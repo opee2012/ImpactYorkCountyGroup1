@@ -1,5 +1,7 @@
 const express = require('express');
 
+require('dotenv').config();
+
 // express app
 const app = express();
 
@@ -7,10 +9,10 @@ const app = express();
 // req = request - info about the request
 // res = response - info about what we send back to the browser
 app.get('/', (req, res) => {
-    res.json({msg: 'Hello World'})
+    res.json({msg: 'Hello World'});
 });
 
 // listen for requests
-app.listen(3000, () => {
-    console.log('Listening on port 3000');
+app.listen(process.env.PORT, () => {
+    console.log('Listening on port', process.env.PORT);
 });
