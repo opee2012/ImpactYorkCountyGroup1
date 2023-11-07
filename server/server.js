@@ -13,7 +13,7 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use('/login', loginRoutes);
+app.use(loginRoutes);
 
 // listen for requests
 app.listen(process.env.PORT, () => {

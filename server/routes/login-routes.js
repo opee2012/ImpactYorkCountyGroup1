@@ -1,16 +1,11 @@
 const express = require('express');
+
+// controller functions
+const { login } = require('../controllers/login-controller');
+
 const router = express.Router();
 
-// GET login information
-router.get('/', (req, res) => {
-    res.json({
-        message: 'GET login'})
-});
-
-// router.post('/', (req, res) => {});
-
-// router.put('/', (req, res) => {});
-
-// router.delete('/', (req, res) => {});
+// login route
+router.post('/login', login);
 
 module.exports = router;
