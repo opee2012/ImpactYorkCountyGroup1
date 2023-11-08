@@ -1,20 +1,19 @@
-import React from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import './App.css';
-import Login from './Login';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Login from "./Login";
+import Upload from "./Upload";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <div className='pages'>
-        <Routes>
-          <Route
-            path="/"
-            element={<Login />}
-          />
-        </Routes>
-      </div>
+        <div className="pages">
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/Upload" element={<Upload />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );
