@@ -1,6 +1,8 @@
 import React from "react";
 import "./Login.css";
 import LoginForm from "./LoginForm";
+import userIcon from "./icons/user.png";
+import passwordIcon from "./icons/lock.png";
 
 function Login() {
   return (
@@ -9,7 +11,7 @@ function Login() {
         <img src="IYC.png" />
       </div>
       <div id="loginform">
-        <LoginForm />
+        <LoginForm userIcon={userIcon} passwordIcon={passwordIcon}/>
       </div>
     </div>
   );

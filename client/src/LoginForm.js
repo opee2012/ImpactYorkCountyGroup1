@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./loginform.css";
 
-function LoginForm() {
+function LoginForm( {userIcon , passwordIcon}) {
   //TODO:
   //secure password
-  //add icons
   //change font
   //send data somewhere to be validated
   //add statuse for invalid login
@@ -23,6 +22,8 @@ function LoginForm() {
 
   return (
     <form action="/Upload">
+      <div className="input-container">
+        <img src={userIcon} alt="user icon" className="icon" />
       <input
         type="text"
         name="Username"
@@ -32,7 +33,10 @@ function LoginForm() {
         value={profile.user}
         onChange={handleOnChange}
       />
-      <br />
+      </div>
+      
+      <div className="input-container">
+        <img src={passwordIcon} alt="password icon" className="icon" />
       <input
         type="password"
         name="Password"
@@ -41,7 +45,8 @@ function LoginForm() {
         value={profile.pass}
         onChange={handleOnChange}
       />
-      <br />
+      </div>
+      
       <p id="status">{status}</p>
       <input type="submit" id="submitbtn" value="Login"></input>
       <br />
