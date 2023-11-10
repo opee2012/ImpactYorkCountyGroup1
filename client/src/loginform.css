@@ -1,12 +1,24 @@
 .formtext {
+    color: #1226AA;
     border: #1226AA solid 2px;
     border-radius: 5px;
-    width: 50%;
+    padding-left: 40px;
+    width: 45%;
     height: 35px;
     margin: 8px;
     background-color: white;
 }
 
+::placeholder {
+    color: #1226AA;
+}
+
+#status {
+    padding: 0px;
+    margin: 0px;
+    color: red;
+    font-size: 1em;
+}
 #submitbtn {
     background-color: #79A3dc;
     color: white;

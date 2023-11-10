@@ -6,9 +6,11 @@ function LoginForm() {
   //secure password
   //add icons
   //change font
-  //add statuse for invalid login
   //send data somewhere to be validated
+  //add statuse for invalid login
+  
   const [profile, setProfile] = useState({});
+  const [status, setStatus] = useState('');
 
   const handleOnChange = ({ target }) => {
     const { name, value } = target;
@@ -24,19 +26,23 @@ function LoginForm() {
       <input
         type="text"
         name="Username"
+        id="Username"
         className="formtext"
+        placeholder="USERNAME"
         value={profile.user}
         onChange={handleOnChange}
       />
       <br />
       <input
-        type="text"
+        type="password"
         name="Password"
         className="formtext"
+        placeholder="PASSWORD"
         value={profile.pass}
         onChange={handleOnChange}
       />
       <br />
+      <p id="status">{status}</p>
       <input type="submit" id="submitbtn" value="Login"></input>
     </form>
   );
