@@ -44,6 +44,10 @@ function LoginForm() {
       <br />
       <p id="status">{status}</p>
       <input type="submit" id="submitbtn" value="Login"></input>
+      <br />
+      <form action = "/Dashboard">
+      <input type="button" id="returnbtn" value="Back To Dashboard"></input>
+      </form>
     </form>
   );
 }
