@@ -32,6 +32,10 @@
     color: #1226AA;
 }
 
+input:focus::placeholder {
+    color:transparent;
+}
+
 #status {
     padding: 0px;
     margin: 0px;
