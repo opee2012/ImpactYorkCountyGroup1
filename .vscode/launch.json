@@ -4,6 +4,13 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     //Yes, you can actually change both ports
+    "compounds": [
+        {
+            //Run server, then client
+            "name": "Run Server & Client",
+            "configurations": ["Run Server", "Run Client"]
+        }
+    ],
     "configurations": [
         {
             "type": "node-terminal",
