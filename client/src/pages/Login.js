@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 
+// components
+import LoginDetails from "../components/login-component";
+
+
 const Login = () => {
 
-    const [logins, setLogins] = useState(null);
+    const [login, setLogins] = useState(null);
 
     useEffect(() => {
         const fetchLogins = async () => {
@@ -18,14 +22,11 @@ const Login = () => {
     }, []);
 
     return (
-        <div className="login">
+        <div className="login-page">
             <h1>Login</h1>
             <div className="logins">
-                {logins && logins.map((login) => (
-                    <div key={login._id}>
-                        <h2>{login.username}</h2>
-                        <p>{login.password}</p>
-                    </div>
+                {login && login.map(login => (
+                    <LoginDetails key={login._id} loginDetails={login} />
                 ))}
             </div>
         </div>
