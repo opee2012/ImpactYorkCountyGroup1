@@ -1,21 +1,27 @@
-const express = require('express');
-const loginRoutes = require('./routes/login-routes');
+const HTTP_STATUS = {
+    OK: 200,
+    CREATED: 201,
+    BAD_REQUEST: 400,
+    UNAUTHORIZED: 401,
+    CONFLICT: 409,
+};
+
+const MONGO_ERRORS = {
+    DUPLICATE_KEY: 11000,
+};
 
 require('dotenv').config();
 
-// express app
-const app = express();
+const loginRoutes = require('./routes/login-routes');
 
-// register view engine (middleware)
-app.use((req, res, next) => {
-    console.log(req.path, req.method);
-    next();
-});
+module.exports = function(app) {
 
-// routes
-app.use(loginRoutes);
+    // register view engine (middleware)
+    app.use((req, res, next) => {
+        console.log(req.path, req.method);
+        next();
+    });
 
-// listen for requests
-app.listen(process.env.PORT, () => {
-    console.log('Listening on port', process.env.PORT);
-});
+    // routes
+    app.use(loginRoutes);   
+}
