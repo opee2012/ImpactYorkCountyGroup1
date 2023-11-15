@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 
 // get all logins
 const getAllLogins = async (req, res) => {
-    const logins = await Login.find({}).sort('username');
+    const login = await Login.find({}).sort('username');
 
-    res.status(200).json(logins);
+    res.status(200).json(login);
 };
 
 // get one login
