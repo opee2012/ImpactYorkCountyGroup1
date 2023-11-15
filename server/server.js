@@ -1,27 +1,30 @@
-const HTTP_STATUS = {
-    OK: 200,
-    CREATED: 201,
-    BAD_REQUEST: 400,
-    UNAUTHORIZED: 401,
-    CONFLICT: 409,
-};
-
-const MONGO_ERRORS = {
-    DUPLICATE_KEY: 11000,
-};
-
 require('dotenv').config();
 
+const express = require('express');
+const mongoose = require('mongoose');
 const loginRoutes = require('./routes/login-routes');
 
-module.exports = function(app) {
+// express app
+const app = express();
 
-    // register view engine (middleware)
-    app.use((req, res, next) => {
-        console.log(req.path, req.method);
-        next();
-    });
+// middleware
+app.use(express.json());
 
-    // routes
-    app.use(loginRoutes);   
-}
+app.use((req, res, next) => {
+    console.log(req.path, req.method);
+    next();
+});
+
+// routes
+app.use('/login', loginRoutes);
+
+// connect to db
+mongoose.connect(process.env.DB_URI)
+    .then(() => {
+        console.log('Connected to MongoDB');
+        // listen for requests
+        app.listen(process.env.PORT, () => {
+            console.log(`Server listening on port ${process.env.PORT}`);
+        });
+    })
+    .catch(err => console.log(err));
