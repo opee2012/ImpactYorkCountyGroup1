@@ -1,0 +1,46 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    //Yes, you can actually change both ports
+    "compounds": [
+        {
+            //Run server, then client
+            "name": "Run Server & Client",
+            "configurations": ["Run Server", "Run Client"]
+        }
+    ],
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Run Server",
+            "command": "npm start dev",
+            "windows": {
+                "cwd": "${workspaceFolder}\\server"
+            },
+            "linux": {
+                "cwd": "${workspaceFolder}/server"
+            },
+            "osx": {
+                "cwd": "${workspaceFolder}/server"
+            }
+        },
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Run Client",
+            "command": "npm start",
+            "windows": {
+                "cwd": "${workspaceFolder}\\client"
+            },
+            "linux": {
+                "cwd": "${workspaceFolder}/client"
+            },
+            "osx": {
+                "cwd": "${workspaceFolder}/client"
+            }
+        }
+    ]
+}
