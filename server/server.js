@@ -21,14 +21,9 @@ app.use('/login', loginRoutes);
 // check if db is dev or prod
 let db = '';
 
-if (process.argv[2] === 'dev') {
-    db = 'IMPACT_DEV?retryWrites=true&w=majority';
-} else if (process.argv[2] === 'prod') {
-    db = 'IMPACT_PROD?retryWrites=true&w=majority';
-}
-
 // connect to db
-mongoose.connect(process.env.DB_URI + db)
+function MongoConnect(db) {
+    mongoose.connect(process.env.DB_URI + db)
     .then(() => {
         console.log('Connected to MongoDB');
         // listen for requests
@@ -37,3 +32,10 @@ mongoose.connect(process.env.DB_URI + db)
         });
     })
     .catch(err => console.log(err));
+};
+
+if (process.argv[2] === 'dev') {
+    MongoConnect('IMPACT_DEV?retryWrites=true&w=majority');
+} else if (process.argv[2] === 'prod') {
+    db = 'IMPACT_PROD?retryWrites=true&w=majority';
+};
