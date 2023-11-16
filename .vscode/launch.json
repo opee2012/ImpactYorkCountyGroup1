@@ -17,14 +17,30 @@
             "request": "launch",
             "name": "Run Server",
             "command": "npm start dev",
-            "cwd": "${workspaceFolder}\\server"
+            "windows": {
+                "cwd": "${workspaceFolder}\\server"
+            },
+            "linux": {
+                "cwd": "${workspaceFolder}/server"
+            },
+            "osx": {
+                "cwd": "${workspaceFolder}/server"
+            }
         },
         {
             "type": "node-terminal",
             "request": "launch",
             "name": "Run Client",
             "command": "npm start",
-            "cwd": "${workspaceFolder}\\client"
+            "windows": {
+                "cwd": "${workspaceFolder}\\client"
+            },
+            "linux": {
+                "cwd": "${workspaceFolder}/client"
+            },
+            "osx": {
+                "cwd": "${workspaceFolder}/client"
+            }
         }
     ]
 }
