@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 
 // components
-import LoginDetails from "../components/login-component";
+import LoginForm from "../components/login-form";
+
+// icons
+import userIcon from "../icons/user.png";
+import passwordIcon from "../icons/lock.png";
+
+// styles
+import "../styles/Login.css";
 
 
 const Login = () => {
@@ -22,12 +29,12 @@ const Login = () => {
     }, []);
 
     return (
-        <div className="login-page">
-            <h1>Login</h1>
-            <div className="logins">
-                {login && login.map(login => (
-                    <LoginDetails key={login._id} loginDetails={login} />
-                ))}
+        <div className="container">
+            <div id="logo">
+                <img src="IYC.png" />
+            </div>
+            <div id="loginform">
+                <LoginForm userIcon={userIcon} passwordIcon={passwordIcon}/>
             </div>
         </div>
     );
