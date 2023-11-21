@@ -1,3 +1,4 @@
+const bcrypt = require ('bcrypt');
 const Login = require('../models/login-schema');
 const mongoose = require('mongoose');
 
@@ -9,19 +10,42 @@ const getAllLogins = async (req, res) => {
 };
 
 // get one login
+// const getOneLogin = async (req, res) => {
+//     const { id } = req.params;
+
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//         return res.status(404).json({ message: 'No login with that id' });
+//     };
+
+//     const login = await Login.findById(id);
+
+//     if (!login) {
+//         return res.status(404).json({ message: 'No login with that id' });
+//     };
+// };
+
 const getOneLogin = async (req, res) => {
-    const { id } = req.params;
+    const {username, password} = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ message: 'No login with that id' });
-    };
+    try {
+        const login = await Login.findOne({ username });
 
-    const login = await Login.findById(id);
+        if (!login) {
+            return res.status(404).json({ message: 'No login with that username' });
+        }
 
-    if (!login) {
-        return res.status(404).json({ message: 'No login with that id' });
-    };
-};
+        //compare given password with stored hashed password
+        const isMatch = await bcrypt.compare(password, login.password);
+
+        if (!isMatch) {
+            return res.status (401).json({ message: 'Invalid password' });
+        }
+
+        res.status(200).json({ message: 'Login successful'});
+    } catch (error) {
+        res.status(500).json({ message: 'Error authenticating login', error});
+    }
+}
 
 // create login
 const createLogin = async (req, res) => {

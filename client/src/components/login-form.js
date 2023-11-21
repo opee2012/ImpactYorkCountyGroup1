@@ -1,15 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/loginform.css";
 
 const LoginForm = ({ userIcon , passwordIcon }) => {
     //TODO:
-    //secure password
     //change font
-    //send data somewhere to be validated
-    //add statuse for invalid login
 
     const [profile, setProfile] = useState({});
     const [status, setStatus] = useState('');
+    const navigate = useNavigate();
 
     const handleOnChange = ({ target }) => {
     const { name, value } = target;
@@ -20,17 +19,41 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
     console.log(profile);
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+                const response = await fetch('http://localhost:3001/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(profile),
+            });
+
+            if (response.status === 200) {
+                setStatus('Login successful');
+                navigate('/upload');
+            } else {
+                setStatus('Invalid login credentials');
+            }
+        } catch (error) {
+            console.error('Error during login validation:', error);
+            setStatus('Error during login validation');
+        }
+    }
+
     return (
-    <form action="/Upload">
+    <form onSubmit={handleSubmit}>
         <div className="input-container">
         <img src={userIcon} alt="user icon" className="icon" />
         <input
         type="text"
-        name="Username"
+        name="username"
         id="Username"
         className="formtext"
         placeholder="USERNAME"
-        value={profile.user}
+        value={profile.username}
         onChange={handleOnChange}
         />
         </div>
@@ -39,10 +62,10 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
         <img src={passwordIcon} alt="password icon" className="icon" />
         <input
         type="password"
-        name="Password"
+        name="password"
         className="formtext"
         placeholder="PASSWORD"
-        value={profile.pass}
+        value={profile.password}
         onChange={handleOnChange}
         />
         </div>
