@@ -1,72 +1,55 @@
-const Login = require('../models/login-schema');
+const e = require('express');
+const loginSchema = require('../models/login-schema');
+const Login = loginSchema.Login;
+const Validation = require('../utils/validation');
+
 const mongoose = require('mongoose');
 
 // get all logins
-const getAllLogins = async (req, res) => {
-    const login = await Login.find({}).sort('username');
-
-    res.status(200).json(login);
+exports.getAllLogins = async () => {
+    return await Login.find({});
 };
 
 // get one login
-const getOneLogin = async (req, res) => {
-    const { id } = req.params;
+exports.getUserLogin = async (username) => {
+    console.log(`Getting ${username}'s login`);
+    return await Login.findOne({ username: username });
+};
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ message: 'No login with that id' });
-    };
+// create one login
+exports.addNewLogin = async (loginData) => {
+    console.log('Creating new login');
+    const newLogin = new Login(loginData);
 
-    const login = await Login.findById(id);
+    // validate input
+    const validationError = await newLogin.validate();
 
-    if (!login) {
-        return res.status(404).json({ message: 'No login with that id' });
+    if (validationError) {
+        const errorMsg = Validation.getValidationErrorMessage(validationError);
+        throw new Error(errorMsg);
+    } else {
+        return await newLogin.save();
     };
 };
 
-// create login
-const createLogin = async (req, res) => {
-    const { username, password } = req.body;
+// update one login
+exports.updateLogin = async (username, loginData) => {
+    console.log(`Updating ${username}'s login`);
+    const updatedLogin = new Login(loginData);
 
-    // add to database
-    try {
-        const login = await Login.create({ username, password });
-        res.status(201).json(login);
-    } catch (err) {
-        res.status(400).json(err);
+    // validate input
+    const validationError = await updatedLogin.validate();
+
+    if (validationError) {
+        const errorMsg = Validation.getValidationErrorMessage(validationError);
+        throw new Error(errorMsg);
+    } else {
+        return await Login.findOneAndUpdate({ username: username }, loginData);
     };
 };
 
-// delete login
-const deleteLogin = async (req, res) => {
-    const { id } = req.params;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ message: 'No login with that id' });
-    };
-
-    await Login.findByIdAndDelete(id);
-
-    res.status(200).json({ message: 'Login deleted successfully' });
-};
-
-// update login
-const updateLogin = async (req, res) => {
-    const { id } = req.params;
-    const { username, password } = req.body;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ message: 'No login with that id' });
-    };
-
-    const login = await Login.findByIdAndUpdate(id, { username, password }, { new: true });
-
-    res.status(200).json(login);
-};
-
-module.exports = {
-    getAllLogins,
-    getOneLogin,
-    createLogin,
-    deleteLogin,
-    updateLogin
+// delete one login
+exports.deleteLogin = async (username) => {
+    console.log(`Deleting ${username}'s login`);
+    return await Login.findOneAndDelete({ username: username });
 };
