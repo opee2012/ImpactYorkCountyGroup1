@@ -16,7 +16,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// check if db is dev or prod
+// connect to MongoDB
 function MongoConnect(dbString) {
     mongoose.connect(process.env.DB_URI + dbString)
     let db = mongoose.connection;
@@ -33,6 +33,7 @@ function MongoConnect(dbString) {
     });
 };
 
+// check if db is dev or prod
 if (process.argv[2] === 'dev') {
     MongoConnect('IMPACT_DEV?retryWrites=true&w=majority');
 } else if (process.argv[2] === 'prod') {
