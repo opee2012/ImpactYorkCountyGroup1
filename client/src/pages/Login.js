@@ -13,28 +13,28 @@ import "../styles/Login.css";
 
 const Login = () => {
 
-    // const [login, setLogins] = useState(null);
-    const [username, setUser] = useState(null);
-    const [password, setPassword] = useState(null);
+    const [login, setLogins] = useState(null);
+    // const [username, setUser] = useState(null);
+    // const [password, setPassword] = useState(null);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
 
-        console.log(username, password);
-    };
+    //     console.log(username, password);
+    // };
 
-    // useEffect(() => {
-    //     const fetchLogins = async () => {
-    //         const response = await fetch('/login');
-    //         const json = await response.json();
+    useEffect(() => {
+        const fetchLogins = async () => {
+            const response = await fetch('/login');
+            const json = await response.json();
 
-    //         if (response.status === 200) {
-    //             setLogins(json);
-    //         }
-    //     };
+            if (response.status === 200) {
+                setLogins(json);
+            }
+        };
 
-    //     fetchLogins();
-    // }, []);
+        fetchLogins();
+    }, []);
 
     return (
         <div className="container">
