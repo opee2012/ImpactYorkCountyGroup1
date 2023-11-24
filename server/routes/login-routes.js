@@ -1,27 +1,62 @@
-const express = require('express');
-const {
-    getAllLogins,
-    getOneLogin,
-    createLogin,
-    deleteLogin,
-    updateLogin
-} = require('../controllers/login-controller');
+const HTTP_STATUS = {
+    OK: 200,
+    CREATED: 201,
+    BAD_REQUEST: 400,
+    UNAUTHORIZED: 401,
+    CONFLICT: 409
+};
 
-const router = express.Router();
+const loginController = require('../controllers/login-controller');
 
-// GET all logins
-router.get('/', getAllLogins);
+module.exports = function(app) {
 
-// GET one login
-router.get('/:id', getOneLogin);
+    // GET all logins
+    app.get('/login', async (req, res) => {
+        loginController.getAllLogins().then(function(logins) {
+            res.status(HTTP_STATUS.OK).json(logins);
+        }).catch(function(err) {
+            console.error(`Error getting all logins: ${err}`);
+            res.status(HTTP_STATUS.BAD_REQUEST).json({ "error": err.message });
+        });
+    });
 
-// POST create login
-router.post('/', createLogin);
+    // GET one login
+    app.get('/login/:username', async (req, res) => {
+        loginController.getUserLogin(req.params.username).then(function(login) {
+            res.status(HTTP_STATUS.OK).json(login);
+        }).catch(function(err) {
+            console.error(`Error getting login: ${err}`);
+            res.status(HTTP_STATUS.BAD_REQUEST).json({ "error": err.message });
+        });
+    });
 
-// DELETE one login
-router.delete('/:id', deleteLogin);
+    // POST one login
+    app.post('/login', async (req, res) => {
+        loginController.addNewLogin(req.body).then(function(login) {
+            res.status(HTTP_STATUS.CREATED).json(login);
+        }).catch(function(err) {
+            console.error(`Error creating login: ${err}`);
+            res.status(HTTP_STATUS.BAD_REQUEST).json({ "error": err.message });
+        });
+    });
 
-// PUT update one login
-router.put('/:id', updateLogin);
+    // PUT one login
+    app.put('/login/:username', async (req, res) => {
+        loginController.updateLogin(req.params.username, req.body).then(function(login) {
+            res.status(HTTP_STATUS.OK).json(login);
+        }).catch(function(err) {
+            console.error(`Error updating login: ${err}`);
+            res.status(HTTP_STATUS.BAD_REQUEST).json({ "error": err.message });
+        });
+    });
 
-module.exports = router;
+    // DELETE one login
+    app.delete('/login/:username', async (req, res) => {
+        loginController.deleteLogin(req.params.username).then(function(login) {
+            res.status(HTTP_STATUS.OK).json(login);
+        }).catch(function(err) {
+            console.error(`Error deleting login: ${err}`);
+            res.status(HTTP_STATUS.BAD_REQUEST).json({ "error": err.message });
+        });
+    });
+};
