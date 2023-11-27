@@ -73,6 +73,7 @@ exports.addNewLogin = async (req, res) => {
 exports.updateLogin = async (req, res) => {
     const { username } = req.params;
     console.log(`Updating ${username}'s login`);
+    const updatedLogin = new Login(req.body);
 
     // validate input
     const validationError = await updatedLogin.validate();
@@ -81,7 +82,7 @@ exports.updateLogin = async (req, res) => {
         const errorMsg = Validation.getValidationErrorMessage(validationError);
         throw new Error(errorMsg);
     } else {
-        return await Login.findOneAndUpdate({ username: username }, loginData);
+        return await Login.findOneAndUpdate({ username: username }, updatedLogin.body);
     };
 };
 
