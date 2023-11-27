@@ -21,8 +21,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route 
-              path="/login"
-              element={ username ? <Login /> : <Navigate to="/upload" /> }
+              path="/login" 
+              element={!username ? <Login /> : <Navigate to="/upload" />} 
             />
             <Route path="/upload" element={<Upload />} />
           </Routes>
