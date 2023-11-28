@@ -21,7 +21,7 @@ loginSchema.statics.hash = async function(password) {
 // static signup method
 loginSchema.statics.signup = async function(username, password) {
 
-    const user = await this.create({ username, password: await this.hash() });
+    const user = await this.create({ username, password: await this.hash(password) });
 
     return user;
 };
