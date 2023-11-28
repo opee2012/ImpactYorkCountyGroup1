@@ -1,96 +1,115 @@
-const bcrypt = require ('bcrypt');
-const Login = require('../models/login-schema');
-const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+
+const Validation = require('../utils/validation');
+const loginSchema = require('../models/login-schema');
+const Login = loginSchema.Login;
+
+const createToken = (_id) => {
+    return jwt.sign({ _id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+}
 
 // get all logins
-const getAllLogins = async (req, res) => {
-    const login = await Login.find({}).sort('username');
+exports.getAllLogins = async (req, res) => {
+    console.log(`Getting all logins`);
+    const logins = await Login.find({}).sort({ username: 1 });
 
-    res.status(200).json(login);
+    res.status(200).json(logins);
 };
 
 // get one login
-// const getOneLogin = async (req, res) => {
-//     const { id } = req.params;
+exports.getUserLogin = async (req, res) => {
+    const { username } = req.params;
+    console.log(`Getting ${username}'s login`);
 
-//     if (!mongoose.Types.ObjectId.isValid(id)) {
-//         return res.status(404).json({ message: 'No login with that id' });
-//     };
+    res.status(200).json(await Login.findOne({ username: username }));
+};
 
-//     const login = await Login.findById(id);
-
-//     if (!login) {
-//         return res.status(404).json({ message: 'No login with that id' });
-//     };
-// };
-
-const getOneLogin = async (req, res) => {
-    const {username, password} = req.body;
-
-    try {
-        const login = await Login.findOne({ username });
-
-        if (!login) {
-            return res.status(404).json({ message: 'No login with that username' });
-        }
-
-        //compare given password with stored hashed password
-        const isMatch = await bcrypt.compare(password, login.password);
-
-        if (!isMatch) {
-            return res.status (401).json({ message: 'Invalid password' });
-        }
-
-        res.status(200).json({ message: 'Login successful'});
-    } catch (error) {
-        res.status(500).json({ message: 'Error authenticating login', error});
-    }
-}
-
-// create login
-const createLogin = async (req, res) => {
+// login a user
+exports.loginUser = async (req, res) => {
     const { username, password } = req.body;
 
-    // add to database
     try {
-        const login = await Login.create({ username, password });
-        res.status(201).json(login);
+        const user = await Login.login(username, password);
+
+        // create token
+        const token = createToken(user._id);
+
+        res.status(200).json({ username, token });
     } catch (err) {
-        res.status(400).json(err);
+        res.status(400).json({ message: err.message });
     };
 };
 
-// delete login
-const deleteLogin = async (req, res) => {
-    const { id } = req.params;
+// create one login
+exports.addNewLogin = async (req, res) => {
+    console.log(`Creating new login`);
+    const newLogin = new Login(req.body);
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ message: 'No login with that id' });
+    // validate input
+    const validationError = await newLogin.validate();
+
+    if (validationError) {
+        const errorMsg = Validation.getValidationErrorMessage(validationError);
+        throw new Error(errorMsg);
+    } else {
+        const { username, password } = req.body;
+    
+        try {
+            const user = await Login.signup(username, password);
+        
+            // create a token
+            const token = createToken(user._id);
+
+            res.status(200).json({username, token});
+        } catch (error) {
+            res.status(400).json({error: error.message});
+        };
     };
-
-    await Login.findByIdAndDelete(id);
-
-    res.status(200).json({ message: 'Login deleted successfully' });
 };
 
-// update login
-const updateLogin = async (req, res) => {
-    const { id } = req.params;
-    const { username, password } = req.body;
+// update one login
+exports.updateLogin = async (req, res) => {
+    const { targetUsername } = req.params;
+    console.log(`Updating ${targetUsername}'s login`);
+    const updatedLogin = new Login(req.body);
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ message: 'No login with that id' });
+    // validate input
+    const validationError = await updatedLogin.validate();
+
+    if (validationError) {
+        const errorMsg = Validation.getValidationErrorMessage(validationError);
+        throw new Error(errorMsg);
+    } else {
+        const {username, password} = req.body;
+
+        try {
+            // find the target user (needs a check for new username conflicting with existing usernames?)
+            const user = await Login.findOne({username: targetUsername});
+
+            // create a token
+            const token = createToken(user._id);
+            // hash the new password
+            req.body.password = await Login.hash(password);
+
+            // only update everything that the req's body has within the target user
+            await Login.findOneAndUpdate({username: targetUsername}, req.body);
+            res.status(200).json({username, token});
+        }
+        catch(error) {
+            res.status(400).json({error: error.message});
+        }
     };
-
-    const login = await Login.findByIdAndUpdate(id, { username, password }, { new: true });
-
-    res.status(200).json(login);
 };
 
-module.exports = {
-    getAllLogins,
-    getOneLogin,
-    createLogin,
-    deleteLogin,
-    updateLogin
+// delete one login
+exports.deleteLogin = async (req, res) => {
+    const { username } = req.params;
+    console.log(`Deleting ${username}'s login`);
+
+    //Need a res.status to stop hanging
+    //  Successful delete displays 200
+    //  Unsuccessful delete displays 400
+    return await Login.findOneAndDelete({ username: username });
 };

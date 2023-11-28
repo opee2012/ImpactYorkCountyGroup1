@@ -1,27 +1,37 @@
-const express = require('express');
+const HTTP_STATUS = {
+    OK: 200,
+    CREATED: 201,
+    BAD_REQUEST: 400,
+    UNAUTHORIZED: 401,
+    CONFLICT: 409
+};
+
 const {
     getAllLogins,
-    getOneLogin,
-    createLogin,
-    deleteLogin,
-    updateLogin
+    getUserLogin,
+    loginUser,
+    addNewLogin,
+    updateLogin,
+    deleteLogin
 } = require('../controllers/login-controller');
 
-const router = express.Router();
+module.exports = function(app) {
 
-// GET all logins
-router.get('/', getAllLogins);
+    // GET all logins
+    app.get('/login', getAllLogins);
 
-// GET one login
-router.get('/:id', getOneLogin);
+    // GET one login
+    app.get('/login/:username', getUserLogin);
 
-// POST create login
-router.post('/', createLogin);
+    // POST login user
+    app.post('/login', loginUser);
 
-// DELETE one login
-router.delete('/:id', deleteLogin);
+    // POST login signup
+    app.post('/signup', addNewLogin);
 
-// PUT update one login
-router.put('/:id', updateLogin);
+    // PUT one login
+    app.put('/login/:targetUsername', updateLogin);
 
-module.exports = router;
+    // DELETE one login
+    app.delete('/login/:username', deleteLogin);
+};
