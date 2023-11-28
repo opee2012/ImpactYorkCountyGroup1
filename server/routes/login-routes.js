@@ -30,7 +30,7 @@ module.exports = function(app) {
     app.post('/signup', addNewLogin);
 
     // PUT one login
-    app.put('/login/:username', updateLogin);
+    app.put('/login/:targetUsername', updateLogin);
 
     // DELETE one login
     app.delete('/login/:username', deleteLogin);

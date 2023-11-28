@@ -71,8 +71,8 @@ exports.addNewLogin = async (req, res) => {
 
 // update one login
 exports.updateLogin = async (req, res) => {
-    const { username } = req.params;
-    console.log(`Updating ${username}'s login`);
+    const { targetUsername } = req.params;
+    console.log(`Updating ${targetUsername}'s login`);
     const updatedLogin = new Login(req.body);
 
     // validate input
@@ -82,7 +82,24 @@ exports.updateLogin = async (req, res) => {
         const errorMsg = Validation.getValidationErrorMessage(validationError);
         throw new Error(errorMsg);
     } else {
-        return await Login.findOneAndUpdate({ username: username }, updatedLogin.body);
+        const {username, password} = req.body;
+
+        try {
+            // find the target user (needs a check for new username conflicting with existing usernames?)
+            const user = await Login.findOne({username: targetUsername});
+
+            // create a token
+            const token = createToken(user._id);
+            // hash the new password
+            req.body.password = await Login.hash(password);
+
+            // only update everything that the req's body has within the target user
+            await Login.findOneAndUpdate({username: targetUsername}, req.body);
+            res.status(200).json({username, token});
+        }
+        catch(error) {
+            res.status(400).json({error: error.message});
+        }
     };
 };
 
@@ -91,5 +108,8 @@ exports.deleteLogin = async (req, res) => {
     const { username } = req.params;
     console.log(`Deleting ${username}'s login`);
 
+    //Need a res.status to stop hanging
+    //  Successful delete displays 200
+    //  Unsuccessful delete displays 400
     return await Login.findOneAndDelete({ username: username });
 };

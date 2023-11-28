@@ -13,13 +13,15 @@ const loginSchema = new mongoose.Schema({
     }
 });
 
+// password hashing method
+loginSchema.statics.hash = async function(password) {
+    return await bcrypt.hash(password, await bcrypt.genSalt());
+}
+
 // static signup method
 loginSchema.statics.signup = async function(username, password) {
 
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    const user = await this.create({ username, password: hashedPassword });
+    const user = await this.create({ username, password: await this.hash() });
 
     return user;
 };
