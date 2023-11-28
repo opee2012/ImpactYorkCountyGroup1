@@ -28,9 +28,6 @@ loginSchema.statics.signup = async function(username, password) {
 
 // static login method
 loginSchema.statics.login = async function(username, password) {
-    if (!username || !password) {
-        throw new Error('Missing username or password');
-    };
 
     const user = await this.findOne({ username: username });
 
