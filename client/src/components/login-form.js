@@ -44,7 +44,7 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
                 />
             </div>
             
-            <div className="error">{error}</div>
+            {error && <div className="error">{error}</div>}
             <input
                 type="submit"
                 value="Login"
