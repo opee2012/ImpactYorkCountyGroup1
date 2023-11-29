@@ -13,14 +13,6 @@ const loginSchema = new mongoose.Schema({
     }
 });
 
-loginSchema.pre('save', async function (next) {
-    const user = this;
-    if (user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 10);
-    }
-    next ();
-});
-
 // password hashing method
 loginSchema.statics.hash = async function(password) {
     return await bcrypt.hash(password, await bcrypt.genSalt());
