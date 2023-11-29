@@ -6,57 +6,32 @@ const HTTP_STATUS = {
     CONFLICT: 409
 };
 
-const loginController = require('../controllers/login-controller');
+const {
+    getAllLogins,
+    getUserLogin,
+    loginUser,
+    addNewLogin,
+    updateLogin,
+    deleteLogin
+} = require('../controllers/login-controller');
 
 module.exports = function(app) {
 
     // GET all logins
-    app.get('/login', async (req, res) => {
-        loginController.getAllLogins().then(function(logins) {
-            res.status(HTTP_STATUS.OK).json(logins);
-        }).catch(function(err) {
-            console.error(`Error getting all logins: ${err}`);
-            res.status(HTTP_STATUS.BAD_REQUEST).json({ "error": err.message });
-        });
-    });
+    app.get('/login', getAllLogins);
 
     // GET one login
-    app.get('/login/:username', async (req, res) => {
-        loginController.getUserLogin(req.params.username).then(function(login) {
-            res.status(HTTP_STATUS.OK).json(login);
-        }).catch(function(err) {
-            console.error(`Error getting login: ${err}`);
-            res.status(HTTP_STATUS.BAD_REQUEST).json({ "error": err.message });
-        });
-    });
+    app.get('/login/:username', getUserLogin);
 
-    // POST one login
-    app.post('/login', async (req, res) => {
-        loginController.addNewLogin(req.body).then(function(login) {
-            res.status(HTTP_STATUS.CREATED).json(login);
-        }).catch(function(err) {
-            console.error(`Error creating login: ${err}`);
-            res.status(HTTP_STATUS.BAD_REQUEST).json({ "error": err.message });
-        });
-    });
+    // POST login user
+    app.post('/login', loginUser);
+
+    // POST login signup
+    app.post('/signup', addNewLogin);
 
     // PUT one login
-    app.put('/login/:username', async (req, res) => {
-        loginController.updateLogin(req.params.username, req.body).then(function(login) {
-            res.status(HTTP_STATUS.OK).json(login);
-        }).catch(function(err) {
-            console.error(`Error updating login: ${err}`);
-            res.status(HTTP_STATUS.BAD_REQUEST).json({ "error": err.message });
-        });
-    });
+    app.put('/login/:targetUsername', updateLogin);
 
     // DELETE one login
-    app.delete('/login/:username', async (req, res) => {
-        loginController.deleteLogin(req.params.username).then(function(login) {
-            res.status(HTTP_STATUS.OK).json(login);
-        }).catch(function(err) {
-            console.error(`Error deleting login: ${err}`);
-            res.status(HTTP_STATUS.BAD_REQUEST).json({ "error": err.message });
-        });
-    });
+    app.delete('/login/:username', deleteLogin);
 };
