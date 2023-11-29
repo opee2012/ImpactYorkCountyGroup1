@@ -57,3 +57,10 @@ input:focus::placeholder {
 #submitbtn, #returnbtn:hover {
     cursor: pointer;
 }
+
+.error {
+    color: darkred;
+    font-size: 1em;
+    margin: 0px;
+    padding: 0px;
+}
