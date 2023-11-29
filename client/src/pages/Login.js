@@ -14,6 +14,14 @@ import "../styles/Login.css";
 const Login = () => {
 
     const [login, setLogins] = useState(null);
+    // const [username, setUser] = useState(null);
+    // const [password, setPassword] = useState(null);
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+
+    //     console.log(username, password);
+    // };
 
     useEffect(() => {
         const fetchLogins = async () => {
