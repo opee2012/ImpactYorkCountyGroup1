@@ -51,13 +51,6 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
                 id="submitbtn"
                 disabled={isLoading}
             />
-            <form action = "/Dashboard">
-                <input
-                    type="button"
-                    id="returnbtn"
-                    value="Back To Dashboard"
-                />
-            </form>
         </form>
     );
 };
