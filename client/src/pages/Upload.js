@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 
@@ -23,7 +23,7 @@ const Upload = () => {
             )}
             {!username && (
                 <div>
-                    <Link to="/login">Login</Link>
+                    <Navigate to="/login" />
                 </div>
             )}
         </form>
