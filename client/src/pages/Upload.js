@@ -1,10 +1,33 @@
-import React from "react";
+import { Navigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from "../hooks/useLogout";
 
-function Upload() {
+const Upload = () => {
+    const { username } = useAuthContext();
+    const { logout } = useLogout();
+
+    const handleClick = () => {
+        logout();
+    }
 
     return (
-        <h1>Successfully accessed upload page</h1>
+        <form>
+            <h1>Upload</h1>
+            {username && (
+                <div>
+                    <span>Welcome: {username.username}</span>
+                    <br />
+                    <br />
+                    <button onClick={handleClick}>Logout</button>
+                </div>
+            )}
+            {!username && (
+                <div>
+                    <Navigate to="/login" />
+                </div>
+            )}
+        </form>
     );
-}
+};
 
 export default Upload;

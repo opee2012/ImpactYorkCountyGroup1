@@ -42,7 +42,7 @@ input:focus::placeholder {
     color: red;
     font-size: 1em;
 }
-#submitbtn, #returnbtn {
+#submitbtn {
     background-color: #79A3dc;
     color: white;
     border: none;
@@ -54,6 +54,14 @@ input:focus::placeholder {
     
 }
 
-#submitbtn, #returnbtn:hover {
+#submitbtn:hover {
     cursor: pointer;
+    background-color: #6596da;
+}
+
+.error {
+    color: darkred;
+    font-size: 1em;
+    margin: 0px;
+    padding: 0px;
 }

@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 // components
 import LoginForm from "../components/login-form";
 
@@ -12,29 +10,6 @@ import "../styles/Login.css";
 
 
 const Login = () => {
-
-    const [login, setLogins] = useState(null);
-    // const [username, setUser] = useState(null);
-    // const [password, setPassword] = useState(null);
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-
-    //     console.log(username, password);
-    // };
-
-    useEffect(() => {
-        const fetchLogins = async () => {
-            const response = await fetch('/login');
-            const json = await response.json();
-
-            if (response.status === 200) {
-                setLogins(json);
-            }
-        };
-
-        fetchLogins();
-    }, []);
 
     return (
         <div className="container">
