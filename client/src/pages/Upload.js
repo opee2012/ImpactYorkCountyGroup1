@@ -3,6 +3,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 import { useState } from "react";
 
+// styles
 import "../styles/Upload.css";
 
 const Upload = () => {
