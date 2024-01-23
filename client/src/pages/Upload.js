@@ -3,6 +3,8 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 import { useState } from "react";
 
+import "../styles/Upload.css";
+
 const Upload = () => {
     const { username } = useAuthContext();
     const { logout } = useLogout();
@@ -13,6 +15,11 @@ const Upload = () => {
     }
 
     return (
+    <div className="container">
+        <div id="logo">
+             <img src="IYC.png" />
+        </div>  
+    
         <form>
             <h1>File Upload</h1>
             {username && (
@@ -35,6 +42,7 @@ const Upload = () => {
                 </div>
             )}
         </form>
+    </div>
     );
 };
 
