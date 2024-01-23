@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
+import { useState } from "react";
 
 const Upload = () => {
     const { username } = useAuthContext();
     const { logout } = useLogout();
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const handleClick = () => {
         logout();
@@ -12,13 +14,19 @@ const Upload = () => {
 
     return (
         <form>
-            <h1>Upload</h1>
+            <h1>File Upload</h1>
             {username && (
                 <div>
-                    <span>Welcome: {username.username}</span>
-                    <br />
-                    <br />
-                    <button onClick={handleClick}>Logout</button>
+                    <form>
+                           <p>  drag and drop file</p><br/>
+                           <p>OR</p>
+                           <input type="file" onChange={(e) => {setSelectedFile(e.target.value)}}/>
+                           <p>{selectedFile}</p>
+                           <a href="">Download template</a> <br/>
+                        
+                           <button>Back</button> <br/>
+                           <button>Submit</button>
+                    </form>
                 </div>
             )}
             {!username && (
