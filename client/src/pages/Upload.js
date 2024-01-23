@@ -25,7 +25,7 @@ const Upload = () => {
             {username && (
                 <div>
                     <form>
-                           <p>  drag and drop file</p><br/>
+                           <p>  Drag and drop file</p><br/>
                            <p>OR</p>
                            <input type="file" onChange={(e) => {setSelectedFile(e.target.value)}}/>
                            <p>{selectedFile}</p>
