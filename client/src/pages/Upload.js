@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 import { useState } from "react";
@@ -18,7 +18,7 @@ const Upload = () => {
     return (
     <div className="container">
         <div id="logo">
-             <img src="IYC.png" />
+             <img className = "img-upload" src="IYC.png" />
         </div>  
     
         <form>
@@ -32,7 +32,7 @@ const Upload = () => {
                            <p>{selectedFile}</p>
                            <a href="">Download template</a> <br/>
                         
-                           <button>Back</button> <br/>
+                           <button onClick={handleClick}>Back</button> <br/>
                            <button>Submit</button>
                     </form>
                 </div>
