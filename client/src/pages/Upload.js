@@ -7,44 +7,86 @@ import { useState } from "react";
 import "../styles/Upload.css";
 
 const Upload = () => {
-    const { username } = useAuthContext();
-    const { logout } = useLogout();
-    const [selectedFile, setSelectedFile] = useState(null);
+  //TODO
+  //Fatfrank font on h1
+  //drag and drop functionality
+  //status & download icons
+  //upload to server functionality
+  //set status on attempted upload
 
-    const handleClick = () => {
-        logout();
-    }
+  const { username } = useAuthContext();
+  const { logout } = useLogout();
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [status, setStatus] = useState(null);
 
-    return (
-    <div className="container">
-        <div id="logo">
-             <img className = "img-upload" src="IYC.png" />
-        </div>  
-    
-        <form>
-            <h1>File Upload</h1>
-            {username && (
-                <div>
-                    <form>
-                           <p>  Drag and drop file</p><br/>
-                           <p>OR</p>
-                           <input type="file" onChange={(e) => {setSelectedFile(e.target.value)}}/>
-                           <p>{selectedFile}</p>
-                           <a href="">Download template</a> <br/>
-                        
-                           <button onClick={handleClick}>Back</button> <br/>
-                           <button>Submit</button>
-                    </form>
-                </div>
-            )}
-            {!username && (
-                <div>
-                    <Link to="/login">Login</Link>
-                </div>
-            )}
-        </form>
+  const handleClick = () => {
+    logout();
+  };
+
+  const dropHandler = (e) => {
+    e.preventDefault();
+    //TODO
+  };
+
+  const dragHandler = () => {
+    //TODO
+  };
+
+  const uploadSelectedFile = () => {
+    //TODO
+  }
+
+  return (
+    <div className="uploadcontainer">
+      <div id="logo">
+        <img className="img-upload" src="IYC.png" />
+      </div>
+      <h1>File Upload</h1>
+      {username && (
+        <div className="uploadformcontainer">
+          <div className="uploadformnonflex">
+            <form
+              onDrop={(e) => {
+                dropHandler(e);
+              }}
+            >
+              <p> Drag and drop file</p>
+              <br />
+              <p>OR</p>
+              <label for="fileuploadinput"></label> <br />
+              <input
+                name="fileuploadinput"
+                id="fileuploadinput"
+                style={{ display: "none" }}
+                type="file"
+                onChange={(e) => {
+                  setSelectedFile(e.target.value);
+                }}
+              />
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("fileuploadinput").click();
+                }}
+              >
+                Browse files
+              </button>
+              <p style={{ color: "black" }}>{status ? status : selectedFile}</p>
+            </form>
+            <a href="">Download template</a> <br />
+            <button onClick={handleClick}>Back</button> <br />
+            <button onClick={uploadSelectedFile}>Submit</button>
+          </div>
+        </div>
+      )}
+
+      {!username && (
+        <div>
+          <Navigate to="/login">Login</Navigate>
+        </div>
+      )}
     </div>
-    );
+  );
 };
 
 export default Upload;
