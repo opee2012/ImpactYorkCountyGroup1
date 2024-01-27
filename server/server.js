@@ -38,3 +38,5 @@ if (process.argv[2] === 'dev') {
 } else if (process.argv[2] === 'prod') {
     db = 'IMPACT_PROD?retryWrites=true&w=majority';
 };
+
+console.log("TESTING...TESTING...FOR NODEMON");
