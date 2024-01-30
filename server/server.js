@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-const http = require('http');
 
 // express app
 const app = express();
@@ -10,31 +9,40 @@ const app = express();
 // middleware
 app.use(express.json());
 
+// Logging middleware
+app.use((req, res, next) => {
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] ${req.method} ${req.path}`);
+    next();
+});
+
+// Log route and method
 app.use((req, res, next) => {
     console.log(req.path, req.method);
     next();
 });
 
-// connect to MongoDB
+// Connect to MongoDB
 function MongoConnect(dbString) {
-    mongoose.connect(process.env.DB_URI + dbString)
-    let db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'connection error:'));
-    db.once('open', () => {
-        console.log(`Connected to MongoDB`);
+    mongoose.connect(process.env.DB_URI + dbString, { useNewUrlParser: true, useUnifiedTopology: true })
+        .then(() => {
+            console.log('Connected to MongoDB');
 
-        // routes
-        require('./routes/login-routes')(app);
-        
-        http.createServer(app).listen(process.env.PORT, () => {
-            console.log(`Server is listening on port ${process.env.PORT}`);
-        });
-    });
-};
+            // Routes
+            require('./routes/login-routes')(app);
+        })
+        .catch(error => console.error('MongoDB connection error:', error));
+}
 
-// check if db is dev or prod
+// Check if db is dev or prod
 if (process.argv[2] === 'dev') {
     MongoConnect('IMPACT_DEV?retryWrites=true&w=majority');
 } else if (process.argv[2] === 'prod') {
-    db = 'IMPACT_PROD?retryWrites=true&w=majority';
-};
+    MongoConnect('IMPACT_PROD?retryWrites=true&w=majority');
+}
+
+// Define port number and start the server
+const portNum = process.env.PORT || 3000;
+app.listen(portNum, () => {
+    console.log(`Server is listening on port ${portNum}`);
+});
