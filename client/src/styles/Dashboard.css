@@ -1,0 +1,90 @@
+.dashboard {
+    position: relative;
+    display: flex;
+    width: 1100px;
+    margin: 100px;
+    border-radius: auto;
+    border: 2px solid blue;
+}
+
+.sidebar {
+    background: #1226AA;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: #1226AA;
+}
+
+.sidebar h1 {
+    padding: 10px;
+    margin: 0;
+    color: #fff;
+    font-size: 12px;
+    display: flex;
+    font-family: "FatFrank Heavy"; 
+    background: #1226AA;
+}
+
+.sidebar ul li {
+    padding: 10px 15px;
+    margin: 0;
+    color: #ffffff;
+    font-size: 20px; 
+    font-family: "FatFrank Heavy"; 
+    display: flex;
+    background: #1226AA;
+}
+
+.sidebar li:hover {
+    background-color: #666666;
+}
+
+#logo img {
+    max-width: 300px;
+    background-color: #ffffff;
+    display: block; 
+}
+
+#search-icon {
+    background: #1226AA;
+    margin-right: 10px;
+}
+
+#search-icon img {
+    width: 20px; 
+    height: 20px; 
+    background-color: #1226AA;
+    display: flex;
+}
+
+.content {
+    flex-grow: 1; 
+    padding: 10px; 
+    background-color: #ffffff; 
+}
+
+.top-panel {
+    padding: 30px;
+    background: #79A3DC;
+}
+
+.search-bar {
+    position: absolute;
+    top: 20px;
+    right: 60px; 
+    background-color: #79A3DC;
+}
+
+.search-bar input[type="text"] {
+    width: 200px; 
+    margin-right: 1px;
+    background: #fff;
+}
+
+
