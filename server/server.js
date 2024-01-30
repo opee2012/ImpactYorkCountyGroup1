@@ -30,6 +30,10 @@ function MongoConnect(dbString) {
 
             // Routes
             require('./routes/login-routes')(app);
+
+            const portNum = process.env.PORT;
+            app.listen(portNum, () => {
+            console.log(`Server is listening on port ${portNum}`); });
         })
         .catch(error => console.error('MongoDB connection error:', error));
 }
@@ -40,9 +44,3 @@ if (process.argv[2] === 'dev') {
 } else if (process.argv[2] === 'prod') {
     MongoConnect('IMPACT_PROD?retryWrites=true&w=majority');
 }
-
-// Define port number and start the server
-const portNum = process.env.PORT || 3000;
-app.listen(portNum, () => {
-    console.log(`Server is listening on port ${portNum}`);
-});
