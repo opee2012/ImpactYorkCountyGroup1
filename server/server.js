@@ -16,12 +16,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Log route and method
-app.use((req, res, next) => {
-    console.log(req.path, req.method);
-    next();
-});
-
 // Connect to MongoDB
 function MongoConnect(dbString) {
     mongoose.connect(process.env.DB_URI + dbString, { useNewUrlParser: true, useUnifiedTopology: true })
