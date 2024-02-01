@@ -43,8 +43,8 @@ const Dashboard = () => {
                 <h1>Menu</h1>
                 <ul>
                     <li onClick={() => handleMenuItemClick('Coalition Information')}>
-                        <div id="search-icon">
-                            <img src="search-icon.png.png" alt="Search-icon" />
+                        <div id="information-icon">
+                            <img src="information-icon.png" alt="Information-icon" />
                         </div>
                         Coalition Information
                     </li>
