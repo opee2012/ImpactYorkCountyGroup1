@@ -17,17 +17,17 @@ const {
 module.exports = function(app) {
 
     // GET all data
-    app.get('/data', getAllData);
+    // app.get('/data', getAllData);
 
     // GET one data
-    app.get('/data/:data', getOneData);
+    // app.get('/data/:data', getOneData);
 
     // POST upload data
     app.post('/upload', addNewData);
 
     // PUT one data
-    app.put('/data/:data', updateData);
+    // app.put('/data/:data', updateData);
 
     // DELETE one login
-    app.delete('/data/:data', deleteData);
+    // app.delete('/data/:data', deleteData);
 };
