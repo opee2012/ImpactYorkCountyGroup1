@@ -51,16 +51,14 @@
     display: block; 
 }
 
-#search-icon {
+#information-icon {
     background: #1226AA;
     margin-right: 10px;
 }
-
-#search-icon img {
-    width: 20px; 
-    height: 20px; 
+#information-icon img {
+    width: 30px; 
+    height: 30px; 
     background-color: #1226AA;
-    display: flex;
 }
 
 .content {
