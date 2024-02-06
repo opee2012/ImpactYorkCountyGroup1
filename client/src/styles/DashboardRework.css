@@ -19,16 +19,24 @@
     grid-row: 1 / 3; 
 }
 
+#Logo {
+    margin: 20px;
+    background-color:#ffffff
+}
+
+#Logo img {
+    width: 100%; 
+    background-color:#ffffff
+
+}
+
 #information-icon {
-    background: #1226AA;
     margin-right: 10px;
-    display: flex;
     background-color: transparent;
 }
 
 #information-icon img {
     width: 30px; 
-    background-color: #1226AA;
     background-color: transparent;
 }
 
@@ -54,17 +62,46 @@
     font-family: "FatFrank Heavy"; 
     display: flex;
     background: #1226AA;
-}
-
-.logo {
-    margin: 20px;
-    background-color: #ffffff;
+    align-items: center;
 }
 
 .top-panel {
     background-color: #79A3DC;
-    padding: 50px;
+    padding: 15px; 
     grid-area: top-panel;
     grid-column: 2 / 3; 
     grid-row: 1 / 2; 
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
 }
+
+#Search {
+    margin-left: 10px; 
+    background-color: #79A3DC;
+}
+
+#Search img {
+    width: 24px; 
+    height: 24px;
+    background-color: #79A3DC;
+}
+
+/* Style the search field */
+input[type=text] {
+    border: 2px solid #79A3DC; 
+    transition: all 0.3s ease-in-out; 
+}
+
+/* Change the border color and shadow when the search field is hovered or focused */
+input[type=text]:hover,
+input[type=text]:focus {
+    border-color: #4a69bd; 
+}
+
+/* Change the background color and shadow when the search button is hovered or clicked */
+input[type=button]:hover,
+input[type=button]:active {
+    background-color: #4a69bd; 
+}
+
