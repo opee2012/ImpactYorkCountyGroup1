@@ -9,19 +9,62 @@
     width: 1200px;
     margin: 30px;
     background-color: white;
-    border-radius: 20px; /* Adjust the value to change the curvature */
-    overflow: hidden; /* Ensures content doesn't protrude beyond rounded corners */
+    border-radius: 20px; 
+    overflow: hidden; 
 }
 
 .sidebar {
     background: #1226AA;
-    grid-column: 1 / 2; /* Start from the first column */
-    grid-row: 1 / 3; /* Extend to the third row */
+    grid-column: 1 / 2; 
+    grid-row: 1 / 3; 
+}
+
+#information-icon {
+    background: #1226AA;
+    margin-right: 10px;
+    display: flex;
+    background-color: transparent;
+}
+
+#information-icon img {
+    width: 30px; 
+    background-color: #1226AA;
+    background-color: transparent;
+}
+
+.sidebar h1 {
+    padding: 10px;
+    margin: 0;
+    color: #fff;
+    font-size: 12px;
+    display: flex;
+    font-family: "FatFrank Heavy"; 
+    background-color: #1226AA;
+}
+
+.sidebar li:hover {
+    background-color: gray;
+}
+
+.sidebar li {
+    padding: 10px 15px;
+    margin: 0;
+    color: #ffffff;
+    font-size: 20px; 
+    font-family: "FatFrank Heavy"; 
+    display: flex;
+    background: #1226AA;
+}
+
+.logo {
+    margin: 20px;
+    background-color: #ffffff;
 }
 
 .top-panel {
     background-color: #79A3DC;
+    padding: 50px;
     grid-area: top-panel;
-    grid-column: 2 / 3; /* Start from the first column */
+    grid-column: 2 / 3; 
     grid-row: 1 / 2; 
 }
