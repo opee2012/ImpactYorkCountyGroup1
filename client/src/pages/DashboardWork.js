@@ -23,14 +23,19 @@ const Dashboard = () => {
     return (
         <div className="dashboard-container">
             <header className="sidebar">
-            
+            <img className="logo" src="IYC.png" alt="Logo"/>
+                <h1>Menu</h1>
+                <li onClick={() => handleMenuItemClick('Coalition Information')}>
+                    <div id="information-icon">
+                        <img src="information-icon.png" alt="Information-icon" />
+                    </div>
+                    Coalition Information
+                </li>
             </header>
-
             <header className="top-panel">
-
             </header>
         </div>
     );
-};
+};    
 
 export default Dashboard;
