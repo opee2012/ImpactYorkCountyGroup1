@@ -74,6 +74,7 @@ const Upload = () => {
               <p style={{ color: "black" }}>{status ? status : selectedFile}</p>
             </form>
             <a href="">Download template</a> <br />
+            {/* download icon here */}
             <button onClick={handleClick}>Back</button> <br />
             <button onClick={uploadSelectedFile}>Submit</button>
           </div>
