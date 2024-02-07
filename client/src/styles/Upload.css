@@ -5,10 +5,11 @@
 .uploadcontainer {
   padding-top: 150px;
   width: 95%;
-  color: #1226AA;
+
+  color: #1226aa;
 }
 .uploadcontainer h1 {
-    font-size: 42px;
+  font-size: 42px;
 }
 .uploadformcontainer {
   display: flex;
@@ -34,8 +35,27 @@
   border-radius: 10px;
 }
 .uploadformnonflex {
-    width: 25%;
-    margin: 10px;
+  width: 25%;
+  min-width: 370px;
+  margin: 10px;
+}
+
+.uploadformnonflex > a {
+  text-decoration: none;
+  display: block;
+  margin-top: 5px;
+}
+.uploadformnonflex img {
+}
+#statusbar {
+  color: black;
+}
+#statusbar img {
+  height: 3%;
+  width: 3%;
+  padding-right: 6px;
+
+  background-color: white;
 }
 
 .uploadcontainer form > * {
@@ -60,6 +80,6 @@
 }
 
 .uploadcontainer button:hover {
-    cursor: pointer;
-    background-color: #6596da;
+  cursor: pointer;
+  background-color: #6596da;
 }
