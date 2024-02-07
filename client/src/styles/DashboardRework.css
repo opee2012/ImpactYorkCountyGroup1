@@ -51,7 +51,7 @@
 }
 
 .sidebar li:hover {
-    background-color: gray;
+    background-color: rgb(0, 81, 255);
 }
 
 .sidebar li {
@@ -98,10 +98,3 @@ input[type=text]:hover,
 input[type=text]:focus {
     border-color: #4a69bd; 
 }
-
-/* Change the background color and shadow when the search button is hovered or clicked */
-input[type=button]:hover,
-input[type=button]:active {
-    background-color: #4a69bd; 
-}
-
