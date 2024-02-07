@@ -20,14 +20,13 @@
 }
 
 #Logo {
-    margin: 20px;
-    background-color:#ffffff
+    margin: 0px;
+    background-color: #1226AA;
 }
 
 #Logo img {
-    width: 100%; 
-    background-color:#ffffff
-
+    width: 80%; 
+    background-color: #1226AA;
 }
 
 #information-icon {
@@ -36,6 +35,16 @@
 }
 
 #information-icon img {
+    width: 30px; 
+    background-color: transparent;
+}
+
+#food-access-icon {
+    margin-right: 10px;
+    background-color: transparent;
+}
+
+#food-access-icon img {
     width: 30px; 
     background-color: transparent;
 }
@@ -51,7 +60,7 @@
 }
 
 .sidebar li:hover {
-    background-color: rgb(0, 81, 255);
+    background-color: #79A3DC;
 }
 
 .sidebar li {
@@ -91,6 +100,7 @@
 input[type=text] {
     border: 2px solid #79A3DC; 
     transition: all 0.3s ease-in-out; 
+    background-color: white;
 }
 
 /* Change the border color and shadow when the search field is hovered or focused */
