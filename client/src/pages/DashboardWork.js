@@ -24,7 +24,7 @@ const Dashboard = () => {
         <div className="dashboard-container">
             <header className="sidebar">
             <div id="Logo">
-                    <img src="IYC.png" alt="Logo"/>
+                    <img src="IYC-dashboard-icon.png" alt="Logo"/>
                 </div>
                 <h1>Menu</h1>
 
@@ -35,7 +35,13 @@ const Dashboard = () => {
                     Coalition Information
                 </li>
 
-                <li onClick={() => handleMenuItemClick('Food Access')}>Food Access</li>
+                <li onClick={() => handleMenuItemClick('Food Access')}>
+                    <div id="food-access-icon">
+                        <img src="food-access-icon.png" alt="Icon" />
+                    </div>
+                    Food Access
+                </li>
+
                     <li onClick={() => handleMenuItemClick('Community Guidance')}>Community Guidance</li>
                     <li onClick={() => handleMenuItemClick('Active Living')}>Active Living</li>
                     <li onClick={() => handleMenuItemClick('Chronic Disease Prevention')}>Chronic Disease Prevention</li>
