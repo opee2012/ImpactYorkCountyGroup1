@@ -24,7 +24,7 @@ const Dashboard = () => {
         <div className="dashboard-container">
             <header className="sidebar">
             <div id="Logo">
-                    <img src="IYC-dashboard-icon.png" alt="Logo"/>
+                    <img src="IYC-dashboard-icon.png" alt="IYC"/>
                 </div>
                 <h1>Menu</h1>
 
@@ -37,7 +37,7 @@ const Dashboard = () => {
 
                 <li onClick={() => handleMenuItemClick('Food Access')}>
                     <div id="food-access-icon">
-                        <img src="food-access-icon.png" alt="Icon" />
+                        <img src="food-access-icon.png" alt="" />
                     </div>
                     Food Access
                 </li>
@@ -54,7 +54,7 @@ const Dashboard = () => {
                 <input type="text" placeholder="Search for data..."  onChange = {handleChange} value = {searchInput} />
                     <button type="submit">Search</button>
                     <div id="Search">
-                        <img src="search-icon.png" alt="Search"/>
+                        <img src="search-icon.png" alt=""/>
                     </div> 
             </header>
         </div>
