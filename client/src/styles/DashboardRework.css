@@ -5,7 +5,7 @@
     grid-template-areas: 
         'sidebar top-panel top-panel top-panel'
         'sidebar main main main';
-    height: 80vh;
+    height: 90vh;
     width: 1200px;
     margin: 30px;
     background-color: white;
@@ -25,7 +25,7 @@
 }
 
 #Logo img {
-    width: 80%; 
+    width: 60%; 
     background-color: #1226AA;
 }
 
@@ -35,7 +35,7 @@
 }
 
 #information-icon img {
-    width: 30px; 
+    width: 40px; 
     background-color: transparent;
 }
 
@@ -45,15 +45,65 @@
 }
 
 #food-access-icon img {
-    width: 30px; 
+    width: 40px; 
     background-color: transparent;
+}
+
+#community-icon {
+    margin-right: 10px;
+    background-color: transparent;
+}
+
+#community-icon img {
+    width: 40px; 
+    background-color: transparent;
+}
+
+#active-living-icon {
+    margin-right: 10px;
+    background-color: transparent;
+}
+
+#active-living-icon img {
+    width: 40px;
+    background-color: transparent; 
+}
+
+#disease-icon {
+    margin-right: 6px;
+    background-color: transparent;
+}
+
+#disease-icon img {
+    width: 40px;
+    background-color: transparent; 
+}
+
+#behavioural-health-icon {
+    margin-right: 10px;
+    background-color: transparent;
+}
+
+#behavioural-health-icon img {
+    width: 40px;
+    background-color: transparent; 
+}
+
+#injury-icon {
+    margin-right: 10px;
+    background-color: transparent;
+}
+
+#injury-icon img {
+    width: 40px;
+    background-color: transparent; 
 }
 
 .sidebar h1 {
     padding: 10px;
     margin: 0;
     color: #fff;
-    font-size: 12px;
+    font-size: 10px;
     display: flex;
     font-family: "FatFrank Heavy"; 
     background-color: #1226AA;
@@ -67,7 +117,7 @@
     padding: 10px 15px;
     margin: 0;
     color: #ffffff;
-    font-size: 20px; 
+    font-size: 18px; 
     font-family: "FatFrank Heavy"; 
     display: flex;
     background: #1226AA;
