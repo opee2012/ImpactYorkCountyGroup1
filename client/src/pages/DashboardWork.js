@@ -42,11 +42,39 @@ const Dashboard = () => {
                     Food Access
                 </li>
 
-                    <li onClick={() => handleMenuItemClick('Community Guidance')}>Community Guidance</li>
-                    <li onClick={() => handleMenuItemClick('Active Living')}>Active Living</li>
-                    <li onClick={() => handleMenuItemClick('Chronic Disease Prevention')}>Chronic Disease Prevention</li>
-                    <li onClick={() => handleMenuItemClick('Behavioural Health')}>Behavioural Health</li>
-                    <li onClick={() => handleMenuItemClick('Injury')}>Injury</li>
+                <li onClick={() => handleMenuItemClick('Community Guidance')}>
+                    <div id="community-icon">
+                        <img src="community-icon.png" alt="" />
+                    </div>
+                    Community Guidance
+                </li>
+
+                <li onClick={() => handleMenuItemClick('Active Living')}>
+                    <div id="active-living-icon">
+                        <img src="active-living-icon.png" alt="" />
+                    </div>
+                    Active Living
+                </li>
+
+                    <li onClick={() => handleMenuItemClick('Chronic Disease Prevention')}>
+                        <div id="disease-icon">
+                            <img src="disease-icon.png" alt="" />
+                        </div>
+                        Chronic Disease Prevention
+                    </li>
+
+                    <li onClick={() => handleMenuItemClick('Behavioural Health')}>
+                        <div id="behavioural-health-icon">
+                            <img src="behavioural-health-icon.png" alt="" />
+                        </div>
+                        Behavioural Health
+                    </li>
+                    <li onClick={() => handleMenuItemClick('Injury')}>
+                        <div id="injury-icon">
+                            <img src="injury-icon.png" alt="" />
+                        </div>
+                        Injury
+                    </li>
 
             </header>
             <header className="top-panel">
