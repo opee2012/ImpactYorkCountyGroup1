@@ -44,7 +44,7 @@ const dashbDataSchema = new mongoose.Schema({
 
 // Initialize a new dataset. You can have data or not there, but it must match the schema
 dashbDataSchema.statics.initNewData = async function(dataName, data = {}) {
-    return await this.create({label: dataName, "data": data});
+    return await this.create({label: dataName, data});
 }
 
 // Insert a new element into a dataset.
