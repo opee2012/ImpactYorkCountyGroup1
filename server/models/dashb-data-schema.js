@@ -47,23 +47,6 @@ dashbDataSchema.statics.initNewData = async function(dataName, data = {}) {
     return await this.create({label: dataName, data});
 }
 
-// Insert a new element into a dataset.
-dashbDataSchema.statics.insertElement = async function(targetData, elementName) {
-    const dataSet = await this.findOne({ label: targetData });
-    const map = dataSet.data;
-    if (map.get(elementName) == undefined) {
-        const toInsert = "data." + elementName;
-        const test = await this.updateOne({label: targetData}, 
-            { "$set": { 
-                [toInsert]: elementMapDefinition
-            } });
-    }
-    else {
-        throw new Error('Element already exists');
-    }
-    return 0;
-}
-
 module.exports.DashbData = mongoose.model('DashbData', dashbDataSchema, 'dashbdata');
 
 // REMOVE ME - TESTING FROM SOMEWHERE ELSE
