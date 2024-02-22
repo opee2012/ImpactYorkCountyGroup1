@@ -44,4 +44,4 @@ loginSchema.statics.login = async function(username, password) {
     return user;
 };
 
-module.exports.Login = mongoose.model('Login', loginSchema);
+module.exports.Login = mongoose.model('Login', loginSchema, 'logins');
