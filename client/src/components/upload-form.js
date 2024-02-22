@@ -3,6 +3,7 @@ import { useLogout } from "../hooks/useLogout";
 import "../styles/Upload.css";
 import xcelIcon from "../icons/excelIcon.png";
 import { downloadIcon } from "../icons/svgs";
+import { ExcelToJSON } from "../utils/ExcelToJson";
 
 const UploadForm = () => {
   const { logout } = useLogout();
@@ -23,6 +24,8 @@ const UploadForm = () => {
   const uploadSelectedFile = () => {
     // Implement upload functionality
     console.log("Uploading file:", selectedFile);
+    const file = selectedFile;
+    ExcelToJSON({file});
   };
 
   return (
