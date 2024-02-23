@@ -10,7 +10,13 @@ export function ExcelToJSON ({ file }) {
         const wb = XLSX.read(binaryString, { type: 'binary' });
 
         wb.SheetNames.forEach(function (sheetName) {
-            console.log(sheetName);
+            //console.log(sheetName);
+
+            const ws = wb.Sheets[sheetName];
+
+            // Replace the content of cell A1 with an empty string
+            ws['A1'] = '';
+
             const XL_row_object = XLSX.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
 
             // Initialize the formatted object for the current sheet
@@ -22,11 +28,11 @@ export function ExcelToJSON ({ file }) {
                 const rowCopy = Object.assign({}, row);
                 
                 // Remove the "__EMPTY" key from the row object
-                delete rowCopy["__EMPTY"];
+                delete rowCopy[""];
 
                 // Create an object for each row with "__EMPTY" as key and corresponding value
                 const rowObject = {};
-                rowObject[row["__EMPTY"]] = rowCopy;
+                rowObject[row[""]] = rowCopy;
                 formattedObject.push(rowObject);
             });
 
@@ -43,7 +49,7 @@ export function ExcelToJSON ({ file }) {
 
 
             console.log(json_object);
-            console.log("This executes");
+            
         });
     };
     //console.log("This executes");
