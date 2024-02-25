@@ -11,6 +11,7 @@
     background-color: white;
     border-radius: 20px; 
     overflow: hidden; 
+    position: relative;
 }
 
 .sidebar {
@@ -171,3 +172,5 @@ button[type=submit]:hover,
 input[type=text]:focus {
     border-color: green
 }
+
+
