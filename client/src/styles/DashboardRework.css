@@ -1,0 +1,111 @@
+.dashboard-container {
+    display: grid;
+    grid-template-rows: 70px 1fr;
+    grid-template-columns: 300px 1fr;
+    grid-template-areas: 
+        'sidebar top-panel top-panel top-panel'
+        'sidebar main main main';
+    height: 90vh;
+    width: 1200px;
+    margin: 30px;
+    background-color: white;
+    border-radius: 20px; 
+    overflow: hidden; 
+    position: relative;
+}
+
+.sidebar {
+    background: #1226AA;
+    grid-column: 1 / 2; 
+    grid-row: 1 / 3; 
+}
+
+#Logo {
+    margin: 0px;
+    background-color: #1226AA;
+}
+
+#Logo img {
+    width: 60%; 
+    background-color: #1226AA;
+}
+
+.sidebar ul {
+    margin: 0; 
+    padding: 0; 
+}
+
+.sidebar h1 {
+    padding: 10px;
+    margin: 0;
+    color: #fff;
+    font-size: 10px;
+    display: flex;
+    font-family: "FatFrank Heavy"; 
+    background-color: #1226AA;
+}
+
+.sidebar li:hover {
+    background-color: #79A3DC;
+}
+
+.sidebar li {
+    padding: 15px 15px;
+    margin: 0;
+    color: #ffffff;
+    font-size: 18px; 
+    font-family: "FatFrank Heavy"; 
+    display: flex;
+    background: #1226AA;
+    align-items: center;
+}
+
+.top-panel {
+    background-color: #79A3DC;
+    padding: 15px; 
+    grid-area: top-panel;
+    grid-column: 2 / 3; 
+    grid-row: 1 / 2; 
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+}
+
+#Search {
+    margin-left: 10px; 
+    background-color: #79A3DC;
+}
+
+#Search img {
+    width: 24px; 
+    height: 24px;
+    background-color: #79A3DC;
+}
+
+/* Style the search field */
+input[type=text] {
+    border: 2px solid #79A3DC; 
+    transition: all 0.3s ease-in-out; 
+    background-color: white;
+}
+
+/* Change the border color and shadow when the search field is hovered or focused */
+input[type=text]:hover,
+input[type=text]:focus {
+    border-color: #4a69bd; 
+}
+
+button[type=submit] {
+    background-color: #79A3DC
+}
+
+button[type=submit]:active {
+    background-color: green;
+}
+
+button[type=submit]:hover,
+input[type=text]:focus {
+    border-color: green
+}
+
+
