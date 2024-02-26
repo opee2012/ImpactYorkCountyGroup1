@@ -6,7 +6,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import "./styles/App.css";
 
 // Pages and Components
-import Dashboard from "./pages/ReadFromMongo";
+import Dashboard from "./pages/ReadFromMogo";
 import Login from "./pages/Login";
 import Upload from "./pages/Upload";
 

@@ -36,74 +36,9 @@
     background-color: #1226AA;
 }
 
-#information-icon {
-    margin-right: 10px;
-    background-color: transparent;
-}
-
-#information-icon img {
-    width: 40px; 
-    background-color: transparent;
-}
-
-#food-access-icon {
-    margin-right: 10px;
-    background-color: transparent;
-}
-
-#food-access-icon img {
-    width: 40px; 
-    background-color: transparent;
-}
-
-#community-icon {
-    margin-right: 10px;
-    background-color: transparent;
-}
-
-#community-icon img {
-    width: 40px; 
-    background-color: transparent;
-}
-
-#active-living-icon {
-    margin-right: 10px;
-    background-color: transparent;
-}
-
-#active-living-icon img {
-    width: 40px;
-    background-color: transparent; 
-}
-
-#disease-icon {
-    margin-right: 6px;
-    background-color: transparent;
-}
-
-#disease-icon img {
-    width: 40px;
-    background-color: transparent; 
-}
-
-#behavioural-health-icon {
-    margin-right: 10px;
-    background-color: transparent;
-}
-
-#behavioural-health-icon img {
-    width: 40px;
-    background-color: transparent; 
-}
-
-#injury-icon {
-    margin-right: 10px;
-    background-color: transparent;
-}
-
-#injury-icon img {
-    width: 40px;
-    background-color: transparent; 
+.sidebar ul {
+    margin: 0; 
+    padding: 0; 
 }
 
 .sidebar ul {
