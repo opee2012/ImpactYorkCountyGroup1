@@ -46,20 +46,23 @@ export function ExcelToJSON ({ file }) {
                 [sheetName]: formattedObject
             };
 
+            for (const [key, value] of Object.entries(sheetData)) {
+                for (const element of value) {
+                    for (let [ikey, ivalue] of Object.entries(element)) {
+                        if (Object.values(ivalue).length === 0) {
+                            delete element[ikey];
+                            element["Key"] = ikey;
+                        }
+                    }
+                }
+            }
+
             // Convert the object to a JSON string with indentation for readability
             const json_object = JSON.stringify(sheetData, null, 2);
 
             // function to add the data to the database
 
             console.log(json_object);
-
-            // let val = Object.values(sheetData).every((key) => {
-            //     Object.values(key).every((value) => {
-            //         if (value.length() === 0) {
-            //             console.log(key);
-            //         }
-            //     });
-            // });
 
             // Sent to server for processing
             // return json_object;
