@@ -11,7 +11,6 @@
     background-color: white;
     border-radius: 20px; 
     overflow: hidden; 
-    position: relative;
 }
 
 .sidebar {
@@ -100,6 +99,11 @@
     background-color: transparent; 
 }
 
+.sidebar ul {
+    margin: 0; 
+    padding: 0; 
+}
+
 .sidebar h1 {
     padding: 10px;
     margin: 0;
@@ -115,6 +119,7 @@
 }
 
 .sidebar li {
+    padding: 10px 15px;
     padding: 10px 15px;
     margin: 0;
     color: #ffffff;
@@ -172,5 +177,3 @@ button[type=submit]:hover,
 input[type=text]:focus {
     border-color: green
 }
-
-
