@@ -46,8 +46,6 @@ export function ExcelToJSON ({ file }) {
 
             // function to add the data to the database
 
-
-
             console.log(json_object);
             
         });
