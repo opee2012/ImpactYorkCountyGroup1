@@ -1,33 +1,43 @@
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useLogout } from "../hooks/useLogout";
+
+import { useState } from "react";
+import UploadForm from "../components/upload-form";
+
+// styles
+import "../styles/Upload.css";
 
 const Upload = () => {
-    const { username } = useAuthContext();
-    const { logout } = useLogout();
+  //TODO
+  //Fatfrank font on h1
+  //drag and drop functionality
+  //status & download icons
+  //upload to server functionality
+  //set status on attempted upload
 
-    const handleClick = () => {
-        logout();
-    }
+  const { username } = useAuthContext();
 
-    return (
-        <form>
-            <h1>Upload</h1>
-            {username && (
-                <div>
-                    <span>Welcome: {username.username}</span>
-                    <br />
-                    <br />
-                    <button onClick={handleClick}>Logout</button>
-                </div>
-            )}
-            {!username && (
-                <div>
-                    <Navigate to="/login" />
-                </div>
-            )}
-        </form>
-    );
+  
+
+  return (
+    <div className="uploadcontainer">
+      <div id="logo">
+        <img className="img-upload" src="IYC.png" />
+      </div>
+      <h1>File Upload</h1>
+      {username && (
+        <div className="uploadformcontainer">
+          <UploadForm />
+        </div>
+      )}
+
+      {!username && (
+        <div>
+          <Navigate to="/login">Login</Navigate>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Upload;

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../styles/DashboardRework.css'; 
 
+import DashboardAccordion from '../components/dashboard-accordion';
+
 const Dashboard = () => {
     // State to track which menu item is selected
     const [selectedMenuItem, setSelectedMenuItem] = useState(null);
@@ -85,8 +87,21 @@ const Dashboard = () => {
                         <img src="search-icon.png" alt=""/>
                     </div> 
             </header>
+            <DashboardAccordion data = {dummyData} />
         </div>
     );
 };    
+
+const dummyData = [
+    {
+        title: 'Suicide Deaths',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac orci at nisi suscipit eleifend sed ut dolor. Vivamus aliquet justo et fringilla consectetur. Mauris quis urna nec massa tempor semper ut at magna. Duis volutpat libero felis, ac ornare tellus pharetra sed. Proin eu dui pretium, mollis nunc fringilla, accumsan nunc. Praesent id varius lectus. Nunc elementum leo metus, nec volutpat tortor gravida eu. Maecenas ut feugiat metus.'
+    },
+    {
+        title: 'Coronary Heart Disease',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac orci at nisi suscipit eleifend sed ut dolor. Vivamus aliquet justo et fringilla consectetur. Mauris quis urna nec massa tempor semper ut at magna. Duis volutpat libero felis, ac ornare tellus pharetra sed. Proin eu dui pretium, mollis nunc fringilla, accumsan nunc. Praesent id varius lectus. Nunc elementum leo metus, nec volutpat tortor gravida eu. Maecenas ut feugiat metus.'
+    }
+    
+]
 
 export default Dashboard;
