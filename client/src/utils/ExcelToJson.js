@@ -46,6 +46,8 @@ export function ExcelToJSON ({ file }) {
                 [sheetName]: formattedObject
             };
 
+            // Remove empty keys from the formatted object (italicized cells in the Excel sheet)
+            // and adds them back in as a value of "Key".
             for (const [key, value] of Object.entries(sheetData)) {
                 for (const element of value) {
                     for (let [ikey, ivalue] of Object.entries(element)) {
