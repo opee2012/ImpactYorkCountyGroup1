@@ -26,6 +26,11 @@ export function ExcelToJSON ({ file }) {
             XL_row_object.forEach(row => {
                 // Copy the row object
                 const rowCopy = Object.assign({}, row);
+
+                // if (ws.hasOwnProperty(cellAddress)) {
+                //     const cell = ws[cellAddress];
+                //     if (cell.s && cell.s.font && cell.s.font.italic) {
+                // }
                 
                 // Remove the "__EMPTY" key from the row object
                 delete rowCopy[""];
@@ -47,6 +52,9 @@ export function ExcelToJSON ({ file }) {
             // function to add the data to the database
 
             console.log(json_object);
+
+            // Sent to server for processing
+            // return json_object;
             
         });
     };
