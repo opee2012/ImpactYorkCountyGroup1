@@ -53,13 +53,13 @@ export function ExcelToJSON ({ file }) {
 
             console.log(json_object);
 
-            let val = Object.values(sheetData).every((key) => {
-                Object.values(key).every((value) => {
-                    if (value.length() === 0) {
-                        console.log(key);
-                    }
-                });
-            });
+            // let val = Object.values(sheetData).every((key) => {
+            //     Object.values(key).every((value) => {
+            //         if (value.length() === 0) {
+            //             console.log(key);
+            //         }
+            //     });
+            // });
 
             // Sent to server for processing
             // return json_object;
