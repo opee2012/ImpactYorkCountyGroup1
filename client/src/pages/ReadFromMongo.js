@@ -45,9 +45,9 @@ const Dashboard = () => {
                     <img src="search-icon.png" alt="" />
                 </div>
             </header>
-            <section className="content-section">
+            <div className="content-section">
                 <DashboardAccordion data={dummyData} />
-            </section>
+            </div>
         </div>
     );
 };
