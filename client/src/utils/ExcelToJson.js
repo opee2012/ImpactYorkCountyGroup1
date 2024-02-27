@@ -1,4 +1,3 @@
-import React from 'react';
 import * as XLSX from 'xlsx';
 
 
@@ -7,17 +6,17 @@ export function ExcelToJSON ({ file }) {
     const reader = new FileReader();
     reader.onload = (file) => {
         let binaryString = file.target.result;
-        const wb = XLSX.read(binaryString, { type: 'binary' });
+        const workbook = XLSX.read(binaryString, { type: 'binary' });
 
-        wb.SheetNames.forEach(function (sheetName) {
+        workbook.SheetNames.forEach(function (sheetName) {
             //console.log(sheetName);
 
-            const ws = wb.Sheets[sheetName];
+            const worksheet = workbook.Sheets[sheetName];
 
             // Replace the content of cell A1 with an empty string
-            ws['A1'] = '';
+            worksheet['A1'] = '';
 
-            const XL_row_object = XLSX.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
+            const XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
 
             // Initialize the formatted object for the current sheet
             const formattedObject = [];
@@ -26,16 +25,11 @@ export function ExcelToJSON ({ file }) {
             XL_row_object.forEach(row => {
                 // Copy the row object
                 const rowCopy = Object.assign({}, row);
-
-                // if (ws.hasOwnProperty(cellAddress)) {
-                //     const cell = ws[cellAddress];
-                //     if (cell.s && cell.s.font && cell.s.font.italic) {
-                // }
                 
-                // Remove the "__EMPTY" key from the row object
+                // Remove the "" empty string key from the row object
                 delete rowCopy[""];
 
-                // Create an object for each row with "__EMPTY" as key and corresponding value
+                // Create an object for each row with the empty string "" as key and corresponding value
                 const rowObject = {};
                 rowObject[row[""]] = rowCopy;
                 formattedObject.push(rowObject);
@@ -62,16 +56,13 @@ export function ExcelToJSON ({ file }) {
             // Convert the object to a JSON string with indentation for readability
             const json_object = JSON.stringify(sheetData, null, 2);
 
-            // function to add the data to the database
-
             console.log(json_object);
 
             // Sent to server for processing
-            // return json_object;
+            return json_object;
             
         });
     };
-    //console.log("This executes");
     reader.readAsBinaryString(file);
 
 };
