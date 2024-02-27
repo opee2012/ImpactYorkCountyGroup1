@@ -87,7 +87,9 @@ const Dashboard = () => {
                         <img src="search-icon.png" alt=""/>
                     </div> 
             </header>
-            <DashboardAccordion data = {dummyData} />
+            <div className="content-section">
+                <DashboardAccordion data={dummyData} />
+            </div>
         </div>
     );
 };    
