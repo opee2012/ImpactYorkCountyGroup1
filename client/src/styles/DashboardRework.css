@@ -125,9 +125,12 @@
     background-color: #79A3DC;
 }
 
+.sidebar li:active {
+    background-color: green;
+}
+
 .sidebar li {
-    padding: 10px 15px;
-    padding: 10px 15px;
+    padding: 15px 15px;
     margin: 0;
     color: #ffffff;
     font-size: 18px; 
@@ -159,14 +162,12 @@
     background-color: #79A3DC;
 }
 
-/* Style the search field */
 input[type=text] {
     border: 2px solid #79A3DC; 
     transition: all 0.3s ease-in-out; 
     background-color: white;
 }
 
-/* Change the border color and shadow when the search field is hovered or focused */
 input[type=text]:hover,
 input[type=text]:focus {
     border-color: #4a69bd; 
