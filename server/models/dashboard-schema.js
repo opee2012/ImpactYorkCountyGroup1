@@ -27,7 +27,7 @@ const elementMapDefinition = {
 // It is assumed that the data being passed through to the DB was already
 // parse checked somewhere else in the system.
 // However, additional checks will be made here for missing information too
-const dashbDataSchema = new mongoose.Schema({
+const dashboardDataSchema = new mongoose.Schema({
     // All datasets needs a label (e.g. "Coalition Information")
     label: {
         type: String,
@@ -43,11 +43,11 @@ const dashbDataSchema = new mongoose.Schema({
 });
 
 // Initialize a new dataset. You can have data or not there, but it must match the schema
-dashbDataSchema.statics.initNewData = async function(dataName, data = {}) {
+dashboardDataSchema.statics.initNewData = async function(dataName, data = {}) {
     return await this.create({label: dataName, data});
 }
 
-module.exports.DashbData = mongoose.model('DashbData', dashbDataSchema, 'dashbdata');
+module.exports.DashboardData = mongoose.model('DashboardData', dashboardDataSchema, 'dashboarddata');
 
 // REMOVE ME - TESTING FROM SOMEWHERE ELSE
 // console.log(`Adding new data`);
