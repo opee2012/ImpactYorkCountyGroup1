@@ -6,6 +6,7 @@ export const useUpload = () => {
     e.preventDefault();
   };
 
+  // comment
   const dropHandler = (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
