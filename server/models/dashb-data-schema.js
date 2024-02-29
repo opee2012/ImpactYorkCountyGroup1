@@ -10,8 +10,8 @@ const dbdMapDefinition = {
         // Keys = dates in years
 
         value: {
-            // Of type formatted string (could be a percentage, rounded float, etc).
-            type: String,
+            // Of type "Number" (could be an integer or float, can be changed into a float if needed)
+            type: Number,
             required: [true, 'Missing value']
         }
     }
