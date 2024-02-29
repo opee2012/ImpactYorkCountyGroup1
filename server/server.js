@@ -3,11 +3,10 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const http = require('http');
+const categoriesRoutes = require('./routes/categoriesRoutes');
 
-// express app
 const app = express();
 
-// middleware
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -15,7 +14,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// connect to MongoDB
 function MongoConnect(dbString) {
     mongoose.connect(process.env.DB_URI + dbString)
     let db = mongoose.connection;
@@ -33,7 +31,8 @@ function MongoConnect(dbString) {
     });
 };
 
-// check if db is dev or prod
+app.use('/api', categoriesRoutes);
+
 if (process.argv[2] === 'dev') {
     MongoConnect('IMPACT_DEV?retryWrites=true&w=majority');
 } else if (process.argv[2] === 'prod') {
