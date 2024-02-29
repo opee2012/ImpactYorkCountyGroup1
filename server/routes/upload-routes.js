@@ -7,10 +7,27 @@ const HTTP_STATUS = {
 };
 
 const {
-    uploadData
-} = require('../controllers/upload-controller');
+    getAllData,
+    getOneData,
+    addNewData,
+    updateData,
+    deleteData
+} = require('../controllers/data-controller');
 
 module.exports = function(app) {
-    // PUT one json file to upload
-    app.put('/upload/:json', uploadData);
+
+    // GET all data
+    app.get('/data', getAllData);
+
+    // GET one data
+    app.get('/data/:data', getOneData);
+
+    // POST upload data
+    app.post('/upload', addNewData);
+
+    // PUT one data
+    app.put('/data/:data', updateData);
+
+    // DELETE one login
+    app.delete('/data/:data', deleteData);
 };
