@@ -6,6 +6,19 @@ const DashboardData = dashbSchema.DashbData;
 
 // TODO: From upload request's body, initialize or update a dataset.
 
+exports.uploadData = async function (req, res) {
+    const { json } = req.params;
+    try {
+        // Is the json object going through?
+        dbmsg = json;
+
+        // Status 200 with Mongo interaction result
+        res.status(200).json({ success: true, dbmsg });
+    } catch(err) {
+        res.status(400).json({ success: false, message: err.message });
+    }
+}
+
 // TODO: Maybe should be a regular function instead?
 // Insert a new element into a dataset through the schema.
 exports.insertElement = async function (req, res) {

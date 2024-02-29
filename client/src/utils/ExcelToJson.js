@@ -1,4 +1,3 @@
-import React from 'react';
 import * as XLSX from 'xlsx';
 
 
@@ -7,11 +6,17 @@ export function ExcelToJSON ({ file }) {
     const reader = new FileReader();
     reader.onload = (file) => {
         let binaryString = file.target.result;
-        const wb = XLSX.read(binaryString, { type: 'binary' });
+        const workbook = XLSX.read(binaryString, { type: 'binary' });
 
-        wb.SheetNames.forEach(function (sheetName) {
-            console.log(sheetName);
-            const XL_row_object = XLSX.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
+        workbook.SheetNames.forEach(function (sheetName) {
+            //console.log(sheetName);
+
+            const worksheet = workbook.Sheets[sheetName];
+
+            // Replace the content of cell A1 with an empty string
+            worksheet['A1'] = '';
+
+            const XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
 
             // Initialize the formatted object for the current sheet
             const formattedObject = [];
@@ -21,12 +26,12 @@ export function ExcelToJSON ({ file }) {
                 // Copy the row object
                 const rowCopy = Object.assign({}, row);
                 
-                // Remove the "__EMPTY" key from the row object
-                delete rowCopy["__EMPTY"];
+                // Remove the "" empty string key from the row object
+                delete rowCopy[""];
 
-                // Create an object for each row with "__EMPTY" as key and corresponding value
+                // Create an object for each row with the empty string "" as key and corresponding value
                 const rowObject = {};
-                rowObject[row["__EMPTY"]] = rowCopy;
+                rowObject[row[""]] = rowCopy;
                 formattedObject.push(rowObject);
             });
 
@@ -35,18 +40,29 @@ export function ExcelToJSON ({ file }) {
                 [sheetName]: formattedObject
             };
 
+            // Remove empty keys from the formatted object (italicized cells in the Excel sheet)
+            // and adds them back in as a value of "Key".
+            for (const [key, value] of Object.entries(sheetData)) {
+                for (const element of value) {
+                    for (let [ikey, ivalue] of Object.entries(element)) {
+                        if (Object.values(ivalue).length === 0) {
+                            delete element[ikey];
+                            element["Key"] = ikey;
+                        }
+                    }
+                }
+            }
+
             // Convert the object to a JSON string with indentation for readability
             const json_object = JSON.stringify(sheetData, null, 2);
 
-            // function to add the data to the database
-
-
-
             console.log(json_object);
-            console.log("This executes");
+
+            // Sent to server for processing
+            return json_object;
+            
         });
     };
-    //console.log("This executes");
     reader.readAsBinaryString(file);
 
 };

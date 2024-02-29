@@ -20,6 +20,10 @@ function MongoConnect(dbString) {
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', () => {
         console.log(`Connected to MongoDB`);
+
+        // routes
+        require('./routes/login-routes')(app);
+        require('./routes/upload-routes')(app);
         
         http.createServer(app).listen(process.env.PORT, () => {
             console.log(`Server is listening on port ${process.env.PORT}`);
