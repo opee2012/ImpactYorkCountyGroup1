@@ -25,6 +25,7 @@ function MongoConnect(dbString) {
 
         // routes
         require('./routes/login-routes')(app);
+        require('./routes/data-routes')(app);
         
         http.createServer(app).listen(process.env.PORT, () => {
             console.log(`Server is listening on port ${process.env.PORT}`);
