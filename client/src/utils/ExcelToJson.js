@@ -35,6 +35,8 @@ export function ExcelToJSON ({ file }) {
                 formattedObject.push(rowObject);
             });
 
+            const category = "Category";
+
             // Store the formatted object for the current sheet
             const sheetData = {
                 [sheetName]: formattedObject
