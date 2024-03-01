@@ -7,10 +7,15 @@ const HTTP_STATUS = {
 };
 
 const {
-    uploadData
+    uploadData,
+    getAllData
 } = require('../controllers/upload-controller');
 
-module.exports = function(app) {
+module.exports = (app) => {
     // PUT one json file to upload
     app.put('/upload/:json', uploadData);
 };
+
+module.exports = (app) => {
+    app.get('/data', getAllData);
+}
