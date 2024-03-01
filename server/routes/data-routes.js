@@ -17,7 +17,7 @@ const {
 module.exports = function(app) {
 
     // GET all data
-    // app.get('/data', getAllData);
+    app.get('/data', getAllData);
 
     // GET one data
     app.get('/data/:data', getOneData);
@@ -29,5 +29,5 @@ module.exports = function(app) {
     app.put('/data/:data', updateData);
 
     // DELETE one data
-    // app.delete('/data/:data', deleteData);
+    app.delete('/data/:data', deleteData);
 };
