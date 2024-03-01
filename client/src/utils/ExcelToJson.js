@@ -23,22 +23,26 @@ export function ExcelToJSON ({ file }) {
 
             // Process each row object
             XL_row_object.forEach(row => {
+                //const formattedObject = ["Sub-Category: " , []];
                 // Copy the row object
                 const rowCopy = Object.assign({}, row);
+                //console.log(rowCopy);
+                //console.log(row);
                 
                 // Remove the "" empty string key from the row object
                 delete rowCopy[""];
 
                 // Create an object for each row with the empty string "" as key and corresponding value
-                const rowObject = {};
-                rowObject[row[""]] = rowCopy;
-                formattedObject.push(rowObject);
+                const RowDataObject = {Name: row[""], Data: [rowCopy]};
+                //rowObject["Data"] = rowCopy;
+                //console.log(rowObject);
+                formattedObject.push(RowDataObject);
             });
 
 
             // Store the formatted object for the current sheet
             const sheetData = {
-                Category: sheetName, Data: formattedObject
+                Category: sheetName, Data: [{SubCategory: formattedObject}]
             };
 
             // Remove empty keys from the formatted object (italicized cells in the Excel sheet)
