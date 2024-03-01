@@ -3,10 +3,13 @@ import '../styles/DashboardAccordion.css';
 import DropdownIcon from '../icons/dropdown.png';
 import DropupIcon from '../icons/dropup.png';
 // import { useDataHandle } from '../hooks/useData';
+import Data from '../utils/data_temp/test.json';
+
+const data = Data;
 
 const DashboardAccordion = ({ data }) => {
     // const { error, isLoading, fetchData } = useDataHandle();
-    const [selectedSubItem, setSelectedSubItem] = useState(null);
+    const [selectedSubItems, setSelectedSubItems] = useState([]);
 
    /* useEffect(() => {
         // Fetch data when component mounts
@@ -22,47 +25,48 @@ const DashboardAccordion = ({ data }) => {
 */
 
     const toggleSubCategory = (index) => {
-        if (selectedSubItem == index) {
-            return setSelectedSubItem(null);
+        const newSelectedSubItems = [...selectedSubItems];
+        if (newSelectedSubItems.includes(index)) {
+        newSelectedSubItems.splice(newSelectedSubItems.indexOf(index), 1);
+        } else {
+        newSelectedSubItems.push(index);
         }
-
-        setSelectedSubItem(index);
-    }
+        setSelectedSubItems(newSelectedSubItems);
+    };
 
     return (
         <div className="wrapper">
             <div className="accordion">
                 {data.map((category, index) => (
                     <div key={index} className="item">
-                        <div className="title" onClick={() => toggleSubCategory(index)}>
-                            {category['Sub-Category'].map((subCategory, subIndex) => (
-                                <div key={subIndex}>
-                                    <h3>{subCategory.Name}</h3>
-                                </div>
-                            ))}
-
-                            <span className="dropdownIcons">
-                                {selectedSubItem === index ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
-                            </span>
+                        <div className='category-header'>
+                            <h2>{category.Key}</h2>
                         </div>
-                        <div className={selectedSubItem === index ? 'content show' : 'content'}>
-                            {category['Sub-Category'].map((subCategory, subIndex) => (
-                                <div key={subIndex}>
-                                    <h4>{subCategory.Name}</h4>
-                                    <ul>
-                                        {subCategory.Data.map((item, itemIndex) => (
-                                            <li key={itemIndex}>
-                                                Year: {item.Year}, Value: {item.Value}
-                                            </li>
-                                        ))}
-                                    </ul>
+                        {category['Sub-Category'].map((subCategory, subIndex) => (
+                            <div key={subIndex} className="sub-category">
+                            <div className="title" onClick={() => toggleSubCategory(subIndex)}>
+                                <h3>{subCategory.Name}</h3>
+                                <span className="dropdownIcons">
+                                    {selectedSubItems === index ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
+                                </span>
+                            </div>
+                            {selectedSubItems.includes(subIndex) && (
+                                <div className="content show">
+                                  <ul>
+                                    {subCategory.Data.map((item, itemIndex) => (
+                                      <li key={itemIndex}>
+                                        Year: {item.Year}, Value: {item.Value}
+                                      </li>
+                                    ))}
+                                  </ul>
                                 </div>
-                            ))}
+                            )}
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            ))}
         </div>
+    </div>
     );
 }
 
