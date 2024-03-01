@@ -32,8 +32,8 @@ exports.insertElement = async function (req, res) {
 }
 
 exports.addNewData = async function (req, res) {
-    // Get parameters passed through request
-    const json = req.body;
+    // Get parameters passed through request (pass the category data through the json attribute in the req's body):
+    const { json } = req.body;
     try {
         const dataSet = await DashboardData.initNewCategory(json);
         res.status(201).json({ success: true, dbmsg: dataSet });
