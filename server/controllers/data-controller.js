@@ -33,11 +33,11 @@ exports.insertElement = async function (req, res) {
 
 exports.addNewData = async function (req, res) {
     // Get parameters passed through request
-    const { json } = req.body;
+    const json = req.body;
     try {
         const dataSet = await DashboardData.initNewCategory(json);
         res.status(201).json({ success: true, dbmsg: dataSet });
     } catch (err) {
-        res.status(400).json({ success: false, message: err.message });
+        res.status(400).json({ success: false,  message: err.message });
     }
 }
