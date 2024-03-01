@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/DashboardRework.css';
-
 import DashboardAccordion from '../components/dashboard-accordion';
+import testData from '../utils/data_temp/test.json'; // Importing test.json
 
 const Dashboard = () => {
     const [selectedMenuItem, setSelectedMenuItem] = useState(null);
@@ -17,10 +17,8 @@ const Dashboard = () => {
     };
 
     useEffect(() => {
-        fetch('/api/categories')
-            .then(response => response.json())
-            .then(data => setCategories(data))
-            .catch(error => console.error('Error fetching categories:', error));
+        // Set categories from test.json
+        setCategories(testData.Category);
     }, []);
 
     return (
@@ -31,11 +29,9 @@ const Dashboard = () => {
                 </div>
                 <h1>Menu</h1>
                 <ul>
-                    {categories.map((category, index) => (
-                        <li key={index} onClick={() => handleMenuItemClick(category)}>
-                            {category.name}
-                        </li>
-                    ))}
+                    <li onClick={() => handleMenuItemClick(testData.Category)}>
+                        {testData.Category}
+                    </li>
                 </ul>
             </header>
             <header className="top-panel">
@@ -46,22 +42,13 @@ const Dashboard = () => {
                 </div>
             </header>
             <div className="content-section">
-                <DashboardAccordion data={dummyData} />
+                {/* Pass testData.Data to DashboardAccordion */}
+                <DashboardAccordion data={testData.Data} />
             </div>
         </div>
     );
-};
-
-const dummyData = [
-    {
-        title: 'Suicide Deaths',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac orci at nisi suscipit eleifend sed ut dolor. Vivamus aliquet justo et fringilla consectetur. Mauris quis urna nec massa tempor semper ut at magna. Duis volutpat libero felis, ac ornare tellus pharetra sed. Proin eu dui pretium, mollis nunc fringilla, accumsan nunc. Praesent id varius lectus. Nunc elementum leo metus, nec volutpat tortor gravida eu. Maecenas ut feugiat metus.'
-    },
-    {
-        title: 'Coronary Heart Disease',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac orci at nisi suscipit eleifend sed ut dolor. Vivamus aliquet justo et fringilla consectetur. Mauris quis urna nec massa tempor semper ut at magna. Duis volutpat libero felis, ac ornare tellus pharetra sed. Proin eu dui pretium, mollis nunc fringilla, accumsan nunc. Praesent id varius lectus. Nunc elementum leo metus, nec volutpat tortor gravida eu. Maecenas ut feugiat metus.'
-    }
-];
-
+    
+    
+}
 
 export default Dashboard;
