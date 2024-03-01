@@ -11,9 +11,9 @@ const DashboardAccordion = () => {
     useEffect(() => {
         // Fetch data when component mounts
         fetchData(/* any necessary parameters */)
-            .then((fetchData) => {
+            .then((data) => {
                 // Update selectedSubItem state with fetched data
-                setSelectedSubItem(fetchData);
+                setSelectedSubItem(data);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
@@ -31,7 +31,7 @@ const DashboardAccordion = () => {
 return(
     <div className="wrapper">
         <div className="accordion">
-            {fetchData.map((item, i) => (
+            {data.map((item, i) => (
                 <div className="item">
                     <div className="title" onClick={() => toggleSubCategory(i)}>
                         <h3>{item.title}</h3>
