@@ -1,0 +1,443 @@
+{
+    "Category": "Diseases",
+    "Data": [
+        {
+            "Key": "Infant Mortality (rate per 1000 live births)",
+            "Sub-Category": [
+                {
+                    "Name": "Infant Mortality",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 6.9
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 5.2
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 5.6
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 5.5
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Key": "Chronic Diseases, Risk Factors, and Health Behaviors (all percentages)",
+            "Sub-Category": [
+                {
+                    "Name": "Coronary Heart Disease",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 0.044
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 0.048
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 0.052
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 0.044
+                        },
+                        {
+                            "Year": 2019,
+                            "Value": 0
+                        }
+                    ]
+                },
+                {
+                    "Name": "Stroke",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 0.037
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 0.041
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 0.044
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 0.037
+                        }
+                    ]
+                },
+                {
+                    "Name": "Heart Attack",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 0.05
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 0.052
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 0.044
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 0.039
+                        }
+                    ]
+                },
+                {
+                    "Name": "Hypertension (High Blood Pressure)",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 0.419
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 0.381
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 0.375
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 0.37
+                        },
+                        {
+                            "Year": 2019,
+                            "Value": 0.366
+                        }
+                    ]
+                },
+                {
+                    "Name": "Diabetes",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 0.119
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 0.116
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 0.122
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 0.125
+                        },
+                        {
+                            "Year": 2019,
+                            "Value": 0.123
+                        }
+                    ]
+                },
+                {
+                    "Name": "Current Asthma ",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 0.078
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 0.085
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 0.085
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 0.092
+                        }
+                    ]
+                },
+                {
+                    "Name": "Current Smoking",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 0.18
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 0.19
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 0.185
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 0.21
+                        }
+                    ]
+                },
+                {
+                    "Name": "Obese, Adults",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 0.338
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 0.325
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 0.332
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 0.314
+                        },
+                        {
+                            "Year": 2019,
+                            "Value": 0.342
+                        }
+                    ]
+                },
+                {
+                    "Name": "Physical Activity (Outside of work in paast 30 days)",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 0.771
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 0.741
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 0.74
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 0.759
+                        },
+                        {
+                            "Year": 2019,
+                            "Value": 0.776
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Key": "Mortality/Deaths (all rate per 100,000 population)",
+            "Sub-Category": [
+                {
+                    "Name": "Accidental Drug Overdose",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 13
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 15
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 17.6
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 20.4
+                        }
+                    ]
+                },
+                {
+                    "Name": "Alzheimer's Disease",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 38.1
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 41.4
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 46.2
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 43.6
+                        }
+                    ]
+                },
+                {
+                    "Name": "Cancer",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 167.7
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 165.9
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 162.5
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 160.5
+                        }
+                    ]
+                },
+                {
+                    "Name": "Cerebrovascular Disease",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 47.1
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 47.6
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 49.6
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 47.8
+                        }
+                    ]
+                },
+                {
+                    "Name": "Chronic Lower Respiratory Disease",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 54.8
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 55
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 57.4
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 55
+                        }
+                    ]
+                },
+                {
+                    "Name": "Diabetes",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 20.5
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 19.8
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 18.4
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 19.4
+                        }
+                    ]
+                },
+                {
+                    "Name": "Heart Diseases",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 151.3
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 155.8
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 152.6
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 149.8
+                        }
+                    ]
+                },
+                {
+                    "Name": "Motor Vehicle Accidents",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 10.9
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 12.2
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 12.7
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 13.7
+                        }
+                    ]
+                },
+                {
+                    "Name": "Suicide",
+                    "Data": [
+                        {
+                            "Year": 2015,
+                            "Value": 15.6
+                        },
+                        {
+                            "Year": 2016,
+                            "Value": 15.2
+                        },
+                        {
+                            "Year": 2017,
+                            "Value": 16.3
+                        },
+                        {
+                            "Year": 2018,
+                            "Value": 15.6
+                        },
+                        {
+                            "Year": 2019,
+                            "Value": 16.2
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
