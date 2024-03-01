@@ -19,7 +19,7 @@ const categoryDataSchema = new mongoose.Schema({
         type: String,
         default: "~"
     },
-    Sub_Cat: {
+    "Sub-Category": {
         type: [subCategoryDataSchema],
         default: () => [({})]
     }
@@ -42,8 +42,8 @@ const dashboardDataSchema = new mongoose.Schema({
     }
 });
 
-// Initialize a new dataset. You can have data or not there, but it must match the schema
-dashboardDataSchema.statics.initNewCategory = async function(json = {}) {
+// Initialize a new dataset. The Json parameter must exactly match the schema.
+dashboardDataSchema.statics.initNewCategory = async function(json) {
     return await this.create(json);
 }
 
