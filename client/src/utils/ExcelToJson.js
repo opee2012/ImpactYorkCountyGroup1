@@ -35,11 +35,10 @@ export function ExcelToJSON ({ file }) {
                 formattedObject.push(rowObject);
             });
 
-            const category = "Category";
 
             // Store the formatted object for the current sheet
             const sheetData = {
-                [sheetName]: formattedObject
+                Category: sheetName, Data: formattedObject
             };
 
             // Remove empty keys from the formatted object (italicized cells in the Excel sheet)
