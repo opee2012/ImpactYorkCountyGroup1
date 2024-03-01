@@ -11,27 +11,29 @@ const DashboardAccordion = ({ data }) => {
     // const { error, isLoading, fetchData } = useDataHandle();
     const [selectedSubItems, setSelectedSubItems] = useState([]);
 
-   /* useEffect(() => {
-        // Fetch data when component mounts
-        fetchData(/* any necessary parameters ) */
-          /*  .then((data) => {
-                // Update selectedSubItem state with fetched data
-                setSelectedSubItem(data);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-        }, []);
-*/
+    // useEffect(() => {
+    //     // Fetch data when component mounts
+    //     fetchData(/* any necessary parameters ) */)
+    //         .then((data) => {
+    //             // Update selectedSubItem state with fetched data
+    //             setSelectedSubItem(data);
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error fetching data:', error);
+    //         });
+    //     }, []);
 
-    const toggleSubCategory = (index) => {
+
+    const toggleSubCategory = (subCategory) => {
         const newSelectedSubItems = [...selectedSubItems];
-        if (newSelectedSubItems.includes(index)) {
-        newSelectedSubItems.splice(newSelectedSubItems.indexOf(index), 1);
+        console.log(subCategory);
+        if (newSelectedSubItems.includes(subCategory)) {
+        newSelectedSubItems.splice(newSelectedSubItems.indexOf(subCategory), 1);
         } else {
-        newSelectedSubItems.push(index);
+        newSelectedSubItems.push(subCategory);
         }
         setSelectedSubItems(newSelectedSubItems);
+        console.log(newSelectedSubItems);
     };
 
     return (
@@ -44,13 +46,13 @@ const DashboardAccordion = ({ data }) => {
                         </div>
                         {category['Sub-Category'].map((subCategory, subIndex) => (
                             <div key={subIndex} className="sub-category">
-                            <div className="title" onClick={() => toggleSubCategory(subIndex)}>
+                            <div className="title" onClick={() => toggleSubCategory(subCategory)}>
                                 <h3>{subCategory.Name}</h3>
                                 <span className="dropdownIcons">
                                     {selectedSubItems === index ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
                                 </span>
                             </div>
-                            {selectedSubItems.includes(subIndex) && (
+                            {selectedSubItems.includes(subCategory) && (
                                 <div className="content show">
                                   <ul>
                                     {subCategory.Data.map((item, itemIndex) => (

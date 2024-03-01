@@ -64,3 +64,9 @@ h3, span{
 img {
     background-color: transparent
 }
+.category-header > h2, .sub-category ul, .sub-category li {
+    background-color: white;
+}
+.sub-category li {
+    list-style: none;
+}
