@@ -8,6 +8,7 @@ const DashboardData = dashboardSchema.DashboardData;
 
 // TODO: Maybe should be a regular function instead?
 // Insert a new element into a dataset through the schema.
+// TODO: No longer matches the schema. Needs to be reworked.
 exports.insertElement = async function (req, res) {
     // Get parameters passed through request
     const { target, name } = req.params;
@@ -32,9 +33,9 @@ exports.insertElement = async function (req, res) {
 
 exports.addNewData = async function (req, res) {
     // Get parameters passed through request
-    const { label, data } = req.body;
+    const { json } = req.body;
     try {
-        const dataSet = await DashboardData.initNewData(label, data);
+        const dataSet = await DashboardData.initNewCategory(json);
         res.status(201).json({ success: true, dbmsg: dataSet });
     } catch (err) {
         res.status(400).json({ success: false, message: err.message });

@@ -1,64 +1,49 @@
 const mongoose = require('mongoose');
 
-// Each element contains an object that is mapped to Date(Year) : Value.
-// Here, it is called DataByDate (dbd).
-// Not *required* to be set, but it should be populated from the data we are
-// working with.
-const dbdMapDefinition = {
-    type: Map,
-    of: {
-        // Keys = dates in years
-
-        value: {
-            // Of type formatted string (could be a percentage, rounded float, etc).
-            type: String,
-            required: [true, 'Missing value']
-        }
+const subCategoryDataSchema = new mongoose.Schema({
+    Name: { 
+        type: String,
+        default: "~"
+    },
+    Data: {
+        // Data underneath here could have any unrestricted object (year - value, etc).
+        type: Array,
+        default: () => [({})] // Means an array of objects (invoke a function returning this)
     }
-}
-// The definition of each element in the data
-const elementMapDefinition = {
-    type: Map,
-    // Keys = data element label (e.g. "Coalition Meetings")
+});
 
-    dbd: dbdMapDefinition
-}
-// The schema definition
+// The category data schema
+const categoryDataSchema = new mongoose.Schema({
+    Key: { 
+        type: String,
+        default: "~"
+    },
+    Sub_Cat: {
+        type: [subCategoryDataSchema],
+        default: () => [({})]
+    }
+});
+
+// The whole schema definition
 // It is assumed that the data being passed through to the DB was already
 // parse checked somewhere else in the system.
 // However, additional checks will be made here for missing information too
 const dashboardDataSchema = new mongoose.Schema({
-    // All datasets needs a label (e.g. "Coalition Information")
-    label: {
+    Category: {
         type: String,
-        required: [true, 'Missing data label'],
-        unique: [true, 'There is already data underneath this label']
+        required: [true, 'Missing category name'],
+        unique: [true, 'There is already a category underneath this label']
     },
-    // All labeled data needs a data map beneath it.
-    data: {
-        type: Map,
-        of: elementMapDefinition,
-        required: [true, 'Missing data'],
+    // All categories need data listed underneath an array list
+    Data: {
+        type: [categoryDataSchema],
+        default: () => [({})]
     }
 });
 
 // Initialize a new dataset. You can have data or not there, but it must match the schema
-dashboardDataSchema.statics.initNewData = async function(dataName, data = {}) {
-    return await this.create({label: dataName, data});
+dashboardDataSchema.statics.initNewCategory = async function(json = {}) {
+    return await this.create(json);
 }
 
 module.exports.DashboardData = mongoose.model('DashboardData', dashboardDataSchema, 'dashboarddata');
-
-// REMOVE ME - TESTING FROM SOMEWHERE ELSE
-// console.log(`Adding new data`);
-// const dbSchema = require('../server/models/dashb-data-schema');
-// const DashbSchema = dbSchema.DashbData;
-// const testData = DashbSchema.initNewData("testData", {
-//     "some-info": {
-//         dbd: {
-//             "2020": "100.0"
-//         }
-//     }
-// });
-// DashbSchema.insertElement("testData", "new-element");
-// console.log(`Data added`);
