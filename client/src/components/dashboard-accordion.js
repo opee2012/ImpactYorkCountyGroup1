@@ -2,27 +2,13 @@ import React, { useEffect , useState } from 'react';
 import '../styles/DashboardAccordion.css'; 
 import DropdownIcon from '../icons/dropdown.png';
 import DropupIcon from '../icons/dropup.png';
-// import { useDataHandle } from '../hooks/useData';
-import Data from '../utils/data_temp/test.json';
+import tempData from '../utils/data_temp/test.json';
 
-const data = Data;
 
-const DashboardAccordion = ({ data }) => {
-    // const { error, isLoading, fetchData } = useDataHandle();
+const  DashboardAccordion = ({ category }) => {
+    
     const [selectedSubItems, setSelectedSubItems] = useState([]);
-
-    // useEffect(() => {
-    //     // Fetch data when component mounts
-    //     fetchData(/* any necessary parameters ) */)
-    //         .then((data) => {
-    //             // Update selectedSubItem state with fetched data
-    //             setSelectedSubItem(data);
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error fetching data:', error);
-    //         });
-    //     }, []);
-
+    let data=category.Data;
 
     const toggleSubCategory = (subCategory) => {
         const newSelectedSubItems = [...selectedSubItems];
