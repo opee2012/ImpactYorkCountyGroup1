@@ -12,14 +12,12 @@ const  DashboardAccordion = ({ category }) => {
 
     const toggleSubCategory = (subCategory) => {
         const newSelectedSubItems = [...selectedSubItems];
-        console.log(subCategory);
         if (newSelectedSubItems.includes(subCategory)) {
         newSelectedSubItems.splice(newSelectedSubItems.indexOf(subCategory), 1);
         } else {
         newSelectedSubItems.push(subCategory);
         }
         setSelectedSubItems(newSelectedSubItems);
-        console.log(newSelectedSubItems);
     };
 
     return (

@@ -9,8 +9,6 @@ const Dashboard = () => {
   const { fetchData } = useDataHandle();
   const [searchInput, setSearchInput] = useState("");
   const [categories, setCategories] = useState(null);
-  const [Data, setData] = useState(null);
-
   const handleChange = (event) => {
     setSearchInput(event.target.value);
   };
@@ -39,7 +37,7 @@ const Dashboard = () => {
         <ul>
           {categories
             ? categories.map((item, index) => {
-                return <li key={item.id} onClick={() => handleMenuItemClick(index)}>{item.Category}</li>;
+                return <li key={index} onClick={() => handleMenuItemClick(index)}>{item.Category}</li>;
               })
             : null}
         </ul>
