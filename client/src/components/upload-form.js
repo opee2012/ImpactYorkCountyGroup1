@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLogout } from "../hooks/useLogout";
+import { useUpload } from "../hooks/useUpload";
 import "../styles/Upload.css";
 import xcelIcon from "../icons/excelIcon.png";
 import { downloadIcon } from "../icons/svgs";
@@ -7,6 +8,7 @@ import { ExcelToJSON } from "../utils/ExcelToJson";
 
 const UploadForm = () => {
   const { logout } = useLogout();
+  const { uploadSelectedFile } = useUpload();
   const [selectedFile, setSelectedFile] = useState(null);
   const [status, setStatus] = useState(null);
 
@@ -21,19 +23,18 @@ const UploadForm = () => {
     setStatus(`${file.name}`);
   };
 
-  const uploadSelectedFile = () => {
+  const uploadClientFile = () => {
     // Implement upload functionality
     console.log("Uploading file:", selectedFile);
     const file = selectedFile;
-    ExcelToJSON({file});
+    // console.log(ExcelToJSON({file}));
+    ExcelToJSON({ file });
+    //  uploadSelectedFile();
   };
 
   return (
     <div className="uploadformnonflex">
-      <form
-        onDrop={dropHandler}
-        onDragOver={dragOverHandler}
-      >
+      <form onDrop={dropHandler} onDragOver={dragOverHandler}>
         <p>Drag and drop file</p>
         <br />
         <p>OR</p>
@@ -56,7 +57,6 @@ const UploadForm = () => {
         >
           Browse files
         </button>
-
         <p id="statusbar">
           {selectedFile ? <img src={xcelIcon} alt="file icon" /> : null}
           {status ? status : selectedFile}
@@ -64,7 +64,7 @@ const UploadForm = () => {
       </form>
       <a href=""> {downloadIcon} Download template</a> <br />
       <button onClick={() => logout()}>Back</button> <br />
-      <button onClick={uploadSelectedFile}>Submit</button>
+      <button onClick={() => uploadClientFile()}>Submit</button>
     </div>
   );
 };
