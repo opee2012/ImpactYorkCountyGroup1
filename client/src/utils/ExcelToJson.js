@@ -5,7 +5,7 @@ export function ExcelToJSON ({ file }) {
     const reader = new FileReader();
     reader.onload = (file) => {
         let binaryString = file.target.result;
-        const workbook = XLSX.read(binaryString, { type: 'binary' });
+        const workbook = XLSX.read(binaryString, { type: 'binary', cellNF: true });
 
         // for each sheet
         workbook.SheetNames.forEach(function (sheetName) {
@@ -15,6 +15,31 @@ export function ExcelToJSON ({ file }) {
 
             // Replace the content of cell A1 with an empty string
             worksheet['A1'] = '';
+
+            // cell.v - raw value (number, string, Date object, boolean) for specific cell
+            // cell.w - formatted text (string)
+            // cell.z - number format string associated with the cell 
+
+            for (const cell in worksheet) {
+                if (!worksheet.hasOwnProperty(cell)) continue;
+                //console.log(cell.z);
+    
+                // Check if the cell contains a percentage value
+                if (worksheet[cell].v && typeof worksheet[cell].v === 'number' && worksheet[cell].w && worksheet[cell].w.endsWith('%')) {
+                
+                    worksheet[cell].v = worksheet[cell].w; // Replace the numeric value with the formatted string version of itself
+                    //console.log(ws[cell].v);
+                }
+                // checks to see if the cell has the currency number format
+                if (worksheet[cell].v && typeof worksheet[cell].v === 'number' && worksheet[cell].w && (worksheet[cell].w.startsWith('$') || worksheet[cell].w.endsWith(')'))) {
+
+                    worksheet[cell].v = worksheet[cell].w; // Replace the numeric value with the formatted string version
+                }
+                // Checks to see if the number format of the cell = the accounting js string, 2 decimals and $ sign
+                if (worksheet[cell].z === '_("$"* #,##0.00_);_("$"* \\(#,##0.00\\);_("$"* "-"??_);_(@_)') {
+                    worksheet[cell].v = worksheet[cell].w;
+                }
+            }
 
             const XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
 
@@ -61,7 +86,7 @@ export function ExcelToJSON ({ file }) {
 
             // Remove empty keys from the formatted object (italicized cells in the Excel sheet)
             // and adds them back in as a value of "Key".
-            /*for (const [key, value] of Object.entries(sheetData)) {
+            for (const [key, value] of Object.entries(sheetData)) {
                 for (const element of value) {
                     for (let [ikey, ivalue] of Object.entries(element)) {
                         if (Object.values(ivalue).length === 0) {
@@ -70,7 +95,7 @@ export function ExcelToJSON ({ file }) {
                         }
                     }
                 }
-            }*/
+            }
 
             // Convert the object to a JSON string with indentation for readability
             const json_object = JSON.stringify(sheetData, null, 2);
