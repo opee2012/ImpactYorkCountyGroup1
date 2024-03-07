@@ -55,10 +55,16 @@ h3, span{
 }
 
 .dropdownIcons {
-    height: 35px;
-    width: 35px;
-   
-    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2em;
+    width: 2em;
+}
+
+.dropdownIcons img {
+    max-height: 100%;
+    max-width: 100%;
 }
 
 img {
