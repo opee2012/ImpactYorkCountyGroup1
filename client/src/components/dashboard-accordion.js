@@ -12,10 +12,11 @@ const  DashboardAccordion = ({ category }) => {
 
     const toggleSubCategory = (subCategory) => {
         const newSelectedSubItems = [...selectedSubItems];
-        if (newSelectedSubItems.includes(subCategory)) {
-        newSelectedSubItems.splice(newSelectedSubItems.indexOf(subCategory), 1);
+        const index = newSelectedSubItems.indexOf(subCategory);
+        if (index > -1) {
+            newSelectedSubItems.splice(index, 1);
         } else {
-        newSelectedSubItems.push(subCategory);
+            newSelectedSubItems.push(subCategory);
         }
         setSelectedSubItems(newSelectedSubItems);
     };
@@ -24,16 +25,14 @@ const  DashboardAccordion = ({ category }) => {
         <div className="wrapper">
             <div className="accordion">
                 {data.map((category, index) => (
-                    <div key={index} className="item">
-                        <div className='category-header'>
-                            <h2>{category.Key}</h2>
-                        </div>
+                    <div key ={index}>
+                        <h2>{category.Key}</h2>
                         {category['Sub-Category'].map((subCategory, subIndex) => (
-                            <div key={subIndex} className="sub-category">
+                            <div key={subIndex} className="sub-category item">
                             <div className="title" onClick={() => toggleSubCategory(subCategory)}>
                                 <h3>{subCategory.Name}</h3>
                                 <span className="dropdownIcons">
-                                    {selectedSubItems === index ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
+                                    {selectedSubItems.includes(subCategory) ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
                                 </span>
                             </div>
                             {selectedSubItems.includes(subCategory) && (
