@@ -120,8 +120,9 @@ export function ExcelToJSON ({ file }) {
                     formattedObject.push(RowDataObject);
                     //SubCategoryObject = {SubCategory: formattedObject};
                     }
+
                     if (KeyCategory) {
-                        console.log(KeyCategory);
+                        //console.log(KeyCategory);
                         SubCategoryObject = {Key: KeyCategory, SubCategory: formattedObject};
                     }
                     else {
@@ -133,64 +134,11 @@ export function ExcelToJSON ({ file }) {
                  }
                 SheetObject.push(SubCategoryObject);
              }
-            
-
-            // Initialize the formatted object for the current sheet
-            /*const formattedObject = [];
-            // Process each row object
-            XL_row_object.forEach(row => {
-
-                // Copy the row object
-                const rowCopy = Object.assign({}, row);
-                
-                // Remove the "" empty string key from the row object
-                // The empty string comes from cell A1, maps to the string or sub-cat in column a 
-                delete rowCopy[""];
-
-                // Array for the data in each row
-                const individualRowDataArray = [];
-
-                // For loop that goes through the data in the row copy object, pulls the key and value and formats to be put into the individual data object
-                for (let key in rowCopy) {
-                    if (rowCopy.hasOwnProperty(key)) {
-                        //console.log("Key:", key, "Value:", rowCopy[key]);
-                        const individualDataObject = {
-                            "Year": key,
-                            "Value": rowCopy[key]
-                        };
-                        individualRowDataArray.push(individualDataObject)
-                    }
-                }
-
-                //console.log(individualRowDataArray);
-                let RowDataObject = {};
-
-                // Create an object for each row with row[""] being the name of the row in column a 
-                RowDataObject = {Name: row[""], Data: individualRowDataArray};
-                //console.log(rowObject);
-                
-                formattedObject.push(RowDataObject);
-                //console.log(formattedObject);
-            });*/
-
 
             // Store the formatted object for the current sheet {SubCategory: formattedObject}
             const sheetData = {
                 Category: sheetName, Data: SheetObject
             };
-
-            // Remove empty keys from the formatted object (italicized cells in the Excel sheet)
-            // and adds them back in as a value of "Key".
-            /*for (const [key, value] of Object.entries(sheetData)) {
-                for (const element of value) {
-                    for (let [ikey, ivalue] of Object.entries(element)) {
-                        if (Object.values(ivalue).length === 0) {
-                            delete element[ikey];
-                            element["Key"] = ikey;
-                        }
-                    }
-                }
-            }*/
 
             // Convert the object to a JSON string with indentation for readability
             const json_object = JSON.stringify(sheetData, null, 2);
