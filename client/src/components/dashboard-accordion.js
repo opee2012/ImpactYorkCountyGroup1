@@ -37,13 +37,22 @@ const  DashboardAccordion = ({ category }) => {
                             </div>
                             {selectedSubItems.includes(subCategory) && (
                                 <div className="content show">
-                                  <ul>
-                                    {subCategory.Data.map((item, itemIndex) => (
-                                      <li key={itemIndex}>
-                                        Year: {item.Year}, Value: {item.Value}
-                                      </li>
-                                    ))}
-                                  </ul>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Year</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {subCategory.Data.map((item, index) => (
+                                                <tr key={index}>
+                                                    <td>{item.Year}</td>
+                                                    <td>{item.Value}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
                                 </div>
                             )}
                         </div>
