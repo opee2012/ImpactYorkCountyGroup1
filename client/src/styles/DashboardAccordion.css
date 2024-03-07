@@ -76,3 +76,27 @@ img {
 .sub-category li {
     list-style: none;
 }
+
+table {
+    background-color: white;
+    width: 50%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border-spacing: 0 10px;
+}
+
+th {
+    background-color: white;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
