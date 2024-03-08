@@ -25,8 +25,10 @@ const UploadForm = () => {
 
   const uploadClientFile = async () => {
     // Implement upload functionality
-    const json_file = await ExcelToJSON(selectedFile);
-    uploadSelectedFile(json_file);
+    const json_files = await ExcelToJSON(selectedFile);
+    for (let i in json_files) {
+      uploadSelectedFile(json_files[i]);
+    };
   };
 
   return (
