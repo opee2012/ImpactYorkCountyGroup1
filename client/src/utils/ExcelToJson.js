@@ -8,6 +8,9 @@ export function ExcelToJSON (file) {
             let binaryString = file.target.result;
             const workbook = XLSX.read(binaryString, { type: 'binary', cellNF: true, cellStyles: true});
 
+            // Array to store the data from each sheet
+            const sheetArray = new Array();
+
             // for each sheet
             workbook.SheetNames.forEach(function (sheetName) {
                 const worksheet = workbook.Sheets[sheetName];
@@ -138,9 +141,12 @@ export function ExcelToJSON (file) {
                     Category: sheetName, Data: SheetObject
                 };
 
-                // Sent to server for processing
-                resolve(sheetData);
+                // Push the formatted object to the sheetArray
+                sheetArray.push(sheetData);
             });
+
+            // Return the sheetArray
+            resolve(sheetArray);
         };
 
         reader.onerror = (error) => {
