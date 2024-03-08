@@ -23,13 +23,10 @@ const UploadForm = () => {
     setStatus(`${file.name}`);
   };
 
-  const uploadClientFile = () => {
+  const uploadClientFile = async () => {
     // Implement upload functionality
-    console.log("Uploading file:", selectedFile);
-    const file = selectedFile;
-    // console.log(ExcelToJSON({file}));
-    ExcelToJSON({ file });
-    //  uploadSelectedFile();
+    const json_file = await ExcelToJSON(selectedFile);
+    uploadSelectedFile(json_file);
   };
 
   return (
