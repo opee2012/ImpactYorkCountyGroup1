@@ -27,7 +27,7 @@ const  DashboardAccordion = ({ category }) => {
                 {data.map((category, index) => (
                     <div key ={index}>
                         <h2>{category.Key}</h2>
-                        {category['Sub-Category'].map((subCategory, subIndex) => (
+                        {category['SubCategory'].map((subCategory, subIndex) => (
                             <div key={subIndex} className="sub-category item">
                             <div className="title" onClick={() => toggleSubCategory(subCategory)}>
                                 <h3>{subCategory.Name}</h3>
