@@ -34,7 +34,7 @@ exports.getOneData = async function(req, res) {
 // Create a new category
 exports.addNewData = async function (req, res) {
     // Get parameters passed through request (pass the category data through the json attribute in the req's body):
-    const { json } = req.body;
+    const json = req.body;
     try {
         const createdCategory = await DashboardData.initNewCategory(json);
         res.status(201).json({ success: true, dbmsg: createdCategory });

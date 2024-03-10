@@ -16,7 +16,6 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
         await login(username, password);
     }
 
-    console.log(error);
     return (
         <form className="login" onSubmit={handleSubmit}>
             <div className="input-container">
