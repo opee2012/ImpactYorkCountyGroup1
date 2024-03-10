@@ -1,6 +1,5 @@
 import * as XLSX from 'xlsx';
 
-
 export function ExcelToJSON (file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
