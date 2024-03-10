@@ -10,9 +10,6 @@ import "../styles/Upload.css";
 const Upload = () => {
   //TODO
   //Fatfrank font on h1
-  //drag and drop functionality
-  //status & download icons
-  //upload to server functionality
   //set status on attempted upload
 
   const { username } = useAuthContext();
@@ -33,6 +30,7 @@ const Upload = () => {
 
       {!username && (
         <div>
+          {console.log(username)}
           <Navigate to="/login">Login</Navigate>
         </div>
       )}

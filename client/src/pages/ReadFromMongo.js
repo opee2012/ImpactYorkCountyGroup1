@@ -3,12 +3,19 @@ import "../styles/DashboardRework.css";
 import DashboardAccordion from "../components/dashboard-accordion";
 // import testData from '../utils/data_temp/test.json';
 import { useDataHandle } from "../hooks/useData";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from "../hooks/useLogout";
+import { Navigate } from "react-router-dom";
+
 
 const Dashboard = () => {
+  const { username } = useAuthContext();
+  const { logout } = useLogout();
   const [selectedMenuItem, setSelectedMenuItem] = useState(0);
-  const { fetchData } = useDataHandle();
+  const { fetchData, isLoading, error } = useDataHandle();
   const [searchInput, setSearchInput] = useState("");
   const [categories, setCategories] = useState(null);
+  const [tryRefresh, setTryRefresh] = useState(false);
   const handleChange = (event) => {
     setSearchInput(event.target.value);
   };
@@ -26,7 +33,14 @@ const Dashboard = () => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [tryRefresh]);
+  //if theres an error, try getting data again after 5 sec
+  useEffect(() => {
+    const intervalid = setInterval(() => {
+      if (error) setTryRefresh(!tryRefresh);
+    }, 5000);
+    return () => clearInterval(intervalid);
+  }, [error]);
 
   return (
     <div className="dashboard-container">
@@ -38,12 +52,20 @@ const Dashboard = () => {
         <ul>
           {categories
             ? categories.map((item, index) => {
-                return <li key={index} onClick={() => handleMenuItemClick(index)}>{item.Category}</li>;
+                return (
+                  <li key={index} onClick={() => handleMenuItemClick(index)} {...selectedMenuItem === index ? {className:"highlighted"}:null}>
+                    {item.Category}
+                  </li>
+                );
               })
             : null}
         </ul>
       </header>
       <header className="top-panel">
+      {username && <button onClick={() => logout()}>Logout</button>}
+      {!username && <button onClick={() => window.location.assign('/login')}>Login</button>}
+        {username && <button>Edit</button>}
+        {username && <button onClick={() => window.location.assign('/upload')}>Upload</button>}
         <input
           type="text"
           placeholder="Search for data..."
@@ -56,7 +78,13 @@ const Dashboard = () => {
         </div>
       </header>
       <div className="content-section">
-      {categories ? <DashboardAccordion category={categories[selectedMenuItem]} /> : null}
+        {error ? (
+          <p className="wrapper">{error}</p>
+        ) : isLoading ? (
+          <p className="wrapper">loading...</p>
+        ) : categories ? (
+          <DashboardAccordion category={categories[selectedMenuItem]} />
+        ) : null}
       </div>
     </div>
   );

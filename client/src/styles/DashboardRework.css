@@ -130,6 +130,7 @@ input[type=text]:focus {
         'sidebar main main main';
     height: 90vh;
     width: 1200px;
+    min-width: 1000px;
     margin: 30px;
     background-color: white;
     border-radius: 20px; 
@@ -171,6 +172,9 @@ input[type=text]:focus {
 .sidebar li:hover {
     background-color: #79A3DC;
 }
+.highlighted {
+    background-color: #79A3DC !important; 
+}
 
 .sidebar li {
     padding: 15px 15px;
@@ -204,6 +208,7 @@ input[type=text]:focus {
     height: 24px;
     background-color: #79A3DC;
 }
+
 
 input[type=text] {
     border: 2px solid #79A3DC; 

@@ -62,7 +62,7 @@ const UploadForm = () => {
         </p>
       </form>
       <a href=""> {downloadIcon} Download template</a> <br />
-      <button onClick={() => logout()}>Back</button> <br />
+      <button onClick={() => window.location.assign('/')}>Back</button> <br />
       <button onClick={() => uploadClientFile()}>Submit</button>
     </div>
   );

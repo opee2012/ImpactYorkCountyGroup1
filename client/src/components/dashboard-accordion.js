@@ -29,7 +29,7 @@ const  DashboardAccordion = ({ category }) => {
                         <h2>{category.Key}</h2>
                         {category['SubCategory'].map((subCategory, subIndex) => (
                             <div key={subIndex} className="sub-category item">
-                            <div className="title" onClick={() => toggleSubCategory(subCategory)}>
+                            <div className="title" onClick={() => toggleSubCategory(subCategory)} >
                                 <h3>{subCategory.Name}</h3>
                                 <span className="dropdownIcons">
                                     {selectedSubItems.includes(subCategory) ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
