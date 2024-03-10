@@ -7,8 +7,7 @@ import { downloadIcon } from "../icons/svgs";
 import { ExcelToJSON } from "../utils/ExcelToJson";
 
 const UploadForm = () => {
-  const { logout } = useLogout();
-  const { uploadSelectedFile } = useUpload();
+  const { uploadSelectedFile, error, setError} = useUpload();
   const [selectedFile, setSelectedFile] = useState(null);
   const [status, setStatus] = useState(null);
 
@@ -24,6 +23,7 @@ const UploadForm = () => {
   };
 
   const uploadClientFile = async () => {
+    
     // Implement upload functionality
     const json_files = await ExcelToJSON(selectedFile);
     for (let i in json_files) {
@@ -45,20 +45,22 @@ const UploadForm = () => {
           type="file"
           onChange={(e) => {
             setSelectedFile(e.target.files[0]);
-            setStatus(`${e.target.files[0].name}`);
+            setError(null);
+            if(e.target.files[0])setStatus(`${e.target.files[0].name}`);
           }}
         />
         <button
           onClick={(e) => {
             e.preventDefault();
+            setError(null);
             document.getElementById("fileuploadinput").click();
           }}
         >
           Browse files
         </button>
         <p id="statusbar">
-          {selectedFile ? <img src={xcelIcon} alt="file icon" /> : null}
-          {status ? status : selectedFile}
+          {selectedFile && !error ? <img src={xcelIcon} alt="file icon" /> : null}
+          {error ? error : (status ? status : selectedFile)}
         </p>
       </form>
       <a href=""> {downloadIcon} Download template</a> <br />
