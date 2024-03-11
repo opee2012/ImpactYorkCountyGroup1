@@ -234,5 +234,31 @@ input[type=text]:focus {
     border-color: green
 }
 
+ .top-panel .button {
+    width: 75px;
+    height: 25px;
+    font-size: 15px;
+    padding: 2px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 90px; 
+}
+
+ .top-panel .button-red {
+    background-color: red;
+}
+
+ .top-panel .button-blue {
+    background-color: #1226AA;
+}
+
+ .top-panel .button-center {
+    margin: 15px;
+    display: block;
+}
+
+
 
 
