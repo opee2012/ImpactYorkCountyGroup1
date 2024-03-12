@@ -226,12 +226,13 @@ button[type=submit] {
 }
 
 button[type=submit]:active {
-    background-color: green;
+    background-color: #1226AA;
 }
 
-button[type=submit]:hover,
-input[type=text]:focus {
-    border-color: green
+button[type=submit]:hover
+ {
+    background: #1226AA;
+    cursor: pointer;
 }
 
  .top-panel .button {
@@ -259,6 +260,22 @@ input[type=text]:focus {
     display: block;
 }
 
+.top-panel .search-textbox {
+    width: 265px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+.top-panel .search-icon-submit {
+    width: 40px;
+    height: 30px;
+    margin-left: -1px;
+    border: none;
+    outline: none;
+}
 
 
 

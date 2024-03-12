@@ -66,15 +66,14 @@ const Dashboard = () => {
         {!username && <button className="button button-center button-blue" onClick={() => window.location.assign('/login')}>Login</button>}
         {username && <button className="button button-center button-blue">Edit</button>}
         {username && <button className="button button-center button-blue" onClick={() => window.location.assign('/upload')}>Upload</button>}
-        <input
+        <input className="search-textbox"
           type="text"
           placeholder="Search for data..."
           onChange={handleChange}
           value={searchInput}
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="search-icon-submit"><img src="search-icon.png" alt="search-icon" /></button>
         <div id="Search">
-          <img src="search-icon.png" alt="" />
         </div>
       </header>
       <div className="content-section">
