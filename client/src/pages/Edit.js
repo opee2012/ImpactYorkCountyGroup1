@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { useParams,useLocation } from "react-router-dom";
 
+import "../styles/Edit.css"
+
 
 const Edit = () => {
 
@@ -35,11 +37,13 @@ const Edit = () => {
 
 
   return (
-    <div>
+    <div className="editcontainer">
+      <div id="logo">
+        <img className="img-edit" src="/IYC.png" alt="IYC logo" style={{width: '265px', height: 'auto'}}/>
+      </div>
       <h1>Edit Page: {name}</h1>
       {subCategoryData && (
         <div>
-          <h2>Data</h2>
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
             {data.map((item, index) => (
               <div key={index} style={{ marginLeft: '10px', marginBottom: '20px' }}>
@@ -48,7 +52,7 @@ const Edit = () => {
                   <input
                     type="text"
                     value={item.Year}
-                    style={{ width: '100px', padding: '5px' }}
+                    style={{ width: '40px', padding: '5px' }}
                     onChange={(e) => handleYearChange(e, index)}
                   />
                 </div>
@@ -57,7 +61,7 @@ const Edit = () => {
                   <input
                     type="text"
                     value={item.Value}
-                    style={{ width: '100px', padding: '5px' }}
+                    style={{ width: '50px', padding: '5px' }}
                     onChange={(e) => handleValueChange(e, index)}
                   />
                 </div>
@@ -65,7 +69,8 @@ const Edit = () => {
               </div>
             ))}
           </div>
-          <button onClick={handleAddField}>Add Field</button>
+          <button onClick={handleAddField}>Add Field</button> <br/> <br />
+          <button onClick>Submit</button>
         </div>
       )}
     </div>
