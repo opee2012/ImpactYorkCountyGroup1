@@ -5,7 +5,7 @@ import DropupIcon from '../icons/dropup.png';
 import tempData from '../utils/data_temp/test.json';
 
 
-const  DashboardAccordion = ({ category }) => {
+const  DashboardAccordion = ({ category, searchInput }) => {
     
     const [selectedSubItems, setSelectedSubItems] = useState([]);
     let data=category.Data;
@@ -20,6 +20,18 @@ const  DashboardAccordion = ({ category }) => {
         }
         setSelectedSubItems(newSelectedSubItems);
     };
+
+    /*const filteredData = data.map(category => ({
+        ...category,
+        SubCategory: category.SubCategory.filter(subCategory => {
+          const name = subCategory.Name || '';
+          const searchText = (searchInput || '').toLowerCase();
+          return name.toLowerCase().includes(searchText);
+        })
+      })).filter(category => category.SubCategory.length > 0);
+      
+      uncomment and change data to filteredData on line 39
+      */
 
     return (
         <div className="wrapper">

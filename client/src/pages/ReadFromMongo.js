@@ -82,7 +82,7 @@ const Dashboard = () => {
         ) : isLoading ? (
           <p className="wrapper">loading...</p>
         ) : categories ? (
-          <DashboardAccordion category={categories[selectedMenuItem]} />
+          <DashboardAccordion category={categories[selectedMenuItem]} searchInput={searchInput}/>
         ) : null}
       </div>
     </div>
