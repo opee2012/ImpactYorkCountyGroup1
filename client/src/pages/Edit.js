@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
-import { useParams,useLocation } from "react-router-dom";
+import { useParams,useLocation, Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import "../styles/Edit.css"
 
@@ -18,22 +19,22 @@ const Edit = () => {
         setData(newData);
       };
 
-  const handleYearChange = (e, index) => {
-    const newData = [...data];
-    newData[index].Year = e.target.value;
-    setData(newData);
-  };
+    const handleYearChange = (e, index) => {
+      const newData = [...data];
+      newData[index].Year = e.target.value;
+      setData(newData);
+    };
 
-  const handleValueChange = (e, index) => {
-    const newData = [...data];
-    newData[index].Value = e.target.value;
-    setData(newData);
-    console.log(data);
-  };
+    const handleValueChange = (e, index) => {
+      const newData = [...data];
+      newData[index].Value = e.target.value;
+      setData(newData);
+      console.log(data);
+    };
 
-  const handleAddField = () => {
-    setData([...data, { Year: '', Value: '' }]);
-  };
+    const handleAddField = () => {
+      setData([...data, { Year: '', Value: '' }]);
+    };
 
 
   return (
@@ -52,7 +53,7 @@ const Edit = () => {
                   <input
                     type="text"
                     value={item.Year}
-                    style={{ width: '40px', padding: '5px' }}
+                    style={{ width: '50px', padding: '5px' }}
                     onChange={(e) => handleYearChange(e, index)}
                   />
                 </div>
@@ -70,7 +71,13 @@ const Edit = () => {
             ))}
           </div>
           <button onClick={handleAddField}>Add Field</button> <br/> <br />
-          <button onClick>Submit</button>
+          <button onClick>Submit</button> <br />
+          <Link to={"/"}> 
+            <button> 
+              Back to Dashboard
+            </button>
+          </Link>
+          
         </div>
       )}
     </div>
