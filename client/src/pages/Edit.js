@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import { useParams,useLocation, Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 
 import "../styles/Edit.css"
 
@@ -66,7 +65,7 @@ const Edit = () => {
                     onChange={(e) => handleValueChange(e, index)}
                   />
                 </div>
-                <button onClick={() => handleDeleteField(index)}>Delete</button>
+                <button onClick={() => handleDeleteField(index)} style={{width: "90%"}}>Delete</button>
               </div>
             ))}
           </div>
