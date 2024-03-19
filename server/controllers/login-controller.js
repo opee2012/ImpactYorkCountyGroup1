@@ -57,7 +57,8 @@ exports.addNewLogin = async (req, res) => {
         const { username, password } = req.body;
     
         try {
-            if (!(username.indexOf('@') > 0 && username.indexOf('.') > 0)) {
+            const emailRegEx = '.+\@.+\..+';
+            if (username.match(emailRegEx) == null) {
                 // Might need to send a validation link to ensure the email provided is valid
                 throw new Error("Username must be an email address");
             }
