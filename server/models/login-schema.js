@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const loginSchema = new mongoose.Schema({
-    username: {
+    email: {
         type: String,
-        required: [true, 'Missing username'],
-        unique: [true, 'Username already in use']
+        required: [true, 'Missing email'],
+        unique: [true, 'Email already in use']
     },
     password: {
         type: String,
@@ -19,20 +19,20 @@ loginSchema.statics.hash = async function(password) {
 }
 
 // static signup method
-loginSchema.statics.signup = async function(username, password) {
+loginSchema.statics.signup = async function(email, password) {
 
-    const user = await this.create({ username, password: await this.hash(password) });
+    const user = await this.create({ email, password: await this.hash(password) });
 
     return user;
 };
 
 // static login method
-loginSchema.statics.login = async function(username, password) {
+loginSchema.statics.login = async function(email, password) {
 
-    const user = await this.findOne({ username: username });
+    const user = await this.findOne({ email: email });
 
     if (!user) {
-        throw new Error('Invalid username');
+        throw new Error('Invalid email');
     }
 
     const match = await bcrypt.compare(password, user.password);
