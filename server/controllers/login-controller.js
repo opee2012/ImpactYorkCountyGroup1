@@ -57,6 +57,11 @@ exports.addNewLogin = async (req, res) => {
         const { username, password } = req.body;
     
         try {
+            if (!(username.indexOf('@') > 0 && username.indexOf('.') > 0)) {
+                // Might need to send a validation link to ensure the email provided is valid
+                throw new Error("Username must be an email address");
+            }
+
             const user = await Login.signup(username, password);
         
             // create a token
