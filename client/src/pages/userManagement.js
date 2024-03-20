@@ -1,45 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../styles/userManagement.css";
 import AddUserIcon from '../icons/add-email-icon.svg';
 import EditUserIcon from '../icons/edit-email-icon.svg';
 import DeleteUserIcon from '../icons/delete-email-icon.svg';
 
-const ActionComponent = () => {
-    // Example click handlers for each action
-    const handleAddEmailClick = () => {
-        console.log('Add Email Clicked');
-        // Implement your add email logic here
-    };
-
-    const handleEditEmailClick = () => {
-        console.log('Edit Email Clicked');
-        // Implement your edit email logic here
-    };
-
-    const handleDeleteEmailClick = () => {
-        console.log('Delete Email Clicked');
-        // Implement your delete email logic here
-    };
-
-    return (
-        <div className="action">
-            <button className="action-item" onClick={handleAddEmailClick}>
-                <img src={AddUserIcon} alt="Add User" className="action-icon" />
-                <li>Add Email</li>
-            </button>
-            <button className="action-item" onClick={handleEditEmailClick}>
-                <img src={EditUserIcon} alt="Edit User" className="action-icon" />
-                <li>Edit Email</li>
-            </button>
-            <button className="action-item" onClick={handleDeleteEmailClick}>
-                <img src={DeleteUserIcon} alt="Delete User" className="action-icon" />
-                <li>Delete Email</li>
-            </button>
-        </div>
-    );
-};
-
 const UserManagement = () => {
+    const [users, setUsers] = useState([
+        { id: 1, email: 'user1@example.com' },
+        { id: 2, email: 'user2@example.com' },
+    ]);
+    const [newEmail, setNewEmail] = useState('');
+    const [editEmail, setEditEmail] = useState('');
+    const [selectedUserId, setSelectedUserId] = useState(null);
+    const [addError, setAddError] = useState(''); // State to track add error
+
+    const handleAddEmail = () => {
+        if (newEmail.trim() === '') {
+            setAddError(''); // Set error message
+            return;
+        }
+        const newUser = {
+            id: users.length + 1,
+            email: newEmail,
+        };
+        setUsers([...users, newUser]);
+        setNewEmail('');
+        setAddError(''); // Clear error message
+    };
+
+    const handleEditEmail = () => {
+        const updatedUsers = users.map((user) =>
+            user.id === selectedUserId ? { ...user, email: editEmail } : user
+        );
+        setUsers(updatedUsers);
+        setEditEmail('');
+        setSelectedUserId(null);
+    };
+
+    const handleDeleteEmail = () => {
+        const updatedUsers = users.filter((user) => user.id !== selectedUserId);
+        setUsers(updatedUsers);
+        setSelectedUserId(null);
+    };
+
+    const handleUserClick = (id) => {
+        setSelectedUserId(id);
+        const selectedUser = users.find((user) => user.id === id);
+        setEditEmail(selectedUser ? selectedUser.email : '');
+    };
+
     return (
         <div className="userManagement">
             <div className="top-panelManagement"></div>
@@ -47,26 +56,39 @@ const UserManagement = () => {
                 <div className="user-list">
                     <div className="sidebarTitle">User List</div>
                     <ul>
-                        <li>User 1</li>
-                        <li>User 2</li>
+                        {users.map((user) => (
+                            <li key={user.id} onClick={() => handleUserClick(user.id)}>
+                                {user.email}
+                            </li>
+                        ))}
                     </ul>
                 </div>
-                <ActionComponent />
+                <div className="action">
+                    <button className="action-item" onClick={handleAddEmail}>
+                        <img src={AddUserIcon} alt="Add User" className="action-icon" />
+                        <li>Add Email</li>
+                    </button>
+                    {addError && <p className="error-message">{addError}</p>} {/* Display error message */}
+                    <button className="action-item" onClick={handleEditEmail}>
+                        <img src={EditUserIcon} alt="Edit User" className="action-icon" />
+                        <li>Edit Email</li>
+                    </button>
+                    <button className="action-item" onClick={handleDeleteEmail}>
+                        <img src={DeleteUserIcon} alt="Delete User" className="action-icon" />
+                        <li>Delete Email</li>
+                    </button>
+                </div>
             </div>
             <div className="content">
                 <label>
-                    Current Email:
-                    <input type="email" value="User3@example.com" readOnly />
+                    Enter Email:
+                    <input
+                        type="email"
+                        value={newEmail}
+                        onChange={(e) => setNewEmail(e.target.value)}
+                        placeholder="Enter new email"
+                    />
                 </label>
-                <label>
-                    New Email:
-                    <input type="email" placeholder="Enter new email" />
-                </label>
-                <label>
-                    Confirm Email:
-                    <input type="email" placeholder="Confirm new email" />
-                </label>
-                <button type="submit">Submit</button>
             </div>
         </div>
     );

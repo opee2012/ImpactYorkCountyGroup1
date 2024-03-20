@@ -21,6 +21,7 @@
     padding: 40px;
 }
 
+/* Sidebar styling */
 .sidebarManagement {
     grid-area: sidebar;
     display: flex;
@@ -31,6 +32,7 @@
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Title styling */
 .sidebarTitle {
     font-size: 20px;
     margin-bottom: 30px;
@@ -48,6 +50,7 @@
 }
 
 .user-list li {
+    list-style: none;
     padding: 5px;
     margin-bottom: 8px;
     cursor: pointer;
@@ -69,21 +72,18 @@
 .action-item {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Center content for better visual */
     cursor: pointer;
-    margin-bottom: 15px;
-    padding: 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    border: none; /* Remove button border */
-    background-color: transparent; /* Transparent background */
-    width: 100%; /* Full width */
+    margin-bottom: 15px; /* Space between action items */
+    padding: 10px; /* Padding inside the action item for larger clickable area */
+    border-radius: 4px; 
+    transition: background-color 0.3s; 
 }
 
-.action-item li { 
+.action-item li {
+    list-style: none;
     font-size: 18px;
     font-weight: 400;
-    list-style: none;
 }
 
 .action-item:hover {
@@ -97,9 +97,12 @@
     transition: transform 0.3s; 
 }
 
-/* Ensuring the icon inside the button changes on hover */
+.action-icon:hover {
+    background-color: #4a90e2; 
+}
+  
 .action-item:hover .action-icon {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Slightly enlarge the icon */
 }  
   
 .content {
@@ -109,7 +112,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 400px;
+    min-height: 400px; /* Ensures that the area is visible */
     background-color: #ffffff;
 }
 
