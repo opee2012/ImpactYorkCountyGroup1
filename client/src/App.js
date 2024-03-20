@@ -9,7 +9,7 @@ import "./styles/App.css";
 import Dashboard from "./pages/ReadFromMongo";
 import Login from "./pages/Login";
 import Upload from "./pages/Upload";
-
+import UserManagement from "./pages/userManagement"
 function App() {
   const { username } = useAuthContext();
 
@@ -18,6 +18,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/user-management" element={<UserManagement />} />
           <Route
             path="/login"
             element={!username ? <Login /> : <Navigate to="/upload" />}

@@ -1,0 +1,153 @@
+.userManagement {
+    display: grid;
+    grid-template-columns: 250px auto; /* Sidebar width and the rest for content */
+    grid-template-rows: 70px auto; /* Top panel height and the rest for content */
+    grid-template-areas:
+        "top-panel top-panel"
+        "sidebar main";
+    height: 90vh;
+    grid-gap: 10px; /* This will create a gap between the grid columns */
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 30px auto;
+    width: calc(100% - 60px); /* Subtracts the margin from the full width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.top-panelManagement {
+    grid-area: top-panel;
+    background-color: #79A3DC;
+    padding: 40px;
+}
+
+/* Sidebar styling */
+.sidebarManagement {
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Title styling */
+.sidebarTitle {
+    font-size: 20px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* User list styling */
+.user-list {
+    text-align: center;
+}
+
+.user-list ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.user-list li {
+    list-style: none;
+    padding: 5px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    text-align: center;
+}
+
+.user-list li:hover {
+    background-color: #4a90e2;
+}
+
+/* Action styling */
+.action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+}
+  
+.action-item {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center content for better visual */
+    cursor: pointer;
+    margin-bottom: 15px; /* Space between action items */
+    padding: 10px; /* Padding inside the action item for larger clickable area */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth background-color transition */
+}
+
+.action-item li {
+    list-style: none;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.action-item:hover {
+    background-color: #4a90e2; 
+}
+  
+.action-icon {
+    margin-right: 10px; 
+    width: 38px;
+    height: 38px; 
+    transition: transform 0.3s; 
+}
+
+.action-icon:hover {
+    background-color: #4a90e2; 
+}
+  
+.action-item:hover .action-icon {
+    transform: scale(1.1); /* Slightly enlarge the icon */
+}  
+  
+.content {
+    grid-area: main;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    /* Ensures that the area is visible */
+    background-color: #ffffff;
+    /* A light grey to distinguish the area */
+}
+
+.content label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    align-items: center;
+    width: 100%;
+}
+
+.content input[type="email"] {
+    width: 80%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.content button {
+    width: 80%;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.content button:hover {
+    background-color: #357abd;
+}
