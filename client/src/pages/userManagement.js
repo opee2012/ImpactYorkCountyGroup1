@@ -19,15 +19,15 @@ const userManagement = () => {
                 <div className="action">
                     <div className="action-item">
                         <img src={AddUserIcon} alt="Add User" className="action-icon" />
-                        <li>Add User</li>
+                        <li>Add Email</li>
                     </div>
                     <div className="action-item">
                         <img src={EditUserIcon} alt="Edit User" className="action-icon" />
-                        <li>Edit User</li>
+                        <li>Edit Email</li>
                     </div>
                     <div className="action-item">
                         <img src={DeleteUserIcon} alt="Delete User" className="action-icon" />
-                        <li>Delete User</li>
+                        <li>Delete Email</li>
                     </div>
                 </div>
 
