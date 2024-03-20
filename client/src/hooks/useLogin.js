@@ -33,5 +33,33 @@ export const useLogin = () => {
     };
   };
 
-  return { login, isLoading, error };
+  const getAllLogins = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+        const response = await fetch('/login', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+
+        const json = await response.json();
+
+        // Update loading state
+        setIsLoading(false);
+
+        return json; // Return the fetched data
+    } catch (error) {
+        setIsLoading(false);
+        setError(error.message);
+        return null; // Return null in case of an error
+    }
+};
+
+  return { login, isLoading, error, getAllLogins };
 }
