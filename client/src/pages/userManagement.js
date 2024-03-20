@@ -19,7 +19,7 @@ const UserManagement = () => {
     // Handle adding a new email
     const handleAddEmail = () => {
         if (newEmail.trim() === '') {
-            setAddError('Please enter an email to add.');
+            setAddError('');
             return;
         }
         const newUser = {
@@ -48,10 +48,15 @@ const UserManagement = () => {
         setNewEmail('');
     };
 
-    // Handle showing the edit email form
+    // Handle showing the edit email form only if there is a value in the "Enter Email" input
     const handleEditButtonClick = () => {
-        setShowEditForm(true);
+        if (newEmail.trim() !== '') {
+            setShowEditForm(true);
+        } else {
+            setAddError('');
+        }
     };
+
 
     return (
         <div className="userManagement">
