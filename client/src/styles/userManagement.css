@@ -21,7 +21,6 @@
     padding: 40px;
 }
 
-/* Sidebar styling */
 .sidebarManagement {
     grid-area: sidebar;
     display: flex;
@@ -32,14 +31,12 @@
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Title styling */
 .sidebarTitle {
     font-size: 20px;
     margin-bottom: 30px;
     font-weight: bold;
 }
 
-/* User list styling */
 .user-list {
     text-align: center;
 }
@@ -51,7 +48,6 @@
 }
 
 .user-list li {
-    list-style: none;
     padding: 5px;
     margin-bottom: 8px;
     cursor: pointer;
@@ -63,7 +59,6 @@
     background-color: #4a90e2;
 }
 
-/* Action styling */
 .action {
     display: flex;
     flex-direction: column;
@@ -74,18 +69,21 @@
 .action-item {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center content for better visual */
+    justify-content: center;
     cursor: pointer;
-    margin-bottom: 15px; /* Space between action items */
-    padding: 10px; /* Padding inside the action item for larger clickable area */
-    border-radius: 4px; /* Rounded corners */
-    transition: background-color 0.3s; /* Smooth background-color transition */
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    border: none; /* Remove button border */
+    background-color: transparent; /* Transparent background */
+    width: 100%; /* Full width */
 }
 
-.action-item li {
-    list-style: none;
+.action-item li { 
     font-size: 18px;
     font-weight: 400;
+    list-style: none;
 }
 
 .action-item:hover {
@@ -99,12 +97,9 @@
     transition: transform 0.3s; 
 }
 
-.action-icon:hover {
-    background-color: #4a90e2; 
-}
-  
+/* Ensuring the icon inside the button changes on hover */
 .action-item:hover .action-icon {
-    transform: scale(1.1); /* Slightly enlarge the icon */
+    transform: scale(1.1);
 }  
   
 .content {
@@ -115,9 +110,7 @@
     justify-content: center;
     align-items: center;
     min-height: 400px;
-    /* Ensures that the area is visible */
     background-color: #ffffff;
-    /* A light grey to distinguish the area */
 }
 
 .content label {
