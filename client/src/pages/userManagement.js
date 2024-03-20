@@ -4,19 +4,22 @@ import AddUserIcon from '../icons/add-email-icon.svg';
 import EditUserIcon from '../icons/edit-email-icon.svg';
 import DeleteUserIcon from '../icons/delete-email-icon.svg';
 
+// UserManagement component for managing user emails
 const UserManagement = () => {
+    // State for storing users, new email, edit email, error message, and showing edit form
     const [users, setUsers] = useState([
         { id: 1, email: 'user1@example.com' },
         { id: 2, email: 'user2@example.com' },
     ]);
     const [newEmail, setNewEmail] = useState('');
     const [editEmail, setEditEmail] = useState('');
-    const [selectedUserId, setSelectedUserId] = useState(null);
-    const [addError, setAddError] = useState(''); // State to track add error
+    const [addError, setAddError] = useState('');
+    const [showEditForm, setShowEditForm] = useState(false);
 
+    // Handle adding a new email
     const handleAddEmail = () => {
         if (newEmail.trim() === '') {
-            setAddError(''); // Set error message
+            setAddError('Please enter an email to add.');
             return;
         }
         const newUser = {
@@ -25,28 +28,29 @@ const UserManagement = () => {
         };
         setUsers([...users, newUser]);
         setNewEmail('');
-        setAddError(''); // Clear error message
+        setAddError('');
     };
 
+    // Handle editing an existing email
     const handleEditEmail = () => {
         const updatedUsers = users.map((user) =>
-            user.id === selectedUserId ? { ...user, email: editEmail } : user
+            user.email === newEmail ? { ...user, email: editEmail } : user
         );
         setUsers(updatedUsers);
         setEditEmail('');
-        setSelectedUserId(null);
+        setShowEditForm(false);
     };
 
+    // Handle deleting an email
     const handleDeleteEmail = () => {
-        const updatedUsers = users.filter((user) => user.id !== selectedUserId);
+        const updatedUsers = users.filter((user) => user.email !== newEmail);
         setUsers(updatedUsers);
-        setSelectedUserId(null);
+        setNewEmail('');
     };
 
-    const handleUserClick = (id) => {
-        setSelectedUserId(id);
-        const selectedUser = users.find((user) => user.id === id);
-        setEditEmail(selectedUser ? selectedUser.email : '');
+    // Handle showing the edit email form
+    const handleEditButtonClick = () => {
+        setShowEditForm(true);
     };
 
     return (
@@ -57,26 +61,9 @@ const UserManagement = () => {
                     <div className="sidebarTitle">User List</div>
                     <ul>
                         {users.map((user) => (
-                            <li key={user.id} onClick={() => handleUserClick(user.id)}>
-                                {user.email}
-                            </li>
+                            <li key={user.id}>{user.email}</li>
                         ))}
                     </ul>
-                </div>
-                <div className="action">
-                    <button className="action-item" onClick={handleAddEmail}>
-                        <img src={AddUserIcon} alt="Add User" className="action-icon" />
-                        <li>Add Email</li>
-                    </button>
-                    {addError && <p className="error-message">{addError}</p>} {/* Display error message */}
-                    <button className="action-item" onClick={handleEditEmail}>
-                        <img src={EditUserIcon} alt="Edit User" className="action-icon" />
-                        <li>Edit Email</li>
-                    </button>
-                    <button className="action-item" onClick={handleDeleteEmail}>
-                        <img src={DeleteUserIcon} alt="Delete User" className="action-icon" />
-                        <li>Delete Email</li>
-                    </button>
                 </div>
             </div>
             <div className="content">
@@ -86,9 +73,36 @@ const UserManagement = () => {
                         type="email"
                         value={newEmail}
                         onChange={(e) => setNewEmail(e.target.value)}
-                        placeholder="Enter new email"
+                        placeholder="..."
                     />
                 </label>
+                <div className="action">
+                    <button className="action-item" onClick={handleAddEmail}>
+                        <img src={AddUserIcon} alt="Add User" className="action-icon" />
+                        Add Email
+                    </button>
+                    {addError && <p className="error-message">{addError}</p>}
+                    <button className="action-item" onClick={handleEditButtonClick}>
+                        <img src={EditUserIcon} alt="Edit User" className="action-icon" />
+                        Edit Email
+                    </button>
+                    <button className="action-item" onClick={handleDeleteEmail}>
+                        <img src={DeleteUserIcon} alt="Delete User" className="action-icon" />
+                        Delete Email
+                    </button>
+                </div>
+                {showEditForm && (
+                    <label>
+                        New Email:
+                        <input
+                            type="email"
+                            value={editEmail}
+                            onChange={(e) => setEditEmail(e.target.value)}
+                            placeholder="Enter new email"
+                        />
+                        <button onClick={handleEditEmail}>Submit</button>
+                    </label>
+                )}
             </div>
         </div>
     );

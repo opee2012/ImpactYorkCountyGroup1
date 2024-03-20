@@ -64,7 +64,7 @@
 
 .action {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     margin-bottom: 100px;
 }
@@ -78,6 +78,7 @@
     padding: 10px; /* Padding inside the action item for larger clickable area */
     border-radius: 4px; 
     transition: background-color 0.3s; 
+    margin-right: 30px;
 }
 
 .action-item li {
