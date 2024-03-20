@@ -1,20 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../styles/userManagement.css";
 import AddUserIcon from '../icons/add-email-icon.svg';
 import EditUserIcon from '../icons/edit-email-icon.svg';
 import DeleteUserIcon from '../icons/delete-email-icon.svg';
+import { useLogin } from '../hooks/useLogin';
 
 // UserManagement component for managing user emails
 const UserManagement = () => {
     // State for storing users, new email, edit email, error message, and showing edit form
-    const [users, setUsers] = useState([
-        { id: 1, email: 'user1@example.com' },
-        { id: 2, email: 'user2@example.com' },
-    ]);
+    const [users, setUsers] = useState([]);
     const [newEmail, setNewEmail] = useState('');
     const [editEmail, setEditEmail] = useState('');
     const [addError, setAddError] = useState('');
     const [showEditForm, setShowEditForm] = useState(false);
+
+    const { getAllLogins, isLoading, error } = useLogin();
+
+    useEffect(() => {
+        const fetchLogins = async () => {
+            try {
+                const logins = await getAllLogins();
+                setUsers(logins);
+            } catch (error) {
+                console.error('Error fetching logins:', error);
+            }
+        };
+        fetchLogins();
+    }, []);
+
 
     // Handle adding a new email
     const handleAddEmail = () => {
