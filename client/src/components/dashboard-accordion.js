@@ -38,7 +38,7 @@ const  DashboardAccordion = ({ category }) => {
                                 <span className="dropdownIcons">
                                 {username && 
                                 (<Link to={`/edit/${subCategory.Name}`} state={{ subCategoryData: subCategory.Data }}> 
-                                    <button style={{ width: '40px', height: '25px', fontSize: '15px', padding: '2px' }}> 
+                                    <button > 
                                     Edit</button>
                                 </Link>)}
                                     {selectedSubItems.includes(subCategory) ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
