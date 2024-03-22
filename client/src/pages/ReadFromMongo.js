@@ -21,7 +21,6 @@ const Dashboard = () => {
     fetchData()
       .then((data) => {
         setCategories(data.out);
-        console.log(data.out);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
