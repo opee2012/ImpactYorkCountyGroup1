@@ -10,12 +10,8 @@ import "../styles/Upload.css";
 const Upload = () => {
   //TODO
   //Fatfrank font on h1
-  //drag and drop functionality
-  //status & download icons
-  //upload to server functionality
-  //set status on attempted upload
 
-  const { username } = useAuthContext();
+  const { email } = useAuthContext();
 
   
 
@@ -25,13 +21,13 @@ const Upload = () => {
         <img className="img-upload" src="IYC.png" />
       </div>
       <h1>File Upload</h1>
-      {username && (
+      {email && (
         <div className="uploadformcontainer">
           <UploadForm />
         </div>
       )}
 
-      {!username && (
+      {!email && (
         <div>
           <Navigate to="/login">Login</Navigate>
         </div>
