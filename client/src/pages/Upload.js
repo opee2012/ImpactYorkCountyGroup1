@@ -10,10 +10,6 @@ import "../styles/Upload.css";
 const Upload = () => {
   //TODO
   //Fatfrank font on h1
-  //drag and drop functionality
-  //status & download icons
-  //upload to server functionality
-  //set status on attempted upload
 
   const { email } = useAuthContext();
 
