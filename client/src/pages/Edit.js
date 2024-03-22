@@ -7,7 +7,7 @@ import "../styles/Edit.css";
 const Edit = () => {
   const { name } = useParams();
   const { state } = useLocation();
-  const {editSelectedCategory} = useEdit();
+  const { editSelectedCategory } = useEdit();
 
   const subCategoryData = state && state.subCategoryData;
   let categoryData = state && state.categoryData;
@@ -15,9 +15,9 @@ const Edit = () => {
   const [data, setData] = useState(subCategoryData);
 
   const handleDeleteField = (index) => {
-    const newData = [...data];
+    let newData = data;
     newData.splice(index, 1);
-    setData(newData);
+    setData([...newData]);
   };
 
   const handleYearChange = (e, index) => {
@@ -29,15 +29,22 @@ const Edit = () => {
   const handleValueChange = (e, index) => {
     const newData = [...data];
     newData[index].Value = e.target.value;
+   
     setData(newData);
   };
 
   const handleAddField = () => {
-    setData([...data, { Year: "", Value: "" }]);
+    let newData = data;
+    newData.push({ Year: "", Value: "" });
+    setData([...newData]);
   };
 
   const handleSubmit = async () => {
-    JSON.stringify(categoryData).replace(JSON.stringify(categoryData), JSON.stringify(data))
+    JSON.stringify(categoryData).replace(
+      JSON.stringify(categoryData),
+      JSON.stringify(data)
+    );
+    console.log(categoryData);
     await editSelectedCategory(categoryName, categoryData);
   };
 
