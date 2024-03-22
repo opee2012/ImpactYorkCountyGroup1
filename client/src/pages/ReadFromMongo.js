@@ -64,7 +64,6 @@ const Dashboard = () => {
       <header className="top-panel">    
         {username && <button className="button button-center button-red"  onClick={() => logout()}>Logout</button>}
         {!username && <button className="button button-center button-blue" onClick={() => window.location.assign('/login')}>Login</button>}
-        {username && <button className="button button-center button-blue">Edit</button>}
         {username && <button className="button button-center button-blue" onClick={() => window.location.assign('/upload')}>Upload</button>}
         <input className="search-textbox"
           type="text"

@@ -21,7 +21,7 @@ const  DashboardAccordion = ({ category, searchInput }) => {
         setSelectedSubItems(newSelectedSubItems);
     };
 
-    /*const filteredData = data.map(category => ({
+    const filteredData = data.map(category => ({
         ...category,
         SubCategory: category.SubCategory.filter(subCategory => {
           const name = subCategory.Name || '';
@@ -30,13 +30,13 @@ const  DashboardAccordion = ({ category, searchInput }) => {
         })
       })).filter(category => category.SubCategory.length > 0);
       
-      uncomment and change data to filteredData on line 39
-      */
+    //   uncomment and change data to filteredData on line 39
+      
 
     return (
         <div className="wrapper">
             <div className="accordion">
-                {data.map((category, index) => (
+                {filteredData.map((category, index) => (
                     <div key ={index}>
                         <h2>{category.Key}</h2>
                         {category['SubCategory'].map((subCategory, subIndex) => (
