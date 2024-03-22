@@ -1,9 +1,9 @@
 import { useState } from "react";
 export const useEdit = () => {
-  const [setError] = useState(null);
+  const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [status] = useState(null);
-  const [setIsLoading] = useState(false);
+  const [status, setStatus] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const editSelectedCategory = async (categoryName, data) => {
     setSelectedFile(true);
@@ -11,7 +11,6 @@ export const useEdit = () => {
 
     // Implement upload functionality
     try {
-      console.log(categoryName, "\n", data);
       const request = await fetch("/data/:data", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

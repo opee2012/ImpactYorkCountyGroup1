@@ -37,10 +37,6 @@ const Edit = () => {
   };
 
   const handleSubmit = async () => {
-    // console.log(categoryData);
-    // console.log(categoryName);
-    // console.log(JSON.stringify(categoryData).replace(JSON.stringify(categoryData), JSON.stringify(data)));
-    // console.log(categoryData);
     JSON.stringify(categoryData).replace(JSON.stringify(categoryData), JSON.stringify(data))
     await editSelectedCategory(categoryName, categoryData);
   };
