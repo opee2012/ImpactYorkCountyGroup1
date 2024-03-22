@@ -19,7 +19,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/user-management" element={!username ? <Login /> : <UserManagement />} />
+          <Route path="/user-management" element={!email ? <Login /> : <UserManagement />} />
           <Route path="/user-management" element={<UserManagement />} />
           <Route
             path="/login"
