@@ -8,7 +8,7 @@ const xlsx_storage = multer.diskStorage({
         cb(null, xlsxDir);
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname);
+        cb(null, 'IYC Dashboard Data.xlsx');
     }
 });
 

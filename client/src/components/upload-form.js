@@ -30,7 +30,7 @@ const UploadForm = () => {
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      const response = await fetch("/uploadfile", {
+      const response = await fetch("/uploadxlsx", {
         method: "POST",
         body: formData,
         enctype: "multipart/form-data",
