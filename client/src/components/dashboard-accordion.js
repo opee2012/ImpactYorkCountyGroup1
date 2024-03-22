@@ -12,7 +12,7 @@ const  DashboardAccordion = ({ category }) => {
     const [selectedSubItems, setSelectedSubItems] = useState([]);
     let data=category.Data;
     let categoryName = category.Category;
-    const { username } = useAuthContext();
+    const { email } = useAuthContext();
 
     const toggleSubCategory = (subCategory) => {
         const newSelectedSubItems = [...selectedSubItems];
@@ -36,7 +36,7 @@ const  DashboardAccordion = ({ category }) => {
                             <div className="title" onClick={() => toggleSubCategory(subCategory)}>
                                 <h3>{subCategory.Name}</h3>
                                 <span className="dropdownIcons">
-                                {username && 
+                                {email && 
                                 (<Link to={`/edit/${subCategory.Name}`} state={{ subCategoryData: subCategory.Data, categoryName: categoryName, categoryData: data}}> 
                                     <button > 
                                     Edit</button>
