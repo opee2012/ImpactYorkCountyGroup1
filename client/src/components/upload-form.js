@@ -50,6 +50,8 @@ const UploadForm = () => {
     }
   };
 
+  const filename = "IYC Dashboard Data.xlsx";
+
   return (
     <div className="uploadformnonflex">
       <form onDrop={dropHandler} onDragOver={dragOverHandler}>
@@ -80,7 +82,7 @@ const UploadForm = () => {
           {status ? status : selectedFile}
         </p>
       </form>
-      <a href=""> {downloadIcon} Download template</a> <br />
+      <a href={`/downloadxlsx/${filename}`} download> {downloadIcon} Download Template</a> <br />
       <button onClick={() => logout()}>Back</button> <br />
       <button onClick={() => uploadClientFile()}>Submit</button>
     </div>
