@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 export const useEdit = () => {
-  const [error, setError] = useState(null);
+  const [setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [status, setStatus] = useState(null);
+  const [status] = useState(null);
+  const [setIsLoading] = useState(false);
 
   const editSelectedCategory = async (categoryName, data) => {
     setSelectedFile(true);
@@ -14,10 +15,10 @@ export const useEdit = () => {
       const request = await fetch("/data/:data", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: {
+        body: JSON.stringify({
           query: { Category: categoryName },
-          json: { Data: JSON.stringify(data) },
-        },
+          json: { Data: data },
+        }),
       });
       console.log(request);
       if (!request.ok) {
@@ -28,13 +29,9 @@ export const useEdit = () => {
         return json;
       }
 
-      // Handle successful response here (e.g., set data state)
-      // ...
-
-      // setIsLoading(false);
     } catch (error) {
-      // setError(error.message);
-      // setIsLoading(false);
+      setError(error.message);
+      setIsLoading(false);
     }
   };
 
