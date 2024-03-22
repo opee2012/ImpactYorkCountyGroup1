@@ -84,7 +84,7 @@ const UserManagement = () => {
                     </ul>
                 </div>
             </div>
-            <div className="content">
+            <div className="content-user">
                 <label>
                     Enter Email:
                     <input

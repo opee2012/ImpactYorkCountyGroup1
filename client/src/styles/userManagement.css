@@ -106,7 +106,7 @@
     transform: scale(1.1); /* Slightly enlarge the icon */
 }  
   
-.content {
+.content-user{
     grid-area: main;
     padding: 20px;
     display: flex;
@@ -117,7 +117,7 @@
     background-color: #ffffff;
 }
 
-.content label {
+.content-user label {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
@@ -125,7 +125,7 @@
     width: 100%;
 }
 
-.content input[type="email"] {
+.content-user input[type="email"] {
     width: 80%;
     padding: 10px;
     margin-top: 5px;
@@ -133,7 +133,7 @@
     border-radius: 4px;
 }
 
-.content button {
+.content-user button {
     width: 80%;
     padding: 10px 20px;
     margin-top: 20px;
@@ -145,6 +145,6 @@
     font-size: 16px;
 }
 
-.content button:hover {
+.content-user button:hover {
     background-color: #357abd;
 }
