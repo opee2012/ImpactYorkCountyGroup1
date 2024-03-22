@@ -12,7 +12,7 @@ import Upload from "./pages/Upload";
 import Edit from "./pages/Edit";
 
 function App() {
-  const { username } = useAuthContext();
+  const { email } = useAuthContext();
 
   return (
     <div className="App">
@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route
             path="/login"
-            element={!username ? <Login /> : <Navigate to="/upload" />}
+            element={!email ? <Login /> : <Navigate to="/upload" />}
           />
           <Route path="/upload" element={<Upload />} />
           <Route path="/edit/:name" Component={Edit} />
