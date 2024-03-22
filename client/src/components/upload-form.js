@@ -23,12 +23,30 @@ const UploadForm = () => {
   };
 
   const uploadClientFile = async () => {
-    
-    // Implement upload functionality
-    const json_files = await ExcelToJSON(selectedFile);
-    for (let i in json_files) {
-      uploadSelectedFile(json_files[i]);
-    };
+    try {
+      console.log(selectedFile);
+
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      const response = await fetch("/uploadxlsx", {
+        method: "POST",
+        body: formData,
+        enctype: "multipart/form-data",
+      });
+
+      // Implement upload functionality
+      const json_files = await ExcelToJSON(selectedFile);
+      for (let i in json_files) {
+        uploadSelectedFile(json_files[i]);
+      };
+
+      if (!response.ok) {
+        throw new Error("Upload failed");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

@@ -3,12 +3,16 @@ import '../styles/DashboardAccordion.css';
 import DropdownIcon from '../icons/dropdown.png';
 import DropupIcon from '../icons/dropup.png';
 import tempData from '../utils/data_temp/test.json';
+import { useAuthContext } from "../hooks/useAuthContext";
+import { Navigate, Link } from 'react-router-dom';
 
 
 const  DashboardAccordion = ({ category, searchInput }) => {
     
     const [selectedSubItems, setSelectedSubItems] = useState([]);
     let data=category.Data;
+    let categoryName = category.Category;
+    const { email } = useAuthContext();
 
     const toggleSubCategory = (subCategory) => {
         const newSelectedSubItems = [...selectedSubItems];
@@ -44,6 +48,11 @@ const  DashboardAccordion = ({ category, searchInput }) => {
                             <div className="title" onClick={() => toggleSubCategory(subCategory)} >
                                 <h3>{subCategory.Name}</h3>
                                 <span className="dropdownIcons">
+                                {email && 
+                                (<Link to={`/edit/${subCategory.Name}`} state={{ subCategoryData: subCategory.Data, categoryName: categoryName, categoryData: data}}> 
+                                    <button > 
+                                    Edit</button>
+                                </Link>)}
                                     {selectedSubItems.includes(subCategory) ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
                                 </span>
                             </div>

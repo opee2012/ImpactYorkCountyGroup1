@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 
 
 const Dashboard = () => {
-  const { username } = useAuthContext();
+  const { email } = useAuthContext();
   const { logout } = useLogout();
   const [selectedMenuItem, setSelectedMenuItem] = useState(0);
   const { fetchData, isLoading, error } = useDataHandle();
@@ -28,7 +28,6 @@ const Dashboard = () => {
     fetchData()
       .then((data) => {
         setCategories(data.out);
-        console.log(data.out);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -62,9 +61,9 @@ const Dashboard = () => {
         </ul>
       </header>
       <header className="top-panel">    
-        {username && <button className="button button-center button-red"  onClick={() => logout()}>Logout</button>}
-        {!username && <button className="button button-center button-blue" onClick={() => window.location.assign('/login')}>Login</button>}
-        {username && <button className="button button-center button-blue" onClick={() => window.location.assign('/upload')}>Upload</button>}
+        {email && <button className="button button-center button-red"  onClick={() => logout()}>Logout</button>}
+        {!email && <button className="button button-center button-blue" onClick={() => window.location.assign('/login')}>Login</button>}
+        {email && <button className="button button-center button-blue" onClick={() => window.location.assign('/upload')}>Upload</button>}
         <input className="search-textbox"
           type="text"
           placeholder="Search for data..."
