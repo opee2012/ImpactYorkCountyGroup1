@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "../styles/DashboardRework.css";
+import "../styles/Dashboard.css";
 import DashboardAccordion from "../components/dashboard-accordion";
-// import testData from '../utils/data_temp/test.json';
 import { useDataHandle } from "../hooks/useData";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
-import { Navigate } from "react-router-dom";
 
 
 const Dashboard = () => {
@@ -59,13 +57,15 @@ const Dashboard = () => {
               })
             : null}
         </ul>
+        {email && <button onClick={() => window.location.assign('/upload')}>Upload Data</button>}
       </header>
       <header className="top-panel">    
         {email && <button className="button button-center button-red"  onClick={() => logout()}>Logout</button>}
         {!email && <button className="button button-center button-blue" onClick={() => window.location.assign('/login')}>Login</button>}
-        {email && <button className="button button-center button-blue" onClick={() => window.location.assign('/upload')}>Upload</button>}
-        <input className="search-textbox"
+        <input
+          className="search-textbox"
           type="text"
+          style={{ paddingLeft: "10px" }}
           placeholder="Search for data..."
           onChange={handleChange}
           value={searchInput}
