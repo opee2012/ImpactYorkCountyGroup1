@@ -9,7 +9,8 @@ const HTTP_STATUS = {
 const {
     uploadXLSX,
     uploadImage,
-    getImage
+    getImage,
+    getXLSX
 } = require('../controllers/upload-controller');
 
 module.exports = function(app) {
@@ -20,4 +21,6 @@ module.exports = function(app) {
     app.post('/uploadImage', uploadImage);
 
     app.get('/uploadImage/:image', getImage);
+
+    app.get('/downloadxlsx/:xlsx', getXLSX);
 };

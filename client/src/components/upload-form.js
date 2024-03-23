@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useLogout } from "../hooks/useLogout";
 import { useUpload } from "../hooks/useUpload";
 import "../styles/Upload.css";
 import xcelIcon from "../icons/excelIcon.png";
@@ -49,6 +48,26 @@ const UploadForm = () => {
     }
   };
 
+  const filename = "IYC Dashboard Data.xlsx";
+
+  const downloadFile = async (filename) => {
+    const response = await fetch(`/downloadxlsx/${filename}`);
+    const blob = await response.blob();
+  
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename || 'download';
+    const clickHandler = () => {
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+        a.removeEventListener('click', clickHandler);
+      }, 150);
+    };
+    a.addEventListener('click', clickHandler, false);
+    a.click();
+  }
+
   return (
     <div className="uploadformnonflex">
       <form onDrop={dropHandler} onDragOver={dragOverHandler}>
@@ -75,15 +94,22 @@ const UploadForm = () => {
           }}
         >
           Browse files
-        </button>
+        </button> <br />
+        <button onClick={() => downloadFile(filename)}>Download Template</button>
         <p id="statusbar">
           {selectedFile && !error ? <img src={xcelIcon} alt="file icon" /> : null}
           {error ? error : (status ? status : selectedFile)}
         </p>
       </form>
-      <a href=""> {downloadIcon} Download template</a> <br />
-      <button onClick={() => window.location.assign('/')}>Back</button> <br />
-      <button onClick={() => uploadClientFile()}>Submit</button>
+      <button onClick={() => {
+        if (selectedFile) {
+          uploadClientFile();
+          window.location.assign('/');
+        } else {
+          alert("Please select an Excel file to upload.");
+        }
+      }}>Submit</button> <br />
+      <button onClick={() => window.location.assign('/')}>Dashboard</button>
     </div>
   );
 };
