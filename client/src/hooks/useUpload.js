@@ -41,7 +41,7 @@ export const useUpload = () => {
 
       // setIsLoading(false);
     } catch (error) {
-      // setError(error.message);
+      setError(error.message);
       // setIsLoading(false);
     }
   };
@@ -52,5 +52,8 @@ export const useUpload = () => {
     dragOverHandler,
     dropHandler,
     uploadSelectedFile,
+    error,
+    setError,
+    setStatus
   };
 };
