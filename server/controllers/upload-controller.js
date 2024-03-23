@@ -48,3 +48,9 @@ exports.getImage = (req, res) => {
     const imagePath = path.join(imageDir, imageName);
     res.sendFile(imagePath);
 };
+
+exports.getXLSX = (req, res) => {
+    const xlsxName = req.params.xlsx;
+    const xlsxPath = path.join(xlsxDir, xlsxName);
+    res.sendFile(xlsxPath);
+};
