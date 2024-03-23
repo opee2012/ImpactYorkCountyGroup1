@@ -130,6 +130,7 @@ input[type=text]:focus {
         'sidebar main main main';
     height: 90vh;
     width: 1200px;
+    min-width: 1000px;
     margin: 30px;
     background-color: white;
     border-radius: 20px; 
@@ -171,6 +172,9 @@ input[type=text]:focus {
 .sidebar li:hover {
     background-color: #79A3DC;
 }
+.highlighted {
+    background-color: #79A3DC !important; 
+}
 
 .sidebar li {
     padding: 15px 15px;
@@ -205,6 +209,7 @@ input[type=text]:focus {
     background-color: #79A3DC;
 }
 
+
 input[type=text] {
     border: 2px solid #79A3DC; 
     transition: all 0.3s ease-in-out; 
@@ -221,12 +226,55 @@ button[type=submit] {
 }
 
 button[type=submit]:active {
-    background-color: green;
+    background-color: #1226AA;
 }
 
-button[type=submit]:hover,
-input[type=text]:focus {
-    border-color: green
+button[type=submit]:hover
+ {
+    background: #1226AA;
+    cursor: pointer;
+}
+
+ .top-panel .button {
+    width: 75px;
+    height: 25px;
+    font-size: 15px;
+    padding: 2px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 90px; 
+}
+
+ .top-panel .button-red {
+    background-color: red;
+}
+
+ .top-panel .button-blue {
+    background-color: #1226AA;
+}
+
+ .top-panel .button-center {
+    margin: 15px;
+    display: block;
+}
+
+.top-panel .search-textbox {
+    width: 265px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+.top-panel .search-icon-submit {
+    width: 40px;
+    height: 30px;
+    margin-left: -1px;
+    border: none;
+    outline: none;
 }
 
 

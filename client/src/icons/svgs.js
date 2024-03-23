@@ -1,4 +1,3 @@
-
 export const downloadIcon = (
   <svg
     width="14"

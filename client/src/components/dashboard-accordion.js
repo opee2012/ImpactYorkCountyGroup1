@@ -7,7 +7,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Navigate, Link } from 'react-router-dom';
 
 
-const  DashboardAccordion = ({ category }) => {
+const  DashboardAccordion = ({ category, searchInput }) => {
     
     const [selectedSubItems, setSelectedSubItems] = useState([]);
     let data=category.Data;
@@ -25,15 +25,27 @@ const  DashboardAccordion = ({ category }) => {
         setSelectedSubItems(newSelectedSubItems);
     };
 
+    const filteredData = data.map(category => ({
+        ...category,
+        SubCategory: category.SubCategory.filter(subCategory => {
+          const name = subCategory.Name || '';
+          const searchText = (searchInput || '').toLowerCase();
+          return name.toLowerCase().includes(searchText);
+        })
+      })).filter(category => category.SubCategory.length > 0);
+      
+    //   uncomment and change data to filteredData on line 39
+      
+
     return (
         <div className="wrapper">
             <div className="accordion">
-                {data.map((category, index) => (
+                {filteredData.map((category, index) => (
                     <div key ={index}>
                         <h2>{category.Key}</h2>
                         {category['SubCategory'].map((subCategory, subIndex) => (
                             <div key={subIndex} className="sub-category item">
-                            <div className="title" onClick={() => toggleSubCategory(subCategory)}>
+                            <div className="title" onClick={() => toggleSubCategory(subCategory)} >
                                 <h3>{subCategory.Name}</h3>
                                 <span className="dropdownIcons">
                                 {email && 

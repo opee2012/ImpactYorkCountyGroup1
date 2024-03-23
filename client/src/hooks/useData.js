@@ -5,8 +5,8 @@ export const useDataHandle = () => {
   const [isLoading, setIsLoading] = useState(null);
 
   const fetchData = async (data) => {
-    // setIsLoading(true);
-    // setError(null);
+    setIsLoading(true);
+    setError(null);
 
     try {
       const response = await fetch("/data", {
@@ -19,17 +19,12 @@ export const useDataHandle = () => {
         throw new Error(`Request failed with status ${response.status}`);
       } else {
         const json = await response.json();
+        setIsLoading(false);
          return json;
       }
-      
-
-      // Handle successful response here (e.g., set data state)
-      // ...
-
-      // setIsLoading(false);
     } catch (error) {
-      // setError(error.message);
-      // setIsLoading(false);
+      setError(error.message);
+      setIsLoading(false);
     }
   };
   return { error, isLoading, fetchData };
