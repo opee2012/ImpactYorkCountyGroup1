@@ -132,15 +132,15 @@ button[type=submit]:hover
 }
 
  .top-panel .button {
-    width: 75px;
+    white-space: nowrap;
     height: 25px;
     font-size: 15px;
-    padding: 2px;
+    padding: 2px 10px;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 90px; 
+    margin-right: 90px;
 }
 
  .top-panel .button-red {
@@ -153,7 +153,7 @@ button[type=submit]:hover
 
  .top-panel .button-center {
     margin: 15px;
-    display: block;
+    display: inline-block;
 }
 
 .top-panel .search-textbox {
