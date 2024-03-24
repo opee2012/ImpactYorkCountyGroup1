@@ -70,13 +70,16 @@ exports.addNewLogin = async (req, res) => {
             // Registration passes through a temporary password generated from the client side
             const mailText = "Here is your temporary password for your IYC account: " + password;
             
+            
             sendmail({
                 from: 'no-reply@impactyorkcounty.org',
                 to: email,
                 subject: "Temporary IYC password",
                 html: '<b>' + mailText + '</b>'
             }, (err) => {
-                console.log(err);
+                if (err) {
+                    console.log(err);
+                }
             });
             
             const user = await Login.signup(email, password, admin);
