@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
+const sendmail = require('sendmail')({
+    silent: true
+});
 
 const Validation = require('../utils/validation');
 const loginSchema = require('../models/login-schema');
@@ -66,23 +68,12 @@ exports.addNewLogin = async (req, res) => {
             }
 
             // Registration passes through a temporary password generated from the client side
-            const mailText = "Here is your temporary password for your IYC account: " + password
+            const mailText = "Here is your temporary password for your IYC account: " + password;
 
-            // Fake transporter placeholder
-            const tempPassTransporter = nodemailer.createTransport({
-                host: "smtp.ethereal.email",
-                port: 587,
-                secure: false,
-                auth: {
-                    user: "mariana.shields@ethereal.email",
-                    pass: "Q1XmkBtqgzXvevPdXK"
-                }
-            });
-            await tempPassTransporter.sendMail({
-                from: '"Mariana Shields" <mariana.shields@ethereal.email>',
+            await sendmail({
+                from: 'no-reply@impactyorkcounty.org',
                 to: email,
                 subject: "Temporary IYC password",
-                text: mailText,
                 html: '<b>' + mailText + '</b>'
             });
 
