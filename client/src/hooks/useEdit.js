@@ -2,8 +2,8 @@ import { useState } from "react";
 export const useEdit = () => {
   const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [status ] = useState(null);
+  const [ setIsLoading] = useState(false);
 
   const editSelectedCategory = async (categoryName, data) => {
     setSelectedFile(true);

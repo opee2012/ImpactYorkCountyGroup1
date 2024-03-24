@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 export const useUpload = () => {
   const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
