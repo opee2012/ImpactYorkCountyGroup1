@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./context/AuthContext";
+import { useAuthContext } from "./context/AuthContext";
 
 // styles
 import "./styles/App.css";
