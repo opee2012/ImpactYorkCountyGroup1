@@ -9,9 +9,14 @@ const Upload = () => {
   //TODO
   //Fatfrank font on h1
 
-  const { email } = useAuthContext();
+  const { state, isLoading } = useAuthContext();
+  const { email } = state || {};
 
-  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  console.log(state);
 
   return (
     <div className="uploadcontainer">
@@ -27,7 +32,7 @@ const Upload = () => {
 
       {!email && (
         <div>
-          <Navigate to="/login">Login</Navigate>
+          <Navigate to="/">Dashboard</Navigate>
         </div>
       )}
     </div>
