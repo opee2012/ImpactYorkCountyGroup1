@@ -1,7 +1,5 @@
-import { Link, Navigate } from "react-router-dom";
-import { useAuthContext } from "../hooks/useAuthContext";
-
-import { useState } from "react";
+import { Navigate } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
 import UploadForm from "../components/upload-form";
 
 // styles
