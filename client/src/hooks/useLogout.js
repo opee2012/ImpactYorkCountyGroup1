@@ -1,4 +1,4 @@
-import { useAuthContext } from './useAuthContext'
+import { useAuthContext } from '../context/AuthContext'
 
 export const useLogout = () => {
   const { dispatch } = useAuthContext()
