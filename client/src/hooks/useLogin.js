@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useAuthContext } from './useAuthContext';
+import { useAuthContext } from '../context/AuthContext';
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-  const { dispatch } = useAuthContext();
+  const { dispatch, state } = useAuthContext();
 
   const login = async (email, password) => {
     setIsLoading(true);
@@ -15,24 +15,22 @@ export const useLogin = () => {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ email, password })
     });
-    const json = await response.json();
+    
+    const body = await response.json();
 
     if (!response.ok) {
       setIsLoading(false);
-      setError(json.message);
-    };
-    if (response.ok) {
-      const { email, admin } = await response.json();
+      setError(body.message);
+    } else {
+      const { email, admin } = body;
+
+      console.log(state);
+
       // update the auth context
       dispatch({ type: 'LOGIN', payload: { email, admin } });
 
-      localStorage.setItem('email', JSON.stringify(email));
-      localStorage.setItem('admin', JSON.stringify(admin));
-
       // update loading state
       setIsLoading(false);
-    } else {
-      throw new Error('Invalid login');
     }
   };
 
