@@ -12,7 +12,8 @@ const  DashboardAccordion = ({ category, searchInput }) => {
     const [selectedSubItems, setSelectedSubItems] = useState([]);
     let data = category.Data;
     let categoryName = category.Category;
-    const { email } = useAuthContext();
+    const { state } = useAuthContext();
+    const { email } = state || {};
 
     const toggleSubCategory = (subCategory) => {
         const newSelectedSubItems = [...selectedSubItems];
