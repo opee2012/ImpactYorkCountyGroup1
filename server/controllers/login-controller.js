@@ -20,15 +20,15 @@ exports.getAllLogins = async (req, res) => {
 
 // get one login
 exports.getUserLogin = async (req, res) => {
-    const { email } = req.params;
+    const { email, admin } = req.params;
     console.log(`Getting ${email}'s login`);
 
-    res.status(200).json(await Login.findOne({ email: email }));
+    res.status(200).json(await Login.findOne({ email: email, admin: admin }));
 };
 
 // login a user
 exports.loginUser = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password} = req.body;
 
     try {
         const user = await Login.login(email, password);
@@ -36,7 +36,9 @@ exports.loginUser = async (req, res) => {
         // create token
         const token = createToken(user._id);
 
-        res.status(200).json({ email, token });
+        console.log(user.email, token, user.admin);
+
+        res.status(200).json({ email: user.email, token, admin: user.admin});
     } catch (err) {
         res.status(400).json({ message: err.message });
     };
@@ -54,7 +56,7 @@ exports.addNewLogin = async (req, res) => {
         const errorMsg = Validation.getValidationErrorMessage(validationError);
         throw new Error(errorMsg);
     } else {
-        const { email, password } = req.body;
+        const { email, password, admin } = req.body;
     
         try {
             const emailRegEx = '.+\@.+\..+';
@@ -63,12 +65,12 @@ exports.addNewLogin = async (req, res) => {
                 throw new Error("email must be an email address");
             }
 
-            const user = await Login.signup(email, password);
+            const user = await Login.signup(email, password, admin);
         
             // create a token
             const token = createToken(user._id);
 
-            res.status(200).json({email, token});
+            res.status(200).json({email, token, admin});
         } catch (error) {
             res.status(400).json({error: error.message});
         };
