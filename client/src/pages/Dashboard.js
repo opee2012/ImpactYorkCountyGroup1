@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import "../styles/Dashboard.css";
 import DashboardAccordion from "../components/dashboard-accordion";
 import { useDataHandle } from "../hooks/useData";
-import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
-
+import { useAuthContext } from "../context/AuthContext";
 
 const Dashboard = () => {
-  const { email, admin } = useAuthContext();
   const { logout } = useLogout();
   const [selectedMenuItem, setSelectedMenuItem] = useState(0);
   const { fetchData, isLoading, error } = useDataHandle();
@@ -22,7 +20,8 @@ const Dashboard = () => {
     setSelectedMenuItem(menuItemIndex);
   };
 
-  console.log(email, admin);
+  const { state } = useAuthContext();
+  const { email, admin } = state || {};
 
   useEffect(() => {
     fetchData()
@@ -62,9 +61,9 @@ const Dashboard = () => {
         {email && <button onClick={() => window.location.assign('/upload')}>Upload Data</button>}
       </header>
       <header className="top-panel">    
+        {admin && <button className="button button-center button-blue" onClick={() => window.location.assign('/admin')}>Email Management</button>}
         {email && <button className="button button-center button-red"  onClick={() => logout()}>Logout</button>}
         {!email && <button className="button button-center button-blue" onClick={() => window.location.assign('/login')}>Login</button>}
-        {admin && <button className="button button-center button-green" onClick={() => window.location.assign('/admin')}>Admin</button>}
         <input
           className="search-textbox"
           type="text"
