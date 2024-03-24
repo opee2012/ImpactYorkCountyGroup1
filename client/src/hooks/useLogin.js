@@ -22,15 +22,18 @@ export const useLogin = () => {
       setError(json.message);
     };
     if (response.ok) {
-      // save the user to local storage
-      localStorage.setItem('email', JSON.stringify(json));
-
+      const { email, admin } = await response.json();
       // update the auth context
-      dispatch({type: 'LOGIN', payload: json});
+      dispatch({ type: 'LOGIN', payload: { email, admin } });
+
+      localStorage.setItem('email', JSON.stringify(email));
+      localStorage.setItem('admin', JSON.stringify(admin));
 
       // update loading state
       setIsLoading(false);
-    };
+    } else {
+      throw new Error('Invalid login');
+    }
   };
 
   return { login, isLoading, error };
