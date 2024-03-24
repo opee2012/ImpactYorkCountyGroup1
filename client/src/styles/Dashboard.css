@@ -13,6 +13,7 @@
     border-radius: 20px; 
     overflow: hidden; 
     position: relative;
+    font-family: "FatFrank Heavy";
 }
 
 .sidebar {
@@ -20,7 +21,7 @@
     flex-direction: column;
     background: #1226AA;
     grid-column: 1 / 2; 
-    grid-row: 1 / 3; 
+    grid-row: 1 / 3;
 }
 
 .sidebar button {
