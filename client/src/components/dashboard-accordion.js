@@ -1,10 +1,9 @@
-import React, { useEffect , useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/DashboardAccordion.css'; 
 import DropdownIcon from '../icons/dropdown.png';
 import DropupIcon from '../icons/dropup.png';
-import tempData from '../utils/data_temp/test.json';
 import { useAuthContext } from "../context/AuthContext";
-import { Navigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const  DashboardAccordion = ({ category, searchInput }) => {
