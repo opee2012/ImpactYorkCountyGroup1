@@ -1,7 +1,5 @@
-import { Link, Navigate } from "react-router-dom";
-import { useAuthContext } from "../hooks/useAuthContext";
-
-import { useState } from "react";
+import { Navigate } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
 import UploadForm from "../components/upload-form";
 
 // styles
@@ -10,14 +8,15 @@ import "../styles/Upload.css";
 const Upload = () => {
   //TODO
   //Fatfrank font on h1
-  //drag and drop functionality
-  //status & download icons
-  //upload to server functionality
-  //set status on attempted upload
 
-  const { email } = useAuthContext();
+  const { state, isLoading } = useAuthContext();
+  const { email } = state || {};
 
-  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  console.log(state);
 
   return (
     <div className="uploadcontainer">
@@ -33,7 +32,7 @@ const Upload = () => {
 
       {!email && (
         <div>
-          <Navigate to="/login">Login</Navigate>
+          <Navigate to="/">Dashboard</Navigate>
         </div>
       )}
     </div>

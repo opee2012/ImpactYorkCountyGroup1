@@ -51,7 +51,7 @@
 }
 
 h3, span{
-    background-color: white;
+    background-color: transparent;
 }
 
 .dropdownIcons {
@@ -60,6 +60,7 @@ h3, span{
     justify-content: center;
     height: 2em;
     width: 2em;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .dropdownIcons img {

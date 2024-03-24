@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 export const useUpload = () => {
   const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -41,7 +41,7 @@ export const useUpload = () => {
 
       // setIsLoading(false);
     } catch (error) {
-      // setError(error.message);
+      setError(error.message);
       // setIsLoading(false);
     }
   };
@@ -52,5 +52,8 @@ export const useUpload = () => {
     dragOverHandler,
     dropHandler,
     uploadSelectedFile,
+    error,
+    setError,
+    setStatus
   };
 };
