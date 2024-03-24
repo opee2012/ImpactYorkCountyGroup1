@@ -19,11 +19,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/upload" element={<Upload />} />
           <Route
             path="/login"
             element={!email ? <Login /> : <Navigate to="/" />}
           />
-          <Route path="/upload" element={<Upload />} />
         </Routes>
       </BrowserRouter>
     </div>
