@@ -49,16 +49,18 @@ const  DashboardAccordion = ({ category, searchInput }) => {
                             <div key={subIndex} className="sub-category item">
                             <div className="title" onClick={() => toggleSubCategory(subCategory)} >
                                 <h3>{subCategory.Name}</h3>
-                                <span className="dropdownIcons">
-                                    <div className='edit-and-icons'>
+                                <div className='edit-drop'>
+                                    <div className='edit-button'>
                                         {email && 
                                         (<Link to={`/edit/${subCategory.Name}`} state={{ subCategoryData: subCategory.Data, categoryName: categoryName, categoryData: data}}> 
                                             <button> 
                                             Edit</button>
                                         </Link>)}
                                     </div>
-                                    {selectedSubItems.includes(subCategory) ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
-                                </span>
+                                    <div className='drop-icons'>
+                                        {selectedSubItems.includes(subCategory) ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
+                                    </div>
+                                </div>
                             </div>
                             {selectedSubItems.includes(subCategory) && (
                                 <div className="content show">
