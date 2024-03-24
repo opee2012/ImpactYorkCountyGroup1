@@ -10,6 +10,10 @@ const loginSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Missing password']
+    },
+    admin: {
+        type: Boolean,
+        default: [true, 'Missing staff type']
     }
 });
 
