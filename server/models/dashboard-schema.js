@@ -4,12 +4,12 @@ const mongoose = require('mongoose');
 const subCategoryDataSchema = new mongoose.Schema({
     Name: { 
         type: String,
-        default: "~"
+        required: [true, 'Missing sub-category name'],
     },
     Data: {
         // Data underneath here could have any unrestricted object (year - value, etc).
         type: Array,
-        default: () => [({})] // Means an array of objects (invoke a function returning this)
+        required: [true, 'Missing sub-category data'],
     }
 });
 
@@ -17,10 +17,11 @@ const subCategoryDataSchema = new mongoose.Schema({
 const categoryDataSchema = new mongoose.Schema({
     Key: { 
         type: String,
-        default: "~"
+        required: false,
     },
-    "Sub-Category": {
+    "SubCategory": {
         type: [subCategoryDataSchema],
+        required: [true, 'Missing sub-category data'],
         default: () => [({})]
     }
 });

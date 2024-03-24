@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useLogout } from "../hooks/useLogout";
+import { useUpload } from "../hooks/useUpload";
 import "../styles/Upload.css";
 import xcelIcon from "../icons/excelIcon.png";
 import { downloadIcon } from "../icons/svgs";
 import { ExcelToJSON } from "../utils/ExcelToJson";
 
 const UploadForm = () => {
-  const { logout } = useLogout();
+  const { uploadSelectedFile, error, setError} = useUpload();
   const [selectedFile, setSelectedFile] = useState(null);
   const [status, setStatus] = useState(null);
 
@@ -21,19 +21,56 @@ const UploadForm = () => {
     setStatus(`${file.name}`);
   };
 
-  const uploadSelectedFile = () => {
-    // Implement upload functionality
-    console.log("Uploading file:", selectedFile);
-    const file = selectedFile;
-    ExcelToJSON({file});
+  const uploadClientFile = async () => {
+    try {
+      console.log(selectedFile);
+
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      const response = await fetch("/uploadxlsx", {
+        method: "POST",
+        body: formData,
+        enctype: "multipart/form-data",
+      });
+
+      // Implement upload functionality
+      const json_files = await ExcelToJSON(selectedFile);
+      for (let i in json_files) {
+        uploadSelectedFile(json_files[i]);
+      };
+
+      if (!response.ok) {
+        throw new Error("Upload failed");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  const filename = "IYC Dashboard Data.xlsx";
+
+  const downloadFile = async (filename) => {
+    const response = await fetch(`/downloadxlsx/${filename}`);
+    const blob = await response.blob();
+  
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename || 'download';
+    const clickHandler = () => {
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+        a.removeEventListener('click', clickHandler);
+      }, 150);
+    };
+    a.addEventListener('click', clickHandler, false);
+    a.click();
+  }
 
   return (
     <div className="uploadformnonflex">
-      <form
-        onDrop={dropHandler}
-        onDragOver={dragOverHandler}
-      >
+      <form onDrop={dropHandler} onDragOver={dragOverHandler}>
         <p>Drag and drop file</p>
         <br />
         <p>OR</p>
@@ -45,26 +82,34 @@ const UploadForm = () => {
           type="file"
           onChange={(e) => {
             setSelectedFile(e.target.files[0]);
-            setStatus(`${e.target.files[0].name}`);
+            setError(null);
+            if(e.target.files[0])setStatus(`${e.target.files[0].name}`);
           }}
         />
         <button
           onClick={(e) => {
             e.preventDefault();
+            setError(null);
             document.getElementById("fileuploadinput").click();
           }}
         >
           Browse files
-        </button>
-
+        </button> <br />
+        <button onClick={() => downloadFile(filename)}>Download Template</button>
         <p id="statusbar">
-          {selectedFile ? <img src={xcelIcon} alt="file icon" /> : null}
-          {status ? status : selectedFile}
+          {selectedFile && !error ? <img src={xcelIcon} alt="file icon" /> : null}
+          {error ? error : (status ? status : selectedFile)}
         </p>
       </form>
-      <a href=""> {downloadIcon} Download template</a> <br />
-      <button onClick={() => logout()}>Back</button> <br />
-      <button onClick={uploadSelectedFile}>Submit</button>
+      <button onClick={() => {
+        if (selectedFile) {
+          uploadClientFile();
+          window.location.assign('/');
+        } else {
+          alert("Please select an Excel file to upload.");
+        }
+      }}>Submit</button> <br />
+      <button onClick={() => window.location.assign('/')}>Dashboard</button>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export const useDataHandle = () => {
   const [error, setError] = useState(null);
@@ -9,26 +9,23 @@ export const useDataHandle = () => {
     setError(null);
 
     try {
-      const response = await fetch('/data', {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
+      const response = await fetch("/data", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
 
       if (!response.ok) {
         throw new Error(`Request failed with status ${response.status}`);
-      };
-
-      // Handle successful response here (e.g., set data state)
-      // ...
-
-      setIsLoading(false);
+      } else {
+        const json = await response.json();
+        setIsLoading(false);
+         return json;
+      }
     } catch (error) {
       setError(error.message);
       setIsLoading(false);
     }
-
-    
-  
-  }
-}
+  };
+  return { error, isLoading, fetchData };
+};

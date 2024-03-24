@@ -6,29 +6,28 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
     //TODO:
     //change font
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { login, isLoading, error } = useLogin();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await login(username, password);
+        await login(email, password);
     }
 
-    console.log(error);
     return (
         <form className="login" onSubmit={handleSubmit}>
             <div className="input-container">
                 <img src={userIcon} alt="user icon" className="icon" />
                 <input
                     type="text"
-                    name="username"
-                    id="Username"
+                    name="email"
+                    id="Email"
                     className="formtext"
-                    placeholder="USERNAME"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="EMAIL"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
             </div>
             

@@ -1,64 +1,79 @@
-import React, { useEffect , useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/DashboardAccordion.css'; 
 import DropdownIcon from '../icons/dropdown.png';
 import DropupIcon from '../icons/dropup.png';
-// import { useDataHandle } from '../hooks/useData';
-import Data from '../utils/data_temp/test.json';
+import { useAuthContext } from "../context/AuthContext";
+import { Link } from 'react-router-dom';
 
-const data = Data;
 
-const DashboardAccordion = ({ data }) => {
-    // const { error, isLoading, fetchData } = useDataHandle();
+const  DashboardAccordion = ({ category, searchInput }) => {
+    
     const [selectedSubItems, setSelectedSubItems] = useState([]);
+    let data = category.Data;
+    let categoryName = category.Category;
+    const { state } = useAuthContext();
+    const { email } = state || {};
 
-   /* useEffect(() => {
-        // Fetch data when component mounts
-        fetchData(/* any necessary parameters ) */
-          /*  .then((data) => {
-                // Update selectedSubItem state with fetched data
-                setSelectedSubItem(data);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-        }, []);
-*/
-
-    const toggleSubCategory = (index) => {
+    const toggleSubCategory = (subCategory) => {
         const newSelectedSubItems = [...selectedSubItems];
-        if (newSelectedSubItems.includes(index)) {
-        newSelectedSubItems.splice(newSelectedSubItems.indexOf(index), 1);
+        const index = newSelectedSubItems.indexOf(subCategory);
+        if (index > -1) {
+            newSelectedSubItems.splice(index, 1);
         } else {
-        newSelectedSubItems.push(index);
+            newSelectedSubItems.push(subCategory);
         }
         setSelectedSubItems(newSelectedSubItems);
     };
 
+    const filteredData = data.map(category => ({
+        ...category,
+        SubCategory: category.SubCategory.filter(subCategory => {
+          const name = subCategory.Name || '';
+          const searchText = (searchInput || '').toLowerCase();
+          return name.toLowerCase().includes(searchText);
+        })
+      })).filter(category => category.SubCategory.length > 0);
+      
+    //   uncomment and change data to filteredData on line 39
+      
+
     return (
         <div className="wrapper">
             <div className="accordion">
-                {data.map((category, index) => (
-                    <div key={index} className="item">
-                        <div className='category-header'>
-                            <h2>{category.Key}</h2>
-                        </div>
-                        {category['Sub-Category'].map((subCategory, subIndex) => (
-                            <div key={subIndex} className="sub-category">
-                            <div className="title" onClick={() => toggleSubCategory(subIndex)}>
+                {filteredData.map((category, index) => (
+                    <div key ={index}>
+                        <h2>{category.Key}</h2>
+                        {category['SubCategory'].map((subCategory, subIndex) => (
+                            <div key={subIndex} className="sub-category item">
+                            <div className="title" onClick={() => toggleSubCategory(subCategory)} >
                                 <h3>{subCategory.Name}</h3>
                                 <span className="dropdownIcons">
-                                    {selectedSubItems === index ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
+                                {email && 
+                                (<Link to={`/edit/${subCategory.Name}`} state={{ subCategoryData: subCategory.Data, categoryName: categoryName, categoryData: data}}> 
+                                    <button > 
+                                    Edit</button>
+                                </Link>)}
+                                    {selectedSubItems.includes(subCategory) ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
                                 </span>
                             </div>
-                            {selectedSubItems.includes(subIndex) && (
+                            {selectedSubItems.includes(subCategory) && (
                                 <div className="content show">
-                                  <ul>
-                                    {subCategory.Data.map((item, itemIndex) => (
-                                      <li key={itemIndex}>
-                                        Year: {item.Year}, Value: {item.Value}
-                                      </li>
-                                    ))}
-                                  </ul>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Year</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {subCategory.Data.map((item, index) => (
+                                                <tr key={index}>
+                                                    <td>{item.Year}</td>
+                                                    <td>{item.Value}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
                                 </div>
                             )}
                         </div>

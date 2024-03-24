@@ -2,14 +2,18 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const loginSchema = new mongoose.Schema({
-    username: {
+    email: {
         type: String,
-        required: [true, 'Missing username'],
-        unique: [true, 'Username already in use']
+        required: [true, 'Missing email'],
+        unique: [true, 'Email already in use']
     },
     password: {
         type: String,
         required: [true, 'Missing password']
+    },
+    admin: {
+        type: Boolean,
+        default: [true, 'Missing staff type']
     }
 });
 
@@ -19,29 +23,38 @@ loginSchema.statics.hash = async function(password) {
 }
 
 // static signup method
-loginSchema.statics.signup = async function(username, password) {
+loginSchema.statics.signup = async function(email, password, admin) {
 
-    const user = await this.create({ username, password: await this.hash(password) });
+    const user = await this.create({ email, password: await this.hash(password), admin });
 
-    return user;
+    try {
+        await user.save();
+        return user;
+    } catch (err) {
+        throw new Error(err.message);
+    }
 };
 
 // static login method
-loginSchema.statics.login = async function(username, password) {
+loginSchema.statics.login = async function(email, password) {
 
-    const user = await this.findOne({ username: username });
+    const user = await this.findOne({ email: email });
 
-    if (!user) {
-        throw new Error('Invalid username');
+    try {
+        if (!user) {
+            throw new Error('Invalid email');
+        }
+
+        const match = await bcrypt.compare(password, user.password);
+
+        if (!match) {
+            throw new Error('Invalid password');
+        };
+
+        return user;
+    } catch (err) {
+        throw new Error(err.message);
     }
-
-    const match = await bcrypt.compare(password, user.password);
-
-    if (!match) {
-        throw new Error('Invalid password');
-    };
-
-    return user;
 };
 
 module.exports.Login = mongoose.model('Login', loginSchema, 'logins');

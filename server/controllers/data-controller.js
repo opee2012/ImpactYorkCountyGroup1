@@ -31,17 +31,19 @@ exports.getOneData = async function(req, res) {
 }
 
 // POST update data
-// Create a new category
+// Create a new category or update an existing one
 exports.addNewData = async function (req, res) {
     // Get parameters passed through request (pass the category data through the json attribute in the req's body):
-    const { json } = req.body;
+    const json = req.body;
     try {
-        const createdCategory = await DashboardData.initNewCategory(json);
+        // Update the document if it exists, otherwise insert it
+        const createdCategory = await DashboardData.findOneAndUpdate({ Category: json.Category }, json, { upsert: true, new: true });
         res.status(201).json({ success: true, dbmsg: createdCategory });
     } catch (err) {
         res.status(400).json({ success: false,  message: err.message });
     }
 }
+
 
 // PUT one data
 // Try to update an existing category
