@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "FatFrank Heavy";
+    src: url("../fonts/FatFrank-Heavy.ttf");
+}
+
 .dashboard-container {
     display: grid;
     grid-template-rows: 70px 1fr;
@@ -158,9 +163,15 @@ button[type=submit]:hover
     display: inline-block;
 }
 
-.top-panel .search-textbox {
+.search-container {
     width: 265px;
     height: 30px;
+    display: flex;
+}
+
+.top-panel .search-textbox {
+    width: calc(100% - 40px);
+    height: 100%;
     margin: 0;
     padding: 0;
     border: none;
@@ -169,9 +180,8 @@ button[type=submit]:hover
 }
 
 .top-panel .search-icon-submit {
-    width: 40px;
-    height: 30px;
-    margin-left: -1px;
+    width: 35px;
+    height: 100%;
     border: none;
     outline: none;
 }
