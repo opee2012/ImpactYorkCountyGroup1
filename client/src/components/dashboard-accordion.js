@@ -3,14 +3,14 @@ import '../styles/DashboardAccordion.css';
 import DropdownIcon from '../icons/dropdown.png';
 import DropupIcon from '../icons/dropup.png';
 import tempData from '../utils/data_temp/test.json';
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../context/AuthContext";
 import { Navigate, Link } from 'react-router-dom';
 
 
 const  DashboardAccordion = ({ category, searchInput }) => {
     
     const [selectedSubItems, setSelectedSubItems] = useState([]);
-    let data=category.Data;
+    let data = category.Data;
     let categoryName = category.Category;
     const { email } = useAuthContext();
 
