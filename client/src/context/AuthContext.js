@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useEffect } from 'react'
+import React, { useContext, useReducer, useEffect, useState } from 'react'
 
 const initialState = {
   email: null,
@@ -27,14 +27,22 @@ export const authReducer = (state, action) => {
 const AuthContext = React.createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, initialState)
+  const [state, dispatch] = useReducer(authReducer, initialState);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log("AuthContext", state);
-  }, [state]);
+    const email = localStorage.getItem('email');
+    const admin = localStorage.getItem('admin');
+    
+    if (email && admin) {
+      dispatch({ type: 'LOGIN', payload: { email, admin } });
+    }
+
+    setIsLoading(false);
+  }, []);
   
   return (
-    <AuthContext.Provider value={{ state, dispatch }}>
+    <AuthContext.Provider value={{ state, dispatch, isLoading }}>
       { children }
     </AuthContext.Provider>
   );
