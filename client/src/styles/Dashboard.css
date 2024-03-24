@@ -80,6 +80,7 @@
     display: flex;
     background: #1226AA;
     align-items: center;
+    cursor: pointer;
 }
 
 .top-panel {
