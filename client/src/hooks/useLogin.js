@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuthContext } from './useAuthContext';
+import { useAuthContext } from '../context/AuthContext';
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
@@ -15,22 +15,25 @@ export const useLogin = () => {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ email, password })
     });
-    const json = await response.json();
+    
+    const body = await response.json();
 
     if (!response.ok) {
       setIsLoading(false);
-      setError(json.message);
-    };
-    if (response.ok) {
-      // save the user to local storage
-      localStorage.setItem('email', JSON.stringify(json));
+      setError(body.message);
+    } else {
+      const { email, admin } = body;
+
+      // store user in local storage
+      localStorage.setItem('email', JSON.stringify(email));
+      localStorage.setItem('admin', JSON.stringify(admin));
 
       // update the auth context
-      dispatch({type: 'LOGIN', payload: json});
+      dispatch({ type: 'LOGIN', payload: { email, admin } });
 
       // update loading state
       setIsLoading(false);
-    };
+    }
   };
 
   const getAllLogins = async () => {

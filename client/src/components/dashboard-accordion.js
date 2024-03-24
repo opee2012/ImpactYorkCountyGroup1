@@ -1,18 +1,18 @@
-import React, { useEffect , useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/DashboardAccordion.css'; 
 import DropdownIcon from '../icons/dropdown.png';
 import DropupIcon from '../icons/dropup.png';
-import tempData from '../utils/data_temp/test.json';
-import { useAuthContext } from "../hooks/useAuthContext";
-import { Navigate, Link } from 'react-router-dom';
+import { useAuthContext } from "../context/AuthContext";
+import { Link } from 'react-router-dom';
 
 
 const  DashboardAccordion = ({ category, searchInput }) => {
     
     const [selectedSubItems, setSelectedSubItems] = useState([]);
-    let data=category.Data;
+    let data = category.Data;
     let categoryName = category.Category;
-    const { email } = useAuthContext();
+    const { state } = useAuthContext();
+    const { email } = state || {};
 
     const toggleSubCategory = (subCategory) => {
         const newSelectedSubItems = [...selectedSubItems];
