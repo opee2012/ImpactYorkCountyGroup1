@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useAuthContext } from "./hooks/useAuthContext";
+import { useAuthContext } from "./context/AuthContext";
 
 // styles
 import "./styles/App.css";
@@ -11,7 +11,8 @@ import Login from "./pages/Login";
 import Upload from "./pages/Upload";
 
 function App() {
-  const { email } = useAuthContext();
+  const { state } = useAuthContext();
+  const { email } = state || {};
 
   return (
     <div className="App">
