@@ -1,6 +1,16 @@
 @font-face {
-    font-family: "FatFrank Heavy";
+    font-family: "FatFrank";
     src: url("../fonts/FatFrank-Heavy.ttf");
+}
+
+@font-face {
+    font-family: "AvenirBlack";
+    src: url("../fonts/Avenir Black.ttf");
+}
+
+@font-face {
+    font-family: "AvenirMedium";
+    src: url("../fonts/Avenir Medium.ttf");
 }
 
 .dashboard-container {
@@ -18,7 +28,6 @@
     border-radius: 20px; 
     overflow: hidden; 
     position: relative;
-    font-family: "FatFrank Heavy";
 }
 
 .sidebar {
@@ -39,9 +48,9 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
-    font-family: "FatFrank Heavy";
     align-self: center;
     width: 60%;
+    font-family: "AvenirBlack";
 }
 
 #Logo {
@@ -65,9 +74,9 @@
     color: #fff;
     font-size: 20px;
     display: flex;
-    font-family: "FatFrank Heavy"; 
     background-color: #1226AA;
     text-decoration: underline;
+    font-family: "FatFrank";
 }
 
 .sidebar li:hover {
@@ -82,11 +91,11 @@
     margin: 0;
     color: #ffffff;
     font-size: 18px; 
-    font-family: "FatFrank Heavy"; 
     display: flex;
     background: #1226AA;
     align-items: center;
     cursor: pointer;
+    font-family: "AvenirBlack";
 }
 
 .top-panel {
@@ -148,6 +157,7 @@ button[type=submit]:hover
     border-radius: 5px;
     cursor: pointer;
     margin-right: 90px;
+    font-family: "AvenirBlack";
 }
 
  .top-panel .button-red {
@@ -177,6 +187,7 @@ button[type=submit]:hover
     border: none;
     outline: none;
     padding-left: 10px;
+    font-family: "AvenirMedium";
 }
 
 .top-panel .search-icon-submit {

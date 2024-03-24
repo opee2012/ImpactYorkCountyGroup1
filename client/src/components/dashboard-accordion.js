@@ -42,17 +42,21 @@ const  DashboardAccordion = ({ category, searchInput }) => {
             <div className="accordion">
                 {filteredData.map((category, index) => (
                     <div key ={index}>
-                        <h2>{category.Key}</h2>
+                        <div className="subcategory">
+                            <h2>{category.Key}</h2>
+                        </div>
                         {category['SubCategory'].map((subCategory, subIndex) => (
                             <div key={subIndex} className="sub-category item">
                             <div className="title" onClick={() => toggleSubCategory(subCategory)} >
                                 <h3>{subCategory.Name}</h3>
                                 <span className="dropdownIcons">
-                                {email && 
-                                (<Link to={`/edit/${subCategory.Name}`} state={{ subCategoryData: subCategory.Data, categoryName: categoryName, categoryData: data}}> 
-                                    <button > 
-                                    Edit</button>
-                                </Link>)}
+                                    <div className='edit-and-icons'>
+                                        {email && 
+                                        (<Link to={`/edit/${subCategory.Name}`} state={{ subCategoryData: subCategory.Data, categoryName: categoryName, categoryData: data}}> 
+                                            <button> 
+                                            Edit</button>
+                                        </Link>)}
+                                    </div>
                                     {selectedSubItems.includes(subCategory) ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
                                 </span>
                             </div>
