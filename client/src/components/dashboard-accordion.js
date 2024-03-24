@@ -56,8 +56,7 @@ const  DashboardAccordion = ({ category, searchInput }) => {
                                     {selectedSubItems.includes(subCategory) ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
                                 </span>
                             </div>
-                            {selectedSubItems.includes(subCategory) && (
-                                <div className="content show">
+                            <div className={`content ${selectedSubItems.includes(subCategory) ? 'show' : ''}`}>
                                     <table>
                                         <thead>
                                             <tr>
@@ -75,7 +74,6 @@ const  DashboardAccordion = ({ category, searchInput }) => {
                                         </tbody>
                                     </table>
                                 </div>
-                            )}
                         </div>
                     ))}
                 </div>
