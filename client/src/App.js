@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route
             path="/login"
-            element={!email ? <Login /> : <Navigate to="/upload" />}
+            element={!email ? <Login /> : <Navigate to="/" />}
           />
           <Route path="/upload" element={<Upload />} />
         </Routes>
