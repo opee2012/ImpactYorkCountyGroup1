@@ -14,7 +14,7 @@ const UserManagement = () => {
     const [addError, setAddError] = useState('');
     const [showEditForm, setShowEditForm] = useState(false);
 
-    const { getAllLogins, isLoading, error } = useLogin();
+    const { getAllLogins, updateLogin, isLoading, error } = useLogin();
 
     useEffect(() => {
         const fetchLogins = async () => {
@@ -44,16 +44,27 @@ const UserManagement = () => {
         setAddError('');
     };
 
-    // Handle editing an existing email
-    const handleEditEmail = () => {
-        const updatedUsers = users.map((user) =>
-            user.email === newEmail ? { ...user, email: editEmail } : user
-        );
-        setUsers(updatedUsers);
-        setEditEmail('');
-        setShowEditForm(false);
+    const handleEditEmail = async () => {
+        if (newEmail.trim() === '' || editEmail.trim() === '') {
+            setAddError('Please enter both new and old email');
+            return;
+        }
+        try {
+            await updateLogin(newEmail, editEmail);
+            const updatedUsers = users.map((user) =>
+                user.email === editEmail ? { ...user, email: newEmail } : user
+            );
+            setUsers(updatedUsers);
+            setEditEmail('');
+            setNewEmail('');
+            setShowEditForm(false);
+        } catch (error) {
+            console.error('Error updating login:', error);
+            setAddError('Failed to update login');
+        }
     };
 
+    
     // Handle deleting an email
     const handleDeleteEmail = () => {
         const updatedUsers = users.filter((user) => user.email !== newEmail);
