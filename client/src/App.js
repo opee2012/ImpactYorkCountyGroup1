@@ -6,7 +6,7 @@ import { useAuthContext } from "./context/AuthContext";
 import "./styles/App.css";
 
 // Pages and Components
-import Dashboard from "./pages/ReadFromMongo";
+import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Upload from "./pages/Upload";
 
@@ -20,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path="/edit/:id" element={<Upload />} />
           <Route
             path="/login"
             element={!email ? <Login /> : <Navigate to="/" />}
