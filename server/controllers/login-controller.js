@@ -115,9 +115,20 @@ exports.updateLogin = async (req, res) => {
 exports.deleteLogin = async (req, res) => {
     const { email } = req.params;
     console.log(`Deleting ${email}'s login`);
+    try {
+        // Attempt to delete the login with the provided email
+        const deletedLogin = await Login.findOneAndDelete({ email: email });
 
-    //Need a res.status to stop hanging
-    //  Successful delete displays 200
-    //  Unsuccessful delete displays 400
-    return await Login.findOneAndDelete({ email: email });
+        // If login is successfully deleted, send a success response with status 200
+        if (deletedLogin) {
+            res.status(200).json({ message: `Login for ${email} deleted successfully.` });
+        } else {
+            // If login is not found, send a response with status 404 (Not Found)
+            res.status(404).json({ error: `Login for ${email} not found.` });
+        }
+    } catch (error) {
+        // If an error occurs during the deletion process, send an error response with status 400 (Bad Request)
+        console.error('Error deleting login:', error);
+        res.status(400).json({ error: 'Failed to delete login.' });
+    }
 };
