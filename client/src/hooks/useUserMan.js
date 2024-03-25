@@ -4,6 +4,7 @@ export const useUserMan = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
     const [data, setData] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null);
 
     const getAllLogins = async () => {
         setIsLoading(true);
@@ -50,10 +51,18 @@ export const useUserMan = () => {
                 },
                 body: JSON.stringify({ email, password, admin }),
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    
+                    throw new Error('Failed to add new login, please make sure to enter a valid email');
+                }
+                return response.json(); 
+            })
+            
             .then(data => {
                 setData(data);
                 setIsLoading(false);
+                setSuccessMessage('Login added successfully');
             })
             .catch(error => {
                 setError(error.message);
@@ -77,6 +86,15 @@ export const useUserMan = () => {
                 },
             });
 
+            // Check if the response status is OK (status code 200)
+        if (response.status === 200) {
+            // If the response is successful, set a success message or update the state accordingly
+            // For example, you can set a success message:
+            const successMessage = 'Login deleted successfully';
+            // Set the success message in the state or handle it as needed
+            setSuccessMessage(successMessage);
+        }
+
             if (!response.ok) {
                 throw new Error('Failed to delete login, please enter a valid email');
             }
@@ -91,5 +109,5 @@ export const useUserMan = () => {
     };
 
 
-      return { isLoading, error, getAllLogins, addNewLogin, deleteLogin};
+      return { successMessage, isLoading, error, getAllLogins, addNewLogin, deleteLogin};
 }
