@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useAuthContext } from "../context/AuthContext";
+import {usePassword} from "../hooks/usePassword";
+import { useLogout } from "../hooks/useLogout";
 
 import "../styles/Password.css";
 
@@ -7,12 +9,18 @@ const ChangePasswordForm = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
-  const [error, setError] = useState('');
+  const [errorClient, setError] = useState('');
+
+  const { logout } = useLogout();
 
   const { state, isLoading } = useAuthContext();
-  const { email } = state || {};
+  const { email, admin } = state || {};
 
-  console.log(email);
+
+  const { updateLogin, error} = usePassword();
+
+  const emailWithoutQuotes = email.replace(/"/g, '');
+  
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -20,7 +28,7 @@ const ChangePasswordForm = () => {
 
   
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validation
@@ -29,12 +37,17 @@ const ChangePasswordForm = () => {
       return;
     }
 
-    // Your password change logic here
-    console.log('Password change request:', {
-      currentPassword,
-      newPassword,
-    });
-
+    // Call the updatePassword function from the hook
+    const token = await updateLogin(emailWithoutQuotes, newPassword, admin);
+    if (token) {
+      // Password updated successfully, handle success logic here
+      console.log('Password updated successfully');
+    } else {
+      // Error occurred during password update, handle error logic here
+      console.error('Failed to update password');
+    }
+    logout();
+    window.location.assign('/')
     // Clear form fields
     setCurrentPassword('');
     setNewPassword('');
@@ -93,7 +106,7 @@ const ChangePasswordForm = () => {
             required
           />
         </div>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {errorClient && <div style={{ color: 'red' }}>{errorClient}</div>}
         <button type="submit">Change Password</button> <br />
         <button type="submit" onClick={() => window.location.assign('/upload')} >Cancel</button>
       </form>
