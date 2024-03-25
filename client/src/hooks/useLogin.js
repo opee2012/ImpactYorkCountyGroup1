@@ -36,51 +36,5 @@ export const useLogin = () => {
     }
   };
 
-  const getAllLogins = async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-        const response = await fetch('/login', {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message);
-        }
-
-        const json = await response.json();
-
-        // Update loading state
-        setIsLoading(false);
-
-        return json; // Return the fetched data
-    } catch (error) {
-        setIsLoading(false);
-        setError(error.message);
-        return null; // Return null in case of an error
-    }
-};
-
-const updateLogin = async (targetEmail, newEmail) => {
-  try {
-      const response = await fetch(`/login/${targetEmail}`, {
-          method: 'PUT',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email: newEmail }),
-      });
-      if (!response.ok) {
-          throw new Error('Failed to update login');
-      }
-      return await response.json();
-  } catch (error) {
-      throw error;
-  }
-};
-
-  return { login, isLoading, error, getAllLogins, updateLogin };
+  return { login, isLoading, error};
 }
