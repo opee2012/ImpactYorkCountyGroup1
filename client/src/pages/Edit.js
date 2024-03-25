@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { useEdit } from "../hooks/useEdit";
+import { MyDropzone } from "../components/image-form";
 
 import "../styles/Edit.css";
 
@@ -108,6 +109,7 @@ const Edit = () => {
           <Link to={"/"}>
             <button>Dashboard</button>
           </Link>
+          <MyDropzone />
         </div>
       )}
     </div>
