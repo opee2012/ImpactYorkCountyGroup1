@@ -3,6 +3,8 @@
     top: 10px;
     left: 10px;
     width: 25%;
+    width: 265px;
+    height: auto;
   }
 
   .editcontainer {
@@ -24,5 +26,49 @@
   }
   .editcontainer button:hover {
     background-color: #b2cff7;
-  
+    cursor: pointer;
   }
+
+  .contentcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .datacolumns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .yearcolumn {
+    margin-right: 20px;
+  }
+
+  .yeardata {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .yeardata2 {
+    width: 50px;
+    padding: 5px; 
+  }
+
+  .valuecolumn {
+    margin-bottom: 10px;
+  }
+
+  .valuedata {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; 
+  }
+
+  .valuedata2 {
+    width: 50px;
+    padding: 5px;
+  }
+

@@ -58,51 +58,42 @@ const Edit = () => {
           className="img-edit"
           src="/IYC.png"
           alt="IYC logo"
-          style={{ width: "265px", height: "auto" }}
         />
       </div>
       <h1>Edit: {subcategory}</h1>
       {subCategoryData && (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <div style={{ display: "flex", flexDirection: "row", marginBottom: "20px"}}>
-              <div style={{ marginRight: "20px" }}>
+        <div className="contentcontainer">
+          <div className="datacolumns">
+              <div className="yearcolumn">
                 <h2>Year</h2>
-                  <div style={{ marginBottom: "10px" }}>
                   {data.map((item, index) => (
-                    <div key={index} style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+                    <div className="yeardata" key={index}>
                       <input
                         type="text"
                         value={item.Year}
-                        style={{ width: "50px", padding: "5px" }}
+                        className="yeardata2"
                         onChange={(e) => handleYearChange(e, index)}
                       />
                     </div>
                   ))}
-                  </div>
+                  
                 </div>
                 <div>
                   <h2>Value</h2>
-                  <div style={{ marginBottom: "10px" }}>
+                  <div className="valuecolumn">
                     {data.map((item, index) => (
-                      <div key={index} style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+                      <div className="valuedata" key={index}>
                         <input
                           type="text"
                           value={item.Value}
-                          style={{ width: "50px", padding: "5px" }}
+                          className="valuedata2"
                           onChange={(e) => handleValueChange(e, index)}
                         />
                       </div>
                     ))}
                   </div>
               </div>
-            </div>
+            
           </div>
           <button onClick={handleAddField}>Add Field</button> <br /> <br />
           <button onClick={handleSubmit}>Submit</button> <br />
