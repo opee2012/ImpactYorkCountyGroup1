@@ -148,3 +148,7 @@
 .content-user button:hover {
     background-color: #357abd;
 }
+
+.error-message {
+    color: red;
+}
