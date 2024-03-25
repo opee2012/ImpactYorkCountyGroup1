@@ -1,74 +1,126 @@
-  .img-edit {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 25%;
-    width: 265px;
-    height: auto;
-  }
+@font-face {
+  font-family: "FatFrank";
+  src: url("../fonts/FatFrank-Heavy.ttf");
+}
 
-  .editcontainer {
-    padding-top: 85px;
-    width: 95%;
-  
-    color: #1226aa;
-  }
+@font-face {
+  font-family: "AvenirBlack";
+  src: url("../fonts/Avenir Black.ttf");
+}
 
-  .editcontainer button {
-    background-color: #79a3dc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    width: 20%;
-    height: 40px;
-    margin-top: 10px;
-    box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
-  }
-  .editcontainer button:hover {
-    background-color: #b2cff7;
-    cursor: pointer;
-  }
+@font-face {
+  font-family: "AvenirMedium";
+  src: url("../fonts/Avenir Medium.ttf");
+}
 
-  .contentcontainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.editcontainer {
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  min-width: 1000px;
+  margin: 30px;
+  background-color: white;
+  border-radius: 20px; 
+  overflow: hidden; 
+  position: relative;
+  border-color: #1226AA;
+  border-radius: 20px;
+  border-width: 2px;
+  border-style: solid;
+  padding: 20px;
+}
 
-  .datacolumns {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
+.header {
+  display: flex;
+  align-items: center;
+  margin: 15px;
+  margin-bottom: 0px;
+}
 
-  .yearcolumn {
-    margin-right: 20px;
-  }
+.header-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-family: "FatFrank";
+}
 
-  .yeardata {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
+.img-edit {
+  height: 120px;
+}
 
-  .yeardata2 {
-    width: 50px;
-    padding: 5px; 
-  }
+.editcontainer button {
+  background-color: #79a3dc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  width: 200px;
+  margin: 5px;
+  box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  font-size: large;
+  font-family: "AvenirMedium";
+}
 
-  .valuecolumn {
-    margin-bottom: 10px;
-  }
+.editcontainer button:hover {
+  background-color: #b2cff7;
+  cursor: pointer;
+}
 
-  .valuedata {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px; 
-  }
+.editcontainer .delete-button {
+  width: 80px;
+  align-items: center;
+}
 
-  .valuedata2 {
-    width: 50px;
-    padding: 5px;
-  }
+.contentcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
 
+.datacolumns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  margin: 20px;
+}
+
+th, td {
+  border: 1px solid #1226AA;
+  padding: 5px 10px;
+  text-align: center;
+  font-family: "AvenirBlack";
+}
+
+tr:nth-child(even) {
+  background-color: #d2e0f3;
+}
+
+tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.yeardata2 {
+  width: 50px;
+  font-size: large;
+  padding: 8px;
+  font-family: "AvenirMedium";
+}
+
+.valuedata2 {
+  width: 50px;
+  padding: 8px;
+  font-size: large;
+  font-family: "AvenirMedium";
+}
+
+.dropzone {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}

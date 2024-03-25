@@ -1,0 +1,26 @@
+.dropzonecontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.dropzonebox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #000000; /* Adjust this value to change the color of the border */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+}
+
+.images {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

@@ -53,54 +53,64 @@ const Edit = () => {
 
   return (
     <div className="editcontainer">
-      <div id="logo">
-        <img
-          className="img-edit"
-          src="/IYC.png"
-          alt="IYC logo"
-        />
+      <div className="header">
+        <div id="logo">
+          <img
+            className="img-edit"
+            src="/IYC.png"
+            alt="IYC logo"
+          />
+        </div>
       </div>
-      <h1>Edit: {subcategory}</h1>
       {subCategoryData && (
         <div className="contentcontainer">
-          <div className="datacolumns">
-              <div className="yearcolumn">
-                <h2>Year</h2>
-                  {data.map((item, index) => (
-                    <div className="yeardata" key={index}>
-                      <input
-                        type="text"
-                        value={item.Year}
-                        className="yeardata2"
-                        onChange={(e) => handleYearChange(e, index)}
-                      />
-                    </div>
-                  ))}
-                  
-                </div>
-                <div>
-                  <h2>Value</h2>
-                  <div className="valuecolumn">
-                    {data.map((item, index) => (
-                      <div className="valuedata" key={index}>
-                        <input
-                          type="text"
-                          value={item.Value}
-                          className="valuedata2"
-                          onChange={(e) => handleValueChange(e, index)}
-                        />
-                      </div>
-                    ))}
-                  </div>
-              </div>
-            
+          <div className="header-content">
+            <h1>Edit: {subcategory}</h1>
           </div>
+          <div className="datacolumns">
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Value</th>
+                <th></th>
+              </tr>
+            </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>
+                  <input
+                    type="text"
+                    value={item.Year}
+                    className="yeardata2"
+                    onChange={(e) => handleYearChange(e, index)}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value={item.Value}
+                    className="valuedata2"
+                    onChange={(e) => handleValueChange(e, index)}
+                  />
+                </td>
+                <td>
+                  <button className="delete-button" onClick={() => handleDeleteField(index)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+          </table>
+          <div className="dropzone">
+            <MyDropzone />
+          </div>
+        </div>
           <button onClick={handleAddField}>Add Field</button> <br /> <br />
           <button onClick={handleSubmit}>Submit</button> <br />
           <Link to={"/"}>
-            <button>Dashboard</button>
+            <button className="dashboard-button">Dashboard</button>
           </Link>
-          <MyDropzone />
         </div>
       )}
     </div>
