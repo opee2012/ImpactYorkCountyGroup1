@@ -5,9 +5,9 @@ import { useEdit } from "../hooks/useEdit";
 import "../styles/Edit.css";
 
 const Edit = () => {
-  const { name } = useParams();
   const { state } = useLocation();
   const { editSelectedCategory } = useEdit();
+  const { subcategory } = useParams();
 
   const subCategoryData = state && state.subCategoryData;
   let categoryData = state && state.categoryData;
@@ -60,9 +60,9 @@ const Edit = () => {
           style={{ width: "265px", height: "auto" }}
         />
       </div>
-      <h1>Edit Page: {name}</h1>
+      <h1>Edit: {subcategory}</h1>
       {subCategoryData && (
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <div
             style={{
               display: "flex",
@@ -70,46 +70,43 @@ const Edit = () => {
               justifyContent: "space-between",
             }}
           >
-            {data.map((item, index) => (
-              <div
-                key={index}
-                style={{ marginLeft: "10px", marginBottom: "20px" }}
-              >
-                <div style={{ marginBottom: "10px" }}>
-                  <label style={{ display: "block", marginBottom: "5px" }}>
-                    Year:
-                  </label>
-                  <input
-                    type="text"
-                    value={item.Year}
-                    style={{ width: "50px", padding: "5px" }}
-                    onChange={(e) => handleYearChange(e, index)}
-                  />
+            <div style={{ display: "flex", flexDirection: "row", marginBottom: "20px"}}>
+              <div style={{ marginRight: "20px" }}>
+                <h2>Year</h2>
+                  <div style={{ marginBottom: "10px" }}>
+                  {data.map((item, index) => (
+                    <div key={index} style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+                      <input
+                        type="text"
+                        value={item.Year}
+                        style={{ width: "50px", padding: "5px" }}
+                        onChange={(e) => handleYearChange(e, index)}
+                      />
+                    </div>
+                  ))}
+                  </div>
                 </div>
-                <div style={{ marginBottom: "10px" }}>
-                  <label style={{ display: "block", marginBottom: "5px" }}>
-                    Value:
-                  </label>
-                  <input
-                    type="text"
-                    value={item.Value}
-                    style={{ width: "50px", padding: "5px" }}
-                    onChange={(e) => handleValueChange(e, index)}
-                  />
-                </div>
-                <button
-                  onClick={() => handleDeleteField(index)}
-                  style={{ width: "90%" }}
-                >
-                  Delete
-                </button>
+                <div>
+                  <h2>Value</h2>
+                  <div style={{ marginBottom: "10px" }}>
+                    {data.map((item, index) => (
+                      <div key={index} style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+                        <input
+                          type="text"
+                          value={item.Value}
+                          style={{ width: "50px", padding: "5px" }}
+                          onChange={(e) => handleValueChange(e, index)}
+                        />
+                      </div>
+                    ))}
+                  </div>
               </div>
-            ))}
+            </div>
           </div>
           <button onClick={handleAddField}>Add Field</button> <br /> <br />
           <button onClick={handleSubmit}>Submit</button> <br />
           <Link to={"/"}>
-            <button>Back to Dashboard</button>
+            <button>Dashboard</button>
           </Link>
         </div>
       )}
