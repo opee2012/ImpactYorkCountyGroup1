@@ -8,13 +8,21 @@
     overflow: auto;
 }
 
+.wrapper-inner {
+    padding-bottom: 20px;
+}
+
 .subcategory {
     font-family: "FatFrank";
 }
 
 .accordion {
     background-color: white;
-    margin-top: 10px;
+}
+
+.dashboard-area {
+    background-color: white;
+    margin: 10px;
 }
 
 .item {

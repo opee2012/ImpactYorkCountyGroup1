@@ -39,9 +39,10 @@ const  DashboardAccordion = ({ category, searchInput }) => {
 
     return (
         <div className="wrapper">
+            <div className='wrapper-inner'>
             <div className="accordion">
                 {filteredData.map((category, index) => (
-                    <div key ={index}>
+                    <div key ={index} className='dashboard-area'>
                         <div className="subcategory">
                             <h2>{category.Key}</h2>
                         </div>
@@ -84,6 +85,7 @@ const  DashboardAccordion = ({ category, searchInput }) => {
                     ))}
                 </div>
             ))}
+            </div>
         </div>
     </div>
     );
