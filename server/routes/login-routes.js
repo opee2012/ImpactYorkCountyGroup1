@@ -33,5 +33,5 @@ module.exports = function(app) {
     app.put('/login/:targetUsername', updateLogin);
 
     // DELETE one login
-    app.delete('/login/:username', deleteLogin);
+    app.delete('/login/:email', deleteLogin);
 };
