@@ -3,7 +3,7 @@ import "../styles/userManagement.css";
 import AddUserIcon from '../icons/add-email-icon.svg';
 import EditUserIcon from '../icons/edit-email-icon.svg';
 import DeleteUserIcon from '../icons/delete-email-icon.svg';
-import { useLogin } from '../hooks/useLogin';
+import { useUserMan } from '../hooks/useUserMan';
 
 // UserManagement component for managing user emails
 const UserManagement = () => {
@@ -14,7 +14,7 @@ const UserManagement = () => {
     const [addError, setAddError] = useState('');
     const [showEditForm, setShowEditForm] = useState(false);
 
-    const { getAllLogins, updateLogin, isLoading, error } = useLogin();
+    const { addNewLogin, getAllLogins, isLoading, error } = useUserMan();
 
     useEffect(() => {
         const fetchLogins = async () => {
@@ -29,20 +29,28 @@ const UserManagement = () => {
     }, []);
 
 
-    // Handle adding a new email
-    const handleAddEmail = () => {
-        if (newEmail.trim() === '') {
-            setAddError('');
-            return;
-        }
-        const newUser = {
-            id: users.length + 1,
-            email: newEmail,
+   
+           const handleAddEmail = async () => {
+            if (newEmail.trim() === '') {
+                setAddError('Please add a email');
+                return;
+            }
+            try {
+                const password = 'abc123';
+                const admin = false; 
+                
+                await addNewLogin(newEmail, password, admin);
+        
+                // Fetch logins again to update the user list
+                const logins = await getAllLogins();
+                setUsers(logins);
+                setNewEmail('');
+                setAddError('');
+            } catch (error) {
+                console.error('Error adding login:', error);
+                setAddError('Failed to add login');
+            }
         };
-        setUsers([...users, newUser]);
-        setNewEmail('');
-        setAddError('');
-    };
 
     const handleEditEmail = async () => {
         if (newEmail.trim() === '' || editEmail.trim() === '') {
@@ -50,7 +58,6 @@ const UserManagement = () => {
             return;
         }
         try {
-            await updateLogin(newEmail, editEmail);
             const updatedUsers = users.map((user) =>
                 user.email === editEmail ? { ...user, email: newEmail } : user
             );
@@ -104,13 +111,13 @@ const UserManagement = () => {
                         onChange={(e) => setNewEmail(e.target.value)}
                         placeholder="..."
                     />
+                    {addError && <p className="error-message">{addError}</p>}
                 </label>
                 <div className="action">
                     <button className="action-item" onClick={handleAddEmail}>
                         <img src={AddUserIcon} alt="Add User" className="action-icon" />
                         Add Email
                     </button>
-                    {addError && <p className="error-message">{addError}</p>}
                     <button className="action-item" onClick={handleEditButtonClick}>
                         <img src={EditUserIcon} alt="Edit User" className="action-icon" />
                         Edit Email
