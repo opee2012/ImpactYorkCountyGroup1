@@ -14,7 +14,7 @@ const UserManagement = () => {
     const [addError, setAddError] = useState('');
     const [showEditForm, setShowEditForm] = useState(false);
 
-    const { addNewLogin, getAllLogins, isLoading, error } = useUserMan();
+    const { deleteLogin, addNewLogin, getAllLogins, isLoading, error } = useUserMan();
 
     useEffect(() => {
         const fetchLogins = async () => {
@@ -71,12 +71,21 @@ const UserManagement = () => {
         }
     };
 
-    
-    // Handle deleting an email
-    const handleDeleteEmail = () => {
-        const updatedUsers = users.filter((user) => user.email !== newEmail);
-        setUsers(updatedUsers);
-        setNewEmail('');
+    // handle delete email
+    const handleDeleteEmail = async () => {
+        if (newEmail.trim() === '') {
+            setAddError('Please enter an email to delete');
+            return;
+        }
+        try {
+            await deleteLogin(newEmail);
+            //const updatedUsers = users.filter(user => user.email !== newEmail);
+            setNewEmail('');
+            setAddError('');
+        } catch (error) {
+            console.error('Error deleting login:', error);
+            setAddError('Failed to delete login');
+        }
     };
 
     // Handle showing the edit email form only if there is a value in the "Enter Email" input
@@ -111,7 +120,7 @@ const UserManagement = () => {
                         onChange={(e) => setNewEmail(e.target.value)}
                         placeholder="..."
                     />
-                    {addError && <p className="error-message">{addError}</p>}
+                    {error && <p className="error-message">{error}</p>}
                 </label>
                 <div className="action">
                     <button className="action-item" onClick={handleAddEmail}>
