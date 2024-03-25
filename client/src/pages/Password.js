@@ -31,6 +31,24 @@ const ChangePasswordForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+      // Check if current password field is empty
+    if (!currentPassword.trim()) {
+      setError("Please enter your current password");
+      return;
+    }
+
+      // Check if new password field is empty
+    if (!newPassword.trim()) {
+      setError("Please enter your new password");
+      return;
+    }
+
+    // Check if confirm new password field is empty
+    if (!confirmNewPassword.trim()) {
+      setError("Please confirm your new password");
+      return;
+    }
+
     // Validation
     if (newPassword !== confirmNewPassword) {
       setError("Passwords don't match");
