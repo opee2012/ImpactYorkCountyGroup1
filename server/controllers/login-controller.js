@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
-const sendmail = require('sendmail')({
-    silent: true
-});
+const nodemailer = require('nodemailer');
 
 const Validation = require('../utils/validation');
 const loginSchema = require('../models/login-schema');
@@ -68,19 +66,25 @@ exports.addNewLogin = async (req, res) => {
             }
 
             // Registration passes through a temporary password generated from the client side
-            const mailText = "Here is your temporary password for your IYC account: " + password;
+            //const mailText = "Here is your temporary password for your IYC account: " + password;
             
-            
-            sendmail({
-                from: 'no-reply@impactyorkcounty.org',
-                to: email,
-                subject: "Temporary IYC password",
-                html: '<b>' + mailText + '</b>'
-            }, (err) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
+            // Fake transporter placeholder
+            // const tempPassTransporter = nodemailer.createTransport({
+            //     host: "smtp.ethereal.email",
+            //     port: 587,
+            //     secure: false,
+            //     auth: {
+            //         user: process.env.TRANSPORTER_EMAIL,
+            //         pass: process.env.TRANSPORTER_PASS
+            //     }
+            // });
+            // await tempPassTransporter.sendMail({
+            //     from: 'no-reply@impactyorkcounty.org',
+            //     to: email,
+            //     subject: "Temporary IYC password",
+            //     text: mailText,
+            //     html: '<b>' + mailText + '</b>'
+            // });
             
             const user = await Login.signup(email, password, admin);
         
