@@ -52,7 +52,7 @@ const UserManagement = () => {
             }
         };
 
-    const handleEditEmail = async () => {
+ /*   const handleEditEmail = async () => {
         if (newEmail.trim() === '' || editEmail.trim() === '') {
             setAddError('Please enter both new and old email');
             return;
@@ -70,6 +70,26 @@ const UserManagement = () => {
             setAddError('Failed to update login');
         }
     };
+    
+    <button className="action-item" onClick={handleEditButtonClick}>
+                        <img src={EditUserIcon} alt="Edit User" className="action-icon" />
+                        Edit Email
+                    </button>
+
+     {showEditForm && (
+                    <label>
+                        New Email:
+                        <input
+                            type="email"
+                            value={editEmail}
+                            onChange={(e) => setEditEmail(e.target.value)}
+                            placeholder="Enter new email"
+                        />
+                        <button onClick={handleEditEmail}>Submit</button>
+                    </label>
+                )}                
+    
+    */
 
     // handle delete email
     const handleDeleteEmail = async () => {
@@ -128,27 +148,12 @@ const UserManagement = () => {
                         <img src={AddUserIcon} alt="Add User" className="action-icon" />
                         Add Email
                     </button>
-                    <button className="action-item" onClick={handleEditButtonClick}>
-                        <img src={EditUserIcon} alt="Edit User" className="action-icon" />
-                        Edit Email
-                    </button>
                     <button className="action-item" onClick={handleDeleteEmail}>
                         <img src={DeleteUserIcon} alt="Delete User" className="action-icon" />
                         Delete Email
                     </button>
                 </div>
-                {showEditForm && (
-                    <label>
-                        New Email:
-                        <input
-                            type="email"
-                            value={editEmail}
-                            onChange={(e) => setEditEmail(e.target.value)}
-                            placeholder="Enter new email"
-                        />
-                        <button onClick={handleEditEmail}>Submit</button>
-                    </label>
-                )}
+                
             </div>
         </div>
     );
