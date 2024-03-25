@@ -14,7 +14,7 @@ const UserManagement = () => {
     const [addError, setAddError] = useState('');
     const [showEditForm, setShowEditForm] = useState(false);
 
-    const { deleteLogin, addNewLogin, getAllLogins, isLoading, error } = useUserMan();
+    const { deleteLogin, addNewLogin, getAllLogins, successMessage, isLoading, error } = useUserMan();
 
     useEffect(() => {
         const fetchLogins = async () => {
@@ -120,6 +120,7 @@ const UserManagement = () => {
                         onChange={(e) => setNewEmail(e.target.value)}
                         placeholder="..."
                     />
+                    {successMessage && <p className='success-message'>{successMessage}</p>}
                     {error && <p className="error-message">{error}</p>}
                 </label>
                 <div className="action">
