@@ -65,9 +65,10 @@ exports.addNewLogin = async (req, res) => {
                 throw new Error("email must be an email address");
             }
 
+            // ----- Need to get this working, currently not functional the way we want it -----
             // Registration passes through a temporary password generated from the client side
             //const mailText = "Here is your temporary password for your IYC account: " + password;
-            
+            //
             // Fake transporter placeholder
             // const tempPassTransporter = nodemailer.createTransport({
             //     host: "smtp.ethereal.email",
