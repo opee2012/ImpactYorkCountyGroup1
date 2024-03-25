@@ -71,9 +71,11 @@ const UploadForm = () => {
   return (
     <div className="uploadformnonflex">
       <form onDrop={dropHandler} onDragOver={dragOverHandler}>
-        <p>Drag and drop file</p>
-        <br />
-        <p>OR</p>
+        <div className="dragndrop">
+          <h2>Drag and Drop Excel File Here</h2>
+          <br />
+          <div>OR</div>
+        </div>
         <label htmlFor="fileuploadinput"></label> <br />
         <input
           name="fileuploadinput"
@@ -86,30 +88,34 @@ const UploadForm = () => {
             if(e.target.files[0])setStatus(`${e.target.files[0].name}`);
           }}
         />
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            setError(null);
-            document.getElementById("fileuploadinput").click();
-          }}
-        >
-          Browse files
-        </button> <br />
-        <button onClick={() => downloadFile(filename)}>Download Template</button>
+        <div className="uploadbuttons">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setError(null);
+              document.getElementById("fileuploadinput").click();
+            }}
+          >
+            Browse Files
+          </button> <br />
+          <button onClick={() => downloadFile(filename)}>Download Template</button>
+        </div>
         <p id="statusbar">
           {selectedFile && !error ? <img src={xcelIcon} alt="file icon" /> : null}
           {error ? error : (status ? status : selectedFile)}
         </p>
       </form>
-      <button onClick={() => {
-        if (selectedFile) {
-          uploadClientFile();
-          window.location.assign('/');
-        } else {
-          alert("Please select an Excel file to upload.");
-        }
-      }}>Submit</button> <br />
-      <button onClick={() => window.location.assign('/')}>Dashboard</button>
+      <div className="submitnback">
+        <button onClick={() => {
+          if (selectedFile) {
+            uploadClientFile();
+            window.location.assign('/');
+          } else {
+            alert("Please select an Excel file to upload.");
+          }
+        }}>Submit</button> <br />
+        <button onClick={() => window.location.assign('/')}>Dashboard</button>
+        </div>
     </div>
   );
 };

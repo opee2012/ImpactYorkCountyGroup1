@@ -8,6 +8,10 @@
     overflow: auto;
 }
 
+.subcategory {
+    font-family: "FatFrank";
+}
+
 .accordion {
     background-color: white;
     margin-top: 10px;
@@ -34,6 +38,7 @@
     align-items: center;
     height: 30px;
     cursor: pointer;
+    font-family: "AvenirBlack";
 }
 
 .content {
@@ -42,6 +47,7 @@
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0,1,0,1);
     padding-bottom: 5px;
+    font-family: "AvenirMedium";
 }
 
 .content.show {
@@ -54,23 +60,37 @@ h3, span{
     background-color: transparent;
 }
 
-.dropdownIcons {
+.edit-drop {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.edit-button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    align-items: right;
+}
+
+.edit-button button {
+    border-style: solid;
+    border-width: 1px;
+    border-color:#000000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.drop-icons {
     display: flex;
     align-items: center;
-    justify-content: center;
     height: 2em;
     width: 2em;
     background-color: rgba(0, 0, 0, 0);
 }
 
-.dropdownIcons img {
-    max-height: 100%;
-    max-width: 100%;
-}
-
-img {
-    background-color: transparent
-}
 .category-header > h2, .sub-category ul, .sub-category li {
     background-color: white;
 }
