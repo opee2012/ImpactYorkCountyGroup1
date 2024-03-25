@@ -10,7 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Upload from "./pages/Upload";
 import Edit from "./pages/Edit";
-import UserManagement from "./pages/userManagement"import Edit from "./pages/Edit";
+import UserManagement from "./pages/userManagement";
 
 function App() {
   const { state } = useAuthContext();
@@ -23,9 +23,8 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/edit/:id" element={<Edit />} />
-          <Route path="/user-management" element={!email ? <Login /> : <UserManagement />} />
           <Route path="/login" element={!email ? <Login /> : <Navigate to="/" />} />
-          <Route path="/edit/:name" Component={<Edit />} />
+          <Route path="/user-management" element={!email ? <Login /> : <UserManagement />} />
         </Routes>
       </BrowserRouter>
     </div>
