@@ -65,6 +65,31 @@ export const useUserMan = () => {
         }
       };
 
+      // Function to delete login based on email
+    const deleteLogin = async (email) => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(`/login/${email}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
-      return { isLoading, error, getAllLogins, addNewLogin};
+            if (!response.ok) {
+                throw new Error('Failed to delete login, please enter a valid email');
+            }
+
+            const responseData = await response.json();
+            setData(responseData);
+            setIsLoading(false);
+        } catch (error) {
+            setError(error.message);
+            setIsLoading(false);
+        }
+    };
+
+
+      return { isLoading, error, getAllLogins, addNewLogin, deleteLogin};
 }
