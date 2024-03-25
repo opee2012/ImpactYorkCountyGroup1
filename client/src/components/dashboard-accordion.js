@@ -42,19 +42,25 @@ const  DashboardAccordion = ({ category, searchInput }) => {
             <div className="accordion">
                 {filteredData.map((category, index) => (
                     <div key ={index}>
-                        <h2>{category.Key}</h2>
+                        <div className="subcategory">
+                            <h2>{category.Key}</h2>
+                        </div>
                         {category['SubCategory'].map((subCategory, subIndex) => (
                             <div key={subIndex} className="sub-category item">
                             <div className="title" onClick={() => toggleSubCategory(subCategory)} >
                                 <h3>{subCategory.Name}</h3>
-                                <span className="dropdownIcons">
-                                {email && 
-                                (<Link to={`/edit/${subCategory.Name}`} state={{ subCategoryData: subCategory.Data, categoryName: categoryName, categoryData: data}}> 
-                                    <button > 
-                                    Edit</button>
-                                </Link>)}
-                                    {selectedSubItems.includes(subCategory) ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
-                                </span>
+                                <div className='edit-drop'>
+                                    <div className='edit-button'>
+                                        {email && 
+                                        (<Link to={`/edit/${subCategory.Name}`} state={{ subCategoryData: subCategory.Data, categoryName: categoryName, categoryData: data}}> 
+                                            <button> 
+                                            Edit</button>
+                                        </Link>)}
+                                    </div>
+                                    <div className='drop-icons'>
+                                        {selectedSubItems.includes(subCategory) ? <img src={DropupIcon} alt="Dropup Icon" /> : <img src={DropdownIcon} alt="Dropdown Icon" />}
+                                    </div>
+                                </div>
                             </div>
                             <div className={`content ${selectedSubItems.includes(subCategory) ? 'show' : ''}`}>
                                     <table>

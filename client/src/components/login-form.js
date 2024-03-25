@@ -36,6 +36,7 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
                 <input
                     type="password"
                     name="password"
+                    id="Password"
                     className="formtext"
                     placeholder="PASSWORD"
                     value={password}

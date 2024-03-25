@@ -1,3 +1,18 @@
+@font-face {
+  font-family: "FatFrank";
+  src: url("../fonts/FatFrank-Heavy.ttf");
+}
+
+@font-face {
+  font-family: "AvengerBlack";
+  src: url("../fonts/Avenir Black.ttf");
+}
+
+@font-face {
+  font-family: "AvengerMedium";
+  src: url("../fonts/Avenir Medium.ttf");
+}
+
 body {
   background-color: #f2dab2;
 }
@@ -10,6 +25,7 @@ body {
 }
 .uploadcontainer h1 {
   font-size: 42px;
+  font-family: "FatFrank";
 }
 .uploadformcontainer {
   display: flex;
@@ -45,8 +61,17 @@ body {
   display: block;
   margin-top: 5px;
 }
-.uploadformnonflex img {
+
+.dragndrop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "AvenirBlack";
+  font-size: 14px;
+  color: #1226aa;
 }
+
 #statusbar {
   color: black;
 }
@@ -82,4 +107,14 @@ body {
 .uploadcontainer button:hover {
   cursor: pointer;
   background-color: #6596da;
+}
+
+.uploadbuttons button {
+  font-family: "AvengerMedium";
+  font-size: medium;
+}
+
+.submitnback button {
+  font-family: "AvengerMedium";
+  font-size: medium;
 }
