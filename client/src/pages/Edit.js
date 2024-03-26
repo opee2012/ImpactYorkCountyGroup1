@@ -46,8 +46,8 @@ const Edit = () => {
       JSON.stringify(data)
     );
     let res = await editSelectedCategory(categoryName, categoryData);
-    // if(res.success)
-    //   window.location.assign("/");
+    if(res.success)
+      window.location.assign("/");
   };
 
   return (
