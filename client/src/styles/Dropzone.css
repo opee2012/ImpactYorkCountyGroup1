@@ -8,7 +8,7 @@
 }
 
 .dropzonebox {
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
     border: 2px dashed #000000; /* Adjust this value to change the color of the border */
@@ -23,4 +23,5 @@
     align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    max-height: 100px;
 }

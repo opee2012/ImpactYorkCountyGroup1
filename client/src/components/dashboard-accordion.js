@@ -5,6 +5,8 @@ import DropupIcon from '../icons/dropup.png';
 import { useAuthContext } from "../context/AuthContext";
 import { Link } from 'react-router-dom';
 
+const images = require.context('../images', true);
+
 const  DashboardAccordion = ({ category, searchInput }) => {
     
     const [selectedSubItems, setSelectedSubItems] = useState([]);
@@ -79,6 +81,7 @@ const  DashboardAccordion = ({ category, searchInput }) => {
                                         </tbody>
                                     </table>
                                     <div className='content-image'>
+                                        <img src={images(`./${subCategory.Name}.svg`)} alt='' />
                                     </div>
                                 </div>
                             </div>

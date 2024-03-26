@@ -118,9 +118,3 @@ tr:nth-child(odd) {
   font-size: large;
   font-family: "AvenirMedium";
 }
-
-.dropzone {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px;
-}
