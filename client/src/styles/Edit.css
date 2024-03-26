@@ -20,13 +20,10 @@
   min-width: 1000px;
   margin: 30px;
   background-color: white;
-  border-radius: 20px; 
   overflow: hidden; 
   position: relative;
-  border-color: #1226AA;
+  border: 2px solid #1226AA;
   border-radius: 20px;
-  border-width: 2px;
-  border-style: solid;
   padding: 20px;
 }
 
@@ -55,10 +52,9 @@
   border-radius: 5px;
   height: 40px;
   width: 200px;
-  margin: 5px;
+  margin: 5px auto;
   box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
-  font-size: large;
-  font-family: "AvenirMedium";
+  font: normal normal normal 18px/1.4em "AvenirMedium";
 }
 
 .editcontainer button:hover {
@@ -73,21 +69,23 @@
 
 .contentcontainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
   width: 100%;
+  padding: 20px;
 }
 
 .datacolumns {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-table {
-  width: 100%;
-  margin: 20px;
+.editcontainer .contentcontainer table {
+  border-collapse: collapse;
+  width: 300px;
+  margin-right: 20px;
 }
 
 th, td {
@@ -95,6 +93,7 @@ th, td {
   padding: 5px 10px;
   text-align: center;
   font-family: "AvenirBlack";
+  font-size: 18px;
 }
 
 tr:nth-child(even) {

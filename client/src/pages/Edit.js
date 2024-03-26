@@ -62,55 +62,55 @@ const Edit = () => {
           />
         </div>
       </div>
+      <div className="header-content">
+        <h1>Edit: {subcategory}</h1>
+      </div>
       {subCategoryData && (
         <div className="contentcontainer">
-          <div className="header-content">
-            <h1>Edit: {subcategory}</h1>
-          </div>
           <div className="datacolumns">
-          <table>
-            <thead>
-              <tr>
-                <th>Year</th>
-                <th>Value</th>
-                <th></th>
-              </tr>
-            </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr key={index}>
-                <td>
-                  <input
-                    type="text"
-                    value={item.Year}
-                    className="yeardata2"
-                    onChange={(e) => handleYearChange(e, index)}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    value={item.Value}
-                    className="valuedata2"
-                    onChange={(e) => handleValueChange(e, index)}
-                  />
-                </td>
-                <td>
-                  <button className="delete-button" onClick={() => handleDeleteField(index)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-          </table>
+            <table className="table-container">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Value</th>
+                  <th></th>
+                </tr>
+              </thead>
+            <tbody>
+              {data.map((item, index) => (
+                <tr key={index}>
+                  <td>
+                    <input
+                      type="text"
+                      value={item.Year}
+                      className="yeardata2"
+                      onChange={(e) => handleYearChange(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={item.Value}
+                      className="valuedata2"
+                      onChange={(e) => handleValueChange(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <button className="delete-button" onClick={() => handleDeleteField(index)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            </table>
+            <button onClick={handleAddField}>Add Field</button> <br /> <br />
+            <button onClick={handleSubmit}>Submit</button> <br />
+            <Link to={"/"}>
+              <button className="dashboard-button">Dashboard</button>
+            </Link>
+          </div>
           <div className="dropzone">
             <MyDropzone />
           </div>
-        </div>
-          <button onClick={handleAddField}>Add Field</button> <br /> <br />
-          <button onClick={handleSubmit}>Submit</button> <br />
-          <Link to={"/"}>
-            <button className="dashboard-button">Dashboard</button>
-          </Link>
         </div>
       )}
     </div>
