@@ -27,11 +27,11 @@ const UploadForm = () => {
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      const response = await fetch("/uploadxlsx", {
-        method: "POST",
-        body: formData,
-        enctype: "multipart/form-data",
-      });
+      // const response = await fetch("/uploadxlsx", {
+      //   method: "POST",
+      //   body: formData,
+      //   enctype: "multipart/form-data",
+      // });
 
       // Implement upload functionality
       const json_files = await ExcelToJSON(selectedFile);
@@ -39,9 +39,9 @@ const UploadForm = () => {
         uploadSelectedFile(json_files[i]);
       };
 
-      if (!response.ok) {
-        throw new Error("Upload failed");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Upload failed");
+      // }
     } catch (error) {
       console.error(error);
     }
@@ -108,7 +108,7 @@ const UploadForm = () => {
         <button onClick={() => {
           if (selectedFile) {
             uploadClientFile();
-            window.location.assign('/');
+            // window.location.assign('/');
           } else {
             alert("Please select an Excel file to upload.");
           }

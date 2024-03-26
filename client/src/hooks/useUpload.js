@@ -22,7 +22,7 @@ export const useUpload = () => {
 
     // Implement upload functionality
     try {
-      const request = await fetch("/uploadxlsx", {
+      const request = await fetch("/upload", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(file)
