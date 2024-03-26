@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
 const Validation = require('../utils/validation');
 const loginSchema = require('../models/login-schema');
@@ -36,7 +37,6 @@ exports.loginUser = async (req, res) => {
         // create token
         const token = createToken(user._id);
 
-        console.log(user.email, token, user.admin);
 
         res.status(200).json({ email: user.email, token, admin: user.admin});
     } catch (err) {
@@ -65,6 +65,28 @@ exports.addNewLogin = async (req, res) => {
                 throw new Error("email must be an email address");
             }
 
+            // ----- Need to get this working, currently not functional the way we want it -----
+            // Registration passes through a temporary password generated from the client side
+            //const mailText = "Here is your temporary password for your IYC account: " + password;
+            //
+            // Fake transporter placeholder
+            // const tempPassTransporter = nodemailer.createTransport({
+            //     host: "smtp.ethereal.email",
+            //     port: 587,
+            //     secure: false,
+            //     auth: {
+            //         user: process.env.TRANSPORTER_EMAIL,
+            //         pass: process.env.TRANSPORTER_PASS
+            //     }
+            // });
+            // await tempPassTransporter.sendMail({
+            //     from: 'no-reply@impactyorkcounty.org',
+            //     to: email,
+            //     subject: "Temporary IYC password",
+            //     text: mailText,
+            //     html: '<b>' + mailText + '</b>'
+            // });
+            
             const user = await Login.signup(email, password, admin);
         
             // create a token
@@ -90,20 +112,33 @@ exports.updateLogin = async (req, res) => {
         const errorMsg = Validation.getValidationErrorMessage(validationError);
         throw new Error(errorMsg);
     } else {
-        const {email, password} = req.body;
+        const {email, password, admin} = req.body;
 
         try {
-            // find the target user (needs a check for new email conflicting with existing emails?)
-            const user = await Login.findOne({email: targetEmail});
+            // Update fields
+        const updateFields = {};
+        if (req.body.email) updateFields.email = req.body.email;
+        if (req.body.password) updateFields.password = await Login.hash(req.body.password);
+        if (req.body.admin !== undefined) updateFields.admin = req.body.admin;
+
+        // Update the user
+        const updatedUser = await Login.findOneAndUpdate(
+            { email: targetEmail },
+            updateFields,
+            { new: true } // Return the updated document
+        );
+        if (!updatedUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
 
             // create a token
-            const token = createToken(user._id);
-            // hash the new password
+            //const token = createToken(user._id);
+         /*   // hash the new password
             req.body.password = await Login.hash(password);
 
             // only update everything that the req's body has within the target user
-            await Login.findOneAndUpdate({email: targetEmail}, req.body);
-            res.status(200).json({email, token});
+            await Login.findOneAndUpdate({email: targetEmail}, req.body);*/
+            res.status(200).json({email: updatedUser.email, token});
         }
         catch(error) {
             res.status(400).json({error: error.message});

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { useEdit } from "../hooks/useEdit";
+import { MyDropzone } from "../components/image-form";
 
 import "../styles/Edit.css";
 
 const Edit = () => {
-  const { name } = useParams();
   const { state } = useLocation();
   const { editSelectedCategory } = useEdit();
+  const { subcategory } = useParams();
 
   const subCategoryData = state && state.subCategoryData;
   let categoryData = state && state.categoryData;
@@ -47,70 +48,70 @@ const Edit = () => {
     let res = await editSelectedCategory(categoryName, categoryData);
     if(res.success)
       window.location.assign("/");
-
   };
 
   return (
     <div className="editcontainer">
-      <div id="logo">
-        <img
-          className="img-edit"
-          src="/IYC.png"
-          alt="IYC logo"
-          style={{ width: "265px", height: "auto" }}
-        />
+      <div className="header">
+        <div id="logo">
+          <img
+            className="img-edit"
+            src="/IYC.png"
+            alt="IYC logo"
+          />
+        </div>
       </div>
-      <h1>Edit Page: {name}</h1>
+      <div className="header-content">
+        <h1>Edit: {subcategory}</h1>
+      </div>
       {subCategoryData && (
-        <div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            {data.map((item, index) => (
-              <div
-                key={index}
-                style={{ marginLeft: "10px", marginBottom: "20px" }}
-              >
-                <div style={{ marginBottom: "10px" }}>
-                  <label style={{ display: "block", marginBottom: "5px" }}>
-                    Year:
-                  </label>
-                  <input
-                    type="text"
-                    value={item.Year}
-                    style={{ width: "50px", padding: "5px" }}
-                    onChange={(e) => handleYearChange(e, index)}
-                  />
-                </div>
-                <div style={{ marginBottom: "10px" }}>
-                  <label style={{ display: "block", marginBottom: "5px" }}>
-                    Value:
-                  </label>
-                  <input
-                    type="text"
-                    value={item.Value}
-                    style={{ width: "50px", padding: "5px" }}
-                    onChange={(e) => handleValueChange(e, index)}
-                  />
-                </div>
-                <button
-                  onClick={() => handleDeleteField(index)}
-                  style={{ width: "90%" }}
-                >
-                  Delete
-                </button>
-              </div>
-            ))}
+        <div className="contentcontainer">
+          <div className="datacolumns">
+            <table className="table-container">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Value</th>
+                  <th></th>
+                </tr>
+              </thead>
+            <tbody>
+              {data.map((item, index) => (
+                <tr key={index}>
+                  <td>
+                    <input
+                      type="text"
+                      value={item.Year}
+                      className="yeardata2"
+                      onChange={(e) => handleYearChange(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={item.Value}
+                      className="valuedata2"
+                      onChange={(e) => handleValueChange(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <button className="delete-button" onClick={() => handleDeleteField(index)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            </table>
+            <div>
+              <button onClick={handleAddField}>Add Field</button> <br />
+              <button onClick={handleSubmit}>Submit</button> <br />
+              <Link to={"/"}>
+                <button className="dashboard-button">Dashboard</button>
+              </Link>
+            </div>
           </div>
-          <button onClick={handleAddField}>Add Field</button> <br /> <br />
-          <button onClick={handleSubmit}>Submit</button> <br />
-          <Link to={"/"}>
-            <button>Back to Dashboard</button>
-          </Link>
+          <div className="dropzone">
+            <MyDropzone />
+          </div>
         </div>
       )}
     </div>
