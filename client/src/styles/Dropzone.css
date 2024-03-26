@@ -1,0 +1,29 @@
+.dropzonecontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropzonebox {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #000000;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.images {
+    justify-self: center;
+    align-items: center;
+    margin: 10px;
+    object-fit: cover;
+    margin-left: 0;
+}
+
+.images img {
+    max-width: 500px;
+    max-height: 400px;
+    object-fit: contain;
+}

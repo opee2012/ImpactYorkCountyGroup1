@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/upload" element={<Upload />} />
-          <Route path="/edit/:id" element={<Edit />} />
+          <Route path="/edit/:subcategory" Component={Edit} />
           <Route
             path="/login"
             element={!email ? <Login /> : <Navigate to="/" />}

@@ -5,8 +5,9 @@ import DropupIcon from '../icons/dropup.png';
 import { useAuthContext } from "../context/AuthContext";
 import { Link } from 'react-router-dom';
 
-
 const  DashboardAccordion = ({ category, searchInput }) => {
+
+    const images = require.context('../images', true);
     
     const [selectedSubItems, setSelectedSubItems] = useState([]);
     let data = category.Data;
@@ -32,16 +33,23 @@ const  DashboardAccordion = ({ category, searchInput }) => {
           const searchText = (searchInput || '').toLowerCase();
           return name.toLowerCase().includes(searchText);
         })
-      })).filter(category => category.SubCategory.length > 0);
-      
-    //   uncomment and change data to filteredData on line 39
-      
+      })
+    ).filter(category => category.SubCategory.length > 0);
+
+    const renderimg = (subCategory) => {
+        try {
+            return <img className='content-image' src ={images(`./${subCategory.Name}.png`)} />
+        } catch (error) {
+            return null;
+        }
+    }
 
     return (
         <div className="wrapper">
+            <div className='wrapper-inner'>
             <div className="accordion">
                 {filteredData.map((category, index) => (
-                    <div key ={index}>
+                    <div key ={index} className='dashboard-area'>
                         <div className="subcategory">
                             <h2>{category.Key}</h2>
                         </div>
@@ -62,8 +70,8 @@ const  DashboardAccordion = ({ category, searchInput }) => {
                                     </div>
                                 </div>
                             </div>
-                            {selectedSubItems.includes(subCategory) && (
-                                <div className="content show">
+                            <div className={`content ${selectedSubItems.includes(subCategory) ? 'show' : ''}`}>
+                                <div className="content-inner">
                                     <table>
                                         <thead>
                                             <tr>
@@ -80,12 +88,16 @@ const  DashboardAccordion = ({ category, searchInput }) => {
                                             ))}
                                         </tbody>
                                     </table>
+                                    <div>
+                                        {renderimg(subCategory)}
+                                    </div>
                                 </div>
-                            )}
+                            </div>
                         </div>
                     ))}
                 </div>
             ))}
+            </div>
         </div>
     </div>
     );
