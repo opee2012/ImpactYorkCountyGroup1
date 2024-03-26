@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
 const Validation = require('../utils/validation');
 const loginSchema = require('../models/login-schema');
@@ -36,7 +37,6 @@ exports.loginUser = async (req, res) => {
         // create token
         const token = createToken(user._id);
 
-        console.log(user.email, token, user.admin);
 
         res.status(200).json({ email: user.email, token, admin: user.admin});
     } catch (err) {
@@ -65,6 +65,28 @@ exports.addNewLogin = async (req, res) => {
                 throw new Error("email must be an email address");
             }
 
+            // ----- Need to get this working, currently not functional the way we want it -----
+            // Registration passes through a temporary password generated from the client side
+            //const mailText = "Here is your temporary password for your IYC account: " + password;
+            //
+            // Fake transporter placeholder
+            // const tempPassTransporter = nodemailer.createTransport({
+            //     host: "smtp.ethereal.email",
+            //     port: 587,
+            //     secure: false,
+            //     auth: {
+            //         user: process.env.TRANSPORTER_EMAIL,
+            //         pass: process.env.TRANSPORTER_PASS
+            //     }
+            // });
+            // await tempPassTransporter.sendMail({
+            //     from: 'no-reply@impactyorkcounty.org',
+            //     to: email,
+            //     subject: "Temporary IYC password",
+            //     text: mailText,
+            //     html: '<b>' + mailText + '</b>'
+            // });
+            
             const user = await Login.signup(email, password, admin);
         
             // create a token
