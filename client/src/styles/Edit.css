@@ -1,28 +1,119 @@
-  .img-edit {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 25%;
-  }
+@font-face {
+  font-family: "FatFrank";
+  src: url("../fonts/FatFrank-Heavy.ttf");
+}
 
-  .editcontainer {
-    padding-top: 85px;
-    width: 95%;
-  
-    color: #1226aa;
-  }
+@font-face {
+  font-family: "AvenirBlack";
+  src: url("../fonts/Avenir Black.ttf");
+}
 
-  .editcontainer button {
-    background-color: #79a3dc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    width: 20%;
-    height: 40px;
-    margin-top: 10px;
-    box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
-  }
-  .editcontainer button:hover {
-    background-color: #b2cff7;
-  
-  }
+@font-face {
+  font-family: "AvenirMedium";
+  src: url("../fonts/Avenir Medium.ttf");
+}
+
+.editcontainer {
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  min-width: 1000px;
+  margin: 30px;
+  background-color: white;
+  overflow: hidden; 
+  position: relative;
+  border: 2px solid #1226AA;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin: 15px;
+  margin-bottom: 0px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-family: "FatFrank";
+}
+
+.img-edit {
+  height: 120px;
+}
+
+.editcontainer button {
+  background-color: #79a3dc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  width: 200px;
+  margin: 5px auto;
+  box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  font: normal normal normal 18px/1.4em "AvenirMedium";
+}
+
+.editcontainer button:hover {
+  background-color: #b2cff7;
+  cursor: pointer;
+}
+
+.editcontainer .delete-button {
+  width: 80px;
+  align-items: center;
+}
+
+.contentcontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.datacolumns {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-right: 40px;
+}
+
+.editcontainer .contentcontainer table {
+  border-collapse: collapse;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #1226AA;
+  padding: 5px 10px;
+  text-align: center;
+  font-family: "AvenirBlack";
+  font-size: 18px;
+}
+
+tr:nth-child(even) {
+  background-color: #d2e0f3;
+}
+
+tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.yeardata2 {
+  width: 50px;
+  font-size: large;
+  padding: 8px;
+  font-family: "AvenirMedium";
+}
+
+.valuedata2 {
+  width: 50px;
+  padding: 8px;
+  font-size: large;
+  font-family: "AvenirMedium";
+}
