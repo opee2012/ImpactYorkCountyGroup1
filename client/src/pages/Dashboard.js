@@ -61,6 +61,7 @@ const Dashboard = () => {
       </header>
       <header className="top-panel">    
         {admin && <button className="button button-center button-blue" onClick={() => window.location.assign('/user-management')}>Manage Accounts</button>}
+        {email && <button className="button button-center button-purple" onClick={() => window.location.assign('/password')}>Change password</button>}
         {email && <button className="button button-center button-black" onClick={() => window.location.assign('/upload')}>Upload Data</button>}
         {email && <button className="button button-center button-red"  onClick={() => logout()}>Logout</button>}
         {!email && <button className="button button-center button-blue" onClick={() => window.location.assign('/login')}>Login</button>}
