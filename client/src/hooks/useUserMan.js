@@ -86,10 +86,9 @@ export const useUserMan = () => {
                 },
             });
 
-            // Check if the response status is OK (status code 200)
+            
         if (response.status === 200) {
-            // If the response is successful, set a success message or update the state accordingly
-            // For example, you can set a success message:
+            
             const successMessage = 'Login deleted successfully';
             // Set the success message in the state or handle it as needed
             setSuccessMessage(successMessage);
