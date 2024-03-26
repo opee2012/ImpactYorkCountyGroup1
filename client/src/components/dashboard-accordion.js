@@ -5,9 +5,9 @@ import DropupIcon from '../icons/dropup.png';
 import { useAuthContext } from "../context/AuthContext";
 import { Link } from 'react-router-dom';
 
-const images = require.context('../images', true);
-
 const  DashboardAccordion = ({ category, searchInput }) => {
+
+    const images = require.context('../images', true);
     
     const [selectedSubItems, setSelectedSubItems] = useState([]);
     let data = category.Data;
@@ -35,6 +35,14 @@ const  DashboardAccordion = ({ category, searchInput }) => {
         })
       })
     ).filter(category => category.SubCategory.length > 0);
+
+    const renderimg = (subCategory) => {
+        try {
+            return <img className='content-image' src ={images(`./${subCategory.Name}.svg`)} />
+        } catch (error) {
+            return null;
+        }
+    }
 
     return (
         <div className="wrapper">
@@ -80,8 +88,8 @@ const  DashboardAccordion = ({ category, searchInput }) => {
                                             ))}
                                         </tbody>
                                     </table>
-                                    <div className='content-image'>
-                                        <img src={images(`./${subCategory.Name}.svg`)} alt='' />
+                                    <div>
+                                        {renderimg(subCategory)}
                                     </div>
                                 </div>
                             </div>

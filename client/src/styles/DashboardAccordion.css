@@ -27,20 +27,14 @@
 
 .item {
     background-color: white;
-    margin-bottom: 5px;
-    margin-left: 20px;
-    margin-top: 5px;
-    margin-right: 20px;
+    margin: 5px 20px;
     padding: 0px 20px;
-    border-style: solid;
-    border-width: 2px;
-    border-color:#1226AA;
+    border: 2px solid #1226AA;
     border-radius: 5px;
-    filter: drop-shadow(3px 3px rgba(0,0,0,0.2));
+    box-shadow: 3px 3px rgba(0,0,0,0.2);
 }
 
 .title {
-    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -48,6 +42,10 @@
     cursor: pointer;
     font-family: "AvenirBlack";
     font-size: large;
+
+    h3, span {
+        background-color: transparent;
+    }
 }
 
 .content {
@@ -57,15 +55,29 @@
     transition: all 0.5s cubic-bezier(0,1,0,1);
     font-family: "AvenirMedium";
     display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .content.show {
     max-height: none;
     transition: all 0.5s cubic-bezier(1,0,1,0);
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
-.content.show img {
-    max-block-size: 100px;
+.content-inner {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.content-image {
+    height: 300px;
+    margin: 10px;
 }
 
 h3, span{
@@ -110,30 +122,16 @@ h3, span{
     list-style: none;
 }
 
-table {
+.accordion .item .content table {
     background-color: white;
-    width: 50%;
     border-collapse: collapse;
     margin-top: 10px;
     border-spacing: 0 10px;
+    width: 400px;
 }
 
-th {
+.accordion .item .content th {
     background-color: white;
-    padding: 10px;
     font-weight: bold;
     font-size: 1.2em;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-tr:nth-child(odd) {
-    background-color: #ffffff;
-}
-
-.content-inner {
-  display: flex;
-  justify-content: space-between;
 }
