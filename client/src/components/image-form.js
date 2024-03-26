@@ -4,13 +4,15 @@ import '../styles/Dropzone.css';
 
 export const MyDropzone = () => {
     const [files, setFiles] = useState([]);
-    const { getRootProps, getInputProps } = useDropzone({
+    const { getRootProps, getInputProps, open } = useDropzone({
       accept: 'image/*',
       onDrop: acceptedFiles => {
         setFiles(acceptedFiles.map(file => Object.assign(file, {
           preview: URL.createObjectURL(file)
         })));
-      }
+      },
+      noClick: true,
+      noKeyboard: true
     });
   
     const images = files.map(file => (
@@ -30,7 +32,7 @@ export const MyDropzone = () => {
             <br />
             <div className='dropzone-or'>OR</div>
             <br />
-            <button>Browse</button>
+            <button onClick={open}>Browse</button>
           </div>
           <div className='images'>
             <ul>{images}</ul>
