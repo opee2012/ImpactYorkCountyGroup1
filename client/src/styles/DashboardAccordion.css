@@ -44,9 +44,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 30px;
+    height: 40px;
     cursor: pointer;
     font-family: "AvenirBlack";
+    font-size: large;
 }
 
 .content {
@@ -54,14 +55,17 @@
     max-height: 0px;
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0,1,0,1);
-    padding-bottom: 5px;
     font-family: "AvenirMedium";
+    display: flex;
 }
 
 .content.show {
-    height: auto;
-    max-height: 9999px;
+    max-height: none;
     transition: all 0.5s cubic-bezier(1,0,1,0);
+}
+
+.content.show img {
+    max-block-size: 100px;
 }
 
 h3, span{
@@ -129,3 +133,7 @@ tr:nth-child(odd) {
     background-color: #ffffff;
 }
 
+.content-inner {
+  display: flex;
+  justify-content: space-between;
+}

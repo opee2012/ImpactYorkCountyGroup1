@@ -5,7 +5,6 @@ import DropupIcon from '../icons/dropup.png';
 import { useAuthContext } from "../context/AuthContext";
 import { Link } from 'react-router-dom';
 
-
 const  DashboardAccordion = ({ category, searchInput }) => {
     
     const [selectedSubItems, setSelectedSubItems] = useState([]);
@@ -32,10 +31,8 @@ const  DashboardAccordion = ({ category, searchInput }) => {
           const searchText = (searchInput || '').toLowerCase();
           return name.toLowerCase().includes(searchText);
         })
-      })).filter(category => category.SubCategory.length > 0);
-      
-    //   uncomment and change data to filteredData on line 39
-      
+      })
+    ).filter(category => category.SubCategory.length > 0);
 
     return (
         <div className="wrapper">
@@ -64,6 +61,7 @@ const  DashboardAccordion = ({ category, searchInput }) => {
                                 </div>
                             </div>
                             <div className={`content ${selectedSubItems.includes(subCategory) ? 'show' : ''}`}>
+                                <div className="content-inner">
                                     <table>
                                         <thead>
                                             <tr>
@@ -80,7 +78,10 @@ const  DashboardAccordion = ({ category, searchInput }) => {
                                             ))}
                                         </tbody>
                                     </table>
+                                    <div className='content-image'>
+                                    </div>
                                 </div>
+                            </div>
                         </div>
                     ))}
                 </div>
