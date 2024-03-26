@@ -46,9 +46,8 @@ const Edit = () => {
       JSON.stringify(data)
     );
     let res = await editSelectedCategory(categoryName, categoryData);
-    if(res.success)
-      window.location.assign("/");
-
+    // if(res.success)
+    //   window.location.assign("/");
   };
 
   return (
@@ -102,11 +101,13 @@ const Edit = () => {
               ))}
             </tbody>
             </table>
-            <button onClick={handleAddField}>Add Field</button> <br /> <br />
-            <button onClick={handleSubmit}>Submit</button> <br />
-            <Link to={"/"}>
-              <button className="dashboard-button">Dashboard</button>
-            </Link>
+            <div>
+              <button onClick={handleAddField}>Add Field</button> <br />
+              <button onClick={handleSubmit}>Submit</button> <br />
+              <Link to={"/"}>
+                <button className="dashboard-button">Dashboard</button>
+              </Link>
+            </div>
           </div>
           <div className="dropzone">
             <MyDropzone />
