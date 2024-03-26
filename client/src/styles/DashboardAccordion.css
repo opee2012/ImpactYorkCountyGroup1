@@ -91,21 +91,27 @@ h3, span{
 }
 
 .edit-button {
-    background-color: white;
     border: none;
-    cursor: pointer;
-    font-size: 1em;
     align-items: right;
 }
 
 .edit-button button {
+    width: 50px;
     border-style: solid;
+    border-color: #1226AA;
     border-width: 1px;
-    border-color:#000000;
     border-radius: 5px;
+    padding: 1px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.2em;
+    background-color: #79A3DC;
+    font-family: "avenirMedium";
 }
+
+.edit-button button:hover {
+    background-color: #b2cff7;
+    cursor: pointer;
+  }
 
 .drop-icons {
     display: flex;
@@ -126,6 +132,7 @@ h3, span{
     background-color: white;
     border-collapse: collapse;
     margin-top: 10px;
+    margin-bottom: 20px;
     border-spacing: 0 10px;
     width: 400px;
 }
