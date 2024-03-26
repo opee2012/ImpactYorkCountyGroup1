@@ -38,7 +38,7 @@ const  DashboardAccordion = ({ category, searchInput }) => {
 
     const renderimg = (subCategory) => {
         try {
-            return <img className='content-image' src ={images(`./${subCategory.Name}.svg`)} />
+            return <img className='content-image' src ={images(`./${subCategory.Name}.png`)} />
         } catch (error) {
             return null;
         }
