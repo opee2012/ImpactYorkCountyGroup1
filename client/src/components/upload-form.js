@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useUpload } from "../hooks/useUpload";
 import "../styles/Upload.css";
 import xcelIcon from "../icons/excelIcon.png";
-import { downloadIcon } from "../icons/svgs";
 import { ExcelToJSON } from "../utils/ExcelToJson";
 
 const UploadForm = () => {
