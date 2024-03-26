@@ -78,12 +78,14 @@ export const useUserMan = () => {
     const deleteLogin = async (email) => {
         setIsLoading(true);
         setError(null);
+        console.log(email);
         try {
             const response = await fetch(`/login/${email}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify({ email })
             });
 
             

@@ -148,7 +148,7 @@ exports.updateLogin = async (req, res) => {
 
 // delete one login
 exports.deleteLogin = async (req, res) => {
-    const { email } = req.params;
+    const { email } = req.body;
     console.log(`Deleting ${email}'s login`);
     try {
         // Attempt to delete the login with the provided email
