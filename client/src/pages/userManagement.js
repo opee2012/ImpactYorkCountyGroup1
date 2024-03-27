@@ -16,6 +16,13 @@ const UserManagement = () => {
 
     const { deleteLogin, addNewLogin, getAllLogins, successMessage, isLoading, error } = useUserMan();
 
+    function reloadPageAfterDelay(delay) {
+        setTimeout(() => {
+          window.location.reload();
+        }, delay);
+    }
+      
+
     useEffect(() => {
         const fetchLogins = async () => {
             try {
@@ -46,6 +53,7 @@ const UserManagement = () => {
                 setUsers(logins);
                 setNewEmail('');
                 setAddError('');
+                reloadPageAfterDelay(1000); 
             } catch (error) {
                 console.error('Error adding login:', error);
                 setAddError('Failed to add login');
@@ -102,6 +110,7 @@ const UserManagement = () => {
             //const updatedUsers = users.filter(user => user.email !== newEmail);
             setNewEmail('');
             setAddError('');
+            reloadPageAfterDelay(1000); 
         } catch (error) {
             console.error('Error deleting login:', error);
             setAddError('Failed to delete login');
