@@ -126,7 +126,7 @@ const UserManagement = () => {
                     <div className="sidebarTitle">User List</div>
                     <ul>
                         {users.map((user) => (
-                            <li key={user.id}>{user.email}</li>
+                            <li key={user.id} onClick={() => setNewEmail(user.email)}>{user.email}</li>
                         ))}
                     </ul>
                 </div>
