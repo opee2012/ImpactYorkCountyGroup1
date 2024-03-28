@@ -19,6 +19,7 @@ const Edit = () => {
     let newData = data;
     newData.splice(index, 1);
     setData([...newData]);
+    console.log(data);
   };
 
   const handleYearChange = (e, index) => {
@@ -30,7 +31,7 @@ const Edit = () => {
   const handleValueChange = (e, index) => {
     const newData = [...data];
     newData[index].Value = e.target.value;
-   
+
     setData(newData);
   };
 
@@ -38,13 +39,20 @@ const Edit = () => {
     let newData = data;
     newData.push({ Year: "", Value: "" });
     setData([...newData]);
+    console.log(newData);
   };
 
   const handleSubmit = async () => {
-    JSON.stringify(categoryData).replace(
-      JSON.stringify(categoryData),
-      JSON.stringify(data)
-    );
+    // console.log("subcategorydata", subCategoryData);
+    // console.log("data", data);
+    // console.log("categorydata", categoryData);
+    for (let i in categoryData) {
+      if (categoryData[i].SubCategory[0].Data == subCategoryData) {
+        // console.log("attemp", categoryData[i].SubCategory[0].Data);
+        categoryData[i].SubCategory[0].Data = data;
+      }
+    }
+    // console.log(categoryData);
     let res = await editSelectedCategory(categoryName, categoryData);
     if(res.success)
       window.location.assign("/");
@@ -54,11 +62,7 @@ const Edit = () => {
     <div className="editcontainer">
       <div className="header">
         <div id="logo">
-          <img
-            className="img-edit"
-            src="/IYC.png"
-            alt="IYC logo"
-          />
+          <img className="img-edit" src="/IYC.png" alt="IYC logo" />
         </div>
       </div>
       <div className="header-content">
@@ -75,31 +79,36 @@ const Edit = () => {
                   <th></th>
                 </tr>
               </thead>
-            <tbody>
-              {data.map((item, index) => (
-                <tr key={index}>
-                  <td>
-                    <input
-                      type="text"
-                      value={item.Year}
-                      className="yeardata2"
-                      onChange={(e) => handleYearChange(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      value={item.Value}
-                      className="valuedata2"
-                      onChange={(e) => handleValueChange(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <button className="delete-button" onClick={() => handleDeleteField(index)}>Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+              <tbody>
+                {data.map((item, index) => (
+                  <tr key={index}>
+                    <td>
+                      <input
+                        type="text"
+                        value={item.Year}
+                        className="yeardata2"
+                        onChange={(e) => handleYearChange(e, index)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={item.Value}
+                        className="valuedata2"
+                        onChange={(e) => handleValueChange(e, index)}
+                      />
+                    </td>
+                    <td>
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDeleteField(index)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
             <div>
               <button onClick={handleAddField}>Add Field</button> <br />
