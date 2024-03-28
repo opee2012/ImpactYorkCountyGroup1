@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { useEdit } from "../hooks/useEdit";
 import { MyDropzone } from "../components/image-form";
+import { useImgUpload } from "../hooks/useImgUpload";
 
 import "../styles/Edit.css";
 
 const Edit = () => {
   const { state } = useLocation();
+  const [files, setFiles] = useState([]);
   const { editSelectedCategory } = useEdit();
   const { subcategory } = useParams();
+  const { uploadSelectedImage, status, error } = useImgUpload();
 
   const subCategoryData = state && state.subCategoryData;
   let categoryData = state && state.categoryData;
@@ -46,6 +49,13 @@ const Edit = () => {
     // console.log("subcategorydata", subCategoryData);
     // console.log("data", data);
     // console.log("categorydata", categoryData);
+
+    console.log(files);
+    if (files.length > 0) {
+      for (let i in files) {
+      let res =  await uploadSelectedImage(files[i]);
+      }
+    }
     for (let i in categoryData) {
       if (categoryData[i].SubCategory[0].Data == subCategoryData) {
         // console.log("attemp", categoryData[i].SubCategory[0].Data);
@@ -54,8 +64,7 @@ const Edit = () => {
     }
     // console.log(categoryData);
     let res = await editSelectedCategory(categoryName, categoryData);
-    if(res.success)
-      window.location.assign("/");
+    // if (res.success) window.location.assign("/");
   };
 
   return (
@@ -119,7 +128,7 @@ const Edit = () => {
             </div>
           </div>
           <div className="dropzone">
-            <MyDropzone />
+            <MyDropzone files={files} setFiles={setFiles} />
           </div>
         </div>
       )}

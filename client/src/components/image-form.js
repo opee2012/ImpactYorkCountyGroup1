@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import '../styles/Dropzone.css';
 
-export const MyDropzone = () => {
-    const [files, setFiles] = useState([]);
+export const MyDropzone = (props) => {
+    
     const { getRootProps, getInputProps, open } = useDropzone({
       accept: 'image/*',
       onDrop: acceptedFiles => {
-        setFiles(acceptedFiles.map(file => Object.assign(file, {
+        props.setFiles(acceptedFiles.map(file => Object.assign(file, {
           preview: URL.createObjectURL(file)
         })));
       },
@@ -15,7 +15,7 @@ export const MyDropzone = () => {
       noKeyboard: true
     });
   
-    const images = files.map(file => (
+    const images = props.files.map(file => (
       <div key={file.name}>
         <div>
           <img src={file.preview} style={{width: '100%', height: '100%', objectFit: 'cover'}} alt="preview" />
