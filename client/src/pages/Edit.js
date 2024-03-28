@@ -49,11 +49,15 @@ const Edit = () => {
     // console.log("subcategorydata", subCategoryData);
     // console.log("data", data);
     // console.log("categorydata", categoryData);
+    
+      
 
     console.log(files);
     if (files.length > 0) {
       for (let i in files) {
-      let res =  await uploadSelectedImage(files[i]);
+        const formData = new FormData();
+        formData.append("file", files[i]);
+      let res =  await uploadSelectedImage(formData);
       }
     }
     for (let i in categoryData) {
