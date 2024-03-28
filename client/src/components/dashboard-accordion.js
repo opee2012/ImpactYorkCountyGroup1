@@ -6,8 +6,6 @@ import { useAuthContext } from "../context/AuthContext";
 import { Link } from 'react-router-dom';
 
 const  DashboardAccordion = ({ category, searchInput }) => {
-
-    const images = require.context('../images', true);
     
     const [selectedSubItems, setSelectedSubItems] = useState([]);
     let data = category.Data;
@@ -38,9 +36,16 @@ const  DashboardAccordion = ({ category, searchInput }) => {
 
     const renderimg = (subCategory) => {
         try {
-            return <img className='content-image' src ={images(`./${subCategory.Name}.png`)} />
+            const response = fetch(`/uploadImage/${subCategory.Name}.png`);
+            if (!response.ok) {
+                throw new Error(`Request failed with status ${response.status}`);
+            } else {
+                const blob = response.blob();
+                const url = URL.createObjectURL(blob);
+                setSelectedSubItems(url);
+            }
         } catch (error) {
-            return null;
+            console.error(error);
         }
     }
 
