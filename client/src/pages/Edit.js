@@ -49,26 +49,23 @@ const Edit = () => {
     // console.log("subcategorydata", subCategoryData);
     // console.log("data", data);
     // console.log("categorydata", categoryData);
-    
-      
-
     console.log(files);
     if (files.length > 0) {
       for (let i in files) {
         const formData = new FormData();
-        formData.append("file", files[i]);
+        const newfile = new File([files[i]], subcategory+".png", {type: files[i].type})
+        formData.append("file", newfile);
       let res =  await uploadSelectedImage(formData);
       }
     }
     for (let i in categoryData) {
       if (categoryData[i].SubCategory[0].Data == subCategoryData) {
-        // console.log("attemp", categoryData[i].SubCategory[0].Data);
         categoryData[i].SubCategory[0].Data = data;
       }
     }
     // console.log(categoryData);
     let res = await editSelectedCategory(categoryName, categoryData);
-    // if (res.success) window.location.assign("/");
+    if (res.success) window.location.assign("/");
   };
 
   return (
