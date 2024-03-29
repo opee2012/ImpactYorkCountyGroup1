@@ -148,7 +148,7 @@ const DashboardAccordion = ({ category, searchInput }) => {
                         </tbody>
                       </table>
                       <div id={"image-container-" + subCategory.Name}>
-                      <img id={"image-" + subCategory.Name  } src={`/uploadImage/${subCategory.Name}.png` } onError={() => document.getElementById("image-" + subCategory.Name).setAttribute("hidden", true)}/>
+                      {/* <img id={"image-" + subCategory.Name  } src={`/uploadImage/${subCategory.Name}.png` } onError={() => document.getElementById("image-" + subCategory.Name).setAttribute("hidden", true)}/> */}
                         {/* {renderimg(subCategory)} */}
                       </div>
                     </div>
