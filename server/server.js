@@ -3,17 +3,26 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const http = require('http');
+const dataRoutes = require('./routes/data-routes');
+const uploadRoutes = require('./routes/upload-routes');
+const loginRoutes = require('./routes/login-routes');
 
 // express app
 const app = express();
 
 // middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
     console.log(req.path, req.method);
     next();
 });
+
+// routes
+dataRoutes(app);
+uploadRoutes(app);
+loginRoutes(app);
 
 // connect to MongoDB
 function MongoConnect(dbString) {
@@ -22,15 +31,6 @@ function MongoConnect(dbString) {
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', () => {
         console.log(`Connected to MongoDB`);
-
-        // routes
-        require('./routes/login-routes')(app);
-        require('./routes/data-routes')(app);
-        require('./routes/upload-routes')(app);
-        
-        http.createServer(app).listen(process.env.PORT, () => {
-            console.log(`Server is listening on port ${process.env.PORT}`);
-        });
     });
 };
 
@@ -40,3 +40,7 @@ if (process.argv[2] === 'dev') {
 } else if (process.argv[2] === 'prod') {
     db = 'IMPACT_PROD?retryWrites=true&w=majority';
 };
+
+http.createServer(app).listen(process.env.PORT, () => {
+    console.log(`Server is listening on port ${process.env.PORT}`);
+});
