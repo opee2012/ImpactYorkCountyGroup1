@@ -76,7 +76,7 @@
 }
 
 .user-list li:hover {
-    background-color: #4a90e2;
+    background-color: #6596da;
 }
 
 .action {
@@ -105,7 +105,7 @@
 }
 
 .action-item:hover {
-    background-color: #4a90e2; 
+    background-color: #6596da; 
 }
   
 .action-icon {
@@ -116,7 +116,7 @@
 }
 
 .action-icon:hover {
-    background-color: #4a90e2; 
+    background-color: #6596da; 
 }
   
 .action-item:hover .action-icon {
@@ -155,7 +155,7 @@
     width: 80%;
     padding: 10px 20px;
     margin-top: 20px;
-    background-color: #4a90e2;
+    background-color: #79a3dc;
     color: white;
     border: none;
     border-radius: 4px;
@@ -164,9 +164,16 @@
     font-family: "AvengerMedium";
     font-size: medium;
 }
+.navigation {
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+    height: 40px;
+    margin-top: 10px;
+  }
 
 .content-user button:hover {
-    background-color: #357abd;
+    background-color: #6596da;
 }
 
 .error-message {
