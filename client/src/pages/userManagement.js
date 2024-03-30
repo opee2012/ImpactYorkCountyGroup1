@@ -147,7 +147,7 @@ const UserManagement = () => {
                         type="email"
                         value={newEmail}
                         onChange={(e) => setNewEmail(e.target.value)}
-                        placeholder="..."
+                        placeholder="Click on Email or Enter One"
                     />
                     {successMessage && <p className='success-message'>{successMessage}</p>}
                     {error && <p className="error-message">{error}</p>}
@@ -161,6 +161,9 @@ const UserManagement = () => {
                         <img src={DeleteUserIcon} alt="Delete User" className="action-icon" />
                         Delete Email
                     </button>
+                </div>
+                <div className='navigation'>
+                    <button type="submit" onClick={() => window.location.assign('/')} >Back to Dashboard</button>
                 </div>
                 
             </div>
