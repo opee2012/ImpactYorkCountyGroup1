@@ -16,8 +16,6 @@ const Upload = () => {
     return <div>Loading...</div>;
   }
 
-  console.log(state);
-
   return (
     <div className="uploadcontainer">
       <div id="logo">

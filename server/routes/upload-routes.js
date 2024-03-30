@@ -7,7 +7,6 @@ const HTTP_STATUS = {
 };
 
 const {
-    uploadXLSX,
     uploadImage,
     getImage,
     getXLSX
@@ -16,8 +15,6 @@ const {
 module.exports = function(app) {
 
     // POST upload
-    app.post('/uploadxlsx', uploadXLSX);
-
     app.post('/uploadImage', uploadImage);
 
     app.get('/uploadImage/:image', getImage);
