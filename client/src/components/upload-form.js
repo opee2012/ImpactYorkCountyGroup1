@@ -84,7 +84,7 @@ const UploadForm = () => {
             .then(() => {
               setTimeout(() => {
                 window.location.assign('/')
-              }, 500);
+              }, 50);
             })
             .catch((error) => {
               console.error(error);
