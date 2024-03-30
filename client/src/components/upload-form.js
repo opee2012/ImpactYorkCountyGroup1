@@ -80,8 +80,16 @@ const UploadForm = () => {
       <div className="submitnback">
         <button onClick={() => {
           if (selectedFile) {
-            uploadSelectedFile(selectedFile);
-            window.location.assign('/');
+            uploadSelectedFile(selectedFile)
+            .then(() => {
+              setTimeout(() => {
+                window.location.assign('/')
+              }, 500);
+            })
+            .catch((error) => {
+              console.error(error);
+              setError("Upload failed");
+            });
           } else {
             alert("Please select an Excel file to upload.");
           }
