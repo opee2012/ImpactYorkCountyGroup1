@@ -8,41 +8,28 @@ export const useUpload = () => {
     e.preventDefault();
   };
 
-  // comment
-  const dropHandler = (e) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files[0];
-    setSelectedFile(file);
-    setStatus(`${file.name}`);
-  };
-
-  const uploadSelectedFile = async (file) => {
-    setSelectedFile(true);
+  const uploadSelectedFile = async (selectedFile) => {
+    setStatus("Uploading...");
     setError(null);
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
 
     // Implement upload functionality
     try {
-      const request = await fetch("/uploadxlsx", {
+      const request = await fetch("/upload", {
         method: "POST",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(file)
+        body: formData,
       });
 
       if (!request.ok) {
         throw new Error(`Request failed with status ${request.status}`);
       } else {
-        const json = await request.json();
-        console.log(json);
-        return json;
+        setStatus("Upload successful");
       }
-
-      // Handle successful response here (e.g., set data state)
-      // ...
-
-      // setIsLoading(false);
     } catch (error) {
       setError(error.message);
-      // setIsLoading(false);
+      setStatus('Upload failed');
     }
   };
 
@@ -50,8 +37,8 @@ export const useUpload = () => {
     selectedFile,
     status,
     dragOverHandler,
-    dropHandler,
     uploadSelectedFile,
+    setSelectedFile,
     error,
     setError,
     setStatus

@@ -1,8 +1,11 @@
 // Controller for the upload page
 
+const { ExcelToJSON } = require("../utils/ExcelToJson");
 const Validation = require('../utils/validation');
 const dashboardSchema = require('../models/dashboard-schema');
 const DashboardData = dashboardSchema.DashboardData;
+const path = require('path');
+const uploadDir = path.join(__dirname, '../uploads/xlsx');
 
 // GET all data
 // Retrieves all categories stored
@@ -33,15 +36,18 @@ exports.getOneData = async function(req, res) {
 // POST update data
 // Create a new category or update an existing one
 exports.addNewData = async function (req, res) {
-    // Get parameters passed through request (pass the category data through the json attribute in the req's body):
-    const json = req.body;
     try {
-        // Update the document if it exists, otherwise insert it
-        const createdCategory = await DashboardData.findOneAndUpdate({ Category: json.Category }, json, { upsert: true, new: true });
-        res.status(201).json({ success: true, dbmsg: createdCategory });
-    } catch (err) {
-        res.status(400).json({ success: false,  message: err.message });
-    }
+        const json_files = await ExcelToJSON(uploadDir + '/IYC Dashboard Data.xlsx');
+
+        for (let i in json_files) {
+            let json = json_files[i];
+            await DashboardData.findOneAndUpdate({ Category: json.Category }, json, { upsert: true, new: true });
+        }
+
+        res.status(200).json({ success: true, message: "Data uploaded successfully" });
+    } catch (error) {
+        res.status(400).json({ success: false,  message: error.message });
+    };
 }
 
 
