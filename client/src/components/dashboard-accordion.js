@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const DashboardAccordion = ({ category, searchInput }) => {
   const [selectedSubItems, setSelectedSubItems] = useState([]);
+  const [showImages, setShowImages] = useState({});
   let data = category.Data;
   let categoryName = category.Category;
   const { state } = useAuthContext();
@@ -21,6 +22,11 @@ const DashboardAccordion = ({ category, searchInput }) => {
       newSelectedSubItems.push(subCategory);
     }
     setSelectedSubItems(newSelectedSubItems);
+
+    setShowImages((prevState) => ({
+      ...prevState,
+      [subCategory.Name]: !prevState[subCategory.Name]
+    }));
   };
 
   const filteredData = data
@@ -33,57 +39,6 @@ const DashboardAccordion = ({ category, searchInput }) => {
       }),
     }))
     .filter((category) => category.SubCategory.length > 0);
-
-  function getBase64Image(img) {
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-
-    var dataURL = canvas.toDataURL("image/png");
-
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-  }
-
-  const renderimg = (subCategory) => {
-    // try {
-    //   let img = document.getElementById("image-" + subCategory.Name);
-    //   try {
-    //     img.src =
-    //       "data:image/png;base64," + localStorage.getItem(subCategory.Name);
-    //   } catch {}
-    //   if (
-    //     localStorage.getItem(subCategory.Name) == null ||
-    //     localStorage.getItem(subCategory.Name) == "data:,"
-    //   ) {
-    //     console.log("aaaaa");
-    //     img.src = `/uploadImage/${subCategory.Name}.png`;
-    //     localStorage.setItem(subCategory.Name, getBase64Image(img));
-    //   }
-
-
-    //1st method: blobs
-      // const response = fetch(`/uploadImage/${subCategory.Name}.png`)
-      // .then((res) => res.blob())
-      // .then((blob) => {
-      //   {
-      //     const imageUrl = URL.createObjectURL(blob);
-      //     localStorage.setItem(subCategory.Name, imageUrl);
-      //     const imageElement = document.createElement("img");
-      //     imageElement.src = imageUrl;
-      //     const container = document.getElementById(
-      //       "image-container-" + subCategory.Name
-      //     );
-      //     container.appendChild(imageElement);
-      //   }
-      // });
-      // img = <img src={`/uploadImage/${subCategory.Name}.png`}/>;
-    // } catch (error) {
-    //   console.error(error);
-    // }
-  };
 
   return (
     <div className="wrapper">
@@ -147,10 +102,13 @@ const DashboardAccordion = ({ category, searchInput }) => {
                           ))}
                         </tbody>
                       </table>
-                      <div id={"image-container-" + subCategory.Name}>
-                      {/* <img id={"image-" + subCategory.Name  } src={`/uploadImage/${subCategory.Name}.png` } onError={() => document.getElementById("image-" + subCategory.Name).setAttribute("hidden", true)}/> */}
-                        {/* {renderimg(subCategory)} */}
-                      </div>
+                      {showImages[subCategory.Name] && (
+                        <img
+                          id={"image-" + subCategory.Name}
+                          src={`/uploadImage/${subCategory.Name}.png`}
+                          onError={() => document.getElementById("image-" + subCategory.Name).setAttribute("hidden", true)}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
