@@ -147,7 +147,7 @@ const UserManagement = () => {
                         type="email"
                         value={newEmail}
                         onChange={(e) => setNewEmail(e.target.value)}
-                        placeholder="Click on Email or Enter One"
+                        placeholder="Click on Email or Enter Email"
                     />
                     {successMessage && <p className='success-message'>{successMessage}</p>}
                     {error && <p className="error-message">{error}</p>}
