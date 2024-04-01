@@ -164,6 +164,11 @@
     font-family: "AvengerMedium";
     font-size: medium;
 }
+
+.action-item.fixed-width-button {
+    width: 150px; /* Adjust the width according to your design */
+}
+
 .navigation {
     border: none;
     border-radius: 5px;

@@ -135,7 +135,7 @@ const UserManagement = () => {
                     <div className="sidebarTitle">User List</div>
                     <ul>
                         {users.map((user) => (
-                            <li key={user.id} onClick={() => setNewEmail(user.email)}>{user.email}</li>
+                            <li key={user.id} onClick={() => setNewEmail(user.email)}>{user.email} {user.admin && <span style={{color: "blue"}}>(Admin)</span>}</li>
                         ))}
                     </ul>
                 </div>
@@ -153,11 +153,11 @@ const UserManagement = () => {
                     {error && <p className="error-message">{error}</p>}
                 </label>
                 <div className="action">
-                    <button className="action-item" onClick={handleAddEmail}>
+                    <button className="action-item fixed-width-button" onClick={handleAddEmail}>
                         <img src={AddUserIcon} alt="Add User" className="action-icon" />
                         Add Email
                     </button>
-                    <button className="action-item" onClick={handleDeleteEmail}>
+                    <button className="action-item fixed-width-button" onClick={handleDeleteEmail}>
                         <img src={DeleteUserIcon} alt="Delete User" className="action-icon" />
                         Delete Email
                     </button>
