@@ -13,6 +13,7 @@ const UserManagement = () => {
     const [editEmail, setEditEmail] = useState('');
     const [addError, setAddError] = useState('');
     const [showEditForm, setShowEditForm] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const { deleteLogin, addNewLogin, getAllLogins, successMessage, isLoading, error } = useUserMan();
 
@@ -22,7 +23,6 @@ const UserManagement = () => {
         }, delay);
     }
       
-
     useEffect(() => {
         const fetchLogins = async () => {
             try {
@@ -44,7 +44,7 @@ const UserManagement = () => {
             }
             try {
                 const password = 'abc123';
-                const admin = false; 
+                const admin = isAdmin; 
                 
                 await addNewLogin(newEmail, password, admin);
         
@@ -126,6 +126,10 @@ const UserManagement = () => {
         }
     };
 
+    const handleAdminChange = (e) => {
+        setIsAdmin(e.target.checked);
+    };
+
 
     return (
         <div className="userManagement">
@@ -152,6 +156,16 @@ const UserManagement = () => {
                     {successMessage && <p className='success-message'>{successMessage}</p>}
                     {error && <p className="error-message">{error}</p>}
                 </label>
+                <div className="admin-checkbox">
+                    
+                        <input
+                            type="checkbox"
+                            checked={isAdmin}
+                            onChange={handleAdminChange}
+                        />
+                        Admin
+                    
+                </div>
                 <div className="action">
                     <button className="action-item fixed-width-button" onClick={handleAddEmail}>
                         <img src={AddUserIcon} alt="Add User" className="action-icon" />
@@ -162,7 +176,7 @@ const UserManagement = () => {
                         Delete Email
                     </button>
                 </div>
-                <div className='navigation'>
+                <div className='navigation fixed-width-button'>
                     <button type="submit" onClick={() => window.location.assign('/')} >Back to Dashboard</button>
                 </div>
                 
