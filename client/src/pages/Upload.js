@@ -16,8 +16,6 @@ const Upload = () => {
     return <div>Loading...</div>;
   }
 
-  console.log(state);
-
   return (
     <div className="uploadcontainer">
       <div id="logo">
@@ -26,7 +24,7 @@ const Upload = () => {
       <h1>File Upload</h1>
         <div style={{ position: 'relative', position: 'absolute', top: 10, right: 30 }}>
           {/* Button positioned on the left side */}
-          <button style={{ width: '100px' }} onClick={() => window.location.assign('/password')}>Change Password</button>
+          {/* <button style={{ width: '100px' }} onClick={() => window.location.assign('/password')}>Change Password</button> */}
         </div>
       {email && (
         <div className="uploadformcontainer">

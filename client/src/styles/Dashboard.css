@@ -148,6 +148,9 @@ button[type=submit]:hover
     background-color: black;
 }
 
+.top-panel .button-purple {
+    background-color: rgb(112, 54, 112);
+}
  .top-panel .button-red {
     background-color: red;
 }
