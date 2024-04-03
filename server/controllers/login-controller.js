@@ -59,9 +59,8 @@ exports.addNewLogin = async (req, res) => {
         const { email, password, admin } = req.body;
     
         try {
-            const emailRegEx = '.+\@.+\..+';
+            const emailRegEx = '^[A-z0-9._+-]+\@[A-z0-9-_.]+\.[A-z0-9]+$';
             if (email.match(emailRegEx) == null) {
-                // Might need to send a validation link to ensure the email provided is valid
                 throw new Error("email must be an email address");
             }
 
