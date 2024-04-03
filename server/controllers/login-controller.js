@@ -64,27 +64,16 @@ exports.addNewLogin = async (req, res) => {
                 throw new Error("email must be an email address");
             }
 
-            // ----- Need to get this working, currently not functional the way we want it -----
-            // Registration passes through a temporary password generated from the client side
-            //const mailText = "Here is your temporary password for your IYC account: " + password;
-            //
-            // Fake transporter placeholder
-            // const tempPassTransporter = nodemailer.createTransport({
-            //     host: "smtp.ethereal.email",
-            //     port: 587,
-            //     secure: false,
-            //     auth: {
-            //         user: process.env.TRANSPORTER_EMAIL,
-            //         pass: process.env.TRANSPORTER_PASS
-            //     }
-            // });
-            // await tempPassTransporter.sendMail({
-            //     from: 'no-reply@impactyorkcounty.org',
-            //     to: email,
-            //     subject: "Temporary IYC password",
-            //     text: mailText,
-            //     html: '<b>' + mailText + '</b>'
-            // });
+            // ----- Currently not possible to get email verification the way we want it -----
+            // Instead, writes the contents of the mail send information into a json file.
+            const mailText = "Here is your temporary password for your IYC account: " + password;
+            let sendInfo = {
+                from: 'no-reply@impactyorkcounty.org',
+                to: email,
+                subject: 'Temporary IYC password',
+                text: mailtext,
+                html: (<b>{mailText}</b>)
+            }
             
             const user = await Login.signup(email, password, admin);
         
