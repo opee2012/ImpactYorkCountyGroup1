@@ -1,0 +1,18 @@
+{
+  "sent": [
+    {
+      "from": "no-reply@impactyorkcounty.org",
+      "to": "notanemail@fakeaddress.org",
+      "subject": "Temporary IYC password",
+      "text": "Here is your temporary password for your IYC account: abc123",
+      "html": "<p>Here is your temporary password for your IYC account: abc123</p>"
+    },
+    {
+      "from": "no-reply@impactyorkcounty.org",
+      "to": "anotherfakeemail@forgery.net",
+      "subject": "Temporary IYC password",
+      "text": "Here is your temporary password for your IYC account: abc123",
+      "html": "<p>Here is your temporary password for your IYC account: abc123</p>"
+    }
+  ]
+}
