@@ -1,4 +1,32 @@
-import React, { useState, useEffect } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Dashboard.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Dashboard.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
 import "../styles/Dashboard.css";
 import DashboardAccordion from "../components/dashboard-accordion";
 import { useDataHandle } from "../hooks/useData";
@@ -25,7 +53,7 @@ const Dashboard = () => {
 
   /**
   * Updates the search input state based on the user's input.
-  * @param {React.ChangeEvent<HTMLInputElement>} event - The input event triggered by the user's typing.
+  * @param {React.ChangeEvent&lt;HTMLInputElement>} event - The input event triggered by the user's typing.
   */
   const handleChange = (event) => {
     setSearchInput(event.target.value);
@@ -71,83 +99,83 @@ const Dashboard = () => {
   }, [error, tryRefresh]);
 
   return (
-    <div className="dashboard-container">
+    &lt;div className="dashboard-container">
       {/* Sidebar for navigation */}
-      <header className="sidebar">
+      &lt;header className="sidebar">
         {/* Logo section */}
-        <div id="Logo">
-          <img src="IYC-dashboard-icon.png" alt="IYC" />
-        </div>
+        &lt;div id="Logo">
+          &lt;img src="IYC-dashboard-icon.png" alt="IYC" />
+        &lt;/div>
         {/* Navigation menu */}
-        <h1>Menu</h1>
-        <ul>
+        &lt;h1>Menu&lt;/h1>
+        &lt;ul>
           {categories
             ? categories.map((item, index) => {
 
                 /**
-                * Renders an individual list item (`<li>`) for each category.
+                * Renders an individual list item (`&lt;li>`) for each category.
                 * - key={index}: Provides a unique key for each list item.
                 * - onClick: Updates the selected menu item when this item is clicked.
                 * - className: Conditionally adds the 'highlighted' class if this item is the selected menu item.
                 */
                 return (
-                  <li
+                  &lt;li
                     key={index}
                     onClick={() => handleMenuItemClick(index)}
                     {...selectedMenuItem === index ? { className: "highlighted" } : null}
                   >
                     {item.Category}
-                  </li>
+                  &lt;/li>
                 );
               })
             : null}
-        </ul>
-      </header>
+        &lt;/ul>
+      &lt;/header>
   
       {/* Top panel for user actions */}
-      <header className="top-panel">
+      &lt;header className="top-panel">
         {/* Button for admin users to manage accounts */}
-        {admin && (
-          <button
+        {admin &amp;&amp; (
+          &lt;button
             className="button button-center button-blue"
             onClick={() => window.location.assign("/user-management")}
           >
             Manage Accounts
-          </button>
+          &lt;/button>
         )}
         {/* Button for logged-in users to change password */}
-        {email && (
-          <button
+        {email &amp;&amp; (
+          &lt;button
             className="button button-center button-purple"
             onClick={() => window.location.assign("/password")}
           >
             Change Password
-          </button>
+          &lt;/button>
         )}
         {/* Button for logged-in users to upload data */}
-        {email && (
-          <button
+        {email &amp;&amp; (
+          &lt;button
             className="button button-center button-black"
             onClick={() => window.location.assign("/upload")}
           >
             Upload Data
-          </button>
+          &lt;/button>
         )}
         {/* Button for logged-in users to logout */}
-        {email && (
-          <button className="button button-center button-red" onClick={() => logout()}>
+        {email &amp;&amp; (
+          &lt;button className="button button-center button-red" onClick={() => logout()}>
             Logout
-          </button>
+          &lt;/button>
         )}
         {/* Button for unauthenticated users to login */}
-        {!email && (
-          <button className="button button-center button-blue" onClick={() => window.location.assign("/login")}>
+        {!email &amp;&amp; (
+          &lt;button className="button button-center button-blue" onClick={() => window.location.assign("/login")}>
             Login
-          </button>
+          &lt;/button>
         )}
         {/* Search bar */}
-        <div className="search-container">
-          <input
+        &lt;div className="search-container">
+          &lt;input
             className="search-textbox"
             type="text"
             style={{ paddingLeft: "10px" }}
@@ -155,27 +183,50 @@ const Dashboard = () => {
             onChange={handleChange}
             value={searchInput}
           />
-          <button type="submit" className="search-icon-submit">
-            <img src="search-icon.png" alt="search-icon" />
-          </button>
-        </div>
-      </header>
+          &lt;button type="submit" className="search-icon-submit">
+            &lt;img src="search-icon.png" alt="search-icon" />
+          &lt;/button>
+        &lt;/div>
+      &lt;/header>
   
       {/* Content section for displaying data */}
-      <div className="content-section">
+      &lt;div className="content-section">
         {/* Displays an error message if there's an error */}
         {error ? (
-          <p className="wrapper">{error}</p>
+          &lt;p className="wrapper">{error}&lt;/p>
         ) : isLoading ? (
           /* Displays a loading message while data is being fetched */
-          <p className="wrapper">loading...</p>
+          &lt;p className="wrapper">loading...&lt;/p>
         ) : categories ? (
           /* Displays data based on the selected category and search input */
-          <DashboardAccordion category={categories[selectedMenuItem]} searchInput={searchInput} />
+          &lt;DashboardAccordion category={categories[selectedMenuItem]} searchInput={searchInput} />
         ) : null}
-      </div>
-    </div>
+      &lt;/div>
+    &lt;/div>
   );
 };  
 
 export default Dashboard;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#UserManagement">UserManagement</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 03 2024 17:48:38 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
