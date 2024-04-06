@@ -57,100 +57,112 @@ const UploadForm = () => {
 
   const generateExcelFile = () => {
     const wb = XLSX.utils.book_new();
+    const rowIndex = {};
 
-// Initialize row index for each category
-const rowIndex = {};
+  // Iterate over each category
+  DBdata.forEach((item) => {
+      // Extract the category name
+      const categoryName = item.Category;
 
-// Iterate over each category
-DBdata.forEach((item) => {
-  // Extract the category name
-  const categoryName = item.Category;
+      // Create a worksheet for each category with only the category name as the sheet name
+      const ws = XLSX.utils.aoa_to_sheet([]);
 
-  // Create a worksheet for each category with only the category name as the sheet name
-  const ws = XLSX.utils.aoa_to_sheet([]);
+      // Add worksheet to the workbook with the category name as the sheet name
+      XLSX.utils.book_append_sheet(wb, ws, categoryName);
 
-  // Add worksheet to the workbook with the category name as the sheet name
-  XLSX.utils.book_append_sheet(wb, ws, categoryName);
+      // Initialize row index for this category
+      rowIndex[categoryName] = 2; // Start from row 1
 
-  // Initialize row index for this category
-  rowIndex[categoryName] = 2; // Start from row 1
+      if (Array.isArray(item.Data) && item.Data.length > 0) {
+        // Check if key exists in the data item
+        const keyExists = item.Data.some((dataItem) => !!dataItem.Key);
 
-  if (Array.isArray(item.Data) && item.Data.length > 0) {
-    // Check if key exists in the data item
-    const keyExists = item.Data.some((dataItem) => !!dataItem.Key);
-
-    // Adjust row index if key exists
-    if (keyExists) {
-      rowIndex[categoryName] = 2; // Start from row 2 for categories with a key
-    }
-
-    // Iterate over each data item in the category
-    item.Data.forEach((dataItem) => {
-      // Add key to Excel sheet at the appropriate row if it exists
-      if (dataItem.Key) {
-        XLSX.utils.sheet_add_aoa(ws, [[dataItem.Key]], {origin: `A${rowIndex[categoryName]}`});
-        
-        // Increment row index for the next key
-        rowIndex[categoryName]++;
+      // Adjust row index if key exists
+      if (keyExists) {
+        rowIndex[categoryName] = 2; // Start from row 2 for categories with a key
       }
 
-const yearsArray = [];
+      // Iterate over each data item in the category
+      item.Data.forEach((dataItem) => {
+        // Add key to Excel sheet at the appropriate row if it exists
+        if (dataItem.Key) {
+          XLSX.utils.sheet_add_aoa(ws, [[dataItem.Key]], {origin: `A${rowIndex[categoryName]}`});
+          
+          // Increment row index for the next key
+          rowIndex[categoryName]++;
+        }
 
-// Iterate over each subcategory in the data item
-dataItem.SubCategory.forEach((subCategoryItem) => {
-    //console.log(subCategoryItem); // Log subcategory name
+      const yearsArray = [];
 
-    // Add subcategory name to Excel sheet at the appropriate row
-    XLSX.utils.sheet_add_aoa(ws, [[subCategoryItem.Name]], { origin: `A${rowIndex[categoryName]}` });
+  // Iterate over each subcategory in the data item
+  dataItem.SubCategory.forEach((subCategoryItem) => {
+      // Add subcategory name to Excel sheet at the appropriate row
+      XLSX.utils.sheet_add_aoa(ws, [[subCategoryItem.Name]], { origin: `A${rowIndex[categoryName]}` });
 
-    // Initialize an array to hold the values of each data item
-    const valuesArray = [];
+      // Initialize an array to hold the values of each data item
+      const valuesArray = [];
 
-    // Iterate over each data item in the subcategory
-    subCategoryItem.Data.forEach((data) => {
-        // Add data value to the array
-        valuesArray.push(data.Value);
+      // Iterate over each data item in the subcategory
+      subCategoryItem.Data.forEach((data) => {
+          // Add data value to the array
+          valuesArray.push(data.Value);
 
-        // Add year to the years array if it's not already added
-        if (!yearsArray.includes(data.Year)) {
-            yearsArray.push(data.Year);
+          // Add year to the years array if it's not already added
+          if (!yearsArray.includes(data.Year)) {
+              yearsArray.push(data.Year);
+          }
+      });
+
+      // Add values array to Excel sheet at the appropriate row and column
+      XLSX.utils.sheet_add_aoa(ws, [valuesArray], { origin: `B${rowIndex[categoryName]}` });
+
+      // Increment row index for the next subcategory
+      rowIndex[categoryName]++;
+  });
+
+  // Add years array to Excel sheet at the first row starting from column 2
+  XLSX.utils.sheet_add_aoa(ws, [yearsArray], { origin: `B1` });
+      });
+    } else {
+      // If there's no data array, still increment rowIndex to leave room for header
+      rowIndex[categoryName]++;
+    }
+  // Auto-size columns after adding data
+  for (let i = 0; i < ws['!ref'].split(':')[1].charCodeAt(0) - 65; i++) {
+    let maxContentLength = 0;
+    XLSX.utils.sheet_to_json(ws, { header: 1 }).forEach((row) => {
+        const cellValue = row[i];
+        if (cellValue && cellValue.toString().length > maxContentLength) {
+            maxContentLength = cellValue.toString().length;
         }
     });
 
-    // Add values array to Excel sheet at the appropriate row and column
-    XLSX.utils.sheet_add_aoa(ws, [valuesArray], { origin: `B${rowIndex[categoryName]}` });
+    // Add extra padding
+    const columnWidth = maxContentLength + 2;
 
-    // Increment row index for the next subcategory
-    rowIndex[categoryName]++;
-});
-
-// Add years array to Excel sheet at the first row starting from column 2
-XLSX.utils.sheet_add_aoa(ws, [yearsArray], { origin: `B1` });
-    });
-  } else {
-    // If there's no data array, still increment rowIndex to leave room for header
-    rowIndex[categoryName]++;
+    // Set the column width
+    ws['!cols'] = ws['!cols'] || [];
+    ws['!cols'][i] = { wch: columnWidth };
   }
-});
-    // Write workbook to a file
-    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+  });
+      // Write workbook to a file
+      const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
 
-    const wbBlob = new Blob([wbout], { type: 'application/octet-stream' });
+      const wbBlob = new Blob([wbout], { type: 'application/octet-stream' });
 
-    // Create a temporary URL for the blob
-    const url = window.URL.createObjectURL(wbBlob);
+      const url = window.URL.createObjectURL(wbBlob);
 
-    // Create an anchor element to trigger download
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', 'IYC Dashboard Data.xlsx');
+      // Create an anchor element to trigger download
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'IYC Dashboard Data.xlsx');
 
-    // Trigger download
-    link.click();
+      // Trigger download
+      link.click();
 
-    // Clean up
-    window.URL.revokeObjectURL(url);
-};
+      // Clean up
+      window.URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="uploadformnonflex">
@@ -184,7 +196,7 @@ XLSX.utils.sheet_add_aoa(ws, [yearsArray], { origin: `B1` });
             Browse Files
           </button> <br />
           {/*  remember to take the type=button out after testing*/}
-          <button type= "button" onClick={generateExcelFile}>Download Template</button>
+          <button onClick={generateExcelFile}>Download Template</button>
         </div>
         <p id="statusbar">
           {selectedFile && !error ? <img src={xcelIcon} alt="file icon" /> : null}
