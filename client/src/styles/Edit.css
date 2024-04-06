@@ -93,7 +93,7 @@ th, td {
   padding: 5px 10px;
   text-align: center;
   font-family: "AvenirBlack";
-  font-size: 18px;
+  font-size: 1.8vh;
 }
 
 tr:nth-child(even) {

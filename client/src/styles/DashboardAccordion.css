@@ -5,7 +5,7 @@
     width: 100%;
     height: 100%;
     background-color: white;
-    overflow: auto;
+    
 }
 
 .wrapper-inner {
@@ -19,6 +19,7 @@
 
 .accordion {
     background-color: white;
+    
 }
 
 .dashboard-area {
@@ -39,7 +40,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 40px;
+    height: 5vh;
     cursor: pointer;
     font-family: "AvenirBlack";
     font-size: 1.8vh;
@@ -76,10 +77,11 @@
     flex: 1;
     flex-direction: column;
     align-items: center;
+    font-size: 1.8vh;
 }
 
 .content-image {
-    height: 300px;
+    height: 30vh;
     margin: 10px;
 }
 
@@ -106,7 +108,7 @@ h3, span{
     border-radius: 5px;
     padding: 1px;
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 1.8vh;
     background-color: #79A3DC;
     font-family: "avenirMedium";
 }
@@ -137,11 +139,11 @@ h3, span{
     margin-top: 10px;
     margin-bottom: 20px;
     border-spacing: 0 10px;
-    width: 400px;
+    width: 25vw;
 }
 
 .accordion .item .content th {
     background-color: white;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.8vh;
 }
