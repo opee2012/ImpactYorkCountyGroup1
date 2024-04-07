@@ -7,6 +7,7 @@ import { useUserMan } from '../hooks/useUserMan';
 /**
  * UserManagement component for managing user emails.
  * Provides functionality to add, delete, and display user emails.
+ * @returns {JSX.Element} The rendered userManagement component.
  */
 const UserManagement = () => {
     const [users, setUsers] = useState([]); // Array of user objects.

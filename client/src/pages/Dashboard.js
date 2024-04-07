@@ -13,6 +13,7 @@ import { useAuthContext } from "../context/AuthContext";
 * For users, the dashboard allows viewing data, searching, and filtering through the data.
 * For staff, the dashboard provides the ability to log in and keep the data updated or make changes as needed.
 * The dashboard also handles automatic data refresh in case of errors and provides a logout functionality.
+* @returns {JSX.Element} The rendered Dashboard component.
 */
 
 const Dashboard = () => {
