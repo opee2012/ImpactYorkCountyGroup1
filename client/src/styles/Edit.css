@@ -16,12 +16,11 @@
 .editcontainer {
   display: flex;
   flex-direction: column;
-  width: 1200px;
-  min-width: 1000px;
+  width: 50%;
   margin: 30px;
   background-color: white;
   overflow: hidden; 
-  position: relative;
+  
   border: 2px solid #1226AA;
   border-radius: 20px;
   padding: 20px;
@@ -39,6 +38,7 @@
   justify-content: center;
   width: 100%;
   font-family: "FatFrank";
+  font-size: 2.6vh;
 }
 
 .img-edit {
@@ -50,8 +50,8 @@
   color: white;
   border: none;
   border-radius: 5px;
-  height: 40px;
-  width: 200px;
+  height: 4vh;
+  width: 15vw;
   margin: 5px auto;
   box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
   font: normal normal normal 18px/1.4em "AvenirMedium";
@@ -63,7 +63,7 @@
 }
 
 .editcontainer .delete-button {
-  width: 80px;
+  width: 8vw;
   align-items: center;
 }
 
@@ -84,7 +84,7 @@
 
 .editcontainer .contentcontainer table {
   border-collapse: collapse;
-  width: 300px;
+  width: 40%;
   margin-bottom: 20px;
 }
 
@@ -105,15 +105,18 @@ tr:nth-child(odd) {
 }
 
 .yeardata2 {
-  width: 50px;
-  font-size: large;
+  width: 5vw;
+  font-size: 1.8vh;
   padding: 8px;
   font-family: "AvenirMedium";
 }
 
 .valuedata2 {
-  width: 50px;
+  width: 5vw;
   padding: 8px;
-  font-size: large;
+  font-size: 1.8vh;
   font-family: "AvenirMedium";
+}
+.dropzone {
+  width: 40%;
 }
