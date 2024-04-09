@@ -111,46 +111,50 @@ exports.addNewLogin = async (req, res) => {
 // update one login
 exports.updateLogin = async (req, res) => {
     const { targetEmail } = req.params;
-    console.log(`Updating ${targetEmail}'s login`);
     const updatedLogin = new Login(req.body);
+    const {email, password, admin} = req.body;
 
     // validate input
     const validationError = await updatedLogin.validate();
 
     if (validationError) {
         const errorMsg = Validation.getValidationErrorMessage(validationError);
-        throw new Error(errorMsg);
+        res.status(400).json({ error: errorMsg });
     } else {
-        const {email, password, admin} = req.body;
+        console.log(req.body);
+
+        if (password) {
+            if (password.length < 8 || password.length > 20) {
+                return res.status(400).json({ error: 'Password must be between 8 and 20 characters long' });
+            }
+        }
+    
+        // Prepare update fields (exclude password if not provided)
+        const updateFields = {};
+        if (email != undefined) updateFields.email = email;
+        if (admin !== undefined) updateFields.admin = admin;
+        if (password) { // Only include password if it's valid
+            updateFields.password = await Login.hash(password);
+        }
+
+        console.log(`Updating ${targetEmail}'s login`);
 
         try {
-            // Update fields
-        const updateFields = {};
-        if (req.body.email) updateFields.email = req.body.email;
-        if (req.body.password) updateFields.password = await Login.hash(req.body.password);
-        if (req.body.admin !== undefined) updateFields.admin = req.body.admin;
+            // Update the user
+            const updatedUser = await Login.findOneAndUpdate(
+                { email: targetEmail },
+                updateFields,
+                { new: true } // Return the updated document
+            );
+            if (!updatedUser) {
+                return res.status(404).json({ error: 'User not found' });
+            }
 
-        // Update the user
-        const updatedUser = await Login.findOneAndUpdate(
-            { email: targetEmail },
-            updateFields,
-            { new: true } // Return the updated document
-        );
-        if (!updatedUser) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-            // create a token
-            //const token = createToken(user._id);
-         /*   // hash the new password
-            req.body.password = await Login.hash(password);
-
-            // only update everything that the req's body has within the target user
-            await Login.findOneAndUpdate({email: targetEmail}, req.body);*/
-            res.status(200).json({email: updatedUser.email, token});
+            res.status(201).json({email: updatedUser.email, admin});
         }
         catch(error) {
-            res.status(400).json({error: error.message});
+            console.error('Error updating login:', error);
+            res.status(500).json({error: error.message});
         }
     };
 };
