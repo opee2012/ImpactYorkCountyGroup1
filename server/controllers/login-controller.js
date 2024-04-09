@@ -148,7 +148,6 @@ exports.updateLogin = async (req, res) => {
             const token = createToken(user._id);
 
             // only update everything that the req's body has within the target user
-            await Login.findOneAndUpdate({email: targetEmail}, req.body);
             res.status(200).json({email: updatedUser.email, token, admin});
         }
         catch(error) {
