@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const fs = require("fs");
 
 const Validation = require('../utils/validation');
 const loginSchema = require('../models/login-schema');
@@ -59,34 +60,42 @@ exports.addNewLogin = async (req, res) => {
         const { email, password, admin } = req.body;
     
         try {
-            const emailRegEx = '.+\@.+\..+';
+            const emailRegEx = '^[A-z0-9._+-]+\@[A-z0-9-_.]+\.[A-z0-9]+$';
             if (email.match(emailRegEx) == null) {
-                // Might need to send a validation link to ensure the email provided is valid
                 throw new Error("email must be an email address");
             }
 
-            // ----- Need to get this working, currently not functional the way we want it -----
-            // Registration passes through a temporary password generated from the client side
-            //const mailText = "Here is your temporary password for your IYC account: " + password;
-            //
-            // Fake transporter placeholder
-            // const tempPassTransporter = nodemailer.createTransport({
-            //     host: "smtp.ethereal.email",
-            //     port: 587,
-            //     secure: false,
-            //     auth: {
-            //         user: process.env.TRANSPORTER_EMAIL,
-            //         pass: process.env.TRANSPORTER_PASS
-            //     }
-            // });
-            // await tempPassTransporter.sendMail({
-            //     from: 'no-reply@impactyorkcounty.org',
-            //     to: email,
-            //     subject: "Temporary IYC password",
-            //     text: mailText,
-            //     html: '<b>' + mailText + '</b>'
-            // });
+            // ----- Currently not possible to get email verification the way we want it (need an SMTP server) -----
+            // Instead, writes the contents of the mail sending information into a json file.
+            const mailText = "Here is your temporary password for your IYC account: " + password;
+            let sendInfo = {
+                from: 'no-reply@impactyorkcounty.org',
+                to: email,
+                subject: 'Temporary IYC password',
+                text: mailText,
+                html: '<p>' + mailText + '</p>'
+            };
+
+            // Read
+            let path = "./utils/email_temp/sentEmails.json";
+            fs.readFile(path, (err, data) => {
+                if (err) {
+                    console.log("Read from sentEmails.json failed. Reason: " + err.message);
+                    return;
+                }
+                let sentEmails = JSON.parse(data);
+                sentEmails["sent"].push(sendInfo);
+
+                // Write
+                fs.writeFile(path, JSON.stringify(sentEmails, null, 2), (err) => {
+                    if (err) {
+                        console.log("Write into sentEmails.json failed. Reason: " +  + err.message);
+                        return;
+                    }
+                });
+            });
             
+            // Sign up user
             const user = await Login.signup(email, password, admin);
         
             // create a token
@@ -102,46 +111,47 @@ exports.addNewLogin = async (req, res) => {
 // update one login
 exports.updateLogin = async (req, res) => {
     const { targetEmail } = req.params;
-    console.log(`Updating ${targetEmail}'s login`);
     const updatedLogin = new Login(req.body);
+    const {email, password, admin} = req.body;
 
     // validate input
     const validationError = await updatedLogin.validate();
 
     if (validationError) {
         const errorMsg = Validation.getValidationErrorMessage(validationError);
-        throw new Error(errorMsg);
+        res.status(400).json({ error: errorMsg });
     } else {
-        const {email, password, admin} = req.body;
+        if (password) {
+            if (password.length < 8 || password.length > 20) {
+                return res.status(400).json({ error: 'Password must be between 8 and 20 characters long' });
+            }
+        }
+    
+        // Prepare update fields (exclude password if not provided)
+        const updateFields = {};
+        if (email != undefined) updateFields.email = email;
+        if (admin !== undefined) updateFields.admin = admin;
+        if (password) { // Only include password if it's valid
+            updateFields.password = await Login.hash(password);
+        }
+
+        console.log(`Updating ${targetEmail}'s login`);
 
         try {
-            // Update fields
-        const updateFields = {};
-        if (req.body.email) updateFields.email = req.body.email;
-        if (req.body.password) updateFields.password = await Login.hash(req.body.password);
-        if (req.body.admin !== undefined) updateFields.admin = req.body.admin;
+            // Update the user
+            const updatedUser = await Login.findOneAndUpdate(
+                { email: targetEmail },
+                updateFields,
+                { new: true } // Return the updated document
+            );
+            if (!updatedUser) {
+                return res.status(404).json({ error: 'User not found' });
+            }
 
-        // Update the user
-        const updatedUser = await Login.findOneAndUpdate(
-            { email: targetEmail },
-            updateFields,
-            { new: true } // Return the updated document
-        );
-        if (!updatedUser) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-            // create a token
-            //const token = createToken(user._id);
-         /*   // hash the new password
-            req.body.password = await Login.hash(password);
-
-            // only update everything that the req's body has within the target user
-            await Login.findOneAndUpdate({email: targetEmail}, req.body);*/
-            res.status(200).json({email: updatedUser.email, token});
+            res.status(201).json({email: updatedUser.email, admin});
         }
         catch(error) {
-            res.status(400).json({error: error.message});
+            res.status(500).json({error: error.message});
         }
     };
 };
