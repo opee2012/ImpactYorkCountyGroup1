@@ -124,7 +124,7 @@ exports.updateLogin = async (req, res) => {
         const {email, password, admin} = req.body;
 
         try {
-            // Update fields
+        // Update fields
         const updateFields = {};
         if (req.body.email) updateFields.email = req.body.email;
         if (req.body.password) updateFields.password = await Login.hash(req.body.password);
@@ -139,15 +139,17 @@ exports.updateLogin = async (req, res) => {
         if (!updatedUser) {
             return res.status(404).json({ error: 'User not found' });
         }
-
-            // create a token
-            //const token = createToken(user._id);
-         /*   // hash the new password
+            //hash the new password
             req.body.password = await Login.hash(password);
 
+            // Re-sign in the user
+            const user = await Login.login(email, password);
+            // create a token
+            const token = createToken(user._id);
+
             // only update everything that the req's body has within the target user
-            await Login.findOneAndUpdate({email: targetEmail}, req.body);*/
-            res.status(200).json({email: updatedUser.email, token});
+            await Login.findOneAndUpdate({email: targetEmail}, req.body);
+            res.status(200).json({email: updatedUser.email, token, admin});
         }
         catch(error) {
             res.status(400).json({error: error.message});
