@@ -9,7 +9,13 @@ const loginSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, 'Missing password']
+        required: [true, 'Missing password'],
+        validate: {
+            validator: (value) => {
+                return value.length >= 8 && value.length <= 24;
+            },
+            message: 'Your password should be between 8 and 24 characters long.'
+        }
     },
     admin: {
         type: Boolean,
