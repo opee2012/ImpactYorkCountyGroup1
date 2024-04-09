@@ -170,7 +170,7 @@ button[type=submit]:hover
 }
 
 .search-container {
-    width: 10vw;
+    width: 15vw;
     height: 4vh;
     display: flex;
 }
