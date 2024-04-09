@@ -55,6 +55,11 @@ const ChangePasswordForm = () => {
       return;
     }
 
+    if (newPassword.length < 8 || newPassword.length > 20) {
+      setError("Passwords must be between 8 and 20 characters long");
+      return;
+    }
+
     // Call the updatePassword function from the hook
     const token = await updateLogin(emailWithoutQuotes, newPassword, admin);
     if (token) {
@@ -77,13 +82,13 @@ const ChangePasswordForm = () => {
     <div className="passwordcontainer">
       <div id="logo">
         <img
-          className="img-edit"
+          className="img-password"
           src="/IYC.png"
           alt="IYC logo"
-          style={{ width: "265px", height: "auto" }}
+          style={{ }}
         />
       </div>
-      <h1>Change Password Page</h1>
+      <h1>Change Password</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="currentPassword" className="label-text">
@@ -126,7 +131,7 @@ const ChangePasswordForm = () => {
         </div>
         {errorClient && <div style={{ color: 'red' }}>{errorClient}</div>}
         <button type="submit">Change Password</button> <br />
-        <button type="submit" onClick={() => window.location.assign('/upload')} >Cancel</button>
+        <button type="submit" onClick={() => window.location.assign('/password')} >Cancel</button>
       </form>
     </div>
   );
