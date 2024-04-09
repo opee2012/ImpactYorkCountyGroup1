@@ -124,21 +124,21 @@ exports.updateLogin = async (req, res) => {
         const {email, password, admin} = req.body;
 
         try {
-        // Update fields
-        const updateFields = {};
-        if (req.body.email) updateFields.email = req.body.email;
-        if (req.body.password) updateFields.password = await Login.hash(req.body.password);
-        if (req.body.admin !== undefined) updateFields.admin = req.body.admin;
+            // Update fields
+            const updateFields = {};
+            if (req.body.email) updateFields.email = req.body.email;
+            if (req.body.password) updateFields.password = await Login.hash(req.body.password);
+            if (req.body.admin !== undefined) updateFields.admin = req.body.admin;
 
-        // Update the user
-        const updatedUser = await Login.findOneAndUpdate(
-            { email: targetEmail },
-            updateFields,
-            { new: true } // Return the updated document
-        );
-        if (!updatedUser) {
-            return res.status(404).json({ error: 'Could not update user' });
-        }
+            // Update the user
+            const updatedUser = await Login.findOneAndUpdate(
+                { email: targetEmail },
+                updateFields,
+                { new: true } // Return the updated document
+            );
+            if (!updatedUser) {
+                return res.status(404).json({ error: 'Could not update user' });
+            }
             //hash the new password
             req.body.password = await Login.hash(password);
 
