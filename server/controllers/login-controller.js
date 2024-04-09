@@ -121,7 +121,6 @@ exports.updateLogin = async (req, res) => {
         const errorMsg = Validation.getValidationErrorMessage(validationError);
         res.status(400).json({ error: errorMsg });
     } else {
-
         if (password) {
             if (password.length < 8 || password.length > 20) {
                 return res.status(400).json({ error: 'Password must be between 8 and 20 characters long' });
