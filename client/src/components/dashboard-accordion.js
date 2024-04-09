@@ -60,7 +60,7 @@ const  DashboardAccordion = ({ category, searchInput }) => {
                                 <div className='edit-drop'>
                                     <div className='edit-button'>
                                         {email && 
-                                        (<Link to={`/edit/${subCategory.Name}`} state={{ subCategoryData: subCategory.Data, categoryName: categoryName, categoryData: data}}> 
+                                        (<Link to={`/edit/${encodeURIComponent(subCategory.Name)}`} state={{ subCategoryData: subCategory.Data, categoryName: categoryName, categoryData: data}}> 
                                             <button> 
                                             Edit</button>
                                         </Link>)}
