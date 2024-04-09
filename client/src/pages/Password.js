@@ -77,13 +77,13 @@ const ChangePasswordForm = () => {
     <div className="passwordcontainer">
       <div id="logo">
         <img
-          className="img-edit"
+          className="img-password"
           src="/IYC.png"
           alt="IYC logo"
-          style={{ width: "265px", height: "auto" }}
+          style={{ }}
         />
       </div>
-      <h1>Change Password Page</h1>
+      <h1>Change Password</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="currentPassword" className="label-text">
