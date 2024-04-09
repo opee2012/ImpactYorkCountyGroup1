@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const fs = require("fs");
 
 const Validation = require('../utils/validation');
 const loginSchema = require('../models/login-schema');
@@ -59,34 +60,42 @@ exports.addNewLogin = async (req, res) => {
         const { email, password, admin } = req.body;
     
         try {
-            const emailRegEx = '.+\@.+\..+';
+            const emailRegEx = '^[A-z0-9._+-]+\@[A-z0-9-_.]+\.[A-z0-9]+$';
             if (email.match(emailRegEx) == null) {
-                // Might need to send a validation link to ensure the email provided is valid
                 throw new Error("email must be an email address");
             }
 
-            // ----- Need to get this working, currently not functional the way we want it -----
-            // Registration passes through a temporary password generated from the client side
-            //const mailText = "Here is your temporary password for your IYC account: " + password;
-            //
-            // Fake transporter placeholder
-            // const tempPassTransporter = nodemailer.createTransport({
-            //     host: "smtp.ethereal.email",
-            //     port: 587,
-            //     secure: false,
-            //     auth: {
-            //         user: process.env.TRANSPORTER_EMAIL,
-            //         pass: process.env.TRANSPORTER_PASS
-            //     }
-            // });
-            // await tempPassTransporter.sendMail({
-            //     from: 'no-reply@impactyorkcounty.org',
-            //     to: email,
-            //     subject: "Temporary IYC password",
-            //     text: mailText,
-            //     html: '<b>' + mailText + '</b>'
-            // });
+            // ----- Currently not possible to get email verification the way we want it (need an SMTP server) -----
+            // Instead, writes the contents of the mail sending information into a json file.
+            const mailText = "Here is your temporary password for your IYC account: " + password;
+            let sendInfo = {
+                from: 'no-reply@impactyorkcounty.org',
+                to: email,
+                subject: 'Temporary IYC password',
+                text: mailText,
+                html: '<p>' + mailText + '</p>'
+            };
+
+            // Read
+            let path = "./utils/email_temp/sentEmails.json";
+            fs.readFile(path, (err, data) => {
+                if (err) {
+                    console.log("Read from sentEmails.json failed. Reason: " + err.message);
+                    return;
+                }
+                let sentEmails = JSON.parse(data);
+                sentEmails["sent"].push(sendInfo);
+
+                // Write
+                fs.writeFile(path, JSON.stringify(sentEmails, null, 2), (err) => {
+                    if (err) {
+                        console.log("Write into sentEmails.json failed. Reason: " +  + err.message);
+                        return;
+                    }
+                });
+            });
             
+            // Sign up user
             const user = await Login.signup(email, password, admin);
         
             // create a token
