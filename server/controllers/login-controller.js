@@ -121,7 +121,6 @@ exports.updateLogin = async (req, res) => {
         const errorMsg = Validation.getValidationErrorMessage(validationError);
         res.status(400).json({ error: errorMsg });
     } else {
-        console.log(req.body);
 
         if (password) {
             if (password.length < 8 || password.length > 20) {
@@ -153,7 +152,6 @@ exports.updateLogin = async (req, res) => {
             res.status(201).json({email: updatedUser.email, admin});
         }
         catch(error) {
-            console.error('Error updating login:', error);
             res.status(500).json({error: error.message});
         }
     };
