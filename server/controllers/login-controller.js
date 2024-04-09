@@ -137,7 +137,7 @@ exports.updateLogin = async (req, res) => {
             { new: true } // Return the updated document
         );
         if (!updatedUser) {
-            return res.status(404).json({ error: 'User not found' });
+            return res.status(404).json({ error: 'Could not update user' });
         }
             //hash the new password
             req.body.password = await Login.hash(password);
