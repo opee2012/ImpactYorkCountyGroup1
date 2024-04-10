@@ -38,14 +38,12 @@ const UserManagement = () => {
     function generateRandomString(length) {
         const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?';
         let password = '';
-    
-        // Ensure the password length is at least 8 characters
         length = Math.max(length, 8);
     
-        // Add at least one special character
+        // special character
         password += '!@#$%&*?'.charAt(Math.floor(Math.random() * 8));
     
-        // Add at least one number
+        //number
         password += '0123456789'.charAt(Math.floor(Math.random() * 10));
     
         // Generate the rest of the characters
@@ -56,35 +54,40 @@ const UserManagement = () => {
         // Shuffle the string
         password = password.split('').sort(() => Math.random() - 0.5).join('');
     
+        // Check if the generated password meets the regex requirements
+        const regex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-#$%&!@_+=?])(?=.*[a-zA-Z]).{8,20}$/;
+        if (!regex.test(password)) {
+            return generateRandomString(length);
+        }
+    
         return password;
     }
     
-    // Generate a random string with at least 8 characters
     const randomTempPass = generateRandomString(8);
    
-           const handleAddEmail = async () => {
-            if (newEmail.trim() === '') {
-                setAddError('Please add a email');
-                return;
-            }
-            try {
-                const password = randomTempPass;
-                const admin = isAdmin; 
-                console.log(randomTempPass);
+    const handleAddEmail = async () => {
+        if (newEmail.trim() === '') {
+            setAddError('Please add a email');
+            return;
+        }
+        try {
+            const password = randomTempPass;
+            const admin = isAdmin; 
+            console.log(randomTempPass);
                 
-                await addNewLogin(newEmail, password, admin);
+            await addNewLogin(newEmail, password, admin);
         
-                // Fetch logins again to update the user list
-                const logins = await getAllLogins();
-                setUsers(logins);
-                setNewEmail('');
-                setAddError('');
-                //reloadPageAfterDelay(1000); 
-            } catch (error) {
-                console.error('Error adding login:', error);
-                setAddError('Failed to add login');
-            }
-        };
+            // Fetch logins again to update the user list
+            const logins = await getAllLogins();
+            setUsers(logins);
+            setNewEmail('');
+            setAddError('');
+            //reloadPageAfterDelay(1000); 
+        } catch (error) {
+            console.error('Error adding login:', error);
+            setAddError('Failed to add login');
+        }
+    };
 
     // handle delete email
     const handleDeleteEmail = async () => {
