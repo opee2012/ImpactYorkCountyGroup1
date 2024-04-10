@@ -54,7 +54,7 @@
     background-color: white;
     max-height: 0px;
     overflow: hidden;
-    transition: all 0.5s cubic-bezier(0,1,0,1);
+    transition: max-height 0.3s cubic-bezier(0,1,0,1);
     font-family: "AvenirMedium";
     display: flex;
     align-items: center;
@@ -63,8 +63,8 @@
 }
 
 .content.show {
-    max-height: none;
-    transition: all 0.5s cubic-bezier(1,0,1,0);
+    max-height: 2000px;
+    transition: max-height 0.3s cubic-bezier(1,0,1,0);
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
