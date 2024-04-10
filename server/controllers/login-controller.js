@@ -1,3 +1,8 @@
+/**
+ * @module Controllers/LoginController
+ * Controller for handling user authentication and login operations.
+ */
+
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
@@ -5,13 +10,22 @@ const Validation = require('../utils/validation');
 const loginSchema = require('../models/login-schema');
 const Login = loginSchema.Login;
 
+/**
+ * Creates a JWT token for a user.
+ * @param {string} _id - The user's ID.
+ * @returns {string} A JWT token.
+ */
 const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
     });
 }
 
-// get all logins
+/**
+ * Retrieves all logins stored in the database.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
 exports.getAllLogins = async (req, res) => {
     console.log(`Getting all logins`);
     const logins = await Login.find({}).sort({ email: 1 });
@@ -19,7 +33,11 @@ exports.getAllLogins = async (req, res) => {
     res.status(200).json(logins);
 };
 
-// get one login
+/**
+ * Retrieve a specific user's login information from the database.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
 exports.getUserLogin = async (req, res) => {
     const { email, admin } = req.params;
     console.log(`Getting ${email}'s login`);
@@ -27,7 +45,11 @@ exports.getUserLogin = async (req, res) => {
     res.status(200).json(await Login.findOne({ email: email, admin: admin }));
 };
 
-// login a user
+/**
+ * Authenticates a user and returns a JWT token if successful.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
 exports.loginUser = async (req, res) => {
     const { email, password} = req.body;
 
@@ -37,14 +59,17 @@ exports.loginUser = async (req, res) => {
         // create token
         const token = createToken(user._id);
 
-
         res.status(200).json({ email: user.email, token, admin: user.admin});
     } catch (err) {
         res.status(400).json({ message: err.message });
     };
 };
 
-// create one login
+/**
+ * Creates a new login entry in the database.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
 exports.addNewLogin = async (req, res) => {
     console.log(`Creating new login`);
     const newLogin = new Login(req.body);
@@ -64,28 +89,6 @@ exports.addNewLogin = async (req, res) => {
                 // Might need to send a validation link to ensure the email provided is valid
                 throw new Error("email must be an email address");
             }
-
-            // ----- Need to get this working, currently not functional the way we want it -----
-            // Registration passes through a temporary password generated from the client side
-            //const mailText = "Here is your temporary password for your IYC account: " + password;
-            //
-            // Fake transporter placeholder
-            // const tempPassTransporter = nodemailer.createTransport({
-            //     host: "smtp.ethereal.email",
-            //     port: 587,
-            //     secure: false,
-            //     auth: {
-            //         user: process.env.TRANSPORTER_EMAIL,
-            //         pass: process.env.TRANSPORTER_PASS
-            //     }
-            // });
-            // await tempPassTransporter.sendMail({
-            //     from: 'no-reply@impactyorkcounty.org',
-            //     to: email,
-            //     subject: "Temporary IYC password",
-            //     text: mailText,
-            //     html: '<b>' + mailText + '</b>'
-            // });
             
             const user = await Login.signup(email, password, admin);
         
@@ -99,7 +102,11 @@ exports.addNewLogin = async (req, res) => {
     };
 };
 
-// update one login
+/**
+ * Updates an existing login entry in the database.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
 exports.updateLogin = async (req, res) => {
     const { targetEmail } = req.params;
     console.log(`Updating ${targetEmail}'s login`);
@@ -116,28 +123,23 @@ exports.updateLogin = async (req, res) => {
 
         try {
             // Update fields
-        const updateFields = {};
-        if (req.body.email) updateFields.email = req.body.email;
-        if (req.body.password) updateFields.password = await Login.hash(req.body.password);
-        if (req.body.admin !== undefined) updateFields.admin = req.body.admin;
+            const updateFields = {};
+            if (req.body.email) updateFields.email = req.body.email;
+            if (req.body.password) updateFields.password = await Login.hash(req.body.password);
+            if (req.body.admin !== undefined) updateFields.admin = req.body.admin;
 
-        // Update the user
-        const updatedUser = await Login.findOneAndUpdate(
-            { email: targetEmail },
-            updateFields,
-            { new: true } // Return the updated document
-        );
-        if (!updatedUser) {
-            return res.status(404).json({ error: 'User not found' });
-        }
+            // Update the user
+            const updatedUser = await Login.findOneAndUpdate(
+                { email: targetEmail },
+                updateFields,
+                { new: true } // Return the updated document
+            );
+            if (!updatedUser) {
+                return res.status(404).json({ error: 'User not found' });
+            }
 
             // create a token
-            //const token = createToken(user._id);
-         /*   // hash the new password
-            req.body.password = await Login.hash(password);
-
-            // only update everything that the req's body has within the target user
-            await Login.findOneAndUpdate({email: targetEmail}, req.body);*/
+            const token = createToken(updatedUser._id);
             res.status(200).json({email: updatedUser.email, token});
         }
         catch(error) {
@@ -146,7 +148,11 @@ exports.updateLogin = async (req, res) => {
     };
 };
 
-// delete one login
+/**
+ * Deletes a login entry from the database.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
 exports.deleteLogin = async (req, res) => {
     const { email } = req.body;
     console.log(`Deleting ${email}'s login`);

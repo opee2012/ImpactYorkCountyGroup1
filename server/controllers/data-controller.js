@@ -1,5 +1,7 @@
-// Controller for the upload page
-
+/**
+ * @module Controllers/UploadController
+ * Controller for the upload page.
+ */
 const { ExcelToJSON } = require("../utils/ExcelToJson");
 const Validation = require('../utils/validation');
 const dashboardSchema = require('../models/dashboard-schema');
