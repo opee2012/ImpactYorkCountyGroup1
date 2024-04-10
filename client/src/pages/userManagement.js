@@ -35,6 +35,34 @@ const UserManagement = () => {
         fetchLogins();
     }, []);
 
+    function generateRandomString(length) {
+        const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?';
+        let password = '';
+    
+        // Ensure the password length is at least 8 characters
+        length = Math.max(length, 8);
+    
+        // Add at least one special character
+        password += '!@#$%&*?'.charAt(Math.floor(Math.random() * 8));
+    
+        // Add at least one number
+        password += '0123456789'.charAt(Math.floor(Math.random() * 10));
+    
+        // Generate the rest of the characters
+        for (let i = 0; i < length - 2; i++) {
+            password += charset.charAt(Math.floor(Math.random() * charset.length));
+        }
+    
+        // Shuffle the string
+        password = password.split('').sort(() => Math.random() - 0.5).join('');
+    
+        return password;
+    }
+    
+    // Generate a random string with at least 8 characters
+    const randomTempPass = generateRandomString(8);
+    
+    console.log(randomTempPass);
 
    
            const handleAddEmail = async () => {
@@ -43,8 +71,9 @@ const UserManagement = () => {
                 return;
             }
             try {
-                const password = 'abc123';
+                const password = randomTempPass;
                 const admin = isAdmin; 
+                console.log(randomTempPass);
                 
                 await addNewLogin(newEmail, password, admin);
         
@@ -53,7 +82,7 @@ const UserManagement = () => {
                 setUsers(logins);
                 setNewEmail('');
                 setAddError('');
-                reloadPageAfterDelay(1000); 
+                //reloadPageAfterDelay(1000); 
             } catch (error) {
                 console.error('Error adding login:', error);
                 setAddError('Failed to add login');
@@ -107,7 +136,6 @@ const UserManagement = () => {
         }
         try {
             await deleteLogin(newEmail);
-            //const updatedUsers = users.filter(user => user.email !== newEmail);
             setNewEmail('');
             setAddError('');
             reloadPageAfterDelay(1000); 
