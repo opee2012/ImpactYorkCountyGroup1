@@ -61,9 +61,6 @@ const UserManagement = () => {
     
     // Generate a random string with at least 8 characters
     const randomTempPass = generateRandomString(8);
-    
-    console.log(randomTempPass);
-
    
            const handleAddEmail = async () => {
             if (newEmail.trim() === '') {
@@ -89,45 +86,6 @@ const UserManagement = () => {
             }
         };
 
- /*   const handleEditEmail = async () => {
-        if (newEmail.trim() === '' || editEmail.trim() === '') {
-            setAddError('Please enter both new and old email');
-            return;
-        }
-        try {
-            const updatedUsers = users.map((user) =>
-                user.email === editEmail ? { ...user, email: newEmail } : user
-            );
-            setUsers(updatedUsers);
-            setEditEmail('');
-            setNewEmail('');
-            setShowEditForm(false);
-        } catch (error) {
-            console.error('Error updating login:', error);
-            setAddError('Failed to update login');
-        }
-    };
-    
-    <button className="action-item" onClick={handleEditButtonClick}>
-                        <img src={EditUserIcon} alt="Edit User" className="action-icon" />
-                        Edit Email
-                    </button>
-
-     {showEditForm && (
-                    <label>
-                        New Email:
-                        <input
-                            type="email"
-                            value={editEmail}
-                            onChange={(e) => setEditEmail(e.target.value)}
-                            placeholder="Enter new email"
-                        />
-                        <button onClick={handleEditEmail}>Submit</button>
-                    </label>
-                )}                
-    
-    */
-
     // handle delete email
     const handleDeleteEmail = async () => {
         if (newEmail.trim() === '') {
@@ -145,18 +103,16 @@ const UserManagement = () => {
         }
     };
 
-    // Handle showing the edit email form only if there is a value in the "Enter Email" input
-    const handleEditButtonClick = () => {
-        if (newEmail.trim() !== '') {
-            setShowEditForm(true);
-        } else {
-            setAddError('');
-        }
-    };
-
     const handleAdminChange = (e) => {
         setIsAdmin(e.target.checked);
     };
+
+    const handleEditButtonClick = (user) => {
+       
+        setNewEmail(user.email);
+        setIsAdmin(user.admin);
+    };
+    
 
 
     return (
@@ -167,7 +123,7 @@ const UserManagement = () => {
                     <div className="sidebarTitle">User List</div>
                     <ul>
                         {users.map((user) => (
-                            <li key={user.id} onClick={() => setNewEmail(user.email)}>{user.email} {user.admin && <span style={{color: "blue"}}>(Admin)</span>}</li>
+                            <li key={user.id} onClick={() => handleEditButtonClick(user)}>{user.email} {user.admin && <span style={{color: "blue"}}>(Admin)</span>}</li>
                         ))}
                     </ul>
                 </div>
@@ -214,3 +170,52 @@ const UserManagement = () => {
 };
 
 export default UserManagement;
+
+
+ /*// Handle showing the edit email form only if there is a value in the "Enter Email" input
+    const handleEditButtonClick = () => {
+        if (newEmail.trim() !== '') {
+            setShowEditForm(true);
+        } else {
+            setAddError('');
+        }
+    };*/
+
+    /*   const handleEditEmail = async () => {
+        if (newEmail.trim() === '' || editEmail.trim() === '') {
+            setAddError('Please enter both new and old email');
+            return;
+        }
+        try {
+            const updatedUsers = users.map((user) =>
+                user.email === editEmail ? { ...user, email: newEmail } : user
+            );
+            setUsers(updatedUsers);
+            setEditEmail('');
+            setNewEmail('');
+            setShowEditForm(false);
+        } catch (error) {
+            console.error('Error updating login:', error);
+            setAddError('Failed to update login');
+        }
+    };
+    
+    <button className="action-item" onClick={handleEditButtonClick}>
+                        <img src={EditUserIcon} alt="Edit User" className="action-icon" />
+                        Edit Email
+                    </button>
+
+     {showEditForm && (
+                    <label>
+                        New Email:
+                        <input
+                            type="email"
+                            value={editEmail}
+                            onChange={(e) => setEditEmail(e.target.value)}
+                            placeholder="Enter new email"
+                        />
+                        <button onClick={handleEditEmail}>Submit</button>
+                    </label>
+                )}                
+    
+    */
