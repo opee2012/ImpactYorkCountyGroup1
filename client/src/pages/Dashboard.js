@@ -23,6 +23,8 @@ const Dashboard = () => {
   const { state } = useAuthContext();
   const { email, admin } = state || {};
 
+  console.log(admin);
+
   useEffect(() => {
     fetchData()
       .then((data) => {
@@ -60,7 +62,7 @@ const Dashboard = () => {
         </ul>
       </header>
       <header className="top-panel">    
-        {admin && <button className="button button-center button-blue" onClick={() => window.location.assign('/user-management')}>Manage Accounts</button>}
+        {(admin === true || admin === "true") &&<button className="button button-center button-blue" onClick={() => window.location.assign('/user-management')}>Manage Accounts</button>}
         {email && <button className="button button-center button-purple" onClick={() => window.location.assign('/password')}>Change password</button>}
         {email && <button className="button button-center button-black" onClick={() => window.location.assign('/upload')}>Upload Data</button>}
         {email && <button className="button button-center button-red"  onClick={() => logout()}>Logout</button>}
@@ -69,7 +71,6 @@ const Dashboard = () => {
           <input
             className="search-textbox"
             type="text"
-            style={{ paddingLeft: "10px" }}
             placeholder="Search for data..."
             onChange={handleChange}
             value={searchInput}

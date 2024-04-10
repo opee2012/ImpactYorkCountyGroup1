@@ -4,11 +4,15 @@
  * @returns {string} Returns error message string
  */
 exports.getValidationErrorMessage = function(validationError) {
-    const errorMessages = {};
+    try {
+        const errorMessages = {};
         let errorMsg = '';
         for (const field in validationError.errors) {
             errorMessages[field] = validationError.errors[field].message;
             errorMsg += ("\n" + errorMessages[field]);
         }
-    return errorMsg;
+        return errorMsg;
+    } catch (error) {
+        throw new Error(error.message);
+    }
 };
