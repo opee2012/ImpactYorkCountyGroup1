@@ -71,7 +71,6 @@ const Dashboard = () => {
           <input
             className="search-textbox"
             type="text"
-            style={{ paddingLeft: "10px" }}
             placeholder="Search for data..."
             onChange={handleChange}
             value={searchInput}
