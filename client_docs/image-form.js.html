@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: image-form.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,77 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: image-form.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Components/MyDropzone
+ * A React component that provides a drag-and-drop area for uploading images.
+ * It uses the `react-dropzone` library for handling file drops.
+ */
 
+import React, { useState } from 'react';
+import { useDropzone } from 'react-dropzone';
+import '../styles/Dropzone.css';
 
-    <h3> </h3>
+/**
+ * MyDropzone component for handling image uploads via drag and drop.
+ * @returns {React.Component} A dropzone component for uploading images.
+ */
+export const MyDropzone = () => {
+  // State hook for storing uploaded files
+  const [files, setFiles] = useState([]);
 
+  // Hook for configuring the dropzone
+  const { getRootProps, getInputProps, open } = useDropzone({
+    accept: 'image/*', // Accept only image files
+    onDrop: acceptedFiles => {
+      // Set the files state with the accepted files and create object URLs for preview
+      setFiles(acceptedFiles.map(file => Object.assign(file, {
+        preview: URL.createObjectURL(file)
+      })));
+    },
+    noClick: true, // Disable opening file dialog on click
+    noKeyboard: true // Disable keyboard interaction
+  });
 
+  // Map the files to image elements for rendering
+  const images = files.map(file => (
+    &lt;div key={file.name}>
+      &lt;div>
+        &lt;img src={file.preview} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="preview" />
+      &lt;/div>
+    &lt;/div>
+  ));
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  // Render the dropzone and the uploaded images
+  return (
+    &lt;div className='dropzonecontainer'>
+      &lt;div {...getRootProps()} className='dropzonebox'>
+        &lt;div className='dropzone-input'>
+          &lt;input {...getInputProps()} />
+          &lt;h2 className='dropzone-heading'>Drag and Drop Excel Image Here&lt;/h2>
+          &lt;br />
+          &lt;div className='dropzone-or'>OR&lt;/div>
+          &lt;br />
+          &lt;button onClick={open}>Browse&lt;/button>
+        &lt;/div>
+        &lt;div className='images'>
+          &lt;ul>{images}&lt;/ul>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

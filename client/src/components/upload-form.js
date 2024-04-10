@@ -1,17 +1,34 @@
+/**
+ * @module Components/UploadForm
+ * A React component that renders a form for uploading Excel files and provides a download link for a template file.
+ */
+
 import React, { useState } from "react";
 import { useUpload } from "../hooks/useUpload";
 import "../styles/Upload.css";
 import xcelIcon from "../icons/excelIcon.png";
 
+/**
+ * UploadForm component for handling file uploads.
+ * @returns {React.Component} An upload form component.
+ */
 const UploadForm = () => {
-  const { error, setError, uploadSelectedFile} = useUpload();
+  const { error, setError, uploadSelectedFile } = useUpload();
   const [selectedFile, setSelectedFile] = useState(null);
   const [status, setStatus] = useState(null);
 
+  /**
+   * Prevents the default behavior when dragging a file over the drop area.
+   * @param {Event} e - The dragover event.
+   */
   const dragOverHandler = (e) => {
     e.preventDefault();
   };
 
+  /**
+   * Handles dropping a file onto the drop area.
+   * @param {Event} e - The drop event.
+   */
   const dropHandler = (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
@@ -19,8 +36,10 @@ const UploadForm = () => {
     setStatus(`${file.name}`);
   };
 
-  const filename = "IYC Dashboard Data.xlsx";
-
+  /**
+   * Downloads the Excel template file.
+   * @param {string} filename - The name of the file to download.
+   */
   const downloadFile = async (filename) => {
     const response = await fetch(`/downloadxlsx/${filename}`);
     const blob = await response.blob();
@@ -39,6 +58,11 @@ const UploadForm = () => {
     a.click();
   }
 
+  /**
+  * Renders the upload form with drag-and-drop functionality and file input.
+  * Displays a status message or error message based on the file upload state.
+  * Provides buttons for browsing files, downloading a template, submitting the selected file, and navigating to the dashboard.
+  */
   return (
     <div className="uploadformnonflex">
       <form onDrop={dropHandler} onDragOver={dragOverHandler}>

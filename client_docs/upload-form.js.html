@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: upload-form.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: upload-form.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Components/UploadForm
+ * A React component that renders a form for uploading Excel files and provides a download link for a template file.
+ */
+
+import React, { useState } from "react";
+import { useUpload } from "../hooks/useUpload";
+import "../styles/Upload.css";
+import xcelIcon from "../icons/excelIcon.png";
+
+/**
+ * UploadForm component for handling file uploads.
+ * @returns {React.Component} An upload form component.
+ */
+const UploadForm = () => {
+  const { error, setError, uploadSelectedFile } = useUpload();
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [status, setStatus] = useState(null);
+
+  /**
+   * Prevents the default behavior when dragging a file over the drop area.
+   * @param {Event} e - The dragover event.
+   */
+  const dragOverHandler = (e) => {
+    e.preventDefault();
+  };
+
+  /**
+   * Handles dropping a file onto the drop area.
+   * @param {Event} e - The drop event.
+   */
+  const dropHandler = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    setSelectedFile(file);
+    setStatus(`${file.name}`);
+  };
+
+  /**
+   * Downloads the Excel template file.
+   * @param {string} filename - The name of the file to download.
+   */
+  const downloadFile = async (filename) => {
+    const response = await fetch(`/downloadxlsx/${filename}`);
+    const blob = await response.blob();
+  
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename || 'download';
+    const clickHandler = () => {
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+        a.removeEventListener('click', clickHandler);
+      }, 150);
+    };
+    a.addEventListener('click', clickHandler, false);
+    a.click();
+  }
+
+  /**
+  * Renders the upload form with drag-and-drop functionality and file input.
+  * Displays a status message or error message based on the file upload state.
+  * Provides buttons for browsing files, downloading a template, submitting the selected file, and navigating to the dashboard.
+  */
+  return (
+    &lt;div className="uploadformnonflex">
+      &lt;form onDrop={dropHandler} onDragOver={dragOverHandler}>
+        &lt;div className="dragndrop">
+          &lt;h2>Drag and Drop Excel File Here&lt;/h2>
+          &lt;br />
+          &lt;div>OR&lt;/div>
+        &lt;/div>
+        &lt;label htmlFor="fileuploadinput">&lt;/label> &lt;br />
+        &lt;input
+          id="fileuploadinput"
+          style={{ display: "none" }}
+          type="file"
+          onChange={(e) => {
+            if (e.target.files &amp;&amp; e.target.files.length > 0) {
+              setSelectedFile(e.target.files[0]);
+              setError(null);
+              setStatus(`${e.target.files[0].name}`);
+            }
+          }}
+        />
+        &lt;div className="uploadbuttons">
+          &lt;button
+            onClick={(e) => {
+              e.preventDefault();
+              setError(null);
+              document.getElementById("fileuploadinput").click();
+            }}
+          >
+            Browse Files
+          &lt;/button> &lt;br />
+          &lt;button onClick={() => downloadFile(filename)}>Download Template&lt;/button>
+        &lt;/div>
+        &lt;p id="statusbar">
+          {selectedFile &amp;&amp; !error ? &lt;img src={xcelIcon} alt="file icon" /> : null}
+          {error ? error : (status ? status : selectedFile)}
+        &lt;/p>
+      &lt;/form>
+      &lt;div className="submitnback">
+        &lt;button onClick={() => {
+          if (selectedFile) {
+            uploadSelectedFile(selectedFile)
+            .then(() => {
+              setTimeout(() => {
+                window.location.assign('/')
+              }, 50);
+            })
+            .catch((error) => {
+              console.error(error);
+              setError("Upload failed");
+            });
+          } else {
+            alert("Please select an Excel file to upload.");
+          }
+        }}>Submit&lt;/button> &lt;br />
+        &lt;button onClick={() => window.location.assign('/')}>Dashboard&lt;/button>
+        &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default UploadForm;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="Components_DashboardAccordion%250DA%2520React%2520component%2520that%2520renders%2520an%2520accordion-style%2520list%2520of%2520categories%2520and%2520subcategories.%250DIt%2520allows%2520users%2520to%2520expand_collapse%2520subcategories%2520and%2520provides%2520an%2520option%2520to%2520edit%2520them%2520if%2520the%2520user%2520is%2520authenticated.module_.html">Components/DashboardAccordionA React component that renders an accordion-style list of categories and subcategories.It allows users to expand/collapse subcategories and provides an option to edit them if the user is authenticated.</a></li><li><a href="Components_LoginForm%250DA%2520React%2520component%2520that%2520renders%2520a%2520login%2520form%2520for%2520user%2520authentication.module_.html">Components/LoginFormA React component that renders a login form for user authentication.</a></li><li><a href="Components_MyDropzone%250DA%2520React%2520component%2520that%2520provides%2520a%2520drag-and-drop%2520area%2520for%2520uploading%2520images.%250DIt%2520uses%2520the%2520%2560react-dropzone%2560%2520library%2520for%2520handling%2520file%2520drops.module_.html">Components/MyDropzoneA React component that provides a drag-and-drop area for uploading images.It uses the `react-dropzone` library for handling file drops.</a></li><li><a href="Components_UploadForm%250DA%2520React%2520component%2520that%2520renders%2520a%2520form%2520for%2520uploading%2520Excel%2520files%2520and%2520provides%2520a%2520download%2520link%2520for%2520a%2520template%2520file.module_.html">Components/UploadFormA React component that renders a form for uploading Excel files and provides a download link for a template file.</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 10 2024 12:49:20 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
