@@ -71,7 +71,7 @@ const UploadForm = () => {
       XLSX.utils.book_append_sheet(wb, ws, categoryName);
 
       // Initialize row index for this category
-      rowIndex[categoryName] = 2; // Start from row 1
+      rowIndex[categoryName] = 2; // Start from row #2
 
       if (Array.isArray(item.Data) && item.Data.length > 0) {
         // Check if key exists in the data item
@@ -91,9 +91,7 @@ const UploadForm = () => {
           // Increment row index for the next key
           rowIndex[categoryName]++;
         }
-
       const yearsArray = [];
-
   // Iterate over each subcategory in the data item
   dataItem.SubCategory.forEach((subCategoryItem) => {
       // Add subcategory name to Excel sheet at the appropriate row
@@ -195,7 +193,6 @@ const UploadForm = () => {
           >
             Browse Files
           </button> <br />
-          {/*  remember to take the type=button out after testing*/}
           <button onClick={generateExcelFile}>Download Template</button>
         </div>
         <p id="statusbar">
