@@ -1,5 +1,9 @@
 /**
- * @module Controllers/UploadController
+ * @module DataController
+ * @description Controller for handling data management operations.
+ */
+
+/**
  * Controller for the upload page.
  */
 const { ExcelToJSON } = require("../utils/ExcelToJson");
@@ -29,7 +33,7 @@ exports.getAllData = async function (req, res) {
  * @param {object} req - The request object.
  * @param {object} res - The response object.
  */
-exports.getOneData = async function(req, res) {
+exports.getOneData = async function (req, res) {
     const { query } = req.body; // Get parameters passed through request.
     try {
         const category = await DashboardData.findOne(query);
@@ -64,7 +68,7 @@ exports.addNewData = async function (req, res) {
  * @param {object} req - The request object.
  * @param {object} res - The response object.
  */
-exports.updateData = async function(req, res) {
+exports.updateData = async function (req, res) {
     const { query, json } = req.body; // Get parameters passed through request.
     try {
         const updatedCategory = await DashboardData.findOneAndUpdate(query, json);
@@ -79,7 +83,7 @@ exports.updateData = async function(req, res) {
  * @param {object} req - The request object.
  * @param {object} res - The response object.
  */
-exports.deleteData = async function(req, res) {
+exports.deleteData = async function (req, res) {
     const { query } = req.body; // Get parameters passed through request.
     try {
         const deletedCategory = await DashboardData.findOneAndDelete(query);

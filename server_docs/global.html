@@ -94,6 +94,72 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="app"><span class="type-signature">(constant) </span>app<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Express application instance.This is the main application object where middleware and routes are registered.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -104,7 +170,7 @@
     
 
     
-    <h4 class="name" id="addNewData"><span class="type-signature"></span>addNewData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="MongoConnect"><span class="type-signature"></span>MongoConnect<span class="signature">(dbString)</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +178,7 @@
 
 
 <div class="description">
-    Create a new category or update an existing one in the database.
+    Connects to MongoDB using Mongoose.
 </div>
 
 
@@ -148,13 +214,13 @@
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>dbString</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
             
@@ -164,30 +230,7 @@
 
             
 
-            <td class="description last">The request object.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The response object.</td>
+            <td class="description last">The database connection string.</td>
         </tr>
 
     
@@ -228,7 +271,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line45">line 45</a>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line44">line 44</a>
     </li></ul></dd>
     
 
@@ -264,7 +307,7 @@
     
 
     
-    <h4 class="name" id="deleteData"><span class="type-signature"></span>deleteData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="module:DataRoutes"><span class="type-signature"></span>module:DataRoutes<span class="signature">(app)</span><span class="type-signature"></span></h4>
     
 
     
@@ -272,7 +315,7 @@
 
 
 <div class="description">
-    Delete a category from the database.
+    Sets up routes for data management operations in the application.
 </div>
 
 
@@ -308,13 +351,13 @@
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>app</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
             
@@ -324,30 +367,7 @@
 
             
 
-            <td class="description last">The request object.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The response object.</td>
+            <td class="description last">The Express application instance.</td>
         </tr>
 
     
@@ -388,7 +408,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line80">line 80</a>
+        <a href="routes_data-routes.js.html">routes/data-routes.js</a>, <a href="routes_data-routes.js.html#line57">line 57</a>
     </li></ul></dd>
     
 
@@ -424,7 +444,7 @@
     
 
     
-    <h4 class="name" id="getAllData"><span class="type-signature"></span>getAllData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="module:loginRoutes"><span class="type-signature"></span>module:loginRoutes<span class="signature">(app)</span><span class="type-signature"></span></h4>
     
 
     
@@ -432,7 +452,7 @@
 
 
 <div class="description">
-    Retrieves all categories stored in the database.
+    Sets up routes for login operations in the application.
 </div>
 
 
@@ -468,13 +488,13 @@
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>app</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
             
@@ -484,30 +504,7 @@
 
             
 
-            <td class="description last">The request object.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The response object.</td>
+            <td class="description last">The Express application instance.</td>
         </tr>
 
     
@@ -548,7 +545,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line15">line 15</a>
+        <a href="routes_login-routes.js.html">routes/login-routes.js</a>, <a href="routes_login-routes.js.html#line31">line 31</a>
     </li></ul></dd>
     
 
@@ -584,7 +581,7 @@
     
 
     
-    <h4 class="name" id="getOneData"><span class="type-signature"></span>getOneData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="module:uploadRoutes"><span class="type-signature"></span>module:uploadRoutes<span class="signature">(app)</span><span class="type-signature"></span></h4>
     
 
     
@@ -592,7 +589,7 @@
 
 
 <div class="description">
-    Retrieve a specific category from the database.
+    Sets up routes for file upload and retrieval.
 </div>
 
 
@@ -628,7 +625,7 @@
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>app</code></td>
             
 
             <td class="type">
@@ -644,30 +641,7 @@
 
             
 
-            <td class="description last">The request object.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The response object.</td>
+            <td class="description last">The Express application instance.</td>
         </tr>
 
     
@@ -708,167 +682,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line30">line 30</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="updateData"><span class="type-signature"></span>updateData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Update an existing category in the database.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>req</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The request object.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The response object.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line65">line 65</a>
+        <a href="routes_upload-routes.js.html">routes/upload-routes.js</a>, <a href="routes_upload-routes.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -914,13 +728,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="Controllers_LoginController%250DController%2520for%2520handling%2520user%2520authentication%2520and%2520login%2520operations.module_.html">Controllers/LoginControllerController for handling user authentication and login operations.</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addNewData">addNewData</a></li><li><a href="global.html#deleteData">deleteData</a></li><li><a href="global.html#getAllData">getAllData</a></li><li><a href="global.html#getOneData">getOneData</a></li><li><a href="global.html#updateData">updateData</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-DashboardSchema.html">DashboardSchema</a></li><li><a href="module-DataController.html">DataController</a></li><li><a href="module-DataRoutes.html">DataRoutes</a></li><li><a href="module-LoginController.html">LoginController</a></li><li><a href="module-UploadController.html">UploadController</a></li><li><a href="module-loginRoutes.html">loginRoutes</a></li><li><a href="module-loginSchema.html">loginSchema</a></li><li><a href="module-uploadRoutes.html">uploadRoutes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#MongoConnect">MongoConnect</a></li><li><a href="global.html#app">app</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 10 2024 11:27:07 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 10 2024 22:28:41 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

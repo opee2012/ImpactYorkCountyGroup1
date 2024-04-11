@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: Controllers/UploadControllerController for the upload page.</title>
+    <title>JSDoc: Module: UploadController</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: Controllers/UploadControllerController for the upload page.</h1>
+    <h1 class="page-title">Module: UploadController</h1>
 
     
 
@@ -33,6 +33,8 @@
 <article>
     <div class="container-overview">
     
+        
+            <div class="description">Controller for handling file uploads and retrieval.</div>
         
 
         
@@ -67,7 +69,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line1">line 1</a>
+        <a href="controllers_upload-controller.js.html">controllers/upload-controller.js</a>, <a href="controllers_upload-controller.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -96,6 +98,196 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~image"><span class="type-signature">(inner, constant) </span>image<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Middleware for uploading a single image file.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_upload-controller.js.html">controllers/upload-controller.js</a>, <a href="controllers_upload-controller.js.html#line45">line 45</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~image_storage"><span class="type-signature">(inner, constant) </span>image_storage<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Configuration for storing uploaded images on disk.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_upload-controller.js.html">controllers/upload-controller.js</a>, <a href="controllers_upload-controller.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~xlsx"><span class="type-signature">(inner, constant) </span>xlsx<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Middleware for uploading a single XLSX file.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_upload-controller.js.html">controllers/upload-controller.js</a>, <a href="controllers_upload-controller.js.html#line26">line 26</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -106,7 +298,7 @@
     
 
     
-    <h4 class="name" id="Controllers/UploadControllerController for the upload page.module:.addNewData"><span class="type-signature"></span>Controllers/UploadControllerController for the upload page.module:.addNewData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".getImage"><span class="type-signature">(static) </span>getImage<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
     
 
     
@@ -114,7 +306,7 @@
 
 
 <div class="description">
-    Create a new category or update an existing one in the database.
+    Retrieves and sends an image file based on the request parameter.
 </div>
 
 
@@ -230,7 +422,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line47">line 47</a>
+        <a href="controllers_upload-controller.js.html">controllers/upload-controller.js</a>, <a href="controllers_upload-controller.js.html#line66">line 66</a>
     </li></ul></dd>
     
 
@@ -266,7 +458,7 @@
     
 
     
-    <h4 class="name" id="Controllers/UploadControllerController for the upload page.module:.deleteData"><span class="type-signature"></span>Controllers/UploadControllerController for the upload page.module:.deleteData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".getXLSX"><span class="type-signature">(static) </span>getXLSX<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
     
 
     
@@ -274,7 +466,7 @@
 
 
 <div class="description">
-    Delete a category from the database.
+    Retrieves and sends an XLSX file based on the request parameter.
 </div>
 
 
@@ -390,7 +582,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line82">line 82</a>
+        <a href="controllers_upload-controller.js.html">controllers/upload-controller.js</a>, <a href="controllers_upload-controller.js.html#line77">line 77</a>
     </li></ul></dd>
     
 
@@ -426,7 +618,7 @@
     
 
     
-    <h4 class="name" id="Controllers/UploadControllerController for the upload page.module:.getAllData"><span class="type-signature"></span>Controllers/UploadControllerController for the upload page.module:.getAllData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".uploadImage"><span class="type-signature">(static) </span>uploadImage<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
     
 
     
@@ -434,7 +626,7 @@
 
 
 <div class="description">
-    Retrieves all categories stored in the database.
+    Uploads a single image file and responds with a success message.
 </div>
 
 
@@ -550,7 +742,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line17">line 17</a>
+        <a href="controllers_upload-controller.js.html">controllers/upload-controller.js</a>, <a href="controllers_upload-controller.js.html#line52">line 52</a>
     </li></ul></dd>
     
 
@@ -586,7 +778,7 @@
     
 
     
-    <h4 class="name" id="Controllers/UploadControllerController for the upload page.module:.getOneData"><span class="type-signature"></span>Controllers/UploadControllerController for the upload page.module:.getOneData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".uploadXLSX"><span class="type-signature">(static) </span>uploadXLSX<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
     
 
     
@@ -594,7 +786,7 @@
 
 
 <div class="description">
-    Retrieve a specific category from the database.
+    Uploads a single XLSX file and responds with a success message.
 </div>
 
 
@@ -710,167 +902,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line32">line 32</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="Controllers/UploadControllerController for the upload page.module:.updateData"><span class="type-signature"></span>Controllers/UploadControllerController for the upload page.module:.updateData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Update an existing category in the database.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>req</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The request object.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The response object.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line67">line 67</a>
+        <a href="controllers_upload-controller.js.html">controllers/upload-controller.js</a>, <a href="controllers_upload-controller.js.html#line33">line 33</a>
     </li></ul></dd>
     
 
@@ -916,13 +948,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="Controllers_FileUploadController%250DController%2520for%2520handling%2520file%2520uploads%2520and%2520retrieval.module_.html">Controllers/FileUploadControllerController for handling file uploads and retrieval.</a></li><li><a href="Controllers_LoginController%250DController%2520for%2520handling%2520user%2520authentication%2520and%2520login%2520operations.module_.html">Controllers/LoginControllerController for handling user authentication and login operations.</a></li><li><a href="Controllers_UploadController%250DController%2520for%2520the%2520upload%2520page.module_.html">Controllers/UploadControllerController for the upload page.</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-DashboardSchema.html">DashboardSchema</a></li><li><a href="module-DataController.html">DataController</a></li><li><a href="module-DataRoutes.html">DataRoutes</a></li><li><a href="module-LoginController.html">LoginController</a></li><li><a href="module-UploadController.html">UploadController</a></li><li><a href="module-loginRoutes.html">loginRoutes</a></li><li><a href="module-loginSchema.html">loginSchema</a></li><li><a href="module-uploadRoutes.html">uploadRoutes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#MongoConnect">MongoConnect</a></li><li><a href="global.html#app">app</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 10 2024 11:35:19 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 10 2024 22:28:41 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

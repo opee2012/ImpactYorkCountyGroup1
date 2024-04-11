@@ -1,0 +1,12 @@
+{
+    "source": {
+        "include": ["routes", "controllers", "models", "server.js"],
+        "exclude": ["node_modules"],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "opts": {
+        "recurse": true,
+        "destination": "../server_docs"
+    }
+}

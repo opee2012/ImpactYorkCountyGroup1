@@ -1,50 +1,63 @@
+/**
+ * @module DashboardSchema
+ * @description Mongoose schema and methods for dashboard data management.
+ */
+
 const mongoose = require('mongoose');
 
-// The subcategory data schema
+/**
+ * Mongoose schema for subcategory data.
+ * @type {mongoose.Schema}
+ */
 const subCategoryDataSchema = new mongoose.Schema({
-    Name: { 
+    Name: {
         type: String,
         required: [true, 'Missing sub-category name'],
     },
     Data: {
-        // Data underneath here could have any unrestricted object (year - value, etc).
         type: Array,
         required: [true, 'Missing sub-category data'],
     }
 });
 
-// The category data schema
+/**
+ * Mongoose schema for category data.
+ * @type {mongoose.Schema}
+ */
 const categoryDataSchema = new mongoose.Schema({
-    Key: { 
+    Key: {
         type: String,
         required: false,
     },
-    "SubCategory": {
+    SubCategory: {
         type: [subCategoryDataSchema],
         required: [true, 'Missing sub-category data'],
-        default: () => [({})]
+        default: () => [{}]
     }
 });
 
-// The whole schema definition
-// It is assumed that the data being passed through to the DB was already
-// parse checked somewhere else in the system.
-// However, additional checks will be made here for missing information too
+/**
+ * Mongoose schema for dashboard data.
+ * @type {mongoose.Schema}
+ */
 const dashboardDataSchema = new mongoose.Schema({
     Category: {
         type: String,
         required: [true, 'Missing category name'],
-        unique: [true, 'There is already a category underneath this label']
+        unique: [true, 'Category already exists']
     },
-    // All categories need data listed underneath an array list
     Data: {
         type: [categoryDataSchema],
-        default: () => [({})]
+        default: () => [{}]
     }
 });
 
-// Initialize a new dataset. The Json parameter must exactly match the schema.
-dashboardDataSchema.statics.initNewCategory = async function(json) {
+/**
+ * Static method to initialize a new category.
+ * @param {Object} json - The data to create a new category.
+ * @returns {Promise<mongoose.Document>} A promise that resolves with the newly created document.
+ */
+dashboardDataSchema.statics.initNewCategory = async function (json) {
     return await this.create(json);
 }
 

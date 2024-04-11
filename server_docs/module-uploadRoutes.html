@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
+    <title>JSDoc: Module: uploadRoutes</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">Module: uploadRoutes</h1>
 
     
 
@@ -28,14 +28,13 @@
 
 <header>
     
-        <h2></h2>
-        
-    
 </header>
 
 <article>
     <div class="container-overview">
     
+        
+            <div class="description">Routes for file upload and retrieval in the application.</div>
         
 
         
@@ -67,6 +66,11 @@
 
     
 
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="routes_upload-routes.js.html">routes/upload-routes.js</a>, <a href="routes_upload-routes.js.html#line1">line 1</a>
+    </li></ul></dd>
     
 
     
@@ -94,6 +98,226 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~HTTP_STATUS"><span class="type-signature">(inner, constant) </span>HTTP_STATUS<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    HTTP status codes commonly used in API responses.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>OK</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>CREATED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>BAD_REQUEST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>UNAUTHORIZED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>CONFLICT</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="routes_upload-routes.js.html">routes/upload-routes.js</a>, <a href="routes_upload-routes.js.html#line10">line 10</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -104,7 +328,7 @@
     
 
     
-    <h4 class="name" id="addNewData"><span class="type-signature"></span>addNewData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~get/downloadxlsx/:xlsx"><span class="type-signature">(inner) </span>get/downloadxlsx/:xlsx<span class="signature">(path, getXLSX)</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +336,7 @@
 
 
 <div class="description">
-    Create a new category or update an existing one in the database.
+    Route for downloading an XLSX file by its filename.
 </div>
 
 
@@ -148,13 +372,13 @@
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>path</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
             
@@ -164,20 +388,20 @@
 
             
 
-            <td class="description last">The request object.</td>
+            <td class="description last">The route path with xlsx filename parameter.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>res</code></td>
+                <td class="name"><code>getXLSX</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">function</span>
 
 
             
@@ -187,7 +411,7 @@
 
             
 
-            <td class="description last">The response object.</td>
+            <td class="description last">The controller function to handle the request.</td>
         </tr>
 
     
@@ -228,7 +452,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line45">line 45</a>
+        <a href="routes_upload-routes.js.html">routes/upload-routes.js</a>, <a href="routes_upload-routes.js.html#line49">line 49</a>
     </li></ul></dd>
     
 
@@ -264,7 +488,7 @@
     
 
     
-    <h4 class="name" id="deleteData"><span class="type-signature"></span>deleteData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~get/uploadImage/:image"><span class="type-signature">(inner) </span>get/uploadImage/:image<span class="signature">(path, getImage)</span><span class="type-signature"></span></h4>
     
 
     
@@ -272,7 +496,7 @@
 
 
 <div class="description">
-    Delete a category from the database.
+    Route for retrieving an uploaded image by its filename.
 </div>
 
 
@@ -308,13 +532,13 @@
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>path</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
             
@@ -324,20 +548,20 @@
 
             
 
-            <td class="description last">The request object.</td>
+            <td class="description last">The route path with image filename parameter.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>res</code></td>
+                <td class="name"><code>getImage</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">function</span>
 
 
             
@@ -347,7 +571,7 @@
 
             
 
-            <td class="description last">The response object.</td>
+            <td class="description last">The controller function to handle the request.</td>
         </tr>
 
     
@@ -388,7 +612,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line80">line 80</a>
+        <a href="routes_upload-routes.js.html">routes/upload-routes.js</a>, <a href="routes_upload-routes.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -424,7 +648,7 @@
     
 
     
-    <h4 class="name" id="getAllData"><span class="type-signature"></span>getAllData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~post/uploadImage"><span class="type-signature">(inner) </span>post/uploadImage<span class="signature">(path, uploadImage)</span><span class="type-signature"></span></h4>
     
 
     
@@ -432,7 +656,7 @@
 
 
 <div class="description">
-    Retrieves all categories stored in the database.
+    Route for uploading an image.
 </div>
 
 
@@ -468,13 +692,13 @@
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>path</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
             
@@ -484,20 +708,20 @@
 
             
 
-            <td class="description last">The request object.</td>
+            <td class="description last">The route path.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>res</code></td>
+                <td class="name"><code>uploadImage</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">function</span>
 
 
             
@@ -507,7 +731,7 @@
 
             
 
-            <td class="description last">The response object.</td>
+            <td class="description last">The controller function to handle the request.</td>
         </tr>
 
     
@@ -548,327 +772,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line15">line 15</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="getOneData"><span class="type-signature"></span>getOneData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Retrieve a specific category from the database.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>req</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The request object.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The response object.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line30">line 30</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="updateData"><span class="type-signature"></span>updateData<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Update an existing category in the database.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>req</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The request object.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The response object.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="data-controller.js.html">data-controller.js</a>, <a href="data-controller.js.html#line65">line 65</a>
+        <a href="routes_upload-routes.js.html">routes/upload-routes.js</a>, <a href="routes_upload-routes.js.html#line31">line 31</a>
     </li></ul></dd>
     
 
@@ -914,13 +818,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addNewData">addNewData</a></li><li><a href="global.html#deleteData">deleteData</a></li><li><a href="global.html#getAllData">getAllData</a></li><li><a href="global.html#getOneData">getOneData</a></li><li><a href="global.html#updateData">updateData</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-DashboardSchema.html">DashboardSchema</a></li><li><a href="module-DataController.html">DataController</a></li><li><a href="module-DataRoutes.html">DataRoutes</a></li><li><a href="module-LoginController.html">LoginController</a></li><li><a href="module-UploadController.html">UploadController</a></li><li><a href="module-loginRoutes.html">loginRoutes</a></li><li><a href="module-loginSchema.html">loginSchema</a></li><li><a href="module-uploadRoutes.html">uploadRoutes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#MongoConnect">MongoConnect</a></li><li><a href="global.html#app">app</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Apr 07 2024 19:04:28 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 10 2024 22:28:41 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,11 +1,18 @@
-import { useState } from "react";
-
+/**
+ * Custom hook for handling user management operations.
+ * @returns {Object} An object containing state variables and functions related to user management.
+ */
 export const useUserMan = () => {
+    // State variables for tracking errors, loading status, data, and success messages
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
     const [data, setData] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
 
+    /**
+     * Fetches all logins from the server.
+     * @returns {Promise<Object>|null} The fetched data or null if an error occurs.
+     */
     const getAllLogins = async () => {
         setIsLoading(true);
         setError(null);
@@ -23,42 +30,40 @@ export const useUserMan = () => {
     
             const json = await response.json();
     
-            // Update loading state
             setIsLoading(false);
-    
-            return json; // Return the fetched data
+            return json;
         } catch (error) {
             setIsLoading(false);
             setError(error.message);
-            return null; // Return null in case of an error
+            return null;
         }
     };
 
+    /**
+     * Adds a new login to the server.
+     * @param {string} email - The email of the new login.
+     * @param {string} password - The password of the new login.
+     * @param {boolean} admin - The admin status of the new login.
+     */
     const addNewLogin = (email, password, admin) => {
         setIsLoading(true);
         setError(null);
         try {
-            // Make sure email and password are not empty
             if (!email || !password) {
                 throw new Error("Email and password are required");
             }
       
-            // Send login data to the server
             fetch('/signup', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password, admin }),
             })
             .then(response => {
                 if (!response.ok) {
-                    
                     throw new Error('Failed to add new login, please make sure to enter a valid email');
                 }
                 return response.json(); 
             })
-            
             .then(data => {
                 setData(data);
                 setIsLoading(false);
@@ -72,9 +77,12 @@ export const useUserMan = () => {
             setError(error.message);
             setIsLoading(false);
         }
-      };
+    };
 
-      // Function to delete login based on email
+    /**
+     * Deletes a login from the server based on the provided email.
+     * @param {string} email - The email of the login to be deleted.
+     */
     const deleteLogin = async (email) => {
         setIsLoading(true);
         setError(null);
@@ -82,21 +90,13 @@ export const useUserMan = () => {
         try {
             const response = await fetch(`/login/${email}`, {
                 method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
             });
 
-            
-        if (response.status === 200) {
-            
-            const successMessage = 'Login deleted successfully';
-            // Set the success message in the state or handle it as needed
-            setSuccessMessage(successMessage);
-        }
-
-            if (!response.ok) {
+            if (response.status === 200) {
+                setSuccessMessage('Login deleted successfully');
+            } else if (!response.ok) {
                 throw new Error('Failed to delete login, please enter a valid email');
             }
 
@@ -109,6 +109,5 @@ export const useUserMan = () => {
         }
     };
 
-
-      return { successMessage, isLoading, error, getAllLogins, addNewLogin, deleteLogin};
+    return { successMessage, isLoading, error, getAllLogins, addNewLogin, deleteLogin };
 }
