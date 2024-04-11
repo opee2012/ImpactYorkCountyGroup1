@@ -13,9 +13,16 @@ const UserManagement = () => {
     const [editEmail, setEditEmail] = useState('');
     const [addError, setAddError] = useState('');
     const [showEditForm, setShowEditForm] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const { deleteLogin, addNewLogin, getAllLogins, successMessage, isLoading, error } = useUserMan();
 
+    function reloadPageAfterDelay(delay) {
+        setTimeout(() => {
+          window.location.reload();
+        }, delay);
+    }
+      
     useEffect(() => {
         const fetchLogins = async () => {
             try {
@@ -28,31 +35,156 @@ const UserManagement = () => {
         fetchLogins();
     }, []);
 
-
+    function generateRandomString(length) {
+        const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?';
+        let password = '';
+        length = Math.max(length, 8);
+    
+        // special character
+        password += '!@#$%&*?'.charAt(Math.floor(Math.random() * 8));
+    
+        //number
+        password += '0123456789'.charAt(Math.floor(Math.random() * 10));
+    
+        // Generate the rest of the characters
+        for (let i = 0; i < length - 2; i++) {
+            password += charset.charAt(Math.floor(Math.random() * charset.length));
+        }
+    
+        // Shuffle the string
+        password = password.split('').sort(() => Math.random() - 0.5).join('');
+    
+        // Check if the generated password meets the regex requirements
+        const regex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-#$%&!@_+=?])(?=.*[a-zA-Z]).{8,20}$/;
+        if (!regex.test(password)) {
+            return generateRandomString(length);
+        }
+    
+        return password;
+    }
+    
+    const randomTempPass = generateRandomString(8);
    
-           const handleAddEmail = async () => {
-            if (newEmail.trim() === '') {
-                setAddError('Please add a email');
-                return;
-            }
-            try {
-                const password = 'abc123';
-                const admin = false; 
+    const handleAddEmail = async () => {
+        if (newEmail.trim() === '') {
+            setAddError('Please add a email');
+            return;
+        }
+        try {
+            const password = randomTempPass;
+            const admin = isAdmin; 
+            console.log(randomTempPass);
                 
-                await addNewLogin(newEmail, password, admin);
+            await addNewLogin(newEmail, password, admin);
         
-                // Fetch logins again to update the user list
-                const logins = await getAllLogins();
-                setUsers(logins);
-                setNewEmail('');
-                setAddError('');
-            } catch (error) {
-                console.error('Error adding login:', error);
-                setAddError('Failed to add login');
-            }
-        };
+            // Fetch logins again to update the user list
+            const logins = await getAllLogins();
+            setUsers(logins);
+            setNewEmail('');
+            setAddError('');
+            reloadPageAfterDelay(1000); 
+        } catch (error) {
+            console.error('Error adding login:', error);
+            setAddError('Failed to add login');
+        }
+    };
 
- /*   const handleEditEmail = async () => {
+    // handle delete email
+    const handleDeleteEmail = async () => {
+        if (newEmail.trim() === '') {
+            setAddError('Please enter an email to delete');
+            return;
+        }
+        try {
+            await deleteLogin(newEmail);
+            setNewEmail('');
+            setAddError('');
+            reloadPageAfterDelay(1000); 
+        } catch (error) {
+            console.error('Error deleting login:', error);
+            setAddError('Failed to delete login');
+        }
+    };
+
+    const handleAdminChange = (e) => {
+        setIsAdmin(e.target.checked);
+    };
+
+    const handleEditButtonClick = (user) => {
+       
+        setNewEmail(user.email);
+        setIsAdmin(user.admin);
+    };
+    
+
+
+    return (
+        <div className="userManagement">
+            <div className="top-panelManagement"></div>
+            <div className="sidebarManagement">
+                <div className="user-list">
+                    <div className="sidebarTitle">User List</div>
+                    <ul>
+                        {users.map((user) => (
+                            <li key={user.id} onClick={() => handleEditButtonClick(user)}>{user.email} {user.admin && <span style={{color: "blue"}}>(Admin)</span>}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+            <div className="content-user">
+                <label>
+                    Enter Email:
+                    <input
+                        type="email"
+                        value={newEmail}
+                        onChange={(e) => setNewEmail(e.target.value)}
+                        placeholder="Click on Email or Enter Email"
+                    />
+                    {successMessage && <p className='success-message'>{successMessage}</p>}
+                    {error && <p className="error-message">{error}</p>}
+                </label>
+                <div className="admin-checkbox">
+                    
+                        <input
+                            type="checkbox"
+                            checked={isAdmin}
+                            onChange={handleAdminChange}
+                        />
+                        Admin
+                    
+                </div>
+                <div className="action">
+                    <button className="action-item fixed-width-button" onClick={handleAddEmail}>
+                        <img src={AddUserIcon} alt="Add User" className="action-icon" />
+                        Add Email
+                    </button>
+                    <button className="action-item fixed-width-button" onClick={handleDeleteEmail}>
+                        <img src={DeleteUserIcon} alt="Delete User" className="action-icon" />
+                        Delete Email
+                    </button>
+                </div>
+                <div className='navigation fixed-width-button'>
+                    <button type="submit" onClick={() => window.location.assign('/')} >Back to Dashboard</button>
+                </div>
+                
+            </div>
+        </div>
+    );
+};
+
+export default UserManagement;
+
+
+ /*// Handle showing the edit email form only if there is a value in the "Enter Email" input
+    const handleEditButtonClick = () => {
+        if (newEmail.trim() !== '') {
+            setShowEditForm(true);
+        } else {
+            setAddError('');
+        }
+    };*/
+
+    /*   const handleEditEmail = async () => {
         if (newEmail.trim() === '' || editEmail.trim() === '') {
             setAddError('Please enter both new and old email');
             return;
@@ -90,73 +222,3 @@ const UserManagement = () => {
                 )}                
     
     */
-
-    // handle delete email
-    const handleDeleteEmail = async () => {
-        if (newEmail.trim() === '') {
-            setAddError('Please enter an email to delete');
-            return;
-        }
-        try {
-            await deleteLogin(newEmail);
-            //const updatedUsers = users.filter(user => user.email !== newEmail);
-            setNewEmail('');
-            setAddError('');
-        } catch (error) {
-            console.error('Error deleting login:', error);
-            setAddError('Failed to delete login');
-        }
-    };
-
-    // Handle showing the edit email form only if there is a value in the "Enter Email" input
-    const handleEditButtonClick = () => {
-        if (newEmail.trim() !== '') {
-            setShowEditForm(true);
-        } else {
-            setAddError('');
-        }
-    };
-
-
-    return (
-        <div className="userManagement">
-            <div className="top-panelManagement"></div>
-            <div className="sidebarManagement">
-                <div className="user-list">
-                    <div className="sidebarTitle">User List</div>
-                    <ul>
-                        {users.map((user) => (
-                            <li key={user.id}>{user.email}</li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-            <div className="content-user">
-                <label>
-                    Enter Email:
-                    <input
-                        type="email"
-                        value={newEmail}
-                        onChange={(e) => setNewEmail(e.target.value)}
-                        placeholder="..."
-                    />
-                    {successMessage && <p className='success-message'>{successMessage}</p>}
-                    {error && <p className="error-message">{error}</p>}
-                </label>
-                <div className="action">
-                    <button className="action-item" onClick={handleAddEmail}>
-                        <img src={AddUserIcon} alt="Add User" className="action-icon" />
-                        Add Email
-                    </button>
-                    <button className="action-item" onClick={handleDeleteEmail}>
-                        <img src={DeleteUserIcon} alt="Delete User" className="action-icon" />
-                        Delete Email
-                    </button>
-                </div>
-                
-            </div>
-        </div>
-    );
-};
-
-export default UserManagement;

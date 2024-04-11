@@ -24,7 +24,7 @@ export const useEdit = () => {
         throw new Error(`Request failed with status ${request.status}`);
       } else {
         const json = await request.json();
-        console.log(json);
+        // console.log(json);
         return json;
       }
 

@@ -6,15 +6,10 @@ import { useAuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 
 const DashboardAccordion = ({ category, searchInput }) => {
-  const images = require.context("../images", true);
-
   const [selectedSubItems, setSelectedSubItems] = useState([]);
-  let data;
-  let categoryName;
-  if (category) {
-    data = category.Data;
-    categoryName = category.Category;
-  }
+  const [showImages, setShowImages] = useState({});
+  let data = category.Data;
+  let categoryName = category.Category;
   const { state } = useAuthContext();
   const { email } = state || {};
 
@@ -27,6 +22,11 @@ const DashboardAccordion = ({ category, searchInput }) => {
       newSelectedSubItems.push(subCategory);
     }
     setSelectedSubItems(newSelectedSubItems);
+
+    setShowImages((prevState) => ({
+      ...prevState,
+      [subCategory.Name]: !prevState[subCategory.Name],
+    }));
   };
 
   const filteredData = data
@@ -120,7 +120,17 @@ const DashboardAccordion = ({ category, searchInput }) => {
                               ))}
                             </tbody>
                           </table>
-                          <div>{renderimg(subCategory)}</div>
+                          {showImages[subCategory.Name] && (
+                            <img
+                              id={"image-" + subCategory.Name}
+                              src={`/uploadImage/${subCategory.Name}.png`}
+                              onError={() =>
+                                document
+                                  .getElementById("image-" + subCategory.Name)
+                                  .setAttribute("hidden", true)
+                              }
+                            />
+                          )}
                         </div>
                       </div>
                     </div>

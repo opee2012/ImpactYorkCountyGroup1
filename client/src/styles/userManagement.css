@@ -1,3 +1,18 @@
+@font-face {
+    font-family: "FatFrank";
+    src: url("../fonts/FatFrank-Heavy.ttf");
+  }
+  
+  @font-face {
+    font-family: "AvengerBlack";
+    src: url("../fonts/Avenir Black.ttf");
+  }
+  
+  @font-face {
+    font-family: "AvengerMedium";
+    src: url("../fonts/Avenir Medium.ttf");
+  }
+
 .userManagement {
     display: grid;
     grid-template-columns: 250px auto; /* Sidebar width and the rest for content */
@@ -34,9 +49,9 @@
 
 /* Title styling */
 .sidebarTitle {
+    font-family: "AvenirBlack";
     font-size: 20px;
     margin-bottom: 30px;
-    font-weight: bold;
 }
 
 .user-list {
@@ -56,10 +71,12 @@
     cursor: pointer;
     transition: background-color 0.5s;
     text-align: center;
+    font-family: "AvengerMedium";
+    font-size: medium;
 }
 
 .user-list li:hover {
-    background-color: #4a90e2;
+    background-color: #6596da;
 }
 
 .action {
@@ -88,7 +105,7 @@
 }
 
 .action-item:hover {
-    background-color: #4a90e2; 
+    background-color: #6596da; 
 }
   
 .action-icon {
@@ -99,7 +116,7 @@
 }
 
 .action-icon:hover {
-    background-color: #4a90e2; 
+    background-color: #6596da; 
 }
   
 .action-item:hover .action-icon {
@@ -115,6 +132,7 @@
     align-items: center;
     min-height: 400px; /* Ensures that the area is visible */
     background-color: #ffffff;
+    font-family: "AvenirBlack";
 }
 
 .content-user label {
@@ -137,16 +155,30 @@
     width: 80%;
     padding: 10px 20px;
     margin-top: 20px;
-    background-color: #4a90e2;
+    background-color: #79a3dc;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    font-family: "AvengerMedium";
+    font-size: medium;
 }
 
+.action-item.fixed-width-button {
+    width: 150px; /* Adjust the width according to your design */
+}
+
+.navigation {
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+    height: 40px;
+    margin-top: 10px;
+  }
+
 .content-user button:hover {
-    background-color: #357abd;
+    background-color: #6596da;
 }
 
 .error-message {
