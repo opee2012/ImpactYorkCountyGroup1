@@ -136,7 +136,7 @@ const ChangePasswordForm = () => {
           </p>
         ))}
         <button type="submit">Change Password</button> <br />
-        <button type="submit" onClick={() => window.location.assign('/password')} >Cancel</button>
+        <button type="submit" onClick={() => window.location.assign('/')} >Cancel</button>
       </form>
     </div>
   );

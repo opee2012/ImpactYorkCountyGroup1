@@ -11,7 +11,6 @@ export const useUpload = () => {
   const uploadSelectedFile = async (selectedFile) => {
     setStatus("Uploading...");
     setError(null);
-
     const formData = new FormData();
     formData.append("file", selectedFile);
 
@@ -29,7 +28,7 @@ export const useUpload = () => {
       }
     } catch (error) {
       setError(error.message);
-      setStatus('Upload failed');
+      setStatus("Upload failed");
     }
   };
 
@@ -41,6 +40,6 @@ export const useUpload = () => {
     setSelectedFile,
     error,
     setError,
-    setStatus
+    setStatus,
   };
 };

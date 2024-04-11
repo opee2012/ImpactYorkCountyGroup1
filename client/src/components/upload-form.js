@@ -182,7 +182,7 @@ const UploadForm = () => {
       </form>
       <div className="submitnback">
         <button onClick={() => {
-          if (selectedFile) {
+          if (selectedFile && selectedFile.name.endsWith(".xlsx")) {
             uploadSelectedFile(selectedFile)
             .then(() => {
               setTimeout(() => {
