@@ -8,8 +8,13 @@ import { Link } from "react-router-dom";
 const DashboardAccordion = ({ category, searchInput }) => {
   const [selectedSubItems, setSelectedSubItems] = useState([]);
   const [showImages, setShowImages] = useState({});
-  let data = category.Data;
-  let categoryName = category.Category;
+  let data;
+  let categoryName;
+  if(category) {
+    data = category.Data;
+    categoryName = category.Category;
+  }
+  
   const { state } = useAuthContext();
   const { email } = state || {};
 
@@ -42,18 +47,6 @@ const DashboardAccordion = ({ category, searchInput }) => {
         .filter((category) => category.SubCategory.length > 0)
     : null;
 
-  const renderimg = (subCategory) => {
-    try {
-      return (
-        <img
-          className="content-image"
-          src={images(`./${subCategory.Name}.png`)}
-        />
-      );
-    } catch (error) {
-      return null;
-    }
-  };
 
   return (
     <div className="wrapper">
