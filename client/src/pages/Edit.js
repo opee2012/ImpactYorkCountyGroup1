@@ -59,11 +59,12 @@ const Edit = () => {
       }
     }
     for (let i in categoryData) {
-      if (categoryData[i].SubCategory[0].Data == subCategoryData) {
-        categoryData[i].SubCategory[0].Data = data;
+      for(let j in categoryData[i].SubCategory)
+      if (categoryData[i].SubCategory[j].Data == subCategoryData) {
+        categoryData[i].SubCategory[j].Data = data;
       }
     }
-    // console.log(categoryData);
+     console.log(categoryData);
     let res = await editSelectedCategory(categoryName, categoryData);
     if (res.success) window.location.assign("/");
   };
