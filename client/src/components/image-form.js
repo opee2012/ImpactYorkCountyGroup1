@@ -1,7 +1,5 @@
 /**
- * @module Components/MyDropzone
- * A React component that provides a drag-and-drop area for uploading images.
- * It uses the `react-dropzone` library for handling file drops.
+ * A React component that provides a drag-and-drop area for uploading images. It uses the `react-dropzone` library for handling file drops.
  */
 
 import React, { useState } from 'react';

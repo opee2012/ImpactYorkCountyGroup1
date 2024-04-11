@@ -1,5 +1,8 @@
 /**
  * Main application component that sets up routing for different pages.
+ * It uses the AuthContext to determine if a user is authenticated and
+ * conditionally renders different components based on the authentication state.
+ * 
  * @returns {React.Component} The App component with routing configured.
  */
 function App() {
@@ -16,7 +19,7 @@ function App() {
           {/* Route for the upload page */}
           <Route path="/upload" element={<Upload />} />
           {/* Route for the edit page */}
-          <Route path="/edit/:subcategory" Component={Edit} />
+          <Route path="/edit/:subcategory" element={<Edit />} />
           {/* Route for the password change page */}
           <Route path="/password" element={!email ? <Login /> : <ChangePasswordForm />} />
           {/* Route for the login page */}

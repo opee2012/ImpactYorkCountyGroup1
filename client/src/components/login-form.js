@@ -1,5 +1,4 @@
 /**
- * @module Components/LoginForm
  * A React component that renders a login form for user authentication.
  */
 

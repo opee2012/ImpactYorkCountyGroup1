@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: hooks/useEdit.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,71 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: hooks/useEdit.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Custom hook for handling category editingProvides functionality to edit a selected category by sending a PUT request to the server.
+ *
+ * @returns {Object} An object containing the selectedFile state, status state, and the editSelectedCategory function.
+ */
+export const useEdit = () => {
+  // State for tracking errors
+  const [error, setError] = useState(null);
+  // State for tracking the selected file
+  const [selectedFile, setSelectedFile] = useState(null);
+  // State for tracking the status (currently unused)
+  const [status] = useState(null);
+  // State for tracking loading status (setter function not used)
+  const [setIsLoading] = useState(false);
 
+  /**
+   * Asynchronously edits a selected category by sending a PUT request to the server.
+   * @param {string} categoryName - The name of the category to edit.
+   * @param {Object} data - The new data for the category.
+   */
+  const editSelectedCategory = async (categoryName, data) => {
+    setSelectedFile(true);
+    setError(null);
 
-    <h3> </h3>
+    try {
+      const request = await fetch("/data/:data", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query: { Category: categoryName },
+          json: { Data: data },
+        }),
+      });
+      console.log(request);
+      if (!request.ok) {
+        throw new Error(`Request failed with status ${request.status}`);
+      } else {
+        const json = await request.json();
+        console.log(json);
+        return json;
+      }
+    } catch (error) {
+      setError(error.message);
+      setIsLoading(false);
+    }
+  };
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  return {
+    selectedFile,
+    status,
+    editSelectedCategory,
+  };
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

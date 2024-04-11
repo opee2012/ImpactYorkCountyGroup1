@@ -1,0 +1,12 @@
+{
+    "source": {
+        "include": ["components", "context", "hooks", "pages", "App.js"],
+        "exclude": ["node_modules"],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "opts": {
+        "recurse": true,
+        "destination": "../../client_docs"
+    }
+}

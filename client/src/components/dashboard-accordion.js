@@ -1,7 +1,5 @@
 /**
- * @module Components/DashboardAccordion
- * A React component that renders an accordion-style list of categories and subcategories.
- * It allows users to expand/collapse subcategories and provides an option to edit them if the user is authenticated.
+ * A React component that renders an accordion-style list of categories and subcategories. It allows users to expand/collapse subcategories and provides an option to edit them if the user is authenticated.
  */
 
 import React, { useState } from 'react';

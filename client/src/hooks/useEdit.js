@@ -1,6 +1,7 @@
 /**
- * Custom hook for handling category editing.
- * @returns {Object} An object containing the selectedFile state, status state, and editSelectedCategory function.
+ * Custom hook for handling category editingProvides functionality to edit a selected category by sending a PUT request to the server.
+ *
+ * @returns {Object} An object containing the selectedFile state, status state, and the editSelectedCategory function.
  */
 export const useEdit = () => {
   // State for tracking errors
@@ -13,10 +14,9 @@ export const useEdit = () => {
   const [setIsLoading] = useState(false);
 
   /**
-   * Edits a selected category by sending a PUT request to the server.
+   * Asynchronously edits a selected category by sending a PUT request to the server.
    * @param {string} categoryName - The name of the category to edit.
    * @param {Object} data - The new data for the category.
-   * @returns {Promise<Object>|undefined} The updated category data in JSON format or undefined if an error occurs.
    */
   const editSelectedCategory = async (categoryName, data) => {
     setSelectedFile(true);

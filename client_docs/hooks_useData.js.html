@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: hooks/useData.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,59 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: hooks/useData.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Custom hook for handling data fetching.
+ * @returns {Object} An object containing the error state, loading state, and fetchData function.
+ */
+export const useDataHandle = () => {
+  // State for tracking errors
+  const [error, setError] = useState(null);
+  // State for tracking loading status
+  const [isLoading, setIsLoading] = useState(null);
 
+  /**
+   * Fetches data from the server.
+   * @param {Object} data - The data to send in the request body.
+   * @returns {Promise&lt;Object>|undefined} The fetched data in JSON format or undefined if an error occurs.
+   */
+  const fetchData = async (data) => {
+    setIsLoading(true);
+    setError(null);
 
-    <h3> </h3>
+    try {
+      const response = await fetch("/data", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      } else {
+        const json = await response.json();
+        setIsLoading(false);
+        return json;
+      }
+    } catch (error) {
+      setError(error.message);
+      setIsLoading(false);
+    }
+  };
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  return { error, isLoading, fetchData };
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: App.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,52 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: App.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Main application component that sets up routing for different pages.
+ * It uses the AuthContext to determine if a user is authenticated and
+ * conditionally renders different components based on the authentication state.
+ * 
+ * @returns {React.Component} The App component with routing configured.
+ */
+function App() {
+  // Use the AuthContext to determine if a user is authenticated
+  const { state } = useAuthContext();
+  const { email } = state || {};
 
+  return (
+    &lt;div className="App">
+      &lt;BrowserRouter>
+        &lt;Routes>
+          {/* Route for the dashboard page */}
+          &lt;Route path="/" element={&lt;Dashboard />} />
+          {/* Route for the upload page */}
+          &lt;Route path="/upload" element={&lt;Upload />} />
+          {/* Route for the edit page */}
+          &lt;Route path="/edit/:subcategory" element={&lt;Edit />} />
+          {/* Route for the password change page */}
+          &lt;Route path="/password" element={!email ? &lt;Login /> : &lt;ChangePasswordForm />} />
+          {/* Route for the login page */}
+          &lt;Route path="/login" element={!email ? &lt;Login /> : &lt;Navigate to="/" />} />
+          {/* Route for the user management page */}
+          &lt;Route path="/user-management" element={!email ? &lt;Login /> : &lt;UserManagement />} />
+        &lt;/Routes>
+      &lt;/BrowserRouter>
+    &lt;/div>
+  );
+}
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default App;</code></pre>
+        </article>
+    </section>
 
 
 

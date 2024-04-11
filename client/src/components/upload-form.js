@@ -1,5 +1,4 @@
 /**
- * @module Components/UploadForm
  * A React component that renders a form for uploading Excel files and provides a download link for a template file.
  */
 
