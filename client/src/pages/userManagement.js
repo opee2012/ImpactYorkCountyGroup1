@@ -5,6 +5,34 @@ import EditUserIcon from '../icons/edit-email-icon.svg';
 import DeleteUserIcon from '../icons/delete-email-icon.svg';
 import { useUserMan } from '../hooks/useUserMan';
 
+export function generateRandomString(length) {
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?';
+    let password = '';
+    length = Math.max(length, 8);
+
+    // special character
+    password += '!@#$%&*?'.charAt(Math.floor(Math.random() * 8));
+
+    //number
+    password += '0123456789'.charAt(Math.floor(Math.random() * 10));
+
+    // Generate the rest of the characters
+    for (let i = 0; i < length - 2; i++) {
+        password += charset.charAt(Math.floor(Math.random() * charset.length));
+    }
+
+    // Shuffle the string
+    password = password.split('').sort(() => Math.random() - 0.5).join('');
+
+    // Check if the generated password meets the regex requirements
+    const regex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-#$%&!@_+=?])(?=.*[a-zA-Z]).{8,20}$/;
+    if (!regex.test(password)) {
+        return generateRandomString(length);
+    }
+
+    return password;
+}
+
 // UserManagement component for managing user emails
 const UserManagement = () => {
     // State for storing users, new email, edit email, error message, and showing edit form
@@ -34,34 +62,6 @@ const UserManagement = () => {
         };
         fetchLogins();
     }, []);
-
-    function generateRandomString(length) {
-        const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?';
-        let password = '';
-        length = Math.max(length, 8);
-    
-        // special character
-        password += '!@#$%&*?'.charAt(Math.floor(Math.random() * 8));
-    
-        //number
-        password += '0123456789'.charAt(Math.floor(Math.random() * 10));
-    
-        // Generate the rest of the characters
-        for (let i = 0; i < length - 2; i++) {
-            password += charset.charAt(Math.floor(Math.random() * charset.length));
-        }
-    
-        // Shuffle the string
-        password = password.split('').sort(() => Math.random() - 0.5).join('');
-    
-        // Check if the generated password meets the regex requirements
-        const regex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-#$%&!@_+=?])(?=.*[a-zA-Z]).{8,20}$/;
-        if (!regex.test(password)) {
-            return generateRandomString(length);
-        }
-    
-        return password;
-    }
     
     const randomTempPass = generateRandomString(8);
    
