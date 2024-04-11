@@ -23,7 +23,7 @@ const Dashboard = () => {
   const { state } = useAuthContext();
   const { email, admin } = state || {};
 
-  console.log(admin);
+  // console.log(admin);
 
   useEffect(() => {
     fetchData()
@@ -83,12 +83,13 @@ const Dashboard = () => {
       <div className="content-section">
         {error ? (
           <p className="wrapper">{error}</p>
-        ) : isLoading ? (
+        ) : isLoading ? ( 
           <p className="wrapper">loading...</p>
         ) : categories ? (
           <DashboardAccordion category={categories[selectedMenuItem]} searchInput={searchInput}/>
-        ) : null}
+        ) : <p className="wrapper">no available data...</p>}
       </div>
+      
     </div>
   );
 };
