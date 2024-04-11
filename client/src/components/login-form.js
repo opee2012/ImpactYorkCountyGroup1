@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import "../styles/loginform.css";
+import { generateRandomString } from "../pages/userManagement";
 
 const LoginForm = ({ userIcon , passwordIcon }) => {
     //TODO:
@@ -15,6 +16,13 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
 
         await login(email, password);
     }
+
+    const handleForgotPassword = () => {
+        const confirmReset = window.confirm("Are you sure you want to reset your password?");
+        if (confirmReset) {
+            console.log("resetting password");
+        }
+    };
 
     return (
         <form className="login" onSubmit={handleSubmit}>
@@ -43,8 +51,11 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-            
             {error && <div className="error">{error}</div>}
+            <button type="button" onClick={handleForgotPassword} className="forgot-password">
+                Forgot Password?
+            </button>
+            <br />
             <input
                 type="submit"
                 value="Login"
