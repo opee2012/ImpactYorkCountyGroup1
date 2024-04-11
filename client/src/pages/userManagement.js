@@ -82,7 +82,7 @@ const UserManagement = () => {
             setUsers(logins);
             setNewEmail('');
             setAddError('');
-            //reloadPageAfterDelay(1000); 
+            reloadPageAfterDelay(1000); 
         } catch (error) {
             console.error('Error adding login:', error);
             setAddError('Failed to add login');
