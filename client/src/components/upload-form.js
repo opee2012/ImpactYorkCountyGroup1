@@ -35,26 +35,6 @@ const UploadForm = () => {
     setStatus(`${file.name}`);
   };
 
-  const filename = "IYC Dashboard Data.xlsx";
-
-  const downloadFile = async (filename) => {
-    const response = await fetch(`/downloadxlsx/${filename}`);
-    const blob = await response.blob();
-  
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename || 'download';
-    const clickHandler = () => {
-      setTimeout(() => {
-        URL.revokeObjectURL(url);
-        a.removeEventListener('click', clickHandler);
-      }, 150);
-    };
-    a.addEventListener('click', clickHandler, false);
-    a.click();
-  }
-
   const generateExcelFile = () => {
     const wb = XLSX.utils.book_new();
     const rowIndex = {};
