@@ -100,6 +100,16 @@ const UploadForm = () => {
             rowIndex++;
         });
 
+        // Clear contents of cells with empty strings
+        XLSX.utils.sheet_to_json(ws, { header: 1 }).forEach((row, rowIndex) => {
+            row.forEach((cellValue, colIndex) => {
+                if (cellValue === "") {
+                    const cellAddress = XLSX.utils.encode_cell({ r: rowIndex, c: colIndex });
+                    delete ws[cellAddress];
+                }
+            });
+        });
+
         // Auto-size columns after adding data
         for (let i = 0; i < ws['!ref'].split(':')[1].charCodeAt(0) - 65; i++) {
             let maxContentLength = 0;
@@ -130,6 +140,7 @@ const UploadForm = () => {
 
     window.URL.revokeObjectURL(url);
 };
+
 
   return (
     <div className="uploadformnonflex">
