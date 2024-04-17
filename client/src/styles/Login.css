@@ -5,6 +5,8 @@ body {
 .container {
     padding-top: 10%;
     width: 550px;
+    display: flex;
+    flex-direction: column;
 }
 
 .logo {

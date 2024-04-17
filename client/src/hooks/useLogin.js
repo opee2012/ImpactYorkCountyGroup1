@@ -19,8 +19,7 @@ export const useLogin = () => {
     const body = await response.json();
 
     if (!response.ok) {
-      setIsLoading(false);
-      setError(body.message);
+      throw new Error(body.message || 'Failed to login');
     } else {
       const { email, admin } = body;
 
@@ -36,5 +35,23 @@ export const useLogin = () => {
     }
   };
 
-  return { login, isLoading, error};
+  const forgot = async (email) => {
+    setIsLoading(true);
+    setError(null);
+
+    const response = await fetch('/forgot', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email })
+    });
+
+    if (!response.ok) {
+      throw new Error(body.message || 'Failed to send password reset email');
+    }
+
+    const body = await response.json();
+    return body.message;
+  };
+
+  return { login, forgot, isLoading, setIsLoading};
 }

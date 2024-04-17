@@ -10,23 +10,18 @@ const ChangePasswordForm = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [errorClient, setError] = useState('');
-
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const { logout } = useLogout();
-
   const { state, isLoading } = useAuthContext();
   const { email, admin } = state || {};
-
 
   const { updateLogin, error} = usePassword();
 
   const emailWithoutQuotes = email.replace(/"/g, '');
-  
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,8 +50,10 @@ const ChangePasswordForm = () => {
       return;
     }
 
-    if (newPassword.length < 8 || newPassword.length > 20) {
-      setError("Passwords must be between 8 and 20 characters long");
+    const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-\#\$\%\&\!\@\-\_\=\+\?])(?=.*[a-zA-Z]).{8,20}$/;
+
+    if (!passwordRegex.test(newPassword)) {
+      setError("Password must contain the following:<br />- At least 1 uppercase letter<br />- At least 1 lowercase letter<br />- At least 1 number<br />- At least 1 special character<br />- Minimum 8 characters");
       return;
     }
 
@@ -95,7 +92,7 @@ const ChangePasswordForm = () => {
             Current Password:
           </label>
           <input
-            type="password"
+            type={passwordVisible ? "text" : "password"}
             id="currentPassword"
             className="change-password-input"
             value={currentPassword}
@@ -108,7 +105,7 @@ const ChangePasswordForm = () => {
             New Password:
           </label>
           <input
-            type="password"
+            type={passwordVisible ? "text" : "password"}
             id="newPassword"
             className="change-password-input"
             value={newPassword}
@@ -121,7 +118,7 @@ const ChangePasswordForm = () => {
             Confirm New Password:
           </label>
           <input
-            type="password"
+            type={passwordVisible ? "text" : "password"}
             id="confirmNewPassword"
             className="change-password-input"
             value={confirmNewPassword}
@@ -129,7 +126,11 @@ const ChangePasswordForm = () => {
             required
           />
         </div>
-        {errorClient && <div style={{ color: 'red' }}>{errorClient}</div>}
+        {errorClient.split('<br />').map((line, index) => (
+          <p key={index} style={{ color: 'red' }}>
+            {line}
+          </p>
+        ))}
         <button type="submit">Change Password</button> <br />
         <button type="submit" onClick={() => window.location.assign('/')} >Cancel</button>
       </form>
