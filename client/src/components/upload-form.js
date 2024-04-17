@@ -35,6 +35,34 @@ const UploadForm = () => {
     setStatus(`${file.name}`);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (selectedFile && selectedFile.name.endsWith(".xlsx")) {
+      const confirmUpload = window.confirm(`Are you sure you want to upload ${selectedFile.name}?\n\n` +
+          'Uploading this document will overwrite existing data if it is not up to date. ' +
+          'Downloading a new template and modifying it is strongly recommended.');
+      if (confirmUpload) {
+        uploadSelectedFile(selectedFile)
+        .then(() => {
+          setTimeout(() => {
+            window.location.assign('/')
+          }, 50);
+        })
+        .catch((error) => {
+          console.error(error);
+          setError("Upload failed");
+        });
+      } else {
+        setError("Upload cancelled!");
+        setSelectedFile(null);
+        setStatus(null);
+      }
+    } else {
+      alert("Please select an Excel file to upload.");
+    }
+  };
+
   const generateExcelFile = () => {
     const wb = XLSX.utils.book_new();
 
@@ -181,22 +209,7 @@ const UploadForm = () => {
         </p>
       </form>
       <div className="submitnback">
-        <button onClick={() => {
-          if (selectedFile && selectedFile.name.endsWith(".xlsx")) {
-            uploadSelectedFile(selectedFile)
-            .then(() => {
-              setTimeout(() => {
-                window.location.assign('/')
-              }, 50);
-            })
-            .catch((error) => {
-              console.error(error);
-              setError("Upload failed");
-            });
-          } else {
-            alert("Please select an Excel file to upload.");
-          }
-        }}>Submit</button> <br />
+        <button onClick= {handleSubmit}>Submit</button> <br />
         <button onClick={() => window.location.assign('/')}>Dashboard</button>
         </div>
     </div>

@@ -1,17 +1,6 @@
 const multer = require('multer');
-const path = require('path');
-const xlsxDir = path.join(__dirname, '../uploads/xlsx');
 
-const xlsx_storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, xlsxDir);
-    },
-    filename: (req, file, cb) => {
-        cb(null, 'IYC Dashboard Data.xlsx');
-    }
-});
-
-const xlsx = multer({ storage: xlsx_storage });
+const xlsx = multer({ storage: multer.memoryStorage() });
 
 const HTTP_STATUS = {
     OK: 200,

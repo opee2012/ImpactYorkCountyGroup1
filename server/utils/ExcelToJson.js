@@ -1,11 +1,9 @@
 const XLSX = require('xlsx');
-const fs = require('fs');
 
-function ExcelToJSON (file) {
+function ExcelToJSON (buffer) {
     return new Promise((resolve, reject) => {
-        fs.readFile(file, (err, data) => {
-            if (err) return reject(err);
-            let binaryString = data.toString('binary');
+        try {
+            let binaryString = buffer.toString('binary');
             const workbook = XLSX.read(binaryString, { type: 'binary', cellNF: true, cellStyles: true});
 
             // Array to store the data from each sheet
@@ -147,7 +145,9 @@ function ExcelToJSON (file) {
 
             // Return the sheetArray
             resolve(sheetArray);
-        });
+        } catch (error) {
+            reject(error);
+        };
     });
 
 };
