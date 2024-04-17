@@ -79,6 +79,9 @@
     align-items: center;
     font-size: 1.8vh;
 }
+.content-inner img {
+    padding-bottom: 10px;
+}
 
 .content-image {
     height: 30vh;
