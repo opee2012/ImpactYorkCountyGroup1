@@ -68,15 +68,21 @@ input:focus::placeholder {
     margin: 16px auto;
 }
 
-.error-container {
+.error-container.error {
     color: darkred;
     font-size: 1em;
-    margin-top: -8px;
+    font-size: small;
+}
+
+.error-container.success {
+    color: darkgreen;
+    font-size: 1em;
     font-size: small;
 }
 
 .forgot-password {
     background-color: #79A3dc;
+    margin-top: 8px;
     color: white;
     border: none;
     border-radius: 5px;
@@ -108,3 +114,4 @@ input:focus::placeholder {
     cursor: pointer;
     background-color: #6596da;
 }
+

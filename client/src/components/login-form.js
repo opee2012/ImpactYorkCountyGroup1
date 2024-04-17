@@ -9,6 +9,7 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorClient, setError] = useState('');
+    const [errorType, setErrorType] = useState('');
     const { login, forgot, isLoading, setIsLoading } = useLogin();
 
     const handleSubmit = async (e) => {
@@ -16,10 +17,12 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
 
         if (email.trim() === '') {
             setError('Email is required');
+            setErrorType('error');
             return;
         }
         if (password.trim() === '') {
             setError('Password is required');
+            setErrorType('error');
             return;
         }
 
@@ -28,6 +31,7 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
             return;
         } catch (error) {
             setError(error.message);
+            setErrorType('error');
             return;
         }
     }
@@ -36,16 +40,21 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
         e.preventDefault();
         if (email.trim() === '') {
             setError('Email is required');
+            setErrorType('error');
             return;
         }
         setIsLoading(true);
         try {
             const confirmReset = window.confirm("Are you sure you want to reset your password?");
             if (confirmReset) {
-                await forgot(email);
+                const message = await forgot(email);
+                console.log(message);
+                setError(message);
+                setErrorType('success');
             }
         } catch (error) {
             setError(error.message);
+            setErrorType('error');
         } finally {
             setIsLoading(false);
         }
@@ -77,12 +86,8 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-            <div className="error-container">
-                {errorClient.split('<br />').map((line, index) => (
-                    <p key={index} style={{ color: 'red' }}>
-                        {line}
-                    </p>
-                ))}
+            <div className={`error-container ${errorType}`}>
+                {errorClient}
             </div>
             <button type="button" onClick={handleForgotPassword} className="forgot-password">
                 Forgot Password?

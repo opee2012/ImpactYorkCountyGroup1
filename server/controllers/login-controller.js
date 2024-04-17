@@ -221,7 +221,7 @@ exports.forgotLogin = async (req, res) => {
             return;
         }
 
-        res.status(200).json({ message: 'Temporary password sent to email', email: updatedUser.email });
+        res.status(200).json({ message: `Temporary password sent to ${updatedUser.email}`, email: updatedUser.email });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

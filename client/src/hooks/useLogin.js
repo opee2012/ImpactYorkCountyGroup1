@@ -45,14 +45,12 @@ export const useLogin = () => {
       body: JSON.stringify({ email })
     });
 
-    const body = await response.json();
-
     if (!response.ok) {
       throw new Error(body.message || 'Failed to send password reset email');
-    } else {
-      setIsLoading(false);
-      setError('Password reset email sent');
     }
+
+    const body = await response.json();
+    return body.message;
   };
 
   return { login, forgot, isLoading, setIsLoading};
