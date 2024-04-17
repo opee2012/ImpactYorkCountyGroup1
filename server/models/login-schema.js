@@ -13,7 +13,7 @@ const loginSchema = new mongoose.Schema({
     },
     admin: {
         type: Boolean,
-        default: [false, 'Missing staff type test']
+        default: false
     }
 });
 
