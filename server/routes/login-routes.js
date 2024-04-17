@@ -12,7 +12,8 @@ const {
     loginUser,
     addNewLogin,
     updateLogin,
-    deleteLogin
+    deleteLogin,
+    forgotLogin
 } = require('../controllers/login-controller');
 
 module.exports = function(app) {
@@ -34,4 +35,7 @@ module.exports = function(app) {
 
     // DELETE one login
     app.delete('/login/:email', deleteLogin);
+
+    // POST forgot login
+    app.post('/forgot', forgotLogin);
 };

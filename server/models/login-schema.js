@@ -13,7 +13,7 @@ const loginSchema = new mongoose.Schema({
     },
     admin: {
         type: Boolean,
-        default: [true, 'Missing staff type']
+        default: [false, 'Missing staff type test']
     }
 });
 
@@ -50,6 +50,26 @@ loginSchema.statics.login = async function(email, password) {
         if (!match) {
             throw new Error('Invalid password');
         };
+
+        return user;
+    } catch (err) {
+        throw new Error(err.message);
+    }
+};
+
+// static update password method for forgot password
+loginSchema.statics.updatePassword = async function(email, password) {
+
+    const user = await this.findOne({ email: email });
+    console.log(user);
+
+    try {
+        if (!user) {
+            throw new Error('Invalid email');
+        }
+
+        user.password = await this.hash(password);
+        await user.save();
 
         return user;
     } catch (err) {

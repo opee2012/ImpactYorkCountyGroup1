@@ -12,6 +12,16 @@ const createToken = (_id) => {
     });
 }
 
+function generatePassword(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
 // get all logins
 exports.getAllLogins = async (req, res) => {
     console.log(`Getting all logins`);
@@ -175,5 +185,66 @@ exports.deleteLogin = async (req, res) => {
         // If an error occurs during the deletion process, send an error response with status 400 (Bad Request)
         console.error('Error deleting login:', error);
         res.status(400).json({ error: 'Failed to delete login.' });
+    }
+};
+
+exports.forgotLogin = async (req, res) => {
+    const { email } = req.body;
+    
+    try {
+        const login = await Login.findOne({ email: email });
+
+        if (!login) {
+            res.status(404).json({ message: `${email} not found.` });
+            return;
+        }
+
+        const newPassword = generatePassword(10);
+
+        const hashedPassword = await Login.hash(newPassword);
+
+        login.password = hashedPassword;
+        await login.save();
+
+        const mailText = "Here is your temporary password for your IYC account: " + newPassword;
+        let sendInfo = {
+            from: 'no-reply@impactyorkcounty.org',
+            to: email,
+            subject: 'Temporary IYC password',
+            text: mailText,
+            html: '<p>' + mailText + '</p>'
+        };
+
+        // Read
+        let path = "./utils/email_temp/sentEmails.json";
+        fs.readFile(path, (err, data) => {
+            if (err) {
+                console.log("Read from sentEmails.json failed. Reason: " + err.message);
+                return;
+            }
+            let sentEmails = JSON.parse(data);
+            sentEmails["sent"].push(sendInfo);
+
+            // Write
+            fs.writeFile(path, JSON.stringify(sentEmails, null, 2), (err) => {
+                if (err) {
+                    console.log("Write into sentEmails.json failed. Reason: " +  + err.message);
+                    return;
+                }
+            });
+        });
+
+        res.status(200).json({ message: 'Temporary password sent to email' });
+
+        const updatedUser = await Login.updatePassword(email, newPassword);
+
+        if (!updatedUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        res.status(201).json({ email: updatedUser.email });
+
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 };

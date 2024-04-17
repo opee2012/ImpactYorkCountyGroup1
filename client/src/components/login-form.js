@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import "../styles/loginform.css";
-import { generateRandomString } from "../pages/userManagement";
 
 const LoginForm = ({ userIcon , passwordIcon }) => {
     //TODO:
@@ -9,18 +8,46 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login, isLoading, error } = useLogin();
+    const [errorClient, setError] = useState('');
+    const { login, forgot, isLoading, setIsLoading } = useLogin();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await login(email, password);
+        if (email.trim() === '') {
+            setError('Email is required');
+            return;
+        }
+        if (password.trim() === '') {
+            setError('Password is required');
+            return;
+        }
+
+        try {
+            await login(email, password);
+            return;
+        } catch (error) {
+            setError(error.message);
+            return;
+        }
     }
 
-    const handleForgotPassword = () => {
-        const confirmReset = window.confirm("Are you sure you want to reset your password?");
-        if (confirmReset) {
-            console.log("resetting password");
+    const handleForgotPassword = async (e) => {
+        e.preventDefault();
+        if (email.trim() === '') {
+            setError('Email is required');
+            return;
+        }
+        setIsLoading(true);
+        try {
+            const confirmReset = window.confirm("Are you sure you want to reset your password?");
+            if (confirmReset) {
+                await forgot(email);
+            }
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -38,7 +65,6 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
                     onChange={(e) => setEmail(e.target.value)}
                 />
             </div>
-            
             <div className="input-container">
                 <img src={passwordIcon} alt="password icon" className="icon" />
                 <input
@@ -51,7 +77,13 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-            {error && <div className="error">{error}</div>}
+            <div className="error-container">
+                {errorClient.split('<br />').map((line, index) => (
+                    <p key={index} style={{ color: 'red' }}>
+                        {line}
+                    </p>
+                ))}
+            </div>
             <button type="button" onClick={handleForgotPassword} className="forgot-password">
                 Forgot Password?
             </button>
@@ -62,6 +94,9 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
                 id="submitbtn"
                 disabled={isLoading}
             />
+            <button type="button" onClick={() => window.location.assign('/')} className="dashboard">
+                Dashboard
+            </button>
         </form>
     );
 };

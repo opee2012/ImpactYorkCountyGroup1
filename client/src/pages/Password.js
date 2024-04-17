@@ -15,17 +15,13 @@ const ChangePasswordForm = () => {
   const { state, isLoading } = useAuthContext();
   const { email, admin } = state || {};
 
-
   const { updateLogin, error} = usePassword();
 
   const emailWithoutQuotes = email.replace(/"/g, '');
-  
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
