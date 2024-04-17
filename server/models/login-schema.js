@@ -61,7 +61,6 @@ loginSchema.statics.login = async function(email, password) {
 loginSchema.statics.updatePassword = async function(email, password) {
 
     const user = await this.findOne({ email: email });
-    console.log(user);
 
     try {
         if (!user) {
