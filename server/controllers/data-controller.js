@@ -4,8 +4,8 @@ const { ExcelToJSON } = require("../utils/ExcelToJson");
 const Validation = require('../utils/validation');
 const dashboardSchema = require('../models/dashboard-schema');
 const DashboardData = dashboardSchema.DashboardData;
-const path = require('path');
-const uploadDir = path.join(__dirname, '../uploads/xlsx');
+// const path = require('path');
+// const uploadDir = path.join(__dirname, '../uploads/xlsx');
 
 // GET all data
 // Retrieves all categories stored
@@ -37,7 +37,7 @@ exports.getOneData = async function(req, res) {
 // Create a new category or update an existing one
 exports.addNewData = async function (req, res) {
     try {
-        const json_files = await ExcelToJSON(uploadDir + '/IYC Dashboard Data.xlsx');
+        const json_files = await ExcelToJSON(req.file.buffer);
 
         for (let i in json_files) {
             let json = json_files[i];

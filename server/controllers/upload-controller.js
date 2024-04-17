@@ -11,15 +11,6 @@ const image_storage = multer.diskStorage({
     }
 });
 
-exports.uploadXLSX = (req, res) => {
-    xlsx.single('file')(req, res, (err) => {
-        if (err) {
-            return res.status(400).json({ error: err.message });
-        }
-        res.send({ message: 'File uploaded successfully' });
-    });
-};
-
 const image = multer({ storage: image_storage });
 
 exports.uploadImage = (req, res) => {
