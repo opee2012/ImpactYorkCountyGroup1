@@ -16,8 +16,9 @@ const Dashboard = () => {
     setSearchInput(event.target.value);
   };
 
-  const handleMenuItemClick = (menuItemIndex) => {
-    setSelectedMenuItem(menuItemIndex);
+  const handleMenuItemClick = (categoryName) => {
+    const index = categories.findIndex((item) => item.Category === categoryName);
+    setSelectedMenuItem(index);
   };
 
   const { state } = useAuthContext();
@@ -51,9 +52,9 @@ const Dashboard = () => {
         <h1>Menu</h1>
         <ul>
           {categories
-            ? categories.map((item, index) => {
+            ? [...categories].sort((a,b) => a.Category.localeCompare(b.Category)).map((item, index) => {
                 return (
-                  <li key={index} onClick={() => handleMenuItemClick(index)} {...selectedMenuItem === index ? {className:"highlighted"}:null}>
+                  <li key={index} onClick={() => handleMenuItemClick(item.Category)} {...selectedMenuItem === item.Category ? {className:"highlighted"}:null}>
                     {item.Category}
                   </li>
                 );
