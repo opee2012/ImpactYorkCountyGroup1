@@ -22,6 +22,38 @@ function generatePassword(length) {
     return result;
 }
 
+function sendTemporaryPasswordEmail(email, password) {
+    // ----- Currently not possible to get email verification the way we want it (need an SMTP server) -----
+    // Instead, writes the contents of the mail sending information into a json file.
+    const mailText = "Here is your temporary password for your IYC account: " + password;
+    let sendInfo = {
+        from: 'no-reply@impactyorkcounty.org',
+        to: email,
+        subject: 'Temporary IYC password',
+        text: mailText,
+        html: '<p>' + mailText + '</p>'
+    };
+
+    // Read
+    let path = "./utils/email_temp/sentEmails.json";
+    fs.readFile(path, (err, data) => {
+        if (err) {
+            console.log("Read from sentEmails.json failed. Reason: " + err.message);
+            return;
+        }
+        let sentEmails = JSON.parse(data);
+        sentEmails["sent"].push(sendInfo);
+
+        // Write
+        fs.writeFile(path, JSON.stringify(sentEmails, null, 2), (err) => {
+            if (err) {
+                console.log("Write into sentEmails.json failed. Reason: " +  + err.message);
+                return;
+            }
+        });
+    });
+}
+
 // get all logins
 exports.getAllLogins = async (req, res) => {
     console.log(`Getting all logins`);
@@ -75,35 +107,8 @@ exports.addNewLogin = async (req, res) => {
                 throw new Error("email must be an email address");
             }
 
-            // ----- Currently not possible to get email verification the way we want it (need an SMTP server) -----
-            // Instead, writes the contents of the mail sending information into a json file.
-            const mailText = "Here is your temporary password for your IYC account: " + password;
-            let sendInfo = {
-                from: 'no-reply@impactyorkcounty.org',
-                to: email,
-                subject: 'Temporary IYC password',
-                text: mailText,
-                html: '<p>' + mailText + '</p>'
-            };
-
-            // Read
-            let path = "./utils/email_temp/sentEmails.json";
-            fs.readFile(path, (err, data) => {
-                if (err) {
-                    console.log("Read from sentEmails.json failed. Reason: " + err.message);
-                    return;
-                }
-                let sentEmails = JSON.parse(data);
-                sentEmails["sent"].push(sendInfo);
-
-                // Write
-                fs.writeFile(path, JSON.stringify(sentEmails, null, 2), (err) => {
-                    if (err) {
-                        console.log("Write into sentEmails.json failed. Reason: " +  + err.message);
-                        return;
-                    }
-                });
-            });
+            // Send email
+            sendTemporaryPasswordEmail(email, password);
             
             // Sign up user
             const user = await Login.signup(email, password, admin);
@@ -206,33 +211,8 @@ exports.forgotLogin = async (req, res) => {
         login.password = hashedPassword;
         await login.save();
 
-        const mailText = "Here is your temporary password for your IYC account: " + newPassword;
-        let sendInfo = {
-            from: 'no-reply@impactyorkcounty.org',
-            to: email,
-            subject: 'Temporary IYC password',
-            text: mailText,
-            html: '<p>' + mailText + '</p>'
-        };
-
-        // Read
-        let path = "./utils/email_temp/sentEmails.json";
-        fs.readFile(path, (err, data) => {
-            if (err) {
-                console.log("Read from sentEmails.json failed. Reason: " + err.message);
-                return;
-            }
-            let sentEmails = JSON.parse(data);
-            sentEmails["sent"].push(sendInfo);
-
-            // Write
-            fs.writeFile(path, JSON.stringify(sentEmails, null, 2), (err) => {
-                if (err) {
-                    console.log("Write into sentEmails.json failed. Reason: " +  + err.message);
-                    return;
-                }
-            });
-        });
+        // Send email
+        sendTemporaryPasswordEmail(email, newPassword);
 
         res.status(200).json({ message: 'Temporary password sent to email' });
 
