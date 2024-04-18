@@ -163,7 +163,8 @@ const UploadForm = () => {
 
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', 'IYC Dashboard Data.xlsx');
+    let d = new Date();
+    link.setAttribute('download', `IYC Dashboard Data${(d.getMonth()+1)+"-"+d.getDate().toString()+"-"+d.getFullYear()}.xlsx`);
     link.click();
 
     window.URL.revokeObjectURL(url);
