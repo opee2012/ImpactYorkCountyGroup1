@@ -58,10 +58,13 @@ const Edit = () => {
       let res =  await uploadSelectedImage(formData);
       }
     }
+
+    const filteredData = data.filter((item) => item.Year !== "" && item.Value !== "");
+
     for (let i in categoryData) {
       for(let j in categoryData[i].SubCategory)
       if (categoryData[i].SubCategory[j].Data == subCategoryData) {
-        categoryData[i].SubCategory[j].Data = data;
+        categoryData[i].SubCategory[j].Data = filteredData;
       }
     }
      console.log(categoryData);
