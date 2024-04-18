@@ -2,13 +2,11 @@ import { useState } from 'react';
 import { useAuthContext } from '../context/AuthContext';
 
 export const useLogin = () => {
-  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
 
   const login = async (email, password) => {
     setIsLoading(true);
-    setError(null);
 
     try {
       const response = await fetch('/login', {
@@ -33,18 +31,16 @@ export const useLogin = () => {
   
         // update loading state
         setIsLoading(false);
-        setError(null);
       }
     } catch (error) {
       setIsLoading(false);
-      setError(error.message);
+      throw error;
     }
     
   };
 
   const forgot = async (email) => {
     setIsLoading(true);
-    setError(null);
 
     const response = await fetch('/forgot', {
       method: 'POST',
