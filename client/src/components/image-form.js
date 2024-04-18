@@ -28,7 +28,7 @@ export const MyDropzone = (props) => {
         <div {...getRootProps()} className='dropzonebox'>
           <div className='dropzone-input'>
             <input {...getInputProps()} />
-            <h2 className='dropzone-heading'>Drag and Drop Excel Image Here</h2>
+            <h2 className='dropzone-heading'>Drag and Drop<br />Image Here</h2>
             <br />
             <div className='dropzone-or'>OR</div>
             <br />
