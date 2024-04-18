@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "AvenirBlack";
+    src: url("../fonts/Avenir Black.ttf");
+}
+
 .wrapper {
     
     top: 70px; 
@@ -149,4 +154,17 @@ h3, span{
     background-color: white;
     font-weight: bold;
     font-size: 1.8vh;
+}
+
+.delete-button button{
+    white-space: nowrap;
+    font-size: 1.8vh;
+    padding: 4px 15px;
+    margin-bottom: 10px;
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "AvenirBlack";
 }

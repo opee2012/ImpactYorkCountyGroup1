@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 const DashboardAccordion = ({ category, searchInput }) => {
   const [selectedSubItems, setSelectedSubItems] = useState([]);
   const [showImages, setShowImages] = useState({});
+  const [imageErrors, setImageErrors] = useState({});
+
   let data;
   let categoryName;
   if(category) {
@@ -33,6 +35,32 @@ const DashboardAccordion = ({ category, searchInput }) => {
       [subCategory.Name]: !prevState[subCategory.Name],
     }));
   };
+
+  const handleDeleteImage = async (imageName) => {
+    if (!window.confirm("Are you sure you want to delete this image?")) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`/deleteImage/${encodeURIComponent(imageName)}`, {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            setShowImages((prevState) => ({
+                ...prevState,
+                [imageName]: false,
+            }));
+            // window.location.reload(); <------- Fixes visual glitch but worsens UX
+            alert('Image deleted successfully.');
+        } else {
+            throw new Error('Failed to delete the image.');
+        }
+    } catch (error) {
+        console.error('Error deleting image:', error);
+        alert('Error deleting image.');
+    }
+};
+
 
   const filteredData = data
     ? data
@@ -114,16 +142,22 @@ const DashboardAccordion = ({ category, searchInput }) => {
                             </tbody>
                           </table>
                           {showImages[subCategory.Name] && (
-                            <img
-                              id={"image-" + subCategory.Name}
-                              src={`/uploadImage/${subCategory.Name}.png`}
-                              onError={() =>
-                                document
-                                  .getElementById("image-" + subCategory.Name)
-                                  .setAttribute("hidden", true)
-                              }
-                            />
-                          )}
+                            <div>
+                              <img
+                                src={`/uploadImage/${subCategory.Name}.png`}
+                                onError={() => setImageErrors(prev => ({ ...prev, [subCategory.Name]: true }))}
+                                onLoad={() => setImageErrors(prev => ({ ...prev, [subCategory.Name]: false }))}
+                                alt={subCategory.Name}
+                                style={{ display: imageErrors[subCategory.Name] ? 'none' : 'block' }}
+                              />
+                              <div className="delete-button">
+                              {email && !imageErrors[subCategory.Name] && (
+                                <button onClick={() => handleDeleteImage(subCategory.Name)}>Delete Image</button>
+                              )}
+                              </div>
+                            </div>
+                        )}
+
                         </div>
                       </div>
                     </div>

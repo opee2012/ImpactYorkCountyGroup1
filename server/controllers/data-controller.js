@@ -3,6 +3,8 @@
 const { ExcelToJSON } = require("../utils/ExcelToJson");
 const Validation = require('../utils/validation');
 const dashboardSchema = require('../models/dashboard-schema');
+const fs = require('fs');
+const path = require('path');
 const DashboardData = dashboardSchema.DashboardData;
 // const path = require('path');
 // const uploadDir = path.join(__dirname, '../uploads/xlsx');
@@ -74,5 +76,20 @@ exports.deleteData = async function(req, res) {
         res.status(200).json({ success: true, dbmsg: deletedCategory });
     } catch (err) {
         res.status(400).json({ success: false,  message: err.message });
+    }
+}
+
+exports.deleteImage = async function(req, res) {
+    try {
+        const {imageName } = req.params;
+        const filePath = path.join(__dirname, '../uploads/images', `${imageName}.png`);
+        fs.unlink(filePath, (err) => {
+            if (err) {
+                return res.status(500).json({ success: false, message: err.message });
+            }
+            res.status(200).json({ success: true, message: "Image deleted successfully" });
+        });
+    } catch (err) {
+        res.status(400).json({ success: false, message: "Server error while deleting image"})
     }
 }

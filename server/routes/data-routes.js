@@ -15,7 +15,8 @@ const {
     getOneData,
     addNewData,
     updateData,
-    deleteData
+    deleteData,
+    deleteImage
 } = require('../controllers/data-controller');
 
 module.exports = function(app) {
@@ -34,4 +35,7 @@ module.exports = function(app) {
 
     // DELETE one data
     app.delete('/data/:data', deleteData);
+
+    // DELETE dashboard image
+    app.delete('/deleteImage/:imageName', deleteImage);
 };
