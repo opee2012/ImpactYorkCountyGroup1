@@ -41,19 +41,25 @@ export const useLogin = () => {
 
   const forgot = async (email) => {
     setIsLoading(true);
+  
+    try {
+      const response = await fetch('/forgot', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ email })
+      });
 
-    const response = await fetch('/forgot', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ email })
-    });
-
-    if (!response.ok) {
-      throw new Error(body.message || 'Failed to send password reset email');
+      const body = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(body.message || 'Failed to send password reset email');
+      }
+  
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      throw error;
     }
-
-    const body = await response.json();
-    return body.message;
   };
 
   return { login, forgot, isLoading, setIsLoading};

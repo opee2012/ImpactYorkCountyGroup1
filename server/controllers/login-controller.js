@@ -200,7 +200,7 @@ exports.forgotLogin = async (req, res) => {
         const login = await Login.findOne({ email: email });
 
         if (!login) {
-            res.status(404).json({ message: `${email} not found.` });
+            res.status(404).json({ message: `${email} not found. Please enter a valid email.` });
             return;
         }
 
