@@ -26,6 +26,9 @@ const LoginForm = ({ userIcon , passwordIcon }) => {
             return;
         }
 
+        setError('');
+        setErrorType('');
+
         try {
             await login(email, password);
             return;

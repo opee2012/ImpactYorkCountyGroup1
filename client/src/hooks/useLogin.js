@@ -10,29 +10,36 @@ export const useLogin = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch('/login', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ email, password })
-    });
-    
-    const body = await response.json();
-
-    if (!response.ok) {
-      throw new Error(body.message || 'Failed to login');
-    } else {
-      const { email, admin } = body;
-
-      // store user in local storage
-      localStorage.setItem('email', JSON.stringify(email));
-      localStorage.setItem('admin', JSON.stringify(admin));
-
-      // update the auth context
-      dispatch({ type: 'LOGIN', payload: { email, admin } });
-
-      // update loading state
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ email, password })
+      });
+      
+      const body = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(body.message || 'Failed to login');
+      } else {
+        const { email, admin } = body;
+  
+        // store user in local storage
+        localStorage.setItem('email', JSON.stringify(email));
+        localStorage.setItem('admin', JSON.stringify(admin));
+  
+        // update the auth context
+        dispatch({ type: 'LOGIN', payload: { email, admin } });
+  
+        // update loading state
+        setIsLoading(false);
+        setError(null);
+      }
+    } catch (error) {
       setIsLoading(false);
+      setError(error.message);
     }
+    
   };
 
   const forgot = async (email) => {
