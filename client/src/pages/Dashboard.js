@@ -29,7 +29,8 @@ const Dashboard = () => {
   useEffect(() => {
     fetchData()
       .then((data) => {
-        setCategories(data.out);
+        const sortedCategories = [...data.out].sort((a, b) => a.Category.localeCompare(b.Category));
+        setCategories(sortedCategories);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -51,15 +52,16 @@ const Dashboard = () => {
         </div>
         <h1>Menu</h1>
         <ul>
-          {categories
-            ? [...categories].sort((a,b) => a.Category.localeCompare(b.Category)).map((item, index) => {
-                return (
-                  <li key={index} onClick={() => handleMenuItemClick(item.Category)} {...selectedMenuItem === item.Category ? {className:"highlighted"}:null}>
-                    {item.Category}
-                  </li>
-                );
-              })
-            : null}
+        {categories
+          ? categories.map((item, index) => {
+              return (
+                <li key={index} onClick={() => handleMenuItemClick(item.Category)} className={selectedMenuItem === index ? "highlighted" : undefined}>
+                  {item.Category}
+                </li>
+              );
+            })
+          : null}
+
         </ul>
       </header>
       <header className="top-panel">    
