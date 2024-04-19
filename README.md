@@ -8,12 +8,12 @@ The purpose of this project is to provide the staff of Impact York County with t
 
 ### `npm start dev`
 
-Runs the app in the development mode for the server.<br>
-Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
+- Runs the app in the development mode for the server.<br>
+- Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 
-In the client/ directory, run:
+- In the client/ directory, run:
 
 ### `npm start`
 
-Runs the client.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Runs the client.<br>
+- Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
